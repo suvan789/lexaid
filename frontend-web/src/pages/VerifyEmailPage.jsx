@@ -21,7 +21,7 @@ export default function VerifyEmailPage() {
 
     const verifyToken = async () => {
       try {
-        const response = await api.post('/auth/verify-email', { token });
+        const response = await api.post('/api/auth/verify-email', { token });
         setStatus('success');
         setMessage(response.data.message);
         // Refresh the user context so is_verified becomes true in the app
