@@ -28,6 +28,7 @@ class UserResponse(BaseModel):
     phone: Optional[str] = None
     city: Optional[str] = None
     state: Optional[str] = None
+    is_verified: bool = False
     created_at: datetime
 
     class Config:
@@ -45,6 +46,16 @@ class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
     user: Optional[UserResponse] = None
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(..., min_length=8, max_length=128)
+
+class VerifyEmailRequest(BaseModel):
+    token: str
 
 
 # ─── Document / Analysis Schemas ─────────────────────────────

@@ -19,6 +19,7 @@ class User(Base):
     city = Column(String(100), nullable=True)
     state = Column(String(100), nullable=True)
     is_admin = Column(Boolean, default=False)
+    is_verified = Column(Boolean, default=False)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")

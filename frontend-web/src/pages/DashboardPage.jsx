@@ -18,6 +18,17 @@ export default function DashboardPage() {
   const [stats, setStats] = useState({ docs: 0, generated: 0, posts: 0 });
   const [recentDocs, setRecentDocs] = useState([]);
   const [recentPosts, setRecentPosts] = useState([]);
+  const [verifyStatus, setVerifyStatus] = useState('idle'); // idle, loading, sent, error
+
+  const handleResendVerification = async () => {
+    setVerifyStatus('loading');
+    try {
+      await API.post('/api/auth/send-verification');
+      setVerifyStatus('sent');
+    } catch (err) {
+      setVerifyStatus('error');
+    }
+  };
 
   useEffect(() => {
     loadDashboardData();
@@ -53,6 +64,31 @@ export default function DashboardPage() {
 
   return (
     <div className="page-container max-w-6xl mx-auto">
+      {/* Verification Banner */}
+      {user && !user.is_verified && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-lg shadow-sm">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">
+              <span className="text-yellow-400 text-xl">⚠️</span>
+            </div>
+            <div className="ml-3 flex-1 md:flex md:justify-between">
+              <p className="text-sm text-yellow-700">
+                <strong>Please verify your email address.</strong> You won't be able to generate legal documents until you verify.
+              </p>
+              <p className="mt-2 md:mt-0 md:ml-6 text-sm">
+                <button 
+                  onClick={handleResendVerification}
+                  disabled={verifyStatus === 'loading' || verifyStatus === 'sent'}
+                  className="whitespace-nowrap font-medium text-yellow-700 hover:text-yellow-600 disabled:opacity-50"
+                >
+                  {verifyStatus === 'loading' ? 'Sending...' : verifyStatus === 'sent' ? 'Verification Sent!' : 'Resend Verification'}
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-navy via-navy-light to-accent rounded-2xl p-6 lg:p-8 text-white mb-6 animate-fade-in">
         <h1 className="text-2xl lg:text-3xl font-bold mb-2">

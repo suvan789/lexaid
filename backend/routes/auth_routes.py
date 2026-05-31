@@ -4,8 +4,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from models import User
-from schemas import UserCreate, UserLogin, UserResponse, UserUpdate, Token
-from auth import hash_password, verify_password, create_access_token, get_current_user
+from schemas import (
+    UserCreate, UserLogin, UserResponse, UserUpdate, Token,
+    ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest
+)
+from auth import hash_password, verify_password, create_access_token, get_current_user, decode_token
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 
@@ -43,6 +46,7 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
         phone=new_user.phone,
         city=new_user.city,
         state=new_user.state,
+        is_verified=new_user.is_verified,
         created_at=new_user.created_at,
     )
 
@@ -76,6 +80,7 @@ async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
         phone=user.phone,
         city=user.city,
         state=user.state,
+        is_verified=user.is_verified,
         created_at=user.created_at,
     )
 
@@ -108,3 +113,92 @@ async def update_profile(
     await db.refresh(current_user)
 
     return current_user
+
+
+@router.post("/forgot-password")
+async def forgot_password(req: ForgotPasswordRequest, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(User).where(User.email == req.email))
+    user = result.scalar_one_or_none()
+    
+    if not user:
+        return {"message": "If an account exists, a reset link has been sent."}
+
+    from datetime import timedelta
+    token = create_access_token(data={"sub": str(user.id), "type": "reset"}, expires_delta=timedelta(hours=1))
+    
+    print(f"\n========== EMAIL MOCK ==========")
+    print(f"To: {user.email}")
+    print(f"Subject: Reset your password")
+    print(f"Link: https://lexaid-mu.vercel.app/reset-password?token={token}")
+    print(f"================================\n")
+    
+    return {"message": "If an account exists, a reset link has been sent.", "mock_link": f"/reset-password?token={token}"}
+
+
+@router.post("/reset-password")
+async def reset_password(req: ResetPasswordRequest, db: AsyncSession = Depends(get_db)):
+    try:
+        from jose import jwt, JWTError
+        from auth import SECRET_KEY, ALGORITHM
+        payload = jwt.decode(req.token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("sub")
+        token_type = payload.get("type")
+        
+        if token_type != "reset":
+            raise HTTPException(status_code=400, detail="Invalid token type")
+            
+        result = await db.execute(select(User).where(User.id == user_id))
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+            
+        user.hashed_password = hash_password(req.new_password)
+        await db.commit()
+        return {"message": "Password reset successful"}
+        
+    except JWTError:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+
+@router.post("/send-verification")
+async def send_verification(current_user: User = Depends(get_current_user)):
+    if current_user.is_verified:
+        return {"message": "User is already verified"}
+        
+    from datetime import timedelta
+    token = create_access_token(data={"sub": str(current_user.id), "type": "verify"}, expires_delta=timedelta(hours=24))
+    
+    print(f"\n========== EMAIL MOCK ==========")
+    print(f"To: {current_user.email}")
+    print(f"Subject: Verify your email")
+    print(f"Link: https://lexaid-mu.vercel.app/verify-email?token={token}")
+    print(f"================================\n")
+    
+    return {"message": "Verification email sent", "mock_link": f"/verify-email?token={token}"}
+
+
+@router.post("/verify-email")
+async def verify_email(req: VerifyEmailRequest, db: AsyncSession = Depends(get_db)):
+    try:
+        from jose import jwt, JWTError
+        from auth import SECRET_KEY, ALGORITHM
+        payload = jwt.decode(req.token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("sub")
+        token_type = payload.get("type")
+        
+        if token_type != "verify":
+            raise HTTPException(status_code=400, detail="Invalid token type")
+            
+        result = await db.execute(select(User).where(User.id == user_id))
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+            
+        user.is_verified = True
+        await db.commit()
+        return {"message": "Email verified successfully"}
+        
+    except JWTError:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
