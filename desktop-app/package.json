@@ -1,0 +1,22 @@
+{
+  "name": "lexaid-desktop",
+  "version": "1.0.0",
+  "description": "LexAid Desktop Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "LexAid",
+  "license": "ISC",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "electron": "^30.0.0"
+  }
+}

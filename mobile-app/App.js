@@ -11,6 +11,8 @@ export default function App() {
         style={styles.webview}
         allowsBackForwardNavigationGestures={true}
         bounces={false}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
       />
     </SafeAreaView>
   );
