@@ -1,5 +1,4 @@
 import React from 'react';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AppProvider } from './context/AppContext';
@@ -43,15 +42,17 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md text-center border border-gray-100">
-            <div className="text-5xl mb-4">⚠️</div>
+          <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md text-center border border-red-100">
+            <span className="text-5xl mb-4 block">⚠️</span>
             <h2 className="text-xl font-bold text-navy mb-2">Something went wrong</h2>
-            <p className="text-sm text-gray-500 mb-6">An unexpected UI error occurred. Click reload to refresh your app.</p>
+            <p className="text-xs text-gray-500 mb-6">
+              {this.state.error?.message || "An unexpected error occurred while loading this page."}
+            </p>
             <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-2.5 bg-navy text-white rounded-xl font-semibold text-sm hover:bg-navy-light transition-colors"
+              onClick={() => window.location.assign('/')}
+              className="px-6 py-2.5 bg-navy text-white rounded-xl text-xs font-semibold hover:bg-navy-light transition-all"
             >
-              🔄 Reload Application
+              Return to Safety
             </button>
           </div>
         </div>
@@ -61,16 +62,25 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+function MainDashboard() {
+  const { user } = useAuth();
+  if (user?.role === 'lawyer') {
+    return <LawyerPortalPage />;
+  }
+  return <DashboardPage />;
+}
+
 function ProtectedRoute({ children }) {
-  const { isAuthenticated, loading } = useAuth();
+  const { token, loading } = useAuth();
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-3 border-accent border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+  if (!token) return <Navigate to="/login" replace />;
+  return children;
 }
 
 function AppLayout({ children }) {
@@ -79,18 +89,10 @@ function AppLayout({ children }) {
       <Sidebar />
       <div className="lg:ml-60">
         <Navbar />
-        <main className="p-4 lg:p-6 mt-16">{children}</main>
+        <main className="p-4 lg:p-6 mt-16 pb-20 lg:pb-6">{children}</main>
       </div>
     </div>
   );
-}
-
-function MainDashboard() {
-  const { user } = useAuth();
-  if (user?.role === 'lawyer') {
-    return <LawyerPortalPage />;
-  }
-  return <DashboardPage />;
 }
 
 function AppRoutes() {
@@ -120,18 +122,15 @@ function AppRoutes() {
 }
 
 export default function App() {
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "1087459827461-dummygoogleoauthclientid.apps.googleusercontent.com";
   return (
-    <GoogleOAuthProvider clientId={clientId}>
-      <ErrorBoundary>
-        <AuthProvider>
-          <AppProvider>
-            <Router>
-              <AppRoutes />
-            </Router>
-          </AppProvider>
-        </AuthProvider>
-      </ErrorBoundary>
-    </GoogleOAuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <AppProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </AppProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
