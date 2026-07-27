@@ -6,7 +6,6 @@ workflows:
     environment:
       node: 22
       xcode: latest
-      cocoapods: default
     scripts:
       - name: Install dependencies
         script: |
@@ -20,14 +19,11 @@ workflows:
         script: |
           cd frontend-web
           npx cap sync ios
-      - name: Install CocoaPods
+      - name: Build Unsigned iOS App
         script: |
           cd frontend-web/ios/App
-          pod install
-      - name: Build Unsigned iOS Archive
-        script: |
-          cd frontend-web/ios/App
-          xcodebuild -workspace App.xcworkspace \
+          xcodebuild \
+            -project App.xcodeproj \
             -scheme App \
             -configuration Release \
             -sdk iphoneos \
