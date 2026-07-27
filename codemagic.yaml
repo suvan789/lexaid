@@ -1,0 +1,78 @@
+workflows:
+  ios-workflow:
+    name: LexAid iOS Build
+    max_build_duration: 60
+    environment:
+      node: 18
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install dependencies
+        script: |
+          cd frontend-web
+          npm install
+      - name: Build React app
+        script: |
+          cd frontend-web
+          npm run build
+      - name: Install Capacitor iOS
+        script: |
+          cd frontend-web
+          npx cap add ios || true
+          npx cap sync ios
+      - name: Install CocoaPods
+        script: |
+          cd frontend-web/ios/App
+          pod install
+      - name: Build iOS
+        script: |
+          cd frontend-web
+          xcode-project build-ipa \
+            --workspace ios/App/App.xcworkspace \
+            --scheme App \
+            --archive-flags="-destination 'generic/platform=iOS'"
+    artifacts:
+      - frontend-web/build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      email:
+        recipients:
+          - your-email@gmail.com
+        notify:
+          success: true
+          failure: true
+
+  android-workflow:
+    name: LexAid Android Build
+    max_build_duration: 60
+    environment:
+      node: 18
+      java: 17
+    scripts:
+      - name: Install dependencies
+        script: |
+          cd frontend-web
+          npm install
+      - name: Build React app
+        script: |
+          cd frontend-web
+          npm run build
+      - name: Add Android platform
+        script: |
+          cd frontend-web
+          npx cap add android || true
+          npx cap sync android
+      - name: Build Android APK
+        script: |
+          cd frontend-web/android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+    artifacts:
+      - frontend-web/android/app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - your-email@gmail.com
+        notify:
+          success: true
+          failure: true

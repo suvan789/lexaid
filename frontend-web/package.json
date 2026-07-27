@@ -3,7 +3,12 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/cli": "^8.4.2",
+    "@capacitor/core": "^8.4.2",
+    "@capacitor/ios": "^8.4.2",
     "axios": "^1.7.2",
+    "exceljs": "^4.4.0",
     "html2pdf.js": "^0.14.0",
     "lucide-react": "^1.17.0",
     "react": "^18.2.0",
@@ -19,8 +24,7 @@
     "postcss": "^8.4.38",
     "selenium-webdriver": "^4.44.0",
     "start-server-and-test": "^3.0.9",
-    "tailwindcss": "^3.4.4",
-    "xlsx": "^0.18.5"
+    "tailwindcss": "^3.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,9 +33,13 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "login": "start-server-and-test start http://localhost:3000 test:login",
+    "login": "node generate_report.js",
     "test:login": "node generate_report.js",
-    "test:e2e": "start-server-and-test start http://localhost:3000 test:login"
+    "test:e2e": "node generate_report.js",
+    "cap:build": "npm run build && npx cap sync",
+    "cap:android": "npm run build && npx cap sync android && npx cap open android",
+    "cap:ios": "npm run build && npx cap sync ios && npx cap open ios",
+    "cap:sync": "npx cap sync"
   },
   "browserslist": {
     "production": [
