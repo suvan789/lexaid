@@ -60,7 +60,8 @@ export default function RegisterPage() {
         navigate('/');
       }
     } catch (err) {
-      setError(err.response?.data?.error || err.response?.data?.detail || 'Registration failed.');
+      const msg = err.response?.data?.detail || err.response?.data?.error || 'Registration failed. Please try again.';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -183,6 +184,17 @@ export default function RegisterPage() {
                   <input name="state" value={form.state} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm" placeholder="Maharashtra" />
                 </div>
               </div>
+
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm animate-fade-in my-2">
+                  <p className="font-semibold">❌ {error}</p>
+                  {error.includes('already exists') && (
+                    <p className="text-xs mt-1 text-red-600">
+                      Already have an account? <Link to="/login" className="underline font-bold text-navy">Click here to Sign In</Link>
+                    </p>
+                  )}
+                </div>
+              )}
 
               <button
                 id="register-submit"
