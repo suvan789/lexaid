@@ -15,16 +15,17 @@ export default function NewsCard({ article, isSaved, onToggleSave }) {
   };
 
   const timeAgo = (dateStr) => {
-    if (!dateStr) return '';
+    if (!dateStr) return 'Just now';
     const date = new Date(dateStr);
     const seconds = Math.floor((new Date() - date) / 1000);
+    if (isNaN(seconds) || seconds < 60) return 'Just now';
     
     let interval = seconds / 86400;
-    if (interval > 1) return Math.floor(interval) + 'd ago';
+    if (interval >= 1) return Math.floor(interval) + 'd ago';
     interval = seconds / 3600;
-    if (interval > 1) return Math.floor(interval) + 'h ago';
+    if (interval >= 1) return Math.floor(interval) + 'h ago';
     interval = seconds / 60;
-    if (interval > 1) return Math.floor(interval) + 'm ago';
+    if (interval >= 1) return Math.floor(interval) + 'm ago';
     return 'Just now';
   };
 

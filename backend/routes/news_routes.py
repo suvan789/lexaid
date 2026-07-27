@@ -17,47 +17,50 @@ router = APIRouter(prefix="/api/news", tags=["News"])
 @router.get("", response_model=list[NewsResponse])
 async def get_news(
     category: Optional[str] = Query(None),
-    limit: int = Query(20, ge=1, le=50),
+    limit: int = Query(50, ge=1, le=100),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get legal news articles. Triggers scraping if DB is empty or stale."""
-    # Check if we need to scrape
-    result = await db.execute(
+    """Get legal news articles. Triggers scraping if DB is empty or has few articles."""
+    result = await db.execute(select(func.count()).select_from(NewsArticle))
+    count = result.scalar() or 0
+
+    result_latest = await db.execute(
         select(NewsArticle).order_by(NewsArticle.scraped_at.desc()).limit(1)
     )
-    latest = result.scalar_one_or_none()
+    latest = result_latest.scalar_one_or_none()
 
     should_scrape = False
-    if not latest:
+    if count < 10 or not latest:
         should_scrape = True
     elif latest.scraped_at:
         age = datetime.now(timezone.utc) - latest.scraped_at.replace(tzinfo=timezone.utc)
-        if age > timedelta(hours=6):
+        if age > timedelta(hours=3):
             should_scrape = True
 
     if should_scrape:
         try:
             articles = await scrape_legal_news()
-            # Clear old articles and insert new ones
-            old_result = await db.execute(select(NewsArticle))
-            old_articles = old_result.scalars().all()
-            for old in old_articles:
-                await db.delete(old)
+            if articles:
+                # Clear old articles and insert new ones
+                old_result = await db.execute(select(NewsArticle))
+                old_articles = old_result.scalars().all()
+                for old in old_articles:
+                    await db.delete(old)
 
-            for article_data in articles:
-                article = NewsArticle(
-                    title=article_data["title"],
-                    summary=article_data.get("summary", ""),
-                    source=article_data.get("source", ""),
-                    url=article_data.get("url", ""),
-                    category=article_data.get("category", "General"),
-                    published_at=article_data.get("published_at"),
-                )
-                db.add(article)
+                for article_data in articles:
+                    article = NewsArticle(
+                        title=article_data["title"],
+                        summary=article_data.get("summary", ""),
+                        source=article_data.get("source", ""),
+                        url=article_data.get("url", ""),
+                        category=article_data.get("category", "General"),
+                        published_at=article_data.get("published_at"),
+                    )
+                    db.add(article)
 
-            await db.flush()
-        except Exception:
-            pass  # Serve stale data if scraping fails
+                await db.flush()
+        except Exception as e:
+            print("Auto news scrape error:", e)
 
     # Query articles
     query = select(NewsArticle).order_by(NewsArticle.published_at.desc())
@@ -77,28 +80,29 @@ async def get_news(
 async def refresh_news(
     db: AsyncSession = Depends(get_db),
 ):
-    """Force re-scrape news articles."""
+    """Force re-scrape legal news articles."""
     try:
         articles = await scrape_legal_news()
 
-        # Clear old articles
-        old_result = await db.execute(select(NewsArticle))
-        old_articles = old_result.scalars().all()
-        for old in old_articles:
-            await db.delete(old)
+        if articles:
+            # Clear old articles
+            old_result = await db.execute(select(NewsArticle))
+            old_articles = old_result.scalars().all()
+            for old in old_articles:
+                await db.delete(old)
 
-        for article_data in articles:
-            article = NewsArticle(
-                title=article_data["title"],
-                summary=article_data.get("summary", ""),
-                source=article_data.get("source", ""),
-                url=article_data.get("url", ""),
-                category=article_data.get("category", "General"),
-                published_at=article_data.get("published_at"),
-            )
-            db.add(article)
+            for article_data in articles:
+                article = NewsArticle(
+                    title=article_data["title"],
+                    summary=article_data.get("summary", ""),
+                    source=article_data.get("source", ""),
+                    url=article_data.get("url", ""),
+                    category=article_data.get("category", "General"),
+                    published_at=article_data.get("published_at"),
+                )
+                db.add(article)
 
-        await db.flush()
+            await db.flush()
 
         return {"scraped": len(articles)}
     except Exception as e:
