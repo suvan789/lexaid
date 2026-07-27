@@ -84,6 +84,14 @@ function AppLayout({ children }) {
   );
 }
 
+function MainDashboard() {
+  const { user } = useAuth();
+  if (user?.role === 'lawyer') {
+    return <LawyerPortalPage />;
+  }
+  return <DashboardPage />;
+}
+
 function AppRoutes() {
   return (
     <Routes>
@@ -92,7 +100,7 @@ function AppRoutes() {
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />
-      <Route path="/" element={<ProtectedRoute><AppLayout><DashboardPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/" element={<ProtectedRoute><AppLayout><MainDashboard /></AppLayout></ProtectedRoute>} />
       <Route path="/analyze" element={<ProtectedRoute><AppLayout><AnalyzePage /></AppLayout></ProtectedRoute>} />
       <Route path="/results" element={<ProtectedRoute><AppLayout><ResultsPage /></AppLayout></ProtectedRoute>} />
       <Route path="/generate" element={<ProtectedRoute><AppLayout><GeneratorPage /></AppLayout></ProtectedRoute>} />

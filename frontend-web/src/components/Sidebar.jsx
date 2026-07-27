@@ -2,28 +2,35 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const BASE_NAV_ITEMS = [
-  { path: '/', label: 'Dashboard', icon: '🏠' },
-  { path: '/messages', label: 'Direct Messages', icon: '✉️' },
-  { path: '/analyze', label: 'Analyze Document', icon: '🔍' },
-  { path: '/generate', label: 'Generate Document', icon: '📝' },
-  { path: '/chat', label: 'AI Legal Chat', icon: '💬' },
-  { path: '/lawyers', label: 'Find a Lawyer', icon: '👨‍⚖️' },
-  { path: '/forum', label: 'Community Forum', icon: '👥' },
-  { path: '/news', label: 'Legal News', icon: '📰' },
-  { path: '/profile', label: 'My Profile', icon: '👤' },
-];
-
 export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
 
-  let navItems = [...BASE_NAV_ITEMS];
-  if (user?.role === 'lawyer') {
-    navItems = navItems.filter(item => item.path !== '/lawyers');
-    navItems.splice(1, 0, { path: '/lawyer/portal', label: 'Advocate Portal', icon: '⚖️' });
-  }
+  const isLawyer = user?.role === 'lawyer';
+
+  const navItems = isLawyer
+    ? [
+        { path: '/', label: 'Advocate Portal', icon: '⚖️' },
+        { path: '/messages', label: 'Direct Messages', icon: '✉️' },
+        { path: '/analyze', label: 'Analyze Document', icon: '🔍' },
+        { path: '/generate', label: 'Generate Document', icon: '📝' },
+        { path: '/chat', label: 'AI Legal Chat', icon: '💬' },
+        { path: '/forum', label: 'Community Forum', icon: '👥' },
+        { path: '/news', label: 'Legal News', icon: '📰' },
+        { path: '/profile', label: 'My Profile', icon: '👤' },
+      ]
+    : [
+        { path: '/', label: 'Dashboard', icon: '🏠' },
+        { path: '/messages', label: 'Direct Messages', icon: '✉️' },
+        { path: '/analyze', label: 'Analyze Document', icon: '🔍' },
+        { path: '/generate', label: 'Generate Document', icon: '📝' },
+        { path: '/chat', label: 'AI Legal Chat', icon: '💬' },
+        { path: '/lawyers', label: 'Find a Lawyer', icon: '👨‍⚖️' },
+        { path: '/forum', label: 'Community Forum', icon: '👥' },
+        { path: '/news', label: 'Legal News', icon: '📰' },
+        { path: '/profile', label: 'My Profile', icon: '👤' },
+      ];
 
   return (
     <>
@@ -34,7 +41,7 @@ export default function Sidebar() {
           <div className="w-9 h-9 bg-accent rounded-lg flex items-center justify-center text-lg font-bold">⚖️</div>
           <div>
             <h1 className="text-lg font-bold tracking-tight">LexAid</h1>
-            <p className="text-xs text-gray-400">AI Legal Super App</p>
+            <p className="text-xs text-gray-400">{isLawyer ? 'Advocate Dashboard' : 'AI Legal Super App'}</p>
           </div>
         </div>
 
@@ -69,7 +76,7 @@ export default function Sidebar() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">{user.full_name}</p>
-                <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                <p className="text-xs text-gray-400 truncate">{isLawyer ? 'Advocate Account' : user.email}</p>
               </div>
             </div>
           </div>
