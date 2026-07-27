@@ -27,13 +27,14 @@ workflows:
             -scheme App \
             -configuration Release \
             -sdk iphoneos \
+            -derivedDataPath build \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             clean build
     artifacts:
+      - frontend-web/ios/App/build/Build/Products/Release-iphoneos/*.app
       - frontend-web/ios/App/build/**/*.app
-      - frontend-web/ios/App/build/**/*.xcarchive
       - /tmp/xcodebuild_logs/*.log
     publishing:
       email:
