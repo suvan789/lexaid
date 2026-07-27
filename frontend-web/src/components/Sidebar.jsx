@@ -78,7 +78,7 @@ export default function Sidebar() {
       {/* Mobile Bottom Nav */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-navy z-50 border-t border-white/10 safe-area-inset-bottom">
         <div className="flex justify-around py-1">
-          {NAV_ITEMS.slice(0, 6).map((item) => {
+          {navItems.slice(0, 6).map((item) => {
             const isActive = location.pathname === item.path ||
               (item.path !== '/' && location.pathname.startsWith(item.path));
             return (
