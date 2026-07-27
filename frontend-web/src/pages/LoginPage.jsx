@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
+import { loginWithGoogleFirebase } from '../firebase';
 
 export default function LoginPage() {
   const [authMode, setAuthMode] = useState('email'); // 'email' | 'phone'
@@ -68,15 +69,19 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
+      const googleUser = await loginWithGoogleFirebase();
       const res = await API.post('/api/auth/google', {
-        email: 'suvansenthils@gmail.com',
-        full_name: 'Suvan Senthil',
+        email: googleUser.email,
+        full_name: googleUser.full_name,
+        google_id: googleUser.google_id,
         role: 'lawyer'
       });
       login(res.data.access_token, res.data.user);
       navigate('/');
     } catch (err) {
-      setError('Google Sign-In failed. Please try again.');
+      if (err.message !== "Google Sign-In cancelled") {
+        setError('Google Sign-In failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -141,7 +146,7 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {/* Google OAuth Button */}
+            {/* Real Google OAuth Button */}
             <button
               type="button"
               onClick={handleGoogleSignIn}
@@ -154,7 +159,7 @@ export default function LoginPage() {
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
-              Continue with Google (suvansenthils@gmail.com)
+              Continue with Google Account
             </button>
 
             <div className="relative flex py-2 items-center mb-4">
