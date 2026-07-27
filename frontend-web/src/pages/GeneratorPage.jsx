@@ -13,6 +13,7 @@ export default function GeneratorPage() {
   const [docTypes, setDocTypes] = useState([]);
   const [selectedType, setSelectedType] = useState(null);
   const [formData, setFormData] = useState({});
+  const [signatureImage, setSignatureImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { setGeneratedDoc } = useApp();
@@ -27,8 +28,36 @@ export default function GeneratorPage() {
     } catch {}
   };
 
+  const handleSelectType = (dt) => {
+    setSelectedType(dt);
+    
+    // Auto-fill current system date for all date fields
+    const todayStr = new Date().toISOString().split('T')[0];
+    const initial = {};
+    dt.required_fields.forEach(field => {
+      if (field.includes('date')) {
+        initial[field] = todayStr;
+      }
+    });
+    setFormData(initial);
+    setSignatureImage(null);
+    setStep(2);
+  };
+
   const handleFieldChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSignatureUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSignatureImage(reader.result);
+        setFormData(prev => ({ ...prev, signature_image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const formatLabel = (field) => {
@@ -40,7 +69,7 @@ export default function GeneratorPage() {
     // Validate required fields
     const missing = selectedType.required_fields.filter(f => !formData[f]?.trim());
     if (missing.length > 0) {
-      setError(`Please fill in: ${missing.map(formatLabel).join(', ')}`);
+      setError(`Please fill in required fields: ${missing.map(formatLabel).join(', ')}`);
       return;
     }
     setError('');
@@ -48,9 +77,18 @@ export default function GeneratorPage() {
     try {
       const res = await API.post('/api/generator/generate', {
         doc_type: selectedType.type,
-        form_data: formData,
+        form_data: {
+          ...formData,
+          signature_image: signatureImage || formData.signature_image || null
+        },
       });
-      setGeneratedDoc(res.data);
+      setGeneratedDoc({
+        ...res.data,
+        form_data: {
+          ...res.data.form_data,
+          signature_image: signatureImage
+        }
+      });
       navigate('/generate/result');
     } catch (err) {
       setError(err.response?.data?.error || err.response?.data?.detail || 'Generation failed.');
@@ -92,7 +130,7 @@ export default function GeneratorPage() {
           {docTypes.map((dt) => (
             <button
               key={dt.type}
-              onClick={() => { setSelectedType(dt); setFormData({}); setStep(2); }}
+              onClick={() => handleSelectType(dt)}
               className="bg-white rounded-xl p-5 text-left shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100 group"
             >
               <div className="text-3xl mb-3">{DOC_ICONS[dt.type] || '📄'}</div>
@@ -111,11 +149,16 @@ export default function GeneratorPage() {
           </button>
 
           <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">{DOC_ICONS[selectedType.type] || '📄'}</span>
-              <div>
-                <h2 className="text-lg font-bold text-navy">{selectedType.name}</h2>
-                <p className="text-sm text-gray-500">{selectedType.required_fields.length} fields required</p>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{DOC_ICONS[selectedType.type] || '📄'}</span>
+                <div>
+                  <h2 className="text-lg font-bold text-navy">{selectedType.name}</h2>
+                  <p className="text-sm text-gray-500">{selectedType.required_fields.length} fields required</p>
+                </div>
+              </div>
+              <div className="text-xs bg-accent/10 text-accent px-3 py-1.5 rounded-full font-semibold">
+                📅 Date Auto-Filled to Today ({new Date().toISOString().split('T')[0]})
               </div>
             </div>
 
@@ -123,7 +166,7 @@ export default function GeneratorPage() {
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-4 text-sm">{error}</div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               {selectedType.required_fields.map((field) => (
                 <div key={field} className={field === 'statement' || field === 'grievance_details' || field === 'relief_sought' ? 'sm:col-span-2' : ''}>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -150,9 +193,34 @@ export default function GeneratorPage() {
               ))}
             </div>
 
+            {/* Signature Upload Section */}
+            <div className="p-4 bg-gray-50 rounded-2xl border border-dashed border-gray-300 mb-6">
+              <label className="block text-sm font-semibold text-navy mb-1">
+                ✍️ Upload Sender / Authorized Signature (Optional Image)
+              </label>
+              <p className="text-xs text-gray-500 mb-3">Upload your signature image (PNG/JPG) to place it on the final document & PDF.</p>
+              
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleSignatureUpload}
+                className="block w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-navy file:text-white hover:file:bg-navy-light cursor-pointer"
+              />
+
+              {signatureImage && (
+                <div className="mt-3 flex items-center gap-4 bg-white p-3 rounded-xl border border-gray-200">
+                  <img src={signatureImage} alt="Uploaded Signature" className="h-12 max-w-[160px] object-contain border border-gray-200 p-1 rounded" />
+                  <div>
+                    <p className="text-xs font-semibold text-green-600">✓ Signature Loaded Successfully</p>
+                    <button type="button" onClick={() => setSignatureImage(null)} className="text-xs text-red-500 hover:underline mt-0.5">Remove Signature</button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <button
               onClick={handleGenerate}
-              className="mt-6 w-full py-3 bg-navy text-white rounded-xl font-semibold hover:bg-navy-light transition-all"
+              className="w-full py-3 bg-navy text-white rounded-xl font-semibold hover:bg-navy-light transition-all shadow-md"
             >
               📝 Generate Document
             </button>
