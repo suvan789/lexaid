@@ -3,7 +3,7 @@ workflows:
     name: LexAid iOS Build
     max_build_duration: 60
     environment:
-      node: 20
+      node: 22
       xcode: latest
       cocoapods: default
     scripts:
@@ -46,7 +46,7 @@ workflows:
     name: LexAid Android Build
     max_build_duration: 60
     environment:
-      node: 20
+      node: 22
       java: 17
     scripts:
       - name: Install dependencies
