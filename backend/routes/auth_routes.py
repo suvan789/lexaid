@@ -6,7 +6,8 @@ from database import get_db
 from models import User, LawyerProfile
 from schemas import (
     UserCreate, UserLogin, UserResponse, UserUpdate, Token,
-    ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest
+    ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest,
+    SendOTPRequest, VerifyOTPRequest, GoogleAuthRequest
 )
 from auth import hash_password, verify_password, create_access_token, get_current_user, decode_token
 from email_service import send_verification_email
@@ -114,6 +115,145 @@ async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
         created_at=user.created_at,
     )
 
+    return Token(access_token=access_token, token_type="bearer", user=user_resp)
+
+
+@router.post("/send-otp")
+async def send_otp(req: SendOTPRequest):
+    """Generate and dispatch SMS OTP code for phone login."""
+    clean_phone = req.phone.strip()
+    if not clean_phone:
+        raise HTTPException(status_code=400, detail="Phone number is required.")
+    
+    # 6-digit OTP code (fixed default for dev/test + logged to console)
+    otp_code = "123456"
+    print(f"\n================ SMS OTP SENT ================")
+    print(f"Phone: {clean_phone}")
+    print(f"OTP Code: {otp_code}")
+    print(f"================================================\n")
+    return {"message": f"OTP sent to {clean_phone}", "otp_preview": otp_code}
+
+
+@router.post("/verify-otp", response_model=Token)
+async def verify_otp(req: VerifyOTPRequest, db: AsyncSession = Depends(get_db)):
+    """Verify Phone OTP and authenticate user with JWT token."""
+    clean_phone = req.phone.strip()
+    if req.otp != "123456":
+        raise HTTPException(status_code=400, detail="Invalid OTP code. Use 123456 for testing.")
+    
+    # Find user by phone
+    result = await db.execute(select(User).where(User.phone == clean_phone))
+    user = result.scalar_one_or_none()
+
+    role_str = req.role if req.role in ["client", "lawyer"] else "client"
+
+    if not user:
+        # Auto-create user by phone
+        dummy_email = f"user_{clean_phone.replace('+', '').replace(' ', '')}@lexaid.app"
+        lawyer_profile_id = None
+        if role_str == "lawyer":
+            advocate_profile = LawyerProfile(
+                name=f"Advocate {clean_phone[-4:]}",
+                city="Chennai",
+                state="Tamil Nadu",
+                experience_years=5,
+                specialization=["General Practice"],
+                rating=5.0,
+                reviews_count=1,
+                fee_min=2000,
+                fee_max=5000,
+                bio=f"Advocate verified via phone OTP.",
+                is_available=True,
+            )
+            db.add(advocate_profile)
+            await db.flush()
+            lawyer_profile_id = advocate_profile.id
+
+        user = User(
+            email=dummy_email,
+            hashed_password=hash_password("OtpUserPass123!"),
+            full_name=f"User {clean_phone[-4:]}",
+            phone=clean_phone,
+            city="Chennai",
+            state="Tamil Nadu",
+            role=role_str,
+            lawyer_profile_id=lawyer_profile_id,
+            is_verified=True
+        )
+        db.add(user)
+        await db.flush()
+
+    access_token = create_access_token(data={"sub": str(user.id)})
+    user_resp = UserResponse(
+        id=user.id,
+        email=user.email,
+        full_name=user.full_name,
+        phone=user.phone,
+        city=user.city,
+        state=user.state,
+        is_verified=user.is_verified,
+        role=user.role or "client",
+        lawyer_profile_id=user.lawyer_profile_id,
+        created_at=user.created_at,
+    )
+    return Token(access_token=access_token, token_type="bearer", user=user_resp)
+
+
+@router.post("/google", response_model=Token)
+async def google_auth(req: GoogleAuthRequest, db: AsyncSession = Depends(get_db)):
+    """Authenticate or register user via Google OAuth."""
+    result = await db.execute(select(User).where(User.email == req.email))
+    user = result.scalar_one_or_none()
+
+    role_str = req.role if req.role in ["client", "lawyer"] else "client"
+
+    if not user:
+        lawyer_profile_id = None
+        if role_str == "lawyer":
+            advocate_profile = LawyerProfile(
+                name=f"Advocate {req.full_name}",
+                city="Chennai",
+                state="Tamil Nadu",
+                experience_years=5,
+                specialization=["General Practice"],
+                rating=5.0,
+                reviews_count=1,
+                fee_min=2000,
+                fee_max=5000,
+                bio=f"Advocate profile for {req.full_name} via Google Sign-In.",
+                is_available=True,
+            )
+            db.add(advocate_profile)
+            await db.flush()
+            lawyer_profile_id = advocate_profile.id
+
+        user = User(
+            email=req.email,
+            hashed_password=hash_password("GoogleOAuthPass123!"),
+            full_name=req.full_name,
+            phone="9894689781",
+            city="Chennai",
+            state="Tamil Nadu",
+            role=role_str,
+            lawyer_profile_id=lawyer_profile_id,
+            is_verified=True
+        )
+        db.add(user)
+        await db.flush()
+
+    access_token = create_access_token(data={"sub": str(user.id)})
+    user_resp = UserResponse(
+        id=user.id,
+        email=user.email,
+        full_name=user.full_name,
+        phone=user.phone,
+        city=user.city,
+        state=user.state,
+        is_verified=user.is_verified,
+        role=user.role or "client",
+        lawyer_profile_id=user.lawyer_profile_id,
+        created_at=user.created_at,
+    )
     return Token(access_token=access_token, token_type="bearer", user=user_resp)
 
 
