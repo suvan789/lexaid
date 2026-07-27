@@ -222,6 +222,14 @@ async def verify_email(req: VerifyEmailRequest, db: AsyncSession = Depends(get_d
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
             
+        user.is_verified = True
+        await db.commit()
+        return {"message": "Email verified successfully"}
+        
+    except JWTError:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+
 @router.post("/verify-now", response_model=UserResponse)
 async def verify_now(
     current_user: User = Depends(get_current_user),
