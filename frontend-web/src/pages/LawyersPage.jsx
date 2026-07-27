@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import LawyerCard from '../components/LawyerCard';
 import API from '../api/axios';
 
@@ -8,6 +10,9 @@ const SPECIALIZATIONS = [
 ];
 
 export default function LawyersPage() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const [lawyers, setLawyers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ city: '', specialization: 'All', maxFee: 50000, sortBy: 'rating' });
@@ -26,9 +31,13 @@ export default function LawyersPage() {
   const [issueDescription, setIssueDescription] = useState('');
 
   useEffect(() => {
+    if (user?.role === 'lawyer') {
+      navigate('/lawyer/portal', { replace: true });
+      return;
+    }
     fetchLawyers();
     fetchSavedIds();
-  }, [filters.specialization, filters.sortBy]);
+  }, [user, filters.specialization, filters.sortBy]);
 
   const fetchSavedIds = async () => {
     try {

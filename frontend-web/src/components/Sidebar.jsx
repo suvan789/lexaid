@@ -19,8 +19,9 @@ export default function Sidebar() {
   const location = useLocation();
   const { user } = useAuth();
 
-  const navItems = [...BASE_NAV_ITEMS];
+  let navItems = [...BASE_NAV_ITEMS];
   if (user?.role === 'lawyer') {
+    navItems = navItems.filter(item => item.path !== '/lawyers');
     navItems.splice(1, 0, { path: '/lawyer/portal', label: 'Advocate Portal', icon: '⚖️' });
   }
 

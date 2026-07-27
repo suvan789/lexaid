@@ -153,7 +153,13 @@ export default function DashboardPage() {
       {/* Quick Actions Grid */}
       <h2 className="text-lg font-bold text-navy mb-4">Quick Actions</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {QUICK_ACTIONS.map((action, i) => (
+        {(user?.role === 'lawyer' 
+          ? [
+              { title: 'Advocate Portal', desc: 'Manage client bookings & consultation requests', icon: '⚖️', path: '/lawyer/portal', color: 'from-amber-500 to-orange-600' },
+              ...QUICK_ACTIONS.filter(a => a.path !== '/lawyers')
+            ]
+          : QUICK_ACTIONS
+        ).map((action, i) => (
           <button
             key={i}
             id={`action-${action.path.replace('/', '')}`}
