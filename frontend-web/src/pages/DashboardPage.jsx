@@ -13,12 +13,23 @@ const QUICK_ACTIONS = [
 ];
 
 export default function DashboardPage() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState({ docs: 0, generated: 0, posts: 0 });
   const [recentDocs, setRecentDocs] = useState([]);
   const [recentPosts, setRecentPosts] = useState([]);
   const [verifyStatus, setVerifyStatus] = useState('idle'); // idle, loading, sent, error
+
+  const handleVerifyNow = async () => {
+    setVerifyStatus('loading');
+    try {
+      const res = await API.post('/api/auth/verify-now');
+      updateUser(res.data);
+      setVerifyStatus('verified');
+    } catch (err) {
+      setVerifyStatus('error');
+    }
+  };
 
   const handleResendVerification = async () => {
     setVerifyStatus('loading');
@@ -66,24 +77,30 @@ export default function DashboardPage() {
     <div className="page-container max-w-6xl mx-auto">
       {/* Verification Banner */}
       {user && !user.is_verified && (
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-lg shadow-sm">
-          <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <span className="text-yellow-400 text-xl">⚠️</span>
+        <div className="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-2xl shadow-sm animate-fade-in">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="text-amber-500 text-2xl">⚠️</span>
+              <div>
+                <p className="text-sm font-semibold text-amber-900">Please verify your email address ({user.email})</p>
+                <p className="text-xs text-amber-700">Verify your account to access all document generation features.</p>
+              </div>
             </div>
-            <div className="ml-3 flex-1 md:flex md:justify-between">
-              <p className="text-sm text-yellow-700">
-                <strong>Please verify your email address.</strong> You won't be able to generate legal documents until you verify.
-              </p>
-              <p className="mt-2 md:mt-0 md:ml-6 text-sm">
-                <button 
-                  onClick={handleResendVerification}
-                  disabled={verifyStatus === 'loading' || verifyStatus === 'sent'}
-                  className="whitespace-nowrap font-medium text-yellow-700 hover:text-yellow-600 disabled:opacity-50"
-                >
-                  {verifyStatus === 'loading' ? 'Sending...' : verifyStatus === 'sent' ? 'Verification Sent!' : 'Resend Verification'}
-                </button>
-              </p>
+            <div className="flex items-center gap-2 self-end sm:self-auto">
+              <button 
+                onClick={handleVerifyNow}
+                disabled={verifyStatus === 'loading'}
+                className="px-4 py-2 bg-amber-600 text-white rounded-xl text-xs font-bold hover:bg-amber-700 disabled:opacity-50 transition-colors shadow-sm"
+              >
+                {verifyStatus === 'loading' ? 'Verifying...' : '⚡ Verify Email Now'}
+              </button>
+              <button 
+                onClick={handleResendVerification}
+                disabled={verifyStatus === 'loading' || verifyStatus === 'sent'}
+                className="px-3 py-2 bg-white border border-amber-300 text-amber-800 rounded-xl text-xs font-semibold hover:bg-amber-100 disabled:opacity-50 transition-colors"
+              >
+                {verifyStatus === 'sent' ? '✓ Link Sent' : '📧 Resend Link'}
+              </button>
             </div>
           </div>
         </div>

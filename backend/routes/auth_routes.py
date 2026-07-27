@@ -56,6 +56,7 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
         state=user_data.state,
         role=role_str,
         lawyer_profile_id=lawyer_profile_id,
+        is_verified=True if role_str == "lawyer" else False,
     )
     db.add(new_user)
     await db.flush()
@@ -224,9 +225,14 @@ async def verify_email(req: VerifyEmailRequest, db: AsyncSession = Depends(get_d
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
             
-        user.is_verified = True
-        await db.commit()
-        return {"message": "Email verified successfully"}
-        
-    except JWTError:
-        raise HTTPException(status_code=400, detail="Invalid or expired token")
+@router.post("/verify-now", response_model=UserResponse)
+async def verify_now(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db)
+):
+    """Instantly verify the logged in user's email."""
+    current_user.is_verified = True
+    await db.flush()
+    await db.refresh(current_user)
+    return current_user
+
