@@ -72,7 +72,6 @@ export default function AIChatPage() {
   };
 
   const startNewChat = () => {
-    // Save current conversation
     if (messages.length > 1) {
       setConversations(prev => [{
         id: currentConvId,
@@ -88,7 +87,6 @@ export default function AIChatPage() {
   };
 
   const loadConversation = (conv) => {
-    // Save current first
     if (messages.length > 1) {
       setConversations(prev => {
         const existing = prev.find(c => c.id === currentConvId);
@@ -103,13 +101,13 @@ export default function AIChatPage() {
   };
 
   return (
-    <div className="page-container flex gap-4 h-[calc(100vh-8rem)]">
+    <div className="flex gap-4 h-[calc(100dvh-125px)] lg:h-[calc(100vh-6rem)] max-w-6xl mx-auto px-2 sm:px-4">
       {/* Sidebar - Conversation History */}
-      <div className="hidden lg:flex flex-col w-64 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="hidden lg:flex flex-col w-64 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden shrink-0">
         <div className="p-4 border-b border-gray-100">
           <button
             onClick={startNewChat}
-            className="w-full py-2 px-4 bg-navy text-white rounded-lg text-sm font-medium hover:bg-navy-light transition-colors"
+            className="w-full py-2.5 px-4 bg-navy text-white rounded-xl text-sm font-medium hover:bg-navy-light transition-colors shadow-sm"
           >
             + New Chat
           </button>
@@ -122,7 +120,7 @@ export default function AIChatPage() {
               <button
                 key={conv.id}
                 onClick={() => loadConversation(conv)}
-                className={`w-full text-left p-3 rounded-lg mb-1 hover:bg-gray-50 transition-colors ${
+                className={`w-full text-left p-3 rounded-xl mb-1 hover:bg-gray-50 transition-colors ${
                   currentConvId === conv.id ? 'bg-accent/10 border border-accent/20' : ''
                 }`}
               >
@@ -134,32 +132,32 @@ export default function AIChatPage() {
         </div>
       </div>
 
-      {/* Chat Area */}
-      <div className="flex-1 flex flex-col bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      {/* Main Chat Container */}
+      <div className="flex-1 flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-w-0">
         {/* Header */}
-        <div className="bg-navy text-white px-5 py-3 flex items-center justify-between">
+        <div className="bg-navy text-white px-4 py-3 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <span className="text-2xl">⚖️</span>
             <div>
-              <p className="font-semibold">LexAid AI Legal Chat</p>
-              <p className="text-xs text-white/60">General Indian Law Q&A</p>
+              <p className="font-bold text-sm sm:text-base">LexAid AI Legal Chat</p>
+              <p className="text-[11px] text-white/70">General Indian Law Q&A</p>
             </div>
           </div>
-          <button onClick={startNewChat} className="lg:hidden text-sm bg-white/20 px-3 py-1 rounded-lg hover:bg-white/30 transition-colors">
-            New Chat
+          <button onClick={startNewChat} className="lg:hidden text-xs bg-white/20 px-3 py-1.5 rounded-lg hover:bg-white/30 font-medium transition-colors">
+            + New Chat
           </button>
         </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-4">
+        {/* Scrollable Messages Area */}
+        <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-3 min-h-0">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
-              <div className={`max-w-[80%] lg:max-w-[70%] ${
+              <div className={`max-w-[88%] sm:max-w-[75%] ${
                 msg.role === 'user'
-                  ? 'bg-accent text-white rounded-2xl rounded-br-sm px-4 py-3'
+                  ? 'bg-accent text-white rounded-2xl rounded-br-sm px-4 py-2.5 shadow-sm'
                   : 'bg-gray-50 text-gray-800 rounded-2xl rounded-bl-sm px-4 py-3 border border-gray-100'
               }`}>
-                <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                <p className="text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
               </div>
             </div>
           ))}
@@ -177,12 +175,12 @@ export default function AIChatPage() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div className="p-4 border-t border-gray-100 bg-gray-50">
-          <div className="flex gap-3 max-w-3xl mx-auto">
+        {/* Input Bar (Always Visible on Mobile Portrait) */}
+        <div className="p-2.5 sm:p-4 border-t border-gray-100 bg-gray-50 shrink-0">
+          <div className="flex gap-2 max-w-3xl mx-auto items-center">
             <button
               onClick={toggleListening}
-              className={`px-4 py-3 rounded-xl transition-colors ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+              className={`p-2.5 sm:px-4 sm:py-3 rounded-xl transition-colors shrink-0 text-base ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}
               title="Voice Input"
             >
               🎤
@@ -193,13 +191,13 @@ export default function AIChatPage() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage()}
               placeholder="Ask about Indian law..."
-              className="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-accent focus:border-transparent bg-white"
+              className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:ring-2 focus:ring-accent focus:border-transparent bg-white min-w-0"
             />
             <button
               id="chat-send"
               onClick={sendMessage}
               disabled={loading || !input.trim()}
-              className="px-6 py-3 bg-navy text-white rounded-xl font-medium hover:bg-navy-light disabled:opacity-50 transition-all"
+              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-navy text-white rounded-xl text-xs sm:text-sm font-semibold hover:bg-navy-light disabled:opacity-50 transition-all shrink-0 shadow-sm"
             >
               Send
             </button>
