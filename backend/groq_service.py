@@ -166,9 +166,14 @@ async def analyze_document(text: str) -> dict:
 
 async def generate_document(doc_type: str, form_data: dict) -> str:
     """Generate a complete legal document using Groq."""
+    # Exclude heavy Base64 signature image string from LLM prompt to keep tokens low
+    clean_form_data = {k: v for k, v in form_data.items() if k != "signature_image"}
+    if form_data.get("signature_image"):
+        clean_form_data["has_digitally_attached_signature"] = True
+
     prompt = GENERATE_DOC_PROMPT.format(
         doc_type=doc_type.replace("_", " ").title(),
-        form_data=json.dumps(form_data, indent=2)
+        form_data=json.dumps(clean_form_data, indent=2)
     )
 
     try:
