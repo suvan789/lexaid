@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
-from models import User
+from models import User, LawyerProfile
 from schemas import (
     UserCreate, UserLogin, UserResponse, UserUpdate, Token,
     ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest
@@ -25,6 +25,28 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
             detail="An account with this email already exists.",
         )
 
+    role_str = user_data.role if user_data.role in ["client", "lawyer"] else "client"
+    lawyer_profile_id = None
+
+    if role_str == "lawyer":
+        lawyer_prof = LawyerProfile(
+            name=user_data.full_name,
+            specialization=user_data.specialization or ["General"],
+            city=user_data.city or "Mumbai",
+            state=user_data.state or "Maharashtra",
+            experience_years=user_data.experience_years or 5,
+            fee_min=user_data.fee_min or 2000,
+            fee_max=user_data.fee_max or 5000,
+            phone=user_data.phone,
+            email=user_data.email,
+            bio=user_data.bio or f"Experienced legal professional in {user_data.city or 'India'}.",
+            verified=True,
+        )
+        db.add(lawyer_prof)
+        await db.flush()
+        await db.refresh(lawyer_prof)
+        lawyer_profile_id = lawyer_prof.id
+
     new_user = User(
         email=user_data.email,
         hashed_password=hash_password(user_data.password),
@@ -32,6 +54,8 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
         phone=user_data.phone,
         city=user_data.city,
         state=user_data.state,
+        role=role_str,
+        lawyer_profile_id=lawyer_profile_id,
     )
     db.add(new_user)
     await db.flush()
@@ -47,6 +71,8 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
         city=new_user.city,
         state=new_user.state,
         is_verified=new_user.is_verified,
+        role=new_user.role or "client",
+        lawyer_profile_id=new_user.lawyer_profile_id,
         created_at=new_user.created_at,
     )
 
@@ -81,6 +107,8 @@ async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
         city=user.city,
         state=user.state,
         is_verified=user.is_verified,
+        role=user.role or "client",
+        lawyer_profile_id=user.lawyer_profile_id,
         created_at=user.created_at,
     )
 

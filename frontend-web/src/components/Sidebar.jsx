@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const NAV_ITEMS = [
+const BASE_NAV_ITEMS = [
   { path: '/', label: 'Dashboard', icon: '🏠' },
+  { path: '/messages', label: 'Direct Messages', icon: '✉️' },
   { path: '/analyze', label: 'Analyze Document', icon: '🔍' },
   { path: '/generate', label: 'Generate Document', icon: '📝' },
   { path: '/chat', label: 'AI Legal Chat', icon: '💬' },
@@ -17,6 +18,11 @@ export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const { user } = useAuth();
+
+  const navItems = [...BASE_NAV_ITEMS];
+  if (user?.role === 'lawyer') {
+    navItems.splice(1, 0, { path: '/lawyer/portal', label: 'Advocate Portal', icon: '⚖️' });
+  }
 
   return (
     <>
@@ -33,7 +39,7 @@ export default function Sidebar() {
 
         {/* Nav Links */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const isActive = location.pathname === item.path ||
               (item.path !== '/' && location.pathname.startsWith(item.path));
             return (

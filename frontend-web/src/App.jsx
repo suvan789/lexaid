@@ -19,6 +19,8 @@ import ForumPage from './pages/ForumPage';
 import ForumPostPage from './pages/ForumPostPage';
 import NewsPage from './pages/NewsPage';
 import ProfilePage from './pages/ProfilePage';
+import LawyerPortalPage from './pages/LawyerPortalPage';
+import DirectChatPage from './pages/DirectChatPage';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 
@@ -65,6 +67,8 @@ function AppRoutes() {
       <Route path="/forum/:id" element={<ProtectedRoute><AppLayout><ForumPostPage /></AppLayout></ProtectedRoute>} />
       <Route path="/news" element={<ProtectedRoute><AppLayout><NewsPage /></AppLayout></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><AppLayout><ProfilePage /></AppLayout></ProtectedRoute>} />
+      <Route path="/lawyer/portal" element={<ProtectedRoute><AppLayout><LawyerPortalPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/messages" element={<ProtectedRoute><AppLayout><DirectChatPage /></AppLayout></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -20,8 +20,11 @@ class User(Base):
     state = Column(String(100), nullable=True)
     is_admin = Column(Boolean, default=False)
     is_verified = Column(Boolean, default=False)
+    role = Column(String(50), default="client")  # client or lawyer
+    lawyer_profile_id = Column(Uuid(as_uuid=True), ForeignKey("lawyer_profiles.id", ondelete="SET NULL"), nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
+    lawyer_profile = relationship("LawyerProfile", foreign_keys=[lawyer_profile_id])
     documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")
     generated_docs = relationship("GeneratedDocument", back_populates="user", cascade="all, delete-orphan")
     forum_posts = relationship("ForumPost", back_populates="user", cascade="all, delete-orphan")
@@ -190,7 +193,8 @@ class Appointment(Base):
     user_id = Column(Uuid(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     lawyer_id = Column(Uuid(as_uuid=True), ForeignKey("lawyer_profiles.id", ondelete="CASCADE"), nullable=False)
     appointment_date = Column(DateTime(timezone=True), nullable=False)
-    status = Column(String(50), default="pending")  # pending, confirmed, cancelled
+    status = Column(String(50), default="pending")  # pending, confirmed, cancelled, completed
+    issue_description = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", backref="appointments")
@@ -209,3 +213,20 @@ class Notification(Base):
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", backref="notifications")
+
+
+class DirectMessage(Base):
+    __tablename__ = "direct_messages"
+
+    id = Column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    sender_id = Column(Uuid(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    receiver_id = Column(Uuid(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    appointment_id = Column(Uuid(as_uuid=True), ForeignKey("appointments.id", ondelete="SET NULL"), nullable=True)
+    message = Column(Text, nullable=False)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    is_read = Column(Boolean, default=False)
+
+    sender = relationship("User", foreign_keys=[sender_id])
+    receiver = relationship("User", foreign_keys=[receiver_id])
+    appointment = relationship("Appointment")
+

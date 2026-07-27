@@ -14,6 +14,12 @@ class UserCreate(BaseModel):
     phone: Optional[str] = None
     city: Optional[str] = None
     state: Optional[str] = None
+    role: Optional[str] = "client"
+    specialization: Optional[List[str]] = None
+    experience_years: Optional[int] = None
+    fee_min: Optional[int] = None
+    fee_max: Optional[int] = None
+    bio: Optional[str] = None
 
 
 class UserLogin(BaseModel):
@@ -29,6 +35,8 @@ class UserResponse(BaseModel):
     city: Optional[str] = None
     state: Optional[str] = None
     is_verified: bool = False
+    role: str = "client"
+    lawyer_profile_id: Optional[UUID] = None
     created_at: datetime
 
     class Config:
@@ -269,6 +277,11 @@ class ChatResponse(BaseModel):
 class AppointmentCreate(BaseModel):
     lawyer_id: UUID
     appointment_date: datetime
+    issue_description: Optional[str] = None
+
+
+class AppointmentStatusUpdate(BaseModel):
+    status: str
 
 
 class AppointmentResponse(BaseModel):
@@ -277,8 +290,33 @@ class AppointmentResponse(BaseModel):
     lawyer_id: UUID
     appointment_date: datetime
     status: str
+    issue_description: Optional[str] = None
     lawyer: Optional[LawyerResponse] = None
+    user: Optional[UserResponse] = None
     created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+# ─── Direct Messaging Schemas ─────────────────────────────────────────
+
+class DirectMessageCreate(BaseModel):
+    receiver_id: UUID
+    appointment_id: Optional[UUID] = None
+    message: str = Field(..., min_length=1)
+
+
+class DirectMessageResponse(BaseModel):
+    id: UUID
+    sender_id: UUID
+    receiver_id: UUID
+    appointment_id: Optional[UUID] = None
+    message: str
+    created_at: datetime
+    is_read: bool = False
+    sender_name: Optional[str] = None
+    receiver_name: Optional[str] = None
 
     class Config:
         from_attributes = True

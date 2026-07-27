@@ -4,7 +4,21 @@ import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({ full_name: '', email: '', password: '', confirm: '', phone: '', city: '', state: '' });
+  const [form, setForm] = useState({
+    full_name: '',
+    email: '',
+    password: '',
+    confirm: '',
+    phone: '',
+    city: '',
+    state: '',
+    role: 'client',
+    specialization: 'General',
+    experience_years: 5,
+    fee_min: 2000,
+    fee_max: 5000,
+    bio: ''
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -20,16 +34,31 @@ export default function RegisterPage() {
     if (form.password !== form.confirm) { setError('Passwords do not match.'); return; }
     setLoading(true);
     try {
-      const res = await API.post('/api/auth/register', {
+      const payload = {
         full_name: form.full_name,
         email: form.email,
         password: form.password,
         phone: form.phone || null,
         city: form.city || null,
         state: form.state || null,
-      });
+        role: form.role,
+      };
+
+      if (form.role === 'lawyer') {
+        payload.specialization = [form.specialization];
+        payload.experience_years = parseInt(form.experience_years) || 5;
+        payload.fee_min = parseInt(form.fee_min) || 2000;
+        payload.fee_max = parseInt(form.fee_max) || 5000;
+        payload.bio = form.bio || `Advocate ${form.full_name} practicing legal services.`;
+      }
+
+      const res = await API.post('/api/auth/register', payload);
       login(res.data.access_token, res.data.user);
-      navigate('/');
+      if (res.data.user?.role === 'lawyer') {
+        navigate('/lawyer/portal');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       setError(err.response?.data?.error || err.response?.data?.detail || 'Registration failed.');
     } finally {
@@ -44,14 +73,14 @@ export default function RegisterPage() {
         <div className="max-w-md text-white animate-fade-in">
           <div className="text-6xl mb-6">⚖️</div>
           <h1 className="text-4xl font-bold mb-4">Join LexAid</h1>
-          <p className="text-xl text-white/80 mb-6">Your AI-powered legal companion for navigating Indian law</p>
-          <p className="text-white/60">Free to use • No credit card required • AI-powered insights</p>
+          <p className="text-xl text-white/80 mb-6">Your AI-powered legal super app for citizens and legal professionals</p>
+          <p className="text-white/60">Free to use • Citizen & Lawyer Portals • AI-powered insights</p>
         </div>
       </div>
 
       {/* Right: Form */}
       <div className="flex-1 flex items-center justify-center p-6 bg-gray-50 overflow-y-auto">
-        <div className="w-full max-w-md animate-fade-in">
+        <div className="w-full max-w-md animate-fade-in my-auto">
           <div className="lg:hidden text-center mb-6">
             <div className="text-5xl mb-3">⚖️</div>
             <h1 className="text-3xl font-bold text-navy">LexAid</h1>
@@ -59,11 +88,33 @@ export default function RegisterPage() {
 
           <div className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 p-8">
             <h2 className="text-2xl font-bold text-navy mb-1">Create account</h2>
-            <p className="text-gray-500 mb-6">Start using LexAid for free</p>
+            <p className="text-gray-500 mb-6">Choose your account type and get started</p>
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-4 text-sm">{error}</div>
             )}
+
+            {/* Role Switcher */}
+            <div className="flex bg-gray-100 p-1 rounded-xl mb-6">
+              <button
+                type="button"
+                onClick={() => setForm(f => ({ ...f, role: 'client' }))}
+                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+                  form.role === 'client' ? 'bg-navy text-white shadow-sm' : 'text-gray-600 hover:text-navy'
+                }`}
+              >
+                👤 Citizen / Client
+              </button>
+              <button
+                type="button"
+                onClick={() => setForm(f => ({ ...f, role: 'lawyer' }))}
+                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
+                  form.role === 'lawyer' ? 'bg-accent text-white shadow-sm' : 'text-gray-600 hover:text-accent'
+                }`}
+              >
+                👨‍⚖️ Advocate / Lawyer
+              </button>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
@@ -84,6 +135,40 @@ export default function RegisterPage() {
                   <input name="confirm" id="register-confirm" type="password" value={form.confirm} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm" placeholder="Re-enter" required />
                 </div>
               </div>
+
+              {/* Lawyer Specific Extra Fields */}
+              {form.role === 'lawyer' && (
+                <div className="p-4 bg-accent/5 rounded-xl border border-accent/20 space-y-3 animate-fade-in">
+                  <p className="text-xs font-semibold text-accent uppercase tracking-wider">Lawyer Profile Setup</p>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 mb-1">Specialization</label>
+                    <select name="specialization" value={form.specialization} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white outline-none">
+                      <option value="Criminal">Criminal Law</option>
+                      <option value="Civil">Civil Litigation</option>
+                      <option value="Family">Family / Matrimonial</option>
+                      <option value="Property">Property & RERA</option>
+                      <option value="Labour">Labour & Employment</option>
+                      <option value="Consumer">Consumer Protection</option>
+                      <option value="Corporate">Corporate & Tax</option>
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Exp (Yrs)</label>
+                      <input name="experience_years" type="number" value={form.experience_years} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Min Fee (₹)</label>
+                      <input name="fee_min" type="number" value={form.fee_min} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 mb-1">Max Fee (₹)</label>
+                      <input name="fee_max" type="number" value={form.fee_max} onChange={handleChange} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                 <input name="phone" value={form.phone} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm" placeholder="+91-XXXXXXXXXX" />
@@ -98,23 +183,24 @@ export default function RegisterPage() {
                   <input name="state" value={form.state} onChange={handleChange} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm" placeholder="Maharashtra" />
                 </div>
               </div>
+
               <button
                 id="register-submit"
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-navy text-white rounded-xl font-semibold hover:bg-navy-light transition-all duration-200 disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
+                className="w-full py-3 bg-navy text-white rounded-xl font-medium hover:bg-navy-light disabled:opacity-50 transition-colors shadow-md mt-2"
               >
-                {loading ? (
-                  <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Creating...</>
-                ) : 'Create Account'}
+                {loading ? 'Creating Account...' : form.role === 'lawyer' ? 'Register as Lawyer' : 'Create Account'}
               </button>
             </form>
-          </div>
 
-          <p className="text-center mt-6 text-gray-500 text-sm">
-            Already have an account?{' '}
-            <Link to="/login" className="text-accent font-semibold hover:underline">Sign in</Link>
-          </p>
+            <div className="mt-6 text-center text-sm text-gray-500">
+              Already have an account?{' '}
+              <Link to="/login" className="text-accent font-semibold hover:underline">
+                Sign in
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

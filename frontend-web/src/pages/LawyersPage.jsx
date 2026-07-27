@@ -23,6 +23,7 @@ export default function LawyersPage() {
   
   const [showBooking, setShowBooking] = useState(false);
   const [bookingDate, setBookingDate] = useState('');
+  const [issueDescription, setIssueDescription] = useState('');
 
   useEffect(() => {
     fetchLawyers();
@@ -53,10 +54,15 @@ export default function LawyersPage() {
     e.preventDefault();
     if (!bookingDate) return;
     try {
-      await API.post('/api/appointments', { lawyer_id: selectedLawyer.id, appointment_date: new Date(bookingDate).toISOString() });
-      alert("Appointment booked successfully! View it in your Profile.");
+      await API.post('/api/appointments', {
+        lawyer_id: selectedLawyer.id,
+        appointment_date: new Date(bookingDate).toISOString(),
+        issue_description: issueDescription
+      });
+      alert("Appointment booked successfully! View it in your Profile or Direct Messages.");
       setShowBooking(false);
       setBookingDate('');
+      setIssueDescription('');
     } catch (err) {
       alert("Failed to book appointment. Please login first.");
     }
@@ -250,14 +256,25 @@ export default function LawyersPage() {
 
               {showBooking ? (
                 <form onSubmit={handleBook} className="mt-4 p-5 bg-gray-50 rounded-xl border border-gray-200 animate-fade-in">
-                  <h4 className="font-semibold text-navy mb-3">Book Appointment</h4>
+                  <h4 className="font-semibold text-navy mb-3">Book Consultation Appointment</h4>
+                  <div className="mb-3">
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">Select Date & Time *</label>
+                    <input type="datetime-local" value={bookingDate} onChange={e => setBookingDate(e.target.value)} required className="w-full px-4 py-2 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-accent text-sm" />
+                  </div>
                   <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Select Date & Time</label>
-                    <input type="datetime-local" value={bookingDate} onChange={e => setBookingDate(e.target.value)} required className="w-full px-4 py-2.5 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-accent" />
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">Describe Your Legal Issue / Problem *</label>
+                    <textarea
+                      rows={3}
+                      value={issueDescription}
+                      onChange={e => setIssueDescription(e.target.value)}
+                      placeholder="e.g. Landlord refusing to return security deposit of 50,000 INR. Need legal advice and notice."
+                      required
+                      className="w-full px-4 py-2 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-accent text-sm bg-white"
+                    />
                   </div>
                   <div className="flex gap-3">
-                    <button type="submit" className="flex-1 bg-accent text-white py-2.5 rounded-xl font-semibold hover:bg-accent-dark transition-colors">Confirm Booking</button>
-                    <button type="button" onClick={() => setShowBooking(false)} className="flex-1 bg-white border border-gray-300 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-gray-50 transition-colors">Cancel</button>
+                    <button type="submit" className="flex-1 bg-accent text-white py-2.5 rounded-xl font-semibold hover:bg-accent-dark transition-colors text-sm">Confirm Booking</button>
+                    <button type="button" onClick={() => setShowBooking(false)} className="flex-1 bg-white border border-gray-300 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-gray-50 transition-colors text-sm">Cancel</button>
                   </div>
                 </form>
               ) : contactData ? (
