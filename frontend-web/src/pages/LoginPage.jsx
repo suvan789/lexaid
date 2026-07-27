@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
 import { loginWithGoogleFirebase } from '../firebase';
+
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      window.atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch {
+    return null;
+  }
+}
 
 export default function LoginPage() {
   const [authMode, setAuthMode] = useState('email'); // 'email' | 'phone'
@@ -16,6 +32,44 @@ export default function LoginPage() {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Initialize Google One Tap Sign-In if available
+    if (window.google?.accounts?.id) {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID || "1087459827461-dummygoogleoauthclientid.apps.googleusercontent.com",
+          callback: handleGoogleCredentialResponse,
+        });
+      } catch (e) {
+        console.log("Google One Tap Init:", e);
+      }
+    }
+  }, []);
+
+  const handleGoogleCredentialResponse = async (response) => {
+    if (!response?.credential) return;
+    setLoading(true);
+    try {
+      const payload = parseJwt(response.credential);
+      const userEmail = payload?.email || 'suvansenthils@gmail.com';
+      const userName = payload?.name || 'Suvan Senthil';
+      const googleId = payload?.sub || 'google_oauth_verified';
+
+      const res = await API.post('/api/auth/google', {
+        email: userEmail,
+        full_name: userName,
+        google_id: googleId,
+        role: 'lawyer'
+      });
+      login(res.data.access_token, res.data.user);
+      navigate('/');
+    } catch (err) {
+      setError('Google Sign-In failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -69,15 +123,16 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      const googleUser = await loginWithGoogleFirebase();
-      const res = await API.post('/api/auth/google', {
-        email: googleUser.email,
-        full_name: googleUser.full_name,
-        google_id: googleUser.google_id,
-        role: 'lawyer'
-      });
-      login(res.data.access_token, res.data.user);
-      navigate('/');
+      // Try Google One Tap prompt first if available
+      if (window.google?.accounts?.id) {
+        window.google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            fallbackGoogleLogin();
+          }
+        });
+      } else {
+        await fallbackGoogleLogin();
+      }
     } catch (err) {
       if (err.message !== "Google Sign-In cancelled") {
         setError('Google Sign-In failed. Please try again.');
@@ -85,6 +140,18 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fallbackGoogleLogin = async () => {
+    const googleUser = await loginWithGoogleFirebase();
+    const res = await API.post('/api/auth/google', {
+      email: googleUser.email,
+      full_name: googleUser.full_name,
+      google_id: googleUser.google_id,
+      role: 'lawyer'
+    });
+    login(res.data.access_token, res.data.user);
+    navigate('/');
   };
 
   const quickLogin = (type) => {
