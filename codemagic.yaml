@@ -22,8 +22,16 @@ workflows:
           npx cap sync ios
       - name: Install CocoaPods
         script: |
-          cd frontend-web/ios/App
-          pod install
+          cd frontend-web
+          if [ -f "ios/App/Podfile" ]; then
+            cd ios/App && pod install
+          elif [ -f "ios/Podfile" ]; then
+            cd ios && pod install
+          else
+            echo "Checking generated iOS directory structure..."
+            ls -la ios || true
+            ls -la ios/App || true
+          fi
       - name: Build iOS
         script: |
           cd frontend-web
