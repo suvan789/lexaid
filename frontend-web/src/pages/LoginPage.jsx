@@ -69,7 +69,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const res = await API.post('/api/auth/google', {
-        email: 'suvansenthils4175.sse@saveetha.com',
+        email: 'suvansenthils@gmail.com',
         full_name: 'Suvan Senthil',
         role: 'lawyer'
       });
@@ -84,7 +84,7 @@ export default function LoginPage() {
 
   const quickLogin = (type) => {
     if (type === 'advocate') {
-      setEmail('suvansenthils4175.sse@saveetha.com');
+      setEmail('suvansenthils@gmail.com');
       setPassword('Password123!');
     } else {
       setEmail('citizen@lexaid.com');
