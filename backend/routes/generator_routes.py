@@ -115,8 +115,11 @@ async def generate_doc(
             detail=f"Missing required fields: {', '.join(missing)}"
         )
 
+    # Clean form_data so raw Base64 images are never sent to Groq AI LLM
+    clean_data = {k: str(v)[:500] for k, v in body.form_data.items() if k != "signature_image"}
+
     # Generate document with Groq
-    content = await generate_document(body.doc_type, body.form_data)
+    content = await generate_document(body.doc_type, clean_data)
 
     # Create title from doc type and key fields
     title = f"{type_info.name}"

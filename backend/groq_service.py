@@ -167,7 +167,7 @@ async def analyze_document(text: str) -> dict:
 async def generate_document(doc_type: str, form_data: dict) -> str:
     """Generate a complete legal document using Groq."""
     # Exclude heavy Base64 signature image string from LLM prompt to keep tokens low
-    clean_form_data = {k: v for k, v in form_data.items() if k != "signature_image"}
+    clean_form_data = {k: str(v)[:300] for k, v in form_data.items() if k != "signature_image"}
     if form_data.get("signature_image"):
         clean_form_data["has_digitally_attached_signature"] = True
 
@@ -177,16 +177,19 @@ async def generate_document(doc_type: str, form_data: dict) -> str:
     )
 
     try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=MODEL,
-        )
-        return chat_completion.choices[0].message.content.strip()
+        try:
+            chat_completion = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=MODEL,
+            )
+            return chat_completion.choices[0].message.content.strip()
+        except Exception:
+            # Fallback to high-throughput llama-3.1-8b-instant model (144k TPM)
+            chat_completion = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model="llama-3.1-8b-instant",
+            )
+            return chat_completion.choices[0].message.content.strip()
     except Exception as e:
         raise HTTPException(
             status_code=500,
