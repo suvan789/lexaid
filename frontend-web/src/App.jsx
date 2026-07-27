@@ -1,4 +1,5 @@
 import React from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AppProvider } from './context/AppContext';
@@ -119,15 +120,18 @@ function AppRoutes() {
 }
 
 export default function App() {
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "1087459827461-dummygoogleoauthclientid.apps.googleusercontent.com";
   return (
-    <ErrorBoundary>
-      <AuthProvider>
-        <AppProvider>
-          <Router>
-            <AppRoutes />
-          </Router>
-        </AppProvider>
-      </AuthProvider>
-    </ErrorBoundary>
+    <GoogleOAuthProvider clientId={clientId}>
+      <ErrorBoundary>
+        <AuthProvider>
+          <AppProvider>
+            <Router>
+              <AppRoutes />
+            </Router>
+          </AppProvider>
+        </AuthProvider>
+      </ErrorBoundary>
+    </GoogleOAuthProvider>
   );
 }
