@@ -9,6 +9,7 @@ from schemas import (
     ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest
 )
 from auth import hash_password, verify_password, create_access_token, get_current_user, decode_token
+from email_service import send_verification_email
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 
@@ -198,11 +199,7 @@ async def send_verification(current_user: User = Depends(get_current_user)):
     from datetime import timedelta
     token = create_access_token(data={"sub": str(current_user.id), "type": "verify"}, expires_delta=timedelta(hours=24))
     
-    print(f"\n========== EMAIL MOCK ==========")
-    print(f"To: {current_user.email}")
-    print(f"Subject: Verify your email")
-    print(f"Link: https://lexaid-mu.vercel.app/verify-email?token={token}")
-    print(f"================================\n")
+    await send_verification_email(current_user.email, token)
     
     return {"message": "Verification email sent", "mock_link": f"/verify-email?token={token}"}
 

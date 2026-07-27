@@ -19,6 +19,7 @@ export default function DashboardPage() {
   const [recentDocs, setRecentDocs] = useState([]);
   const [recentPosts, setRecentPosts] = useState([]);
   const [verifyStatus, setVerifyStatus] = useState('idle'); // idle, loading, sent, error
+  const [mockLink, setMockLink] = useState(null);
 
   const handleVerifyNow = async () => {
     setVerifyStatus('loading');
@@ -34,8 +35,11 @@ export default function DashboardPage() {
   const handleResendVerification = async () => {
     setVerifyStatus('loading');
     try {
-      await API.post('/api/auth/send-verification');
+      const res = await API.post('/api/auth/send-verification');
       setVerifyStatus('sent');
+      if (res.data.mock_link) {
+        setMockLink(res.data.mock_link);
+      }
     } catch (err) {
       setVerifyStatus('error');
     }
@@ -99,10 +103,24 @@ export default function DashboardPage() {
                 disabled={verifyStatus === 'loading' || verifyStatus === 'sent'}
                 className="px-3 py-2 bg-white border border-amber-300 text-amber-800 rounded-xl text-xs font-semibold hover:bg-amber-100 disabled:opacity-50 transition-colors"
               >
-                {verifyStatus === 'sent' ? '✓ Link Sent' : '📧 Resend Link'}
+                {verifyStatus === 'sent' ? '✓ Link Generated' : '📧 Generate Verification Link'}
               </button>
             </div>
           </div>
+
+          {mockLink && (
+            <div className="mt-3 p-3 bg-amber-100/80 rounded-xl border border-amber-300 flex items-center justify-between gap-3">
+              <p className="text-xs text-amber-900 font-medium truncate">
+                ✉️ Link: <span className="font-mono">{window.location.origin}{mockLink}</span>
+              </p>
+              <button
+                onClick={() => navigate(mockLink)}
+                className="px-3 py-1 bg-navy text-white rounded-lg text-xs font-semibold hover:bg-navy-light whitespace-nowrap shadow-xs"
+              >
+                Open Link →
+              </button>
+            </div>
+          )}
         </div>
       )}
 
