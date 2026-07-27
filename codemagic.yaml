@@ -20,23 +20,11 @@ workflows:
           cd frontend-web
           npx cap add ios || true
           npx cap sync ios
-      - name: Install CocoaPods
-        script: |
-          cd frontend-web
-          if [ -f "ios/App/Podfile" ]; then
-            cd ios/App && pod install
-          elif [ -f "ios/Podfile" ]; then
-            cd ios && pod install
-          else
-            echo "Checking generated iOS directory structure..."
-            ls -la ios || true
-            ls -la ios/App || true
-          fi
       - name: Build iOS
         script: |
           cd frontend-web
           xcode-project build-ipa \
-            --workspace ios/App/App.xcworkspace \
+            --project ios/App/App.xcodeproj \
             --scheme App \
             --archive-flags="-destination 'generic/platform=iOS'"
     artifacts:
