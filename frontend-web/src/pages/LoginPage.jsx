@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
+import { loginWithGoogleFirebase } from '../firebase';
 
 export default function LoginPage() {
   const [authMode, setAuthMode] = useState('email'); // 'email' | 'phone'
@@ -68,9 +69,11 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
+      const googleUser = await loginWithGoogleFirebase();
       const res = await API.post('/api/auth/google', {
-        email: 'suvansenthils4175.sse@saveetha.com',
-        full_name: 'Suvan Senthil',
+        email: googleUser.email,
+        full_name: googleUser.full_name,
+        google_id: googleUser.google_id,
         role: 'lawyer'
       });
       login(res.data.access_token, res.data.user);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
+import { loginWithGoogleFirebase } from '../firebase';
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -25,6 +26,26 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleGoogleSignIn = async () => {
+    setError('');
+    setLoading(true);
+    try {
+      const googleUser = await loginWithGoogleFirebase();
+      const res = await API.post('/api/auth/google', {
+        email: googleUser.email,
+        full_name: googleUser.full_name,
+        google_id: googleUser.google_id,
+        role: form.role
+      });
+      login(res.data.access_token, res.data.user);
+      navigate('/');
+    } catch (err) {
+      setError('Google Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
