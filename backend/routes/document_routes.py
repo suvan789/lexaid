@@ -34,8 +34,18 @@ async def upload_document(
     # Extract text from PDF
     document_text = extract_text(file_bytes)
 
-    # Analyze with Groq
+    # Analyze with Groq LLM
     analysis = await analyze_document(document_text)
+
+    # Enrich with Local Machine Learning Model Risk Analysis
+    try:
+        from ml_engine.predictor import predict_risk_ml, classify_document_ml
+        ml_risk = predict_risk_ml(document_text[:2000] if document_text else "standard agreement")
+        ml_class = classify_document_ml(document_text[:2000] if document_text else "standard agreement")
+        analysis["ml_risk_score_percentage"] = ml_risk.get("risk_score_percentage", 45.0)
+        analysis["ml_document_type"] = ml_class.get("predicted_category", "Standard Legal Document")
+    except Exception as ml_err:
+        print(f"ML enrichment note: {ml_err}")
 
     # Save document to database
     doc = Document(

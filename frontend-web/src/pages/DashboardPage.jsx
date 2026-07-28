@@ -150,33 +150,64 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Quick Actions Grid */}
-      <h2 className="text-lg font-bold text-navy mb-4">Quick Actions</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {(user?.role === 'lawyer' 
-          ? [
-              { title: 'Advocate Portal', desc: 'Manage client bookings & consultation requests', icon: '⚖️', path: '/lawyer/portal', color: 'from-amber-500 to-orange-600' },
-              ...QUICK_ACTIONS.filter(a => a.path !== '/lawyers')
-            ]
-          : QUICK_ACTIONS
-        ).map((action, i) => (
+      {/* Smart Case Assessor Widget (Powered by Machine Learning) */}
+      <div className="bg-gradient-to-r from-navy via-navy-light to-accent rounded-2xl p-6 text-white shadow-md mb-8">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">⚖️</span>
+            <h2 className="text-lg font-bold">Smart Case Win & Bail Predictor</h2>
+          </div>
+          <span className="text-xs bg-white/20 text-white px-2.5 py-1 rounded-full font-medium">
+            ⚡ Powered by Machine Learning Engine
+          </span>
+        </div>
+        <p className="text-xs text-white/80 mb-4">
+          Enter facts of any legal case, IPC charges, or court dispute to estimate case win probability and bail chances:
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input
+            type="text"
+            id="case-facts-input"
+            placeholder="e.g. Petitioner accused under IPC Section 420 for cheating. First time offender, fully cooperating with investigation..."
+            className="flex-1 px-4 py-2.5 rounded-xl text-xs text-gray-900 bg-white outline-none focus:ring-2 focus:ring-accent"
+            onKeyDown={async (e) => {
+              if (e.key === 'Enter') {
+                const btn = document.getElementById('predict-btn');
+                if (btn) btn.click();
+              }
+            }}
+          />
           <button
-            key={i}
-            id={`action-${action.path.replace('/', '')}`}
-            onClick={() => navigate(action.path)}
-            className="group bg-white rounded-xl p-5 text-left shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in border border-gray-100"
-            style={{ animationDelay: `${i * 0.1}s` }}
+            id="predict-btn"
+            onClick={async () => {
+              const val = document.getElementById('case-facts-input')?.value;
+              if (!val || val.length < 10) return alert('Please enter at least 10 characters of case facts.');
+              const resBox = document.getElementById('predict-result-box');
+              if (resBox) resBox.innerHTML = '<div class="text-xs text-white/80 py-2">Analyzing case with Machine Learning model...</div>';
+              try {
+                const res = await API.post('/api/ml/predict-outcome', { text: val });
+                if (resBox) {
+                  resBox.innerHTML = `
+                    <div class="mt-3 p-4 bg-white/10 rounded-xl backdrop-blur-xs border border-white/20 animate-fade-in text-white text-xs space-y-1">
+                      <div class="flex justify-between items-center">
+                        <span class="font-bold text-accent-light">Predicted Case Outcome:</span>
+                        <span class="bg-emerald-500/20 text-emerald-300 font-mono px-2 py-0.5 rounded text-[10px]">Confidence: ${res.data.confidence_percentage}%</span>
+                      </div>
+                      <p class="text-base font-extrabold text-white">${res.data.predicted_outcome}</p>
+                    </div>
+                  `;
+                }
+              } catch (err) {
+                if (resBox) resBox.innerHTML = '<div class="text-xs text-red-300 py-2">Prediction failed. Please try again.</div>';
+              }
+            }}
+            className="px-6 py-2.5 bg-accent hover:bg-accent-dark text-white rounded-xl text-xs font-bold transition-all shadow-sm"
           >
-            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform`}>
-              {action.icon}
-            </div>
-            <h3 className="font-semibold text-navy mb-1">{action.title}</h3>
-            <p className="text-sm text-gray-500">{action.desc}</p>
-            <div className="mt-3 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-              Get Started →
-            </div>
+            Predict Win Probability
           </button>
-        ))}
+        </div>
+        <div id="predict-result-box"></div>
       </div>
 
       {/* Recent Activity */}
