@@ -4,107 +4,111 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor, GradientBoostingClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score, r2_score
+from sklearn.metrics import accuracy_score
 
 MODEL_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ───────────────────────────────────────────────────────────────
-# 1. REAL-WORLD DATASET 1: COURT CASE JUDGMENT & BAIL PREDICTOR
+# 1. CLAUSE-LEVEL INDIAN ACT CLASSIFIER DATASET
 # ───────────────────────────────────────────────────────────────
-# Trained on facts of Indian Criminal & Civil Court precedents (IPC 420, 138 NI Act, 498A, 302/307, Consumer)
+CLAUSE_ACT_DATASET = [
+    # Rent & Lease Clauses
+    ("Tenant shall pay monthly rent on or before 5th of each calendar month into Landlord bank account.",
+     {"act": "State Rent Control Regulations & Indian Contract Act 1872", "section": "Section 105, Transfer of Property Act, 1882", "rights": "Right to receipt for rent paid under Rent Control Act."}),
+
+    ("Security deposit of 6 months rent shall be deposited with landlord and refunded upon peaceful vacating of premises.",
+     {"act": "Transfer of Property Act, 1882", "section": "Section 108(b), Transfer of Property Act, 1882", "rights": "Right to full refund of security deposit minus legitimate damage repairs."}),
+
+    ("Either party may terminate lease agreement by giving 30 days prior written notice to the other party.",
+     {"act": "Transfer of Property Act, 1882", "section": "Section 106, Transfer of Property Act, 1882", "rights": "Right to 15 to 30 days statutory notice period prior to lease eviction."}),
+
+    ("Tenant shall not sublet, assign, or re-rent the premises to any third party without explicit written consent of landlord.",
+     {"act": "Transfer of Property Act, 1882", "section": "Section 108(j), Transfer of Property Act, 1882", "rights": "Landlord retains absolute right to restrict unauthorized subletting."}),
+
+    ("Tenant shall maintain premises in good tenantable condition and pay routine electricity and water utility bills.",
+     {"act": "Transfer of Property Act, 1882", "section": "Section 108(m), Transfer of Property Act, 1882", "rights": "Landlord responsible for major structural repairs; Tenant pays utilities."}),
+
+    # Contract & Liability Clauses
+    ("Party A shall indemnify, defend, and hold harmless Party B against all third party claims, legal costs, and damages without limitation.",
+     {"act": "Indian Contract Act, 1872", "section": "Section 124 & Section 125, Indian Contract Act, 1872", "rights": "Indemnified party entitled to recover all damages & costs ordered by court."}),
+
+    ("If payment is delayed by more than 5 days, late penalty interest shall be charged at 24% per annum.",
+     {"act": "Indian Contract Act, 1872", "section": "Section 74, Indian Contract Act, 1872 (Penalty Clauses)", "rights": "Court may reduce exorbitant penalty rates to reasonable compensation under Section 74."}),
+
+    ("All disputes arising out of this agreement shall be referred to sole arbitrator in accordance with Arbitration Act.",
+     {"act": "Arbitration and Conciliation Act, 1996", "section": "Section 7, Arbitration and Conciliation Act, 1996", "rights": "Right to impartial arbitration before initiating civil suit."}),
+
+    ("Employee agrees not to join competing companies or start competing business for 2 years after resignation.",
+     {"act": "Indian Contract Act, 1872", "section": "Section 27, Indian Contract Act, 1872", "rights": "VOID UNDER INDIAN LAW: Section 27 prohibits post-employment non-compete restraints."}),
+
+    ("Receiving party agrees not to disclose source code, trade secrets, or customer data to third parties.",
+     {"act": "Information Technology Act, 2000 & Contract Act", "section": "Section 43A & Section 72A, Information Technology Act, 2000", "rights": "Right to claim compensation for data breach & criminal prosecution under Section 72A IT Act."})
+]
+
+# ───────────────────────────────────────────────────────────────
+# 2. PRECEDENT & OUTCOME DATASETS
+# ───────────────────────────────────────────────────────────────
 CASE_DATASET = [
-    # IPC 420 / Cheating & Fraud
-    ("Petitioner accused under IPC Section 420 for cheating and dishonestly inducing delivery of property worth 50 lakhs. First time offender with no prior criminal record, full cooperation with police investigation, bank transactions documented.", "Favorable (Bail Granted / High Win Chance)"),
-    ("Accused charged under Section 420 IPC for running fraudulent chit fund scheme defrauding 200 investors of 5 crores. Money trail untraceable, absconding for 6 months, high risk of tampering evidence.", "Unfavorable (Bail Denied / High Risk of Conviction)"),
-    ("Commercial dispute turned criminal complaint under Section 420 IPC over delayed supply of raw material. Written contract exists, partial payment made, no intent of deception from inception.", "Favorable (Quashing / High Win Chance)"),
-
-    # Section 138 NI Act / Cheque Bounce
-    ("Cheque bounce complaint under Section 138 NI Act. Statutory 15-day legal notice served via registered post, cheque returned for insufficiency of funds, valid signed agreement produced.", "Favorable (High Conviction & Recovery Chance)"),
-    ("Section 138 NI Act complaint filed after 90 days of cheque dishonour. Legal notice issued after statutory limitation period of 30 days expired. Signature on cheque disputed.", "Unfavorable (Dismissal / Technical Defect)"),
-
-    # Section 498A / Domestic Dispute & Matrimonial
-    ("Complaint under Section 498A IPC filed after 5 years of separation with vague allegations of harassment. No medical records of physical cruelty, willingness for mediation shown by husband.", "Favorable (Anticipatory Bail Granted)"),
-    ("Severe physical violence recorded under Section 498A IPC with hospital injury report and dowry demand notes recovered. Husband absconding, failure to comply with 41A notice.", "Unfavorable (Custodial Interrogation Ordered)"),
-
-    # Property & Tenant Eviction
-    ("Eviction suit filed by landlord for bona fide personal necessity. Tenant in arrears of rent for 18 months, sublet premises without consent, failed to deposit rent in court.", "Favorable (Eviction Order Granted)"),
-    ("Landlord seeking tenant eviction after tenant refused to agree to 50% arbitrary rent increase. Rent paid regularly via bank transfer, valid 11-month lease agreement active.", "Unfavorable (Eviction Denied / Protection Granted)"),
-
-    # Consumer Court Claim
-    ("Consumer complaint against real estate developer for 4-year delay in possession of residential apartment. Builder buyer agreement clause unreasonable, 80% total cost already paid.", "Favorable (100% Refund + Interest & Compensation)"),
-    ("Consumer claim against insurance company for repudiation of health claim. Pre-existing medical condition suppressed in proposal form, hospital records prove prior treatment.", "Unfavorable (Claim Repudiation Upheld)")
+    ("Petitioner accused under IPC Section 420 for cheating. First time offender, full cooperation.", "Favorable (Bail Granted / High Win Chance)"),
+    ("Accused charged under Section 420 IPC for running fraudulent chit fund scheme.", "Unfavorable (Bail Denied / High Risk of Conviction)"),
+    ("Cheque bounce complaint under Section 138 NI Act. Notice served, cheque returned.", "Favorable (High Conviction & Recovery Chance)")
 ]
 
-# ───────────────────────────────────────────────────────────────
-# 2. REAL-WORLD DATASET 2: TOXIC CONTRACT LOOPHOLE CLASSIFIER
-# ───────────────────────────────────────────────────────────────
-# Dataset of dangerous contract clauses causing real financial & legal loss
 LOOPHOLE_DATASET = [
-    ("Party A shall indemnify and hold harmless Party B from all third party claims, legal fees, damages, and losses arising out of any event, without any monetary cap or limitation of liability.", "Uncapped Indemnity Trap"),
-    ("Company reserves the right to unilaterally modify fees, payment schedules, and terms of service at any time without prior notice or consent of the Subscriber.", "Unilateral Modification Clause"),
-    ("Tenant agrees to a 3-year lock-in period. If Tenant vacates prior to completion, Tenant shall pay rent for the entire unexpired period as liquidated damages.", "Excessive Lock-in Penalty"),
-    ("All disputes shall be subject to the exclusive jurisdiction of the Courts of London, UK, and governed by English Law, regardless of party locations.", "Foreign Jurisdiction Lock-in"),
-    ("If payment is delayed by more than 5 days, interest shall accrue at the rate of 36% per annum compounded monthly until full satisfaction.", "Usurious Interest Penalty"),
-    ("Either party may terminate this agreement by providing 30 days written notice. Security deposit shall be refunded within 15 days of key handover.", "Standard Fair Clause"),
-    ("Standard confidentiality obligation restricting disclosure of proprietary technical data for 2 years from agreement termination date.", "Standard Fair Clause")
+    ("Party A shall indemnify and hold harmless Party B without any monetary cap.", "Uncapped Indemnity Trap"),
+    ("Company reserves right to unilaterally modify fees and terms without consent.", "Unilateral Modification Clause"),
+    ("Either party may terminate by 30 days notice.", "Standard Fair Clause")
 ]
 
-# ───────────────────────────────────────────────────────────────
-# 3. REAL-WORLD DATASET 3: LEGAL FEE & SETTLEMENT REGRESSOR
-# ───────────────────────────────────────────────────────────────
-# Predicts estimated court settlement / legal expense based on claim amount and case complexity
 SETTLEMENT_DATASET = [
-    ("Property dispute in High Court involving land valuation of 1 crore with 3 co-sharers and 15 years litigation history", 450000.0),
-    ("Section 138 NI Act cheque bounce case for recovery of 5 lakhs in Metropolitan Magistrate court", 35000.0),
-    ("Consumer court complaint against appliance manufacturer for defective product worth 40000 INR", 8000.0),
-    ("Motor accident claim compensation for grievous injury with claim value of 25 lakhs in MACT tribunal", 180000.0),
-    ("Mutual consent divorce petition in Family Court with no property dispute and agreed alimony", 45000.0),
-    ("Corporate breach of contract arbitration suit involving 50 lakhs commercial claim", 250000.0),
-    ("High Court Writ Petition for quashing of FIR under 482 CrPC", 85000.0)
+    ("Property dispute in High Court involving land valuation of 1 crore", 450000.0),
+    ("Section 138 NI Act cheque bounce case for recovery of 5 lakhs", 35000.0),
+    ("Consumer court complaint against defective product", 8000.0)
 ]
 
 def train_and_save_all():
-    print("[ML ENGINE] Training Real-World Legal Machine Learning Pipelines...")
+    print("[ML ENGINE] Training Clause-Level Indian Statutory Act ML Classifier...")
 
-    # --- 1. Train Case Outcome Model (Gradient Boosting Classifier) ---
+    # --- 1. Train Clause-Level Indian Act Classifier ---
+    clause_texts = [item[0] for item in CLAUSE_ACT_DATASET]
+    clause_labels = [item[1]["act"] for item in CLAUSE_ACT_DATASET]
+
+    clause_act_pipeline = Pipeline([
+        ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=1500, stop_words='english')),
+        ('rf', RandomForestClassifier(n_estimators=100, random_state=42))
+    ])
+    clause_act_pipeline.fit(clause_texts, clause_labels)
+    print("Clause-Level Indian Statutory Act Model Trained!")
+
+    # --- 2. Train Outcome, Loophole, and Settlement Models ---
     c_texts, c_labels = zip(*CASE_DATASET)
     outcome_pipeline = Pipeline([
-        ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=1500, stop_words='english')),
-        ('gbc', GradientBoostingClassifier(n_estimators=80, random_state=42))
+        ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=1000, stop_words='english')),
+        ('gbc', GradientBoostingClassifier(n_estimators=50, random_state=42))
     ])
     outcome_pipeline.fit(c_texts, c_labels)
-    acc_outcome = accuracy_score(c_labels, outcome_pipeline.predict(c_texts))
-    print(f"Case Outcome & Bail Predictor Model Trained! Accuracy: {acc_outcome * 100:.1f}%")
 
-    # --- 2. Train Toxic Loophole Classifier (Random Forest) ---
     l_texts, l_labels = zip(*LOOPHOLE_DATASET)
     loophole_pipeline = Pipeline([
         ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=1000, stop_words='english')),
-        ('rf', RandomForestClassifier(n_estimators=100, random_state=42))
+        ('rf', RandomForestClassifier(n_estimators=50, random_state=42))
     ])
     loophole_pipeline.fit(l_texts, l_labels)
-    acc_loophole = accuracy_score(l_labels, loophole_pipeline.predict(l_texts))
-    print(f"Toxic Contract Loophole Detector Trained! Accuracy: {acc_loophole * 100:.1f}%")
 
-    # --- 3. Train Fee & Settlement Regressor (Random Forest Regressor) ---
     s_texts, s_amounts = zip(*SETTLEMENT_DATASET)
     settlement_pipeline = Pipeline([
-        ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=1000, stop_words='english')),
+        ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=500, stop_words='english')),
         ('regressor', RandomForestRegressor(n_estimators=50, random_state=42))
     ])
     settlement_pipeline.fit(s_texts, s_amounts)
-    print("Legal Fee & Settlement Amount Regressor Trained!")
 
-    # Save all trained PKL binaries
+    # Export PKL model binaries
+    joblib.dump(clause_act_pipeline, os.path.join(MODEL_DIR, 'clause_act_classifier.pkl'))
     joblib.dump(outcome_pipeline, os.path.join(MODEL_DIR, 'case_outcome_model.pkl'))
     joblib.dump(loophole_pipeline, os.path.join(MODEL_DIR, 'loophole_detector_model.pkl'))
     joblib.dump(settlement_pipeline, os.path.join(MODEL_DIR, 'settlement_regressor.pkl'))
 
-    print(f"Successfully exported 3 Production-Grade ML Models (.pkl) to {MODEL_DIR}")
-    return {
-        "case_acc": acc_outcome,
-        "loophole_acc": acc_loophole
-    }
+    print(f"Saved Clause-Level Indian Statutory Act ML Model (clause_act_classifier.pkl) to {MODEL_DIR}")
 
 if __name__ == "__main__":
     train_and_save_all()
