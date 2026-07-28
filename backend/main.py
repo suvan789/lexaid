@@ -21,6 +21,7 @@ from routes.user_routes import router as user_router
 from routes.appointment_routes import router as appointment_router
 from routes.notification_routes import router as notification_router
 from routes.direct_chat_routes import router as direct_chat_router
+from routes.ml_routes import router as ml_router
 
 
 # ─── Seed Data ─────────────────────────────────────────────────
@@ -198,6 +199,7 @@ app.include_router(user_router)
 app.include_router(appointment_router)
 app.include_router(notification_router)
 app.include_router(direct_chat_router)
+app.include_router(ml_router)
 
 
 @app.exception_handler(HTTPException)
