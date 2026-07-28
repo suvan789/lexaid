@@ -1,18 +1,14 @@
-from fastapi import APIRouter, Depends, HTTPException
-
-from auth import get_current_user
-from chatbot import chat_with_document
+from typing import Optional
+from fastapi import APIRouter, Depends, HTTPException, Header
 from groq_service import general_legal_chat
-from models import User
+from chatbot import chat_with_document
 from schemas import ChatRequest, ChatLegalRequest, ChatResponse
 
 router = APIRouter(prefix="/api/chat", tags=["Chat"])
 
-
 @router.post("/document", response_model=ChatResponse)
 async def chat_document_endpoint(
-    body: ChatRequest,
-    current_user: User = Depends(get_current_user),
+    body: ChatRequest
 ):
     """Chat with the AI assistant about an uploaded document."""
     if not body.message.strip():
@@ -30,10 +26,9 @@ async def chat_document_endpoint(
 
 @router.post("/legal", response_model=ChatResponse)
 async def chat_legal_endpoint(
-    body: ChatLegalRequest,
-    current_user: User = Depends(get_current_user),
+    body: ChatLegalRequest
 ):
-    """General Indian law Q&A chat — not document specific."""
+    """General Indian law Q&A chat — accessible to all users."""
     if not body.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
 
