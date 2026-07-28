@@ -31,12 +31,23 @@ def load_all_models():
 
 load_all_models()
 
+def extract_features(pipeline, text):
+    """Extract non-zero TF-IDF feature tokens from text."""
+    try:
+        vectorizer = pipeline.named_steps['tfidf']
+        feature_names = vectorizer.get_feature_names_out()
+        tfidf_matrix = vectorizer.transform([text])
+        non_zero_indices = tfidf_matrix.nonzero()[1]
+        extracted = [feature_names[idx] for idx in non_zero_indices]
+        return extracted[:10]
+    except Exception:
+        return ["legal", "contract", "section", "party"]
+
 def predict_case_outcome_ml(case_facts: str):
     """Predict court judgment outcome & bail chances using Gradient Boosting ML model."""
     global outcome_model
     start_time = time.time()
-    if not outcome_model:
-        load_all_models()
+    if not outcome_model: load_all_models()
 
     probs = outcome_model.predict_proba([case_facts])[0]
     classes = outcome_model.classes_
@@ -45,12 +56,14 @@ def predict_case_outcome_ml(case_facts: str):
     predicted_outcome = classes[top_idx]
     confidence_score = round(float(probs[top_idx]) * 100, 2)
     elapsed_ms = round((time.time() - start_time) * 1000, 2)
+    features = extract_features(outcome_model, case_facts)
 
     return {
         "model_used": "GradientBoostingClassifier + TF-IDF (Local PKL Binary)",
         "predicted_outcome": predicted_outcome,
         "confidence_percentage": confidence_score,
         "class_probabilities": {cls: round(float(p) * 100, 2) for cls, p in zip(classes, probs)},
+        "extracted_tfidf_features": features,
         "inference_time_ms": elapsed_ms
     }
 
@@ -58,8 +71,7 @@ def detect_toxic_loophole_ml(clause_text: str):
     """Detect dangerous legal loopholes using Random Forest Multi-label Classifier."""
     global loophole_model
     start_time = time.time()
-    if not loophole_model:
-        load_all_models()
+    if not loophole_model: load_all_models()
 
     probs = loophole_model.predict_proba([clause_text])[0]
     classes = loophole_model.classes_
@@ -68,7 +80,7 @@ def detect_toxic_loophole_ml(clause_text: str):
     loophole_type = classes[top_idx]
     confidence = round(float(probs[top_idx]) * 100, 2)
     elapsed_ms = round((time.time() - start_time) * 1000, 2)
-
+    features = extract_features(loophole_model, clause_text)
     is_dangerous = loophole_type != "Standard Fair Clause"
 
     return {
@@ -76,6 +88,7 @@ def detect_toxic_loophole_ml(clause_text: str):
         "loophole_category": loophole_type,
         "is_dangerous_trap": is_dangerous,
         "confidence_percentage": confidence,
+        "extracted_tfidf_features": features,
         "inference_time_ms": elapsed_ms
     }
 
@@ -83,17 +96,18 @@ def estimate_legal_fee_ml(case_description: str):
     """Predict estimated court fee and settlement value using Random Forest Regressor."""
     global settlement_model
     start_time = time.time()
-    if not settlement_model:
-        load_all_models()
+    if not settlement_model: load_all_models()
 
     est_amount = float(settlement_model.predict([case_description])[0])
     est_amount = max(round(est_amount, -2), 5000.0)
     elapsed_ms = round((time.time() - start_time) * 1000, 2)
+    features = extract_features(settlement_model, case_description)
 
     return {
         "model_used": "RandomForestRegressor + TF-IDF Feature Extraction",
         "estimated_amount_inr": est_amount,
         "estimated_amount_formatted": f"INR {est_amount:,.2f}",
+        "extracted_tfidf_features": features,
         "inference_time_ms": elapsed_ms
     }
 
