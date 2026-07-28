@@ -1,13 +1,34 @@
+import os
 import re
 import time
+import requests
 from typing import List, Dict
 
-# Pretrained Conversational Intent Knowledge Base for Indian Legal AI
-# Handles greetings, small-talk, and 100+ Indian Law statutory queries naturally
+# Ollama & Hugging Face Pretrained LLM Model Engine Configuration
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
+
+def query_ollama_local_model(prompt: str) -> str:
+    """Query local Ollama pretrained LLM model (Llama-3.2 / Mistral / Gemma)."""
+    try:
+        url = f"{OLLAMA_HOST}/api/generate"
+        payload = {
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False,
+            "options": {"temperature": 0.3, "num_predict": 250}
+        }
+        res = requests.post(url, json=payload, timeout=4)
+        if res.status_code == 200:
+            data = res.json()
+            return data.get("response", "").strip()
+    except Exception:
+        pass
+    return None
 
 GREETING_PATTERNS = [
     (r"\b(hi|hello|hey|namaste|good morning|good afternoon|good evening|greetings)\b",
-     "Namaste! 👋 I am **LexAid AI**, your AI Legal Assistant for Indian Law. I can help you understand your legal rights under the Indian Penal Code (BNS 2023), Rent Control & Property laws, Labour & Employment contracts, Consumer Protection Act, Cheque bounce rules, and Court procedures.\n\nHow can I assist you with your legal question today?"),
+     "Namaste! 👋 I am **LexAid AI**, your AI Legal Assistant for Indian Law (Powered by Pretrained Llama & Local NLP Models). How can I assist you with your legal question today?"),
 
     (r"\b(who are you|what can you do|your name|help me)\b",
      "I am **LexAid AI**, an intelligent Legal AI Assistant specialized in Indian Statutory Laws. Here is what I can do for you:\n\n"
@@ -46,7 +67,7 @@ PRETRAINED_LEGAL_QA_DATABASE = [
         "answer": (
             "Cheating and dishonest inducement of property is punishable under **Section 420 IPC** (Section 318 BNS 2023) with imprisonment **up to 7 years** and fine.\n\n"
             "• **Bail Rights**: It is a cognizable and non-bailable offence. However, first-time offenders with documented business transactions can apply for **Anticipatory Bail** under Section 438 CrPC (Section 482 BNSS 2023).\n"
-            "• **Quashing FIR**: Commercial breaches disguised as criminal complaints can be quashed in the High Court under Section 482 CrPC."
+            "• **Quashing FIR**: Commercial breaches disguised as criminal complaints can be quashing candidates in the High Court under Section 482 CrPC."
         )
     },
     {
@@ -89,8 +110,7 @@ PRETRAINED_LEGAL_QA_DATABASE = [
 
 def generate_local_legal_chat_response(message: str, conversation_history: list = None) -> str:
     """
-    100% Local Pretrained Conversational AI Engine.
-    Handles small-talk, greetings, and statutory legal queries naturally.
+    Local AI Chat Engine using Ollama Pretrained Models with Local Statutory RAG Fallback.
     """
     msg_clean = message.strip().lower()
 
@@ -99,10 +119,15 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
         if re.search(pattern, msg_clean, re.IGNORECASE):
             return reply
 
-    # 2. Check Natural Language Statutory QA Database
+    # 2. Try Ollama Local Pretrained Model (Llama-3.2 / Mistral)
+    ollama_prompt = f"You are LexAid AI, expert Indian legal counsel. Answer this question concisely in simple English citing relevant Indian Acts & Sections: {message}"
+    ollama_reply = query_ollama_local_model(ollama_prompt)
+    if ollama_reply:
+        return f"⚖️ **Legal AI Counsel (Powered by Pretrained Llama-3.2 Model)**:\n\n{ollama_reply}"
+
+    # 3. Check Natural Language Statutory QA Database
     best_match = None
     max_score = 0
-
     for item in PRETRAINED_LEGAL_QA_DATABASE:
         score = sum(1 for kw in item["keywords"] if kw in msg_clean)
         if score > max_score:
@@ -112,7 +137,7 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
     if best_match and max_score > 0:
         return f"⚖️ **Statutory Legal Counsel ({best_match['act']})**\n\n{best_match['answer']}"
 
-    # 3. Intelligent Natural General Legal Response
+    # 4. Intelligent Natural General Legal Response
     return (
         f"⚖️ **Indian Legal Counsel Guidance**:\n\n"
         f"Regarding your query on **'{message[:60]}'**:\n\n"
