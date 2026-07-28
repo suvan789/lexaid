@@ -1,237 +1,44 @@
 import os
 import json
-from groq import Groq
-from dotenv import load_dotenv
-from fastapi import HTTPException
+from local_ai_chat import generate_local_legal_chat_response
+from local_doc_generator import generate_local_legal_document
+from ml_engine.local_analyzer import analyze_document_local_ml
+from ml_engine.predictor import estimate_legal_fee_ml
 
-load_dotenv()
-
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    raise RuntimeError("GROQ_API_KEY not found in environment variables. Check your .env file.")
-
-client = Groq(api_key=GROQ_API_KEY)
-MODEL = "llama-3.3-70b-versatile"
-
-# ─── Prompts ──────────────────────────────────────────────────
-
-ANALYSIS_PROMPT = """You are LexAid, expert AI legal assistant for Indian law.
-Analyze this legal document. Return ONLY valid JSON, no markdown.
-
-{
-  "document_type": "detected type",
-  "overall_risk": "HIGH|MEDIUM|LOW",
-  "risk_summary": "one sentence",
-  "total_clauses": number,
-  "high_risk_count": number,
-  "medium_risk_count": number,
-  "low_risk_count": number,
-  "legal_mistakes_detected": [
-    {
-      "mistake_found": "Describe the factually incorrect, legally unsound, or outdated Indian law from the document.",
-      "correction": "Explain what the actual, current Indian law says to correct this mistake."
-    }
-  ],
-  "clauses": [
-    {
-      "clause_number": number,
-      "heading": "max 5 words",
-      "original_text": "exact text",
-      "risk_level": "HIGH|MEDIUM|LOW",
-      "plain_explanation": "2 simple sentences",
-      "what_it_means_for_you": "practical impact",
-      "your_rights": "Indian law citation or empty string"
-    }
-  ]
-}
-
-Sort: HIGH first, MEDIUM next, LOW last.
-Minimum 5 clauses. Be conservative on risk.
-
-DOCUMENT TO ANALYZE:
-"""
-
-GENERATE_DOC_PROMPT = """You are LexAid, an expert Indian legal document drafter.
-Generate a complete, legally sound {doc_type} document
-based on this information: {form_data}
-
-Requirements:
-- Follow Indian law standards
-- Include all standard clauses for this document type
-- Use proper legal language
-- Include date, signatures section
-- Make it comprehensive and professional
-- Return ONLY the document text, no explanation
-"""
-
-LEGAL_CHAT_PROMPT = """You are LexAid, a knowledgeable AI legal assistant
-specializing in Indian law.
-
-RULES:
-1. Answer general Indian legal questions clearly
-2. Cite specific laws when applicable (IPC, CrPC,
-   Contract Act, Consumer Protection Act etc.)
-3. Always add: "Consult a qualified lawyer for
-   advice specific to your situation."
-4. Keep answers under 150 words
-5. Use simple language
-
-Conversation history:
-{history}
-
-User question: {message}
-"""
-
-FEE_ESTIMATE_PROMPT = """You are LexAid, an expert on Indian legal market rates.
-Estimate lawyer fees for:
-- Case type: {case_type}
-- City: {city}
-- Complexity: {complexity}
-
-Return ONLY valid JSON, no markdown:
-{{
-  "min_fee": number_in_inr,
-  "max_fee": number_in_inr,
-  "average_fee": number_in_inr,
-  "factors": ["factor1", "factor2", "factor3"]
-}}
-
-Base on realistic Indian lawyer market rates for 2024-2025.
-Consider city tier, case complexity, and typical duration.
-"""
-
-
-def _parse_json_response(text: str) -> dict:
-    """Parse JSON from Groq response, stripping markdown fences if present."""
-    cleaned = text.strip()
-    if cleaned.startswith("```json"):
-        cleaned = cleaned[7:]
-    elif cleaned.startswith("```"):
-        cleaned = cleaned[3:]
-    if cleaned.endswith("```"):
-        cleaned = cleaned[:-3]
-    cleaned = cleaned.strip()
-    try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError:
-        # Sometimes models add text around JSON, try to find the JSON block
-        start = cleaned.find('{')
-        end = cleaned.rfind('}') + 1
-        if start != -1 and end != 0:
-            return json.loads(cleaned[start:end])
-        raise
-
+# 100% Local AI & Machine Learning Service Engine (Zero Groq API Dependency)
 
 async def analyze_document(text: str) -> dict:
-    """
-    100% Local Machine Learning & Statutory Indian Act Document Analyzer.
-    Runs offline Scikit-Learn ML models & Act Mapper without calling third-party APIs.
-    """
-    from ml_engine.local_analyzer import analyze_document_local_ml
+    """100% Local Machine Learning & Statutory Indian Act Document Analyzer."""
     return analyze_document_local_ml(text)
 
-
 async def generate_document(doc_type: str, form_data: dict) -> str:
-    """Generate a complete legal document using Groq."""
-    # Exclude heavy Base64 signature image string from LLM prompt to keep tokens low
-    clean_form_data = {k: str(v)[:300] for k, v in form_data.items() if k != "signature_image"}
-    if form_data.get("signature_image"):
-        clean_form_data["has_digitally_attached_signature"] = True
-
-    prompt = GENERATE_DOC_PROMPT.format(
-        doc_type=doc_type.replace("_", " ").title(),
-        form_data=json.dumps(clean_form_data, indent=2)
-    )
-
-    try:
-        try:
-            chat_completion = client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model=MODEL,
-            )
-            return chat_completion.choices[0].message.content.strip()
-        except Exception:
-            # Fallback to high-throughput llama-3.1-8b-instant model (144k TPM)
-            chat_completion = client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model="llama-3.1-8b-instant",
-            )
-            return chat_completion.choices[0].message.content.strip()
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Document generation failed: {str(e)}",
-        )
-
+    """100% Local Legal Document Drafting Engine."""
+    return generate_local_legal_document(doc_type, form_data)
 
 async def general_legal_chat(message: str, conversation_history: list = None) -> str:
-    """
-    100% Local Pretrained NLP Legal AI Chat Engine.
-    Runs in-house statutory retrieval without third-party APIs.
-    """
-    from local_ai_chat import generate_local_legal_chat_response
+    """100% Local Pretrained NLP Legal AI Chat Engine."""
     return generate_local_legal_chat_response(message, conversation_history)
 
-
 async def summarize_news(article_text: str) -> str:
-    """Summarize a news article in 2-3 sentences in simple English."""
-    prompt = f"""Summarize the following legal news article in 2-3 sentences in simple English.
-Focus on the key legal impact for Indian citizens.
-Return ONLY the summary, nothing else.
-
-Article:
-{article_text[:5000]}"""
-
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=MODEL,
-        )
-        return chat_completion.choices[0].message.content.strip()
-    except Exception:
-        return article_text[:200] + "..."
-
+    """Local Extractive NLP News Summarizer."""
+    lines = [s.strip() for s in article_text.split('.') if len(s.strip()) > 20]
+    if len(lines) >= 2:
+        return f"{lines[0]}. {lines[1]}."
+    return article_text[:200] + "..."
 
 async def estimate_lawyer_fee(case_type: str, city: str, complexity: str) -> dict:
-    """Estimate lawyer fees using Groq based on Indian market rates."""
-    prompt = FEE_ESTIMATE_PROMPT.format(
-        case_type=case_type,
-        city=city,
-        complexity=complexity
-    )
-
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=MODEL,
-            response_format={"type": "json_object"}
-        )
-        result = json.loads(chat_completion.choices[0].message.content)
-        return {
-            "min_fee": int(result.get("min_fee", 5000)),
-            "max_fee": int(result.get("max_fee", 50000)),
-            "average_fee": int(result.get("average_fee", 20000)),
-            "factors": result.get("factors", [])
-        }
-    except Exception:
-        # Return reasonable defaults if it fails
-        return {
-            "min_fee": 5000,
-            "max_fee": 50000,
-            "average_fee": 20000,
-            "factors": [
-                "City tier and local market rates",
-                "Case complexity and duration",
-                "Lawyer's experience and reputation"
-            ]
-        }
+    """Local Machine Learning Legal Fee Estimator."""
+    query = f"{case_type} in {city} with {complexity} complexity"
+    res = estimate_legal_fee_ml(query)
+    base_fee = int(res.get("estimated_amount_inr", 20000))
+    
+    return {
+        "min_fee": int(base_fee * 0.6),
+        "max_fee": int(base_fee * 1.5),
+        "average_fee": base_fee,
+        "factors": [
+            "Local High Court / District Court market rates",
+            "Statutory court fee schedules & lawyer experience",
+            "Complexity of litigation and evidence requirements"
+        ]
+    }
