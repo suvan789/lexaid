@@ -3,7 +3,7 @@ import API from '../api/axios';
 
 export default function AIChatPage() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Namaste! 🙏 I\'m LexAid, your AI legal assistant. Ask me anything about Indian law — IPC, tenant rights, labour law, consumer rights, family law, and more.\n\n⚖️ Always consult a qualified lawyer for your specific case.' }
+    { role: 'assistant', content: 'Namaste! 🙏 I am **LexAid AI**, your Indian Legal Assistant.\n\nAsk me any question about Indian law and I will guide you with the relevant Acts and Sections.' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -96,7 +96,7 @@ export default function AIChatPage() {
     }
     setCurrentConvId(Date.now());
     setMessages([
-      { role: 'assistant', content: 'Namaste! 🙏 What legal question can I help you with today?\n\n⚖️ Always consult a qualified lawyer for your specific case.' }
+      { role: 'assistant', content: 'Namaste! 🙏 I am **LexAid AI**, your Indian Legal Assistant.\n\nAsk me any question about Indian law and I will guide you with the relevant Acts and Sections.' }
     ]);
   };
 
