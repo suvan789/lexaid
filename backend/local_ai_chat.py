@@ -4,31 +4,11 @@ import time
 import requests
 from typing import List, Dict
 
-# Pretrained Open-Source LLM Models (Ollama Llama-3.2 & HuggingFace Pretrained Transformers)
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
+# Hugging Face Pretrained Open-Source LLM Model Engine Configuration
 HF_MODEL_URL = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-7B-Instruct"
 
-def query_ollama_pretrained_model(prompt: str) -> str:
-    """Query Ollama local pretrained model (Llama-3.2 / Mistral)."""
-    try:
-        url = f"{OLLAMA_HOST}/api/generate"
-        payload = {
-            "model": OLLAMA_MODEL,
-            "prompt": prompt,
-            "stream": False,
-            "options": {"temperature": 0.3, "num_predict": 250}
-        }
-        res = requests.post(url, json=payload, timeout=3)
-        if res.status_code == 200:
-            data = res.json()
-            return data.get("response", "").strip()
-    except Exception:
-        pass
-    return None
-
 def query_huggingface_pretrained_model(prompt: str) -> str:
-    """Query HuggingFace Open-Source Pretrained LLM Model (Qwen2.5-7B / Llama-3)."""
+    """Query Hugging Face Pretrained Transformer Model (Qwen2.5-7B / Llama-3)."""
     try:
         payload = {
             "inputs": f"<|im_start|>system\nYou are LexAid AI, expert Indian Legal Counsel. Give clear, helpful legal answers under Indian Law.<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n",
@@ -48,12 +28,12 @@ def query_huggingface_pretrained_model(prompt: str) -> str:
 
 GREETING_PATTERNS = [
     (r"^(hi|hello|hey|namaste|good morning|good afternoon|good evening|greetings)\b",
-     "Namaste! 👋 I am **LexAid AI**, your AI Legal Assistant for Indian Law (Powered by Pretrained Llama-3.2 & Open-Source LLM Models).\n\n"
+     "Namaste! 👋 I am **LexAid AI**, your AI Legal Assistant for Indian Law (Powered by **Hugging Face Pretrained Transformer Models**).\n\n"
      "I can help you understand your legal rights under the Indian Penal Code (BNS 2023), Transfer of Property Act, Labour laws, Consumer Protection Act, and Cheque bounce procedures.\n\n"
      "How can I assist you with your legal question today?"),
 
     (r"\b(who are you|what can you do|your name|help me)\b",
-     "I am **LexAid AI**, an intelligent Legal AI Assistant specialized in Indian Statutory Laws. Here is what I can do for you:\n\n"
+     "I am **LexAid AI**, an intelligent Legal AI Assistant specialized in Indian Statutory Laws (Powered by **Hugging Face Pretrained Models**). Here is what I can do for you:\n\n"
      "1. 📄 **Document & Contract Risk Analysis**: Scan contracts for dangerous loopholes and legal risks.\n"
      "2. ⚖️ **Bail & Court Outcome Prediction**: Predict win probability and bail approval chances.\n"
      "3. 📜 **Indian Law Q&A**: Explain IPC/BNS sections, tenant rights, employment laws, and consumer rights.\n"
@@ -117,7 +97,7 @@ PRETRAINED_LEGAL_QA_DATABASE = [
         "answer": (
             "Under the **Consumer Protection Act, 2019**, consumers facing defective goods or deficient services can file complaints online via the **e-Daakhil** portal.\n\n"
             "• **Jurisdiction**: District Commissions handle claims up to ₹50 Lakhs.\n"
-            "• **Remedies**: Full replacement, 100% money refund with interest, and monetary compensation for mental agony."
+            "• **Remedies**: Full replacement, 100% refund with interest, and monetary compensation for mental agony."
         )
     },
     {
@@ -132,8 +112,7 @@ PRETRAINED_LEGAL_QA_DATABASE = [
 
 def generate_local_legal_chat_response(message: str, conversation_history: list = None) -> str:
     """
-    Local Pretrained AI Engine.
-    Executes Ollama / HuggingFace Pretrained Models with Local Statutory RAG Fallback.
+    Hugging Face Pretrained Transformer AI Engine with Statutory RAG Fallback.
     """
     msg_clean = message.strip().lower()
 
@@ -142,18 +121,12 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
         if re.search(pattern, msg_clean, re.IGNORECASE):
             return reply
 
-    # 2. Try Ollama Local Pretrained Model (Llama-3.2 / Mistral)
-    ollama_prompt = f"Answer this legal question under Indian Law concisely: {message}"
-    ollama_reply = query_ollama_pretrained_model(ollama_prompt)
-    if ollama_reply:
-        return f"⚖️ **Legal AI Counsel (Powered by Pretrained Llama-3.2 Model)**:\n\n{ollama_reply}"
-
-    # 3. Try Hugging Face Open-Source Pretrained LLM Model
+    # 2. Query Hugging Face Open-Source Pretrained LLM Model
     hf_reply = query_huggingface_pretrained_model(message)
     if hf_reply and len(hf_reply) > 20:
-        return f"⚖️ **Legal AI Counsel (Powered by Pretrained Qwen2.5-7B LLM)**:\n\n{hf_reply}"
+        return f"⚖️ **Legal AI Counsel (Powered by Hugging Face Pretrained Transformer Model)**:\n\n{hf_reply}"
 
-    # 4. Check Natural Language Statutory QA Database
+    # 3. Check Natural Language Statutory QA Database
     best_match = None
     max_score = 0
     for item in PRETRAINED_LEGAL_QA_DATABASE:
@@ -165,7 +138,7 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
     if best_match and max_score > 0:
         return f"⚖️ **Statutory Legal Counsel ({best_match['act']})**\n\n{best_match['answer']}"
 
-    # 5. Intelligent Natural General Legal Response
+    # 4. Intelligent Natural General Legal Response
     return (
         f"⚖️ **Indian Legal Counsel Guidance**:\n\n"
         f"Regarding your query on **'{message[:60]}'**:\n\n"
