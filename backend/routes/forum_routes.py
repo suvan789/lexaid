@@ -64,7 +64,12 @@ async def get_posts(
     db: AsyncSession = Depends(get_db),
 ):
     """Get forum posts with filtering, search, and pagination."""
-    query = select(ForumPost).options(selectinload(ForumPost.user), selectinload(ForumPost.replies))
+    query = (
+        select(ForumPost)
+        .options(selectinload(ForumPost.user), selectinload(ForumPost.replies))
+        .join(User)
+        .where(User.email != "demo@lexaid.in", User.full_name != "LexAid Community")
+    )
 
     if category and category != "all":
         query = query.where(ForumPost.category == category)

@@ -80,15 +80,17 @@ async def seed_database():
                     db.add(lawyer)
                 print("Seeded 30 lawyer profiles")
 
-            # Seed news
-            result = await db.execute(select(NewsArticle).limit(1))
-            if not result.scalar_one_or_none():
-                for news_data in SEED_NEWS:
-                    article = NewsArticle(**news_data)
-                    db.add(article)
-                print("Seeded 5 news articles")
+            # Purge static demo forum posts permanently
+            from sqlalchemy import delete
+            demo_user_res = await db.execute(select(User).where((User.email == "demo@lexaid.in") | (User.full_name == "LexAid Community")))
+            demo_users = demo_user_res.scalars().all()
+            for du in demo_users:
+                await db.execute(delete(ForumReply).where(ForumReply.user_id == du.id))
+                await db.execute(delete(ForumPost).where(ForumPost.user_id == du.id))
+                await db.execute(delete(User).where(User.id == du.id))
 
             await db.commit()
+            print("Purged all static demo forum posts")
         except Exception as e:
             await db.rollback()
             print(f"Seed error (non-fatal): {e}")
