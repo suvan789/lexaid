@@ -64,11 +64,20 @@ async def get_posts(
     db: AsyncSession = Depends(get_db),
 ):
     """Get forum posts with filtering, search, and pagination."""
+    # Delete legacy demo posts automatically if present
+    try:
+        from sqlalchemy import delete
+        demo_uuid = UUID('d658c62f-609f-4888-a6f5-5c3f4dde871f')
+        await db.execute(delete(ForumReply).where(ForumReply.user_id == demo_uuid))
+        await db.execute(delete(ForumPost).where(ForumPost.user_id == demo_uuid))
+        await db.commit()
+    except Exception:
+        pass
+
     query = (
         select(ForumPost)
         .options(selectinload(ForumPost.user), selectinload(ForumPost.replies))
-        .join(User)
-        .where(User.email != "demo@lexaid.in", User.full_name != "LexAid Community")
+        .where(ForumPost.user_id != UUID('d658c62f-609f-4888-a6f5-5c3f4dde871f'))
     )
 
     if category and category != "all":
