@@ -38,18 +38,7 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
     if GREETINGS_PATTERN.match(msg):
         return (
             "Namaste! 🙏 I am **LexAid AI**, your Indian Legal Assistant.\n\n"
-            "I can help you with questions on:\n"
-            "• Rent & Tenant Rights\n"
-            "• Employment & Labour Law\n"
-            "• Cheque Bounce & Banking\n"
-            "• Family & Matrimonial Law\n"
-            "• Consumer Rights\n"
-            "• Cyber Crime\n"
-            "• Criminal Law (IPC / BNS 2023)\n"
-            "• Property & Real Estate\n"
-            "• Contracts & Agreements\n"
-            "• RTI, GST, Startup Law\n\n"
-            "How can I help you today?"
+            "Ask me any question about Indian law and I will guide you with the relevant Acts and Sections."
         )
 
     # ── 2. About LexAid ─────────────────────────────────────────────────────
