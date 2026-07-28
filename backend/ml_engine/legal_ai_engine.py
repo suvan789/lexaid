@@ -53,8 +53,8 @@ def _build_or_load_model():
         max_df=0.95,
         sublinear_tf=True,            # Apply log normalization to TF
         analyzer="word",
-        stop_words=None,              # Keep legal stop words (section, act, etc.)
-        max_features=8000,
+        stop_words="english",         # Filter out English stop words (what, to, do, my, by, etc.)
+        max_features=10000,
     )
 
     # Fit on full corpus (questions form the index)
@@ -76,21 +76,59 @@ def _preprocess(text: str) -> str:
     return text
 
 
-def semantic_legal_search(query: str, top_k: int = 1, threshold: float = 0.08) -> str | None:
+def _domain_intent_classifier(query_lower: str) -> str | None:
+    """Fast-path legal domain intent classifier for high precision on core legal topics."""
+    # 1. Road Accidents, Bike/Car Collisions & Motor Vehicles
+    if any(w in query_lower for w in ["bus", "bike", "crashed", "crash", "collision", "hit", "accident", "mact", "vehicle accident", "knocked down", "run over"]):
+        for item in LEGAL_QA_CORPUS:
+            if "bike crashed by government bus" in item["q"] or "accident hit and run" in item["q"]:
+                return item["a"]
+
+    # 2. Cheque Bounce & Bank Payment Return
+    if any(w in query_lower for w in ["cheque", "check", "bounce", "bounced", "dishonour", "dishonored", "section 138"]):
+        for item in LEGAL_QA_CORPUS:
+            if "cheque bounce" in item["q"]:
+                return item["a"]
+
+    # 3. Cyber Fraud, Scam & OTP
+    if any(w in query_lower for w in ["cyber", "otp", "scammed", "scam", "phishing", "online fraud", "hacked"]):
+        for item in LEGAL_QA_CORPUS:
+            if "online fraud" in item["q"] or "cyber crime" in item["q"]:
+                return item["a"]
+
+    # 4. Salary, Wages & Labour Dues
+    if any(w in query_lower for w in ["salary", "wages", "overtime", "pf not deposited", "epf", "notice period"]):
+        for item in LEGAL_QA_CORPUS:
+            if "salary dues" in item["q"] or "overtime" in item["q"]:
+                return item["a"]
+
+    # 5. Divorce, Marriage & Custody
+    if any(w in query_lower for w in ["divorce", "custody", "alimony", "matrimonial", "husband", "wife"]):
+        for item in LEGAL_QA_CORPUS:
+            if "divorce process" in item["q"] or "hindu marriage act" in item["q"]:
+                return item["a"]
+
+    # 6. FIR, Police & Bail
+    if any(w in query_lower for w in ["police complaint", "false fir", "anticipatory bail", "arrest"]):
+        for item in LEGAL_QA_CORPUS:
+            if "false police complaint" in item["q"] or "crpc bnss" in item["q"]:
+                return item["a"]
+
+    return None
+
+
+def semantic_legal_search(query: str, top_k: int = 1, threshold: float = 0.12) -> str | None:
     """
-    Find the best matching legal answer for a user query using TF-IDF cosine similarity.
-
-    Args:
-        query: User's legal question
-        top_k: Number of results to consider
-        threshold: Minimum similarity score to return a match
-
-    Returns:
-        Best matching answer string, or None if no good match
+    Find the best matching legal answer for a user query using TF-IDF cosine similarity + Intent Router.
     """
     _build_or_load_model()
-
     processed = _preprocess(query)
+
+    # Check Intent Router first for exact domain keyword match
+    domain_match = _domain_intent_classifier(processed)
+    if domain_match:
+        return domain_match
+
     query_vec = _vectorizer.transform([processed])
 
     # Compute cosine similarity against all corpus questions
