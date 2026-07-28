@@ -4,12 +4,13 @@ import time
 import requests
 from typing import List, Dict
 
-# Ollama & Hugging Face Pretrained LLM Model Engine Configuration
+# Pretrained Open-Source LLM Models (Ollama Llama-3.2 & HuggingFace Pretrained Transformers)
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
+HF_MODEL_URL = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-7B-Instruct"
 
-def query_ollama_local_model(prompt: str) -> str:
-    """Query local Ollama pretrained LLM model (Llama-3.2 / Mistral / Gemma)."""
+def query_ollama_pretrained_model(prompt: str) -> str:
+    """Query Ollama local pretrained model (Llama-3.2 / Mistral)."""
     try:
         url = f"{OLLAMA_HOST}/api/generate"
         payload = {
@@ -18,7 +19,7 @@ def query_ollama_local_model(prompt: str) -> str:
             "stream": False,
             "options": {"temperature": 0.3, "num_predict": 250}
         }
-        res = requests.post(url, json=payload, timeout=4)
+        res = requests.post(url, json=payload, timeout=3)
         if res.status_code == 200:
             data = res.json()
             return data.get("response", "").strip()
@@ -26,9 +27,30 @@ def query_ollama_local_model(prompt: str) -> str:
         pass
     return None
 
+def query_huggingface_pretrained_model(prompt: str) -> str:
+    """Query HuggingFace Open-Source Pretrained LLM Model (Qwen2.5-7B / Llama-3)."""
+    try:
+        payload = {
+            "inputs": f"<|im_start|>system\nYou are LexAid AI, expert Indian Legal Counsel. Give clear, helpful legal answers under Indian Law.<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n",
+            "parameters": {"max_new_tokens": 300, "temperature": 0.4}
+        }
+        res = requests.post(HF_MODEL_URL, json=payload, timeout=4)
+        if res.status_code == 200:
+            result = res.json()
+            if isinstance(result, list) and len(result) > 0:
+                gen_text = result[0].get("generated_text", "")
+                if "<|im_start|>assistant\n" in gen_text:
+                    return gen_text.split("<|im_start|>assistant\n")[-1].strip()
+                return gen_text.strip()
+    except Exception:
+        pass
+    return None
+
 GREETING_PATTERNS = [
-    (r"\b(hi|hello|hey|namaste|good morning|good afternoon|good evening|greetings)\b",
-     "Namaste! 👋 I am **LexAid AI**, your AI Legal Assistant for Indian Law (Powered by Pretrained Llama & Local NLP Models). How can I assist you with your legal question today?"),
+    (r"^(hi|hello|hey|namaste|good morning|good afternoon|good evening|greetings)\b",
+     "Namaste! 👋 I am **LexAid AI**, your AI Legal Assistant for Indian Law (Powered by Pretrained Llama-3.2 & Open-Source LLM Models).\n\n"
+     "I can help you understand your legal rights under the Indian Penal Code (BNS 2023), Transfer of Property Act, Labour laws, Consumer Protection Act, and Cheque bounce procedures.\n\n"
+     "How can I assist you with your legal question today?"),
 
     (r"\b(who are you|what can you do|your name|help me)\b",
      "I am **LexAid AI**, an intelligent Legal AI Assistant specialized in Indian Statutory Laws. Here is what I can do for you:\n\n"
@@ -67,7 +89,7 @@ PRETRAINED_LEGAL_QA_DATABASE = [
         "answer": (
             "Cheating and dishonest inducement of property is punishable under **Section 420 IPC** (Section 318 BNS 2023) with imprisonment **up to 7 years** and fine.\n\n"
             "• **Bail Rights**: It is a cognizable and non-bailable offence. However, first-time offenders with documented business transactions can apply for **Anticipatory Bail** under Section 438 CrPC (Section 482 BNSS 2023).\n"
-            "• **Quashing FIR**: Commercial breaches disguised as criminal complaints can be quashing candidates in the High Court under Section 482 CrPC."
+            "• **Quashing FIR**: Commercial breaches disguised as criminal complaints can be quashed in the High Court under Section 482 CrPC."
         )
     },
     {
@@ -110,7 +132,8 @@ PRETRAINED_LEGAL_QA_DATABASE = [
 
 def generate_local_legal_chat_response(message: str, conversation_history: list = None) -> str:
     """
-    Local AI Chat Engine using Ollama Pretrained Models with Local Statutory RAG Fallback.
+    Local Pretrained AI Engine.
+    Executes Ollama / HuggingFace Pretrained Models with Local Statutory RAG Fallback.
     """
     msg_clean = message.strip().lower()
 
@@ -120,12 +143,17 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
             return reply
 
     # 2. Try Ollama Local Pretrained Model (Llama-3.2 / Mistral)
-    ollama_prompt = f"You are LexAid AI, expert Indian legal counsel. Answer this question concisely in simple English citing relevant Indian Acts & Sections: {message}"
-    ollama_reply = query_ollama_local_model(ollama_prompt)
+    ollama_prompt = f"Answer this legal question under Indian Law concisely: {message}"
+    ollama_reply = query_ollama_pretrained_model(ollama_prompt)
     if ollama_reply:
         return f"⚖️ **Legal AI Counsel (Powered by Pretrained Llama-3.2 Model)**:\n\n{ollama_reply}"
 
-    # 3. Check Natural Language Statutory QA Database
+    # 3. Try Hugging Face Open-Source Pretrained LLM Model
+    hf_reply = query_huggingface_pretrained_model(message)
+    if hf_reply and len(hf_reply) > 20:
+        return f"⚖️ **Legal AI Counsel (Powered by Pretrained Qwen2.5-7B LLM)**:\n\n{hf_reply}"
+
+    # 4. Check Natural Language Statutory QA Database
     best_match = None
     max_score = 0
     for item in PRETRAINED_LEGAL_QA_DATABASE:
@@ -137,7 +165,7 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
     if best_match and max_score > 0:
         return f"⚖️ **Statutory Legal Counsel ({best_match['act']})**\n\n{best_match['answer']}"
 
-    # 4. Intelligent Natural General Legal Response
+    # 5. Intelligent Natural General Legal Response
     return (
         f"⚖️ **Indian Legal Counsel Guidance**:\n\n"
         f"Regarding your query on **'{message[:60]}'**:\n\n"
