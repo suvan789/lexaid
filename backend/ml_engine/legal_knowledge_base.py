@@ -207,4 +207,53 @@ LEGAL_QA_CORPUS = [
     # ─── ENVIRONMENTAL LAW ────────────────────────────────────────────────────
     {"q": "factory pollution noise environment complaint",
      "a": "⚖️ **Environment Protection Act, 1986 & Noise Pollution Rules, 2000**\n\n**File complaint with:**\n1. **State Pollution Control Board (SPCB)** — main authority\n2. **District Collector** — for urgent action\n3. **National Green Tribunal (NGT)** — ngt.gov.in (free to file)\n\n**NGT can award:** Compensation + closure of polluting unit\n\n**Noise Pollution Limits:**\n• Residential: 45dB (day) / 35dB (night)\n• Industrial: 75dB (day) / 70dB (night)"},
+
+    # ─── MOTOR VEHICLES ACT ───────────────────────────────────────────────────
+    {"q": "accident hit and run compensation motor vehicle road accident claim",
+     "a": "⚖️ **Motor Vehicles Act, 1988 — Section 161 & 163A**\n\n**Immediate no-fault compensation:**\n• Death: ₹2 Lakhs (Section 163A)\n• Grievous hurt: ₹50,000\n\n**For full compensation:**\n1. File claim before **Motor Accidents Claims Tribunal (MACT)** within 6 months\n2. No need to prove negligence for Section 163A claims\n3. For hit-and-run — apply to **Solatium Fund** at district collector's office\n\nInsurance company is liable even if driver is at fault."},
+
+    # ─── POCSO ACT ────────────────────────────────────────────────────────────
+    {"q": "child sexual abuse POCSO protection minor under 18",
+     "a": "⚖️ **Protection of Children from Sexual Offences Act, 2012 (POCSO)**\n\n• Covers all sexual offences against children below 18 years\n• Mandatory reporting — failure to report is an offence (Section 21)\n• FIR must be registered by police immediately\n• Special Court for trial — child-friendly procedures\n\n**Punishment:** 7 years to life imprisonment depending on severity\n\n**File complaint:** Any police station — police MUST register FIR\n\nChildline helpline: **1098** (24x7, free)"},
+
+    # ─── NDPS ACT ─────────────────────────────────────────────────────────────
+    {"q": "drug possession narcotic NDPS arrested case",
+     "a": "⚖️ **Narcotic Drugs and Psychotropic Substances Act, 1985 (NDPS)**\n\n**Punishment based on quantity:**\n• Small quantity: Up to 6 months + fine\n• Intermediate quantity: 1–10 years + fine\n• Commercial quantity: 10–20 years + minimum ₹1 Lakh fine\n\n**Key rights of accused:**\n1. Must be produced before Magistrate within 24 hours\n2. NDPS commercial quantity offences are **non-bailable**\n3. Anticipatory bail NOT available in commercial quantity cases (Section 37)\n\nImmediate legal representation is critical."},
+
+    # ─── GRATUITY ─────────────────────────────────────────────────────────────
+    {"q": "gratuity payment employer refusing not paying five years service",
+     "a": "⚖️ **Payment of Gratuity Act, 1972 — Section 4**\n\nGratuity is mandatory for employees with **5+ years of continuous service**.\n\n**Formula:** Last drawn salary × 15/26 × number of years of service\n\n**If employer refuses:**\n1. File complaint with **Controlling Authority (Labour Commissioner)** within 30 days\n2. Employer liable to pay gratuity + 10% interest\n3. Simple interest on delayed payment is compulsory\n\nGratuity must be paid within **30 days** of leaving service."},
+
+    # ─── LEGAL AID ────────────────────────────────────────────────────────────
+    {"q": "free legal aid lawyer cannot afford poor",
+     "a": "⚖️ **Legal Services Authorities Act, 1987**\n\n**Free Legal Aid is available to:**\n• Annual income below ₹1 Lakh (State) / ₹5 Lakhs (Supreme Court)\n• Women and children (regardless of income)\n• SC/ST communities\n• Persons in custody\n• Victims of trafficking, disaster, disability\n\n**How to apply:**\n1. Contact **District Legal Services Authority (DLSA)** at your district court\n2. Call **National Legal Aid Helpline: 15100**\n3. Apply online at **nalsa.gov.in**\n\nService includes: free lawyer, court fees, and documentation."},
+
+    # ─── LAND ACQUISITION ─────────────────────────────────────────────────────
+    {"q": "government acquired land compulsory acquisition compensation",
+     "a": "⚖️ **Right to Fair Compensation and Transparency in Land Acquisition Act, 2013**\n\n**Your rights when government acquires land:**\n• 4x market value for rural land; 2x for urban land\n• Social impact assessment mandatory\n• Consent of 80% land owners required for PPP projects\n• Rehabilitation & Resettlement package mandatory\n\n**Challenge inadequate compensation:**\n1. File objections before **Land Acquisition Collector** (Section 15)\n2. Appeal before **High Court** if compensation is inadequate\n3. Approach **Land Acquisition Rehabilitation & Resettlement Authority**"},
+
+    # ─── DIRECT ACT REFERENCES ────────────────────────────────────────────────
+    {"q": "Transfer of Property Act 1882 sections lease sale gift mortgage",
+     "a": "⚖️ **Transfer of Property Act, 1882**\n\nGoverns transfer of immovable property in India.\n\n**Key Sections:**\n• **Section 5** — Definition of 'transfer of property'\n• **Section 54** — Sale (must be by registered deed)\n• **Section 105** — Lease of immovable property\n• **Section 106** — Tenancy notice period (15–180 days)\n• **Section 108** — Rights & liabilities of landlord and tenant\n• **Section 111** — Determination (ending) of lease\n• **Section 118** — Exchange of property\n• **Section 122** — Gift\n• **Section 130** — Assignment of actionable claim"},
+
+    {"q": "Indian Contract Act 1872 sections valid void voidable agreement",
+     "a": "⚖️ **Indian Contract Act, 1872**\n\nGoverns all contracts and agreements in India.\n\n**Key Sections:**\n• **Section 10** — What agreements are contracts\n• **Section 11** — Capacity to contract (18+ years)\n• **Section 14** — Free consent\n• **Section 19** — Voidable contracts (fraud, coercion)\n• **Section 23** — Unlawful consideration\n• **Section 27** — Agreement in restraint of trade — VOID\n• **Section 73** — Compensation for breach of contract\n• **Section 74** — Liquidated damages\n• **Section 126** — Contract of guarantee\n• **Section 148** — Bailment"},
+
+    {"q": "IPC BNS sections murder theft cheating rape criminal offences",
+     "a": "⚖️ **IPC 1860 / Bharatiya Nyaya Sanhita (BNS) 2023**\n\n**Common Criminal Sections:**\n• **S.302/BNS 101** — Murder (life imprisonment/death)\n• **S.304A/BNS 106** — Death by negligence\n• **S.307/BNS 109** — Attempt to murder\n• **S.323/BNS 115** — Voluntarily causing hurt\n• **S.354/BNS 74** — Assault on woman\n• **S.376/BNS 64** — Rape (7 years to life)\n• **S.379/BNS 303** — Theft\n• **S.406/BNS 316** — Criminal breach of trust\n• **S.420/BNS 318** — Cheating (up to 7 years)\n• **S.498A/BNS 85** — Matrimonial cruelty\n• **S.499/BNS 356** — Defamation"},
+
+    {"q": "Consumer Protection Act 2019 rights complaint procedure",
+     "a": "⚖️ **Consumer Protection Act, 2019**\n\n**Six Consumer Rights:** Safety, Information, Choice, Heard, Redressal, Consumer Education\n\n**Complaint Forums:**\n• **District Commission** — claims up to ₹50 Lakhs\n• **State Commission** — ₹50 Lakhs to ₹2 Crores\n• **National Commission** — above ₹2 Crores\n\n**Product Liability (Chapter VI):** Manufacturer/seller liable for defective products causing injury.\n\n**Time limit:** File within **2 years** of cause of action\n\n**File online:** edaakhil.nic.in | **Helpline:** 1800-11-4000"},
+
+    {"q": "IT Act 2000 sections cyber crime hacking fraud privacy",
+     "a": "⚖️ **Information Technology Act, 2000 & IT Amendment Act, 2008**\n\n**Key Sections:**\n• **Section 43** — Unauthorised computer access (civil penalty)\n• **Section 66** — Computer related offences (3 years)\n• **Section 66C** — Identity theft (3 years + ₹1 Lakh fine)\n• **Section 66D** — Cheating by impersonation online (3 years)\n• **Section 66E** — Violation of privacy — voyeurism (3 years)\n• **Section 67** — Obscene content online (5 years)\n• **Section 67A** — Sexually explicit content (7 years)\n• **Section 72** — Breach of confidentiality\n\n**Report:** cybercrime.gov.in | Helpline: **1930**"},
+
+    {"q": "CrPC BNSS sections FIR bail arrest procedure criminal",
+     "a": "⚖️ **CrPC 1973 / Bharatiya Nagarik Suraksha Sanhita (BNSS) 2023**\n\n**Key Sections:**\n• **S.41/BNSS 35** — Arrest without warrant conditions\n• **S.41A/BNSS 35(7)** — Notice before arrest (Arnesh Kumar guidelines)\n• **S.154/BNSS 173** — FIR registration (mandatory for cognizable offence)\n• **S.167/BNSS 187** — Default bail if chargesheet not filed in 60/90 days\n• **S.200/BNSS 223** — Complaint to Magistrate\n• **S.437/BNSS 479** — Bail in non-bailable offence\n• **S.438/BNSS 482** — Anticipatory bail\n• **S.482/BNSS 528** — High Court inherent powers (quash FIR)"},
+
+    {"q": "Hindu Marriage Act 1955 sections divorce separation",
+     "a": "⚖️ **Hindu Marriage Act, 1955**\n\n**Key Sections:**\n• **Section 5** — Conditions for valid Hindu marriage\n• **Section 9** — Restitution of conjugal rights\n• **Section 10** — Judicial separation\n• **Section 11** — Void marriages\n• **Section 12** — Voidable marriages\n• **Section 13** — Divorce grounds (adultery, cruelty, desertion, etc.)\n• **Section 13B** — Divorce by mutual consent\n• **Section 24** — Interim maintenance during proceedings\n• **Section 25** — Permanent alimony\n• **Section 26** — Custody of children\n• **Section 27** — Disposal of matrimonial property"},
+
+    {"q": "RERA real estate builder developer complaint flat delay",
+     "a": "⚖️ **Real Estate (Regulation & Development) Act, 2016 (RERA)**\n\n**Protects homebuyers from:**\n• Delay in possession\n• False advertising\n• Structural defects\n• Unauthorized changes to plans\n\n**Key Rights:**\n• **Interest** at SBI MCLR+2% for each month of delay\n• **Full refund** with interest if buyer opts out\n• **5-year defect liability** for structural defects\n\n**File complaint:** State RERA portal (e.g., MahaRERA, TNRERA, RERA Delhi)\n\nRERA Authority must decide within **60 days**."},
 ]

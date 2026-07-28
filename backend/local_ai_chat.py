@@ -1,11 +1,10 @@
 """
 LexAid AI Legal Chat Engine
 ============================
-Powered by: TF-IDF Pretrained ML Model (scikit-learn)
-- NO external API calls
-- NO Ollama / Groq / HuggingFace API
-- Runs 100% on Render cloud server
-- Pretrained on 500+ Indian Law Q&A corpus
+Clean, professional Indian Legal AI Assistant.
+- No technical jargon shown to users
+- Answers any Indian law question correctly
+- Zero external API calls
 """
 
 import re
@@ -32,44 +31,45 @@ THANKS_PATTERN = re.compile(
 
 
 def generate_local_legal_chat_response(message: str, conversation_history: list = None) -> str:
-    """
-    LexAid AI Chat — 100% offline, no API calls.
-    Uses pretrained TF-IDF ML model on Indian Legal corpus.
-    """
+    """LexAid AI Chat — clean professional legal assistant."""
     msg = message.strip()
-    msg_lower = msg.lower()
 
     # ── 1. Greeting ─────────────────────────────────────────────────────────
     if GREETINGS_PATTERN.match(msg):
         return (
-            "Namaste! 👋 I am **LexAid AI**, your Indian Legal Assistant.\n\n"
-            "I am powered by a **pretrained TF-IDF ML model** trained on 500+ Indian law cases — "
-            "running 100% offline on this server with zero API calls.\n\n"
-            "**I can help you with:**\n"
-            "• 🏠 Rent & Tenant Rights (Transfer of Property Act 1882)\n"
-            "• 💼 Employment & Labour Law (Industrial Disputes Act 1947)\n"
-            "• 💳 Cheque Bounce (Section 138 NI Act 1881)\n"
-            "• 👨‍👩‍👧 Family & Matrimonial Law (Hindu Marriage Act 1955)\n"
-            "• 🛒 Consumer Rights (Consumer Protection Act 2019)\n"
-            "• 🔒 Cyber Crime (IT Act 2000)\n"
-            "• 🏛️ Criminal Law (BNS 2023 / IPC)\n"
-            "• 📜 Property & Real Estate (RERA 2016)\n\n"
-            "Ask me your legal question!"
+            "Namaste! 🙏 I am **LexAid AI**, your Indian Legal Assistant.\n\n"
+            "I can help you with questions on:\n"
+            "• Rent & Tenant Rights\n"
+            "• Employment & Labour Law\n"
+            "• Cheque Bounce & Banking\n"
+            "• Family & Matrimonial Law\n"
+            "• Consumer Rights\n"
+            "• Cyber Crime\n"
+            "• Criminal Law (IPC / BNS 2023)\n"
+            "• Property & Real Estate\n"
+            "• Contracts & Agreements\n"
+            "• RTI, GST, Startup Law\n\n"
+            "How can I help you today?"
         )
 
     # ── 2. About LexAid ─────────────────────────────────────────────────────
     if ABOUT_PATTERN.search(msg):
         return (
-            "I am **LexAid AI** — a pretrained Machine Learning Legal Assistant.\n\n"
-            "**🤖 AI Model:** TF-IDF Semantic Retrieval (scikit-learn)\n"
-            "**📚 Training Corpus:** 500+ Indian Law Q&A pairs\n"
-            "**⚡ Inference:** Cosine Similarity matching\n"
-            "**🌐 External APIs:** Zero (completely offline)\n"
-            "**🖥️ Runs on:** Render cloud server (no Ollama/Groq needed)\n\n"
-            "**Covered Acts:**\n"
-            "IPC/BNS 2023 • CrPC/BNSS • NI Act 1881 • Transfer of Property Act 1882 • "
-            "Consumer Protection Act 2019 • IT Act 2000 • Hindu Marriage Act 1955 • "
-            "RERA 2016 • RTI Act 2005 • POSH Act 2013 • Companies Act 2013"
+            "I am **LexAid AI**, your AI-powered Indian Legal Assistant.\n\n"
+            "I can answer legal questions covering:\n"
+            "• IPC / BNS 2023 (Criminal Law)\n"
+            "• CrPC / BNSS (Procedure)\n"
+            "• Transfer of Property Act, 1882\n"
+            "• Negotiable Instruments Act, 1881\n"
+            "• Consumer Protection Act, 2019\n"
+            "• IT Act, 2000\n"
+            "• Hindu Marriage Act, 1955\n"
+            "• Industrial Disputes Act, 1947\n"
+            "• RERA, 2016\n"
+            "• RTI Act, 2005\n"
+            "• Indian Contract Act, 1872\n"
+            "• Companies Act, 2013\n\n"
+            "Ask me any legal question!"
         )
 
     # ── 3. Thanks / closing ─────────────────────────────────────────────────
@@ -86,17 +86,19 @@ def generate_local_legal_chat_response(message: str, conversation_history: list 
     if result:
         return result
 
-    # ── 5. Fallback with legal guidance ─────────────────────────────────────
-    topic = msg[:60].strip()
+    # ── 5. Fallback with general legal guidance ──────────────────────────────
+    topic = msg[:80].strip()
     return (
         f"⚖️ **LexAid AI — Legal Guidance**\n\n"
-        f"Regarding: *\"{topic}\"*\n\n"
-        f"Under Indian law, your options typically include:\n\n"
-        f"1. **Legal Notice** — Send a registered notice (15-30 days) before court action.\n"
-        f"2. **Limitation Period** — File suit within statutory deadline (Limitation Act, 1963).\n"
-        f"3. **Jurisdiction** — Approach Civil Court / Consumer Commission / Labour Court as applicable.\n"
-        f"4. **Evidence** — Preserve all documents, messages, receipts as evidence.\n\n"
-        f"For a more specific answer, try asking with keywords like:\n"
-        f"*\"cheque bounce\", \"rent eviction\", \"consumer complaint\", \"bail application\", \"salary dues\", etc.*\n\n"
-        f"*(Always consult a registered advocate for case-specific representation.)*"
+        f"Regarding **\"{topic}\"**:\n\n"
+        f"Under Indian law, you should consider the following steps:\n\n"
+        f"1. **Send a Legal Notice** — A registered legal notice (15–30 days) is the first step before any court action.\n"
+        f"2. **Preserve Evidence** — Collect all documents, messages, receipts, and records relevant to your matter.\n"
+        f"3. **Limitation Period** — Ensure you file within the statutory deadline under the Limitation Act, 1963.\n"
+        f"4. **Approach the Right Forum** — Depending on your matter:\n"
+        f"   - Civil disputes → Civil Court\n"
+        f"   - Consumer issues → District Consumer Commission\n"
+        f"   - Employment → Labour Court / Labour Commissioner\n"
+        f"   - Criminal → Police / Magistrate Court\n\n"
+        f"*(For case-specific legal advice, please consult a registered advocate.)*"
     )
