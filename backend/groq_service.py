@@ -165,32 +165,12 @@ async def generate_document(doc_type: str, form_data: dict) -> str:
 
 
 async def general_legal_chat(message: str, conversation_history: list = None) -> str:
-    """General Indian law Q&A using Groq."""
-    history_str = ""
-    if conversation_history:
-        for msg in conversation_history[-10:]:  # Keep last 10 messages for context
-            role = msg.get("role", "user")
-            content = msg.get("content", "")
-            history_str += f"{role}: {content}\n"
-
-    prompt = LEGAL_CHAT_PROMPT.format(
-        history=history_str if history_str else "No previous conversation.",
-        message=message
-    )
-
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=MODEL,
-        )
-        return chat_completion.choices[0].message.content.strip()
-    except Exception as e:
-        return f"I'm sorry, I encountered an error. Please try again. ({str(e)})"
+    """
+    100% Local Pretrained NLP Legal AI Chat Engine.
+    Runs in-house statutory retrieval without third-party APIs.
+    """
+    from local_ai_chat import generate_local_legal_chat_response
+    return generate_local_legal_chat_response(message, conversation_history)
 
 
 async def summarize_news(article_text: str) -> str:
