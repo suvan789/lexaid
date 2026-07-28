@@ -163,7 +163,7 @@ async def verify_otp(req: VerifyOTPRequest, db: AsyncSession = Depends(get_db)):
                 fee_min=2000,
                 fee_max=5000,
                 bio=f"Advocate verified via phone OTP.",
-                is_available=True,
+                verified=True,
             )
             db.add(advocate_profile)
             await db.flush()
@@ -221,7 +221,7 @@ async def google_auth(req: GoogleAuthRequest, db: AsyncSession = Depends(get_db)
                 fee_min=2000,
                 fee_max=5000,
                 bio=f"Advocate profile for {req.full_name} via Google Sign-In.",
-                is_available=True,
+                verified=True,
             )
             db.add(advocate_profile)
             await db.flush()
