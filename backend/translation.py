@@ -1,81 +1,50 @@
-import os
 import json
-from groq import Groq
-from dotenv import load_dotenv
+import requests
 
-load_dotenv()
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-client = Groq(api_key=GROQ_API_KEY)
-MODEL = "llama-3.3-70b-versatile"
+def _huggingface_translate(text: str, target_language: str) -> str:
+    """Translate using HuggingFace free inference API."""
+    lang_display = "Tamil" if target_language == "tamil" else "Hindi"
+    try:
+        url = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
+        prompt = (
+            f"<|system|>\nTranslate the following English legal text to {lang_display}. "
+            f"Return ONLY the translated text, nothing else.\n"
+            f"<|user|>\n{text[:1500]}\n<|assistant|>\n"
+        )
+        res = requests.post(
+            url,
+            json={"inputs": prompt, "parameters": {"max_new_tokens": 400, "temperature": 0.2}},
+            timeout=6,
+        )
+        if res.status_code == 200:
+            data = res.json()
+            if isinstance(data, list) and data:
+                generated = data[0].get("generated_text", "")
+                if "<|assistant|>" in generated:
+                    translated = generated.split("<|assistant|>")[-1].strip()
+                    if translated and len(translated) > 5:
+                        return translated
+    except Exception:
+        pass
+    return text
 
 
 async def translate_text(text: str, target_language: str) -> str:
     """
-    Translate English legal explanation text to Tamil or Hindi using Groq.
-    Falls back to original text if translation fails.
+    Translate English legal explanation text to Tamil or Hindi.
+    Uses HuggingFace free API. Falls back to original if unavailable.
     """
-    language_display = "Tamil" if target_language == "tamil" else "Hindi"
-
-    prompt = f"""Translate the following English legal explanation to {language_display}.
-Keep the translation simple and easy to understand.
-Maintain the same meaning exactly.
-Return ONLY the translated text, nothing else.
-
-Text to translate:
-{text}"""
-
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=MODEL,
-        )
-        translated = chat_completion.choices[0].message.content.strip()
-        if translated:
-            return translated
-        return text
-    except Exception:
-        return text
+    result = _huggingface_translate(text, target_language)
+    return result
 
 
 async def translate_texts_batch(texts: list, target_language: str) -> list:
+    """Translate a list of English texts to target language."""
     if not texts:
         return []
-        
-    language_display = "Tamil" if target_language == "tamil" else "Hindi"
-    
-    prompt = f"""Translate the following JSON array of English texts to {language_display}.
-Keep the translations simple and easy to understand.
-Maintain the same meaning exactly.
-Return ONLY a valid JSON object containing a single key "translations" which holds the array of translated strings in the exact same order. Do not include markdown formatting.
-
-Texts to translate:
-{json.dumps(texts, ensure_ascii=False)}"""
-
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=MODEL,
-            response_format={"type": "json_object"}
-        )
-        
-        response_text = chat_completion.choices[0].message.content.strip()
-        data = json.loads(response_text)
-        
-        translated_list = data.get("translations", texts)
-
-        if isinstance(translated_list, list) and len(translated_list) == len(texts):
-            return translated_list
-        return texts
-    except Exception:
-        return texts
+    translated = []
+    for text in texts:
+        result = _huggingface_translate(text, target_language)
+        translated.append(result)
+    return translated
