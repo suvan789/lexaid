@@ -242,6 +242,15 @@ LEGAL_QA_CORPUS = [
     {"q": "Indian Contract Act 1872 sections valid void voidable agreement",
      "a": "⚖️ **Indian Contract Act, 1872**\n\nGoverns all contracts and agreements in India.\n\n**Key Sections:**\n• **Section 10** — What agreements are contracts\n• **Section 11** — Capacity to contract (18+ years)\n• **Section 14** — Free consent\n• **Section 19** — Voidable contracts (fraud, coercion)\n• **Section 23** — Unlawful consideration\n• **Section 27** — Agreement in restraint of trade — VOID\n• **Section 73** — Compensation for breach of contract\n• **Section 74** — Liquidated damages\n• **Section 126** — Contract of guarantee\n• **Section 148** — Bailment"},
 
+    {"q": "explain section 302 ipc bns 101 murder punishment",
+     "a": "⚖️ **Indian Penal Code Section 302 / Bharatiya Nyaya Sanhita (BNS) Section 101**\n\n**Offence:** Punishment for Murder.\n\n**Legal Definition:** Whosoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine.\n\n**Key Characteristics:**\n• **Cognizable & Non-Bailable** — Police can arrest without warrant.\n• **Trial Court:** Court of Session.\n• **Bail:** Granted only by High Court or Sessions Court under strict conditions."},
+
+    {"q": "explain section 420 ipc bns 318 cheating dishonesty fraud",
+     "a": "⚖️ **Indian Penal Code Section 420 / Bharatiya Nyaya Sanhita (BNS) Section 318**\n\n**Offence:** Cheating and dishonestly inducing delivery of property.\n\n**Legal Definition:** Cheating and thereby dishonestly inducing the person deceived to deliver any property to any person.\n\n**Punishment:** Imprisonment of up to **7 years** + Fine.\n\n**Key Characteristics:**\n• **Cognizable & Non-Bailable** offence.\n• **Compoundable** with permission of the court."},
+
+    {"q": "explain section 498a ipc bns 85 dowry cruelty matrimonial",
+     "a": "⚖️ **Indian Penal Code Section 498A / Bharatiya Nyaya Sanhita (BNS) Section 85**\n\n**Offence:** Husband or relative of husband subjecting a woman to cruelty or dowry harassment.\n\n**Punishment:** Imprisonment of up to **3 years** + Fine.\n\n**Arnesh Kumar Guidelines (Supreme Court):**\n• Police CANNOT arrest automatically upon FIR registration.\n• Section 41A CrPC notice mandatory prior to arrest for offences with under 7 years punishment."},
+
     {"q": "IPC BNS sections murder theft cheating rape criminal offences",
      "a": "⚖️ **IPC 1860 / Bharatiya Nyaya Sanhita (BNS) 2023**\n\n**Common Criminal Sections:**\n• **S.302/BNS 101** — Murder (life imprisonment/death)\n• **S.304A/BNS 106** — Death by negligence\n• **S.307/BNS 109** — Attempt to murder\n• **S.323/BNS 115** — Voluntarily causing hurt\n• **S.354/BNS 74** — Assault on woman\n• **S.376/BNS 64** — Rape (7 years to life)\n• **S.379/BNS 303** — Theft\n• **S.406/BNS 316** — Criminal breach of trust\n• **S.420/BNS 318** — Cheating (up to 7 years)\n• **S.498A/BNS 85** — Matrimonial cruelty\n• **S.499/BNS 356** — Defamation"},
 
