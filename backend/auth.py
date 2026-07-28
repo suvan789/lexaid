@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-change-me-in-production")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "10080"))
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login", auto_error=False)
 
 
 def hash_password(password: str) -> str:
@@ -71,7 +71,7 @@ def decode_token(token: str) -> str:
 
 
 async def get_current_user(
-    token: str = Depends(oauth2_scheme),
+    token: Optional[str] = Depends(oauth2_scheme),
     db: AsyncSession = Depends(get_db),
 ) -> User:
     """
@@ -79,6 +79,12 @@ async def get_current_user(
     then fetches and returns the corresponding User from the database.
     Raises 401 if the token is invalid or user not found.
     """
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     user_id = decode_token(token)
     try:
         user_uuid = UUID(user_id)
