@@ -268,4 +268,23 @@ LEGAL_QA_CORPUS = [
 
     {"q": "RERA real estate builder developer complaint flat delay",
      "a": "⚖️ **Real Estate (Regulation & Development) Act, 2016 (RERA)**\n\n**Protects homebuyers from:**\n• Delay in possession\n• False advertising\n• Structural defects\n• Unauthorized changes to plans\n\n**Key Rights:**\n• **Interest** at SBI MCLR+2% for each month of delay\n• **Full refund** with interest if buyer opts out\n• **5-year defect liability** for structural defects\n\n**File complaint:** State RERA portal (e.g., MahaRERA, TNRERA, RERA Delhi)\n\nRERA Authority must decide within **60 days**."},
+
+    # ─── CONSTITUTION OF INDIA & FUNDAMENTAL RIGHTS ───────────────────────────
+    {"q": "fundamental rights constitution of india article 14 19 21 32 equality speech life privacy",
+     "a": "🏛️ **Constitution of India — Fundamental Rights (Part III, Articles 12–35)**\n\n**Key Fundamental Rights:**\n• **Article 14** — Right to Equality & Equal Protection of Laws\n• **Article 19** — Right to Freedom (Speech, Assembly, Association, Movement, Trade)\n• **Article 21** — Right to Life & Personal Liberty (includes Right to Privacy & Clean Environment)\n• **Article 21A** — Right to Free & Compulsory Education (RTE Act, 2009)\n• **Article 22** — Protection against Arbitrary Arrest & Detention (24-hour Magistrate rule)\n• **Article 32** — Right to Constitutional Remedies (Supreme Court Writs)\n• **Article 226** — High Court Writ Jurisdiction (Habeas Corpus, Mandamus, Certiorari)"},
+
+    {"q": "explain article 21 right to life privacy liberty supreme court",
+     "a": "🏛️ **Constitution of India — Article 21 (Right to Life and Personal Liberty)**\n\n*No person shall be deprived of his life or personal liberty except according to procedure established by law.*\n\n**Expanded Rights under Article 21 (Supreme Court Precedents):**\n• **Right to Privacy** (*Puttaswamy Judgement, 2017*)\n• **Right to Clean Environment & Water** (*MC Mehta v. Union of India*)\n• **Right to Free Legal Aid** (*Hussainara Khatoon Case*)\n• **Right to Speedy Trial** & Right against Handcuffing\n• **Right to Livelihood & Shelter**"},
+
+    {"q": "posh act sexual harassment workplace women internal committee",
+     "a": "⚖️ **Sexual Harassment of Women at Workplace (Prevention, Prohibition & Redressal) Act, 2013 (POSH)**\n\n**Key Provisions:**\n• Mandatory **Internal Complaints Committee (ICC)** for all companies with 10+ employees\n• External woman member mandatory on the ICC panel\n• **Time Limit:** Complaint must be filed within **3 months** of the incident\n• ICC must complete inquiry within **90 days**\n\nEmployer failing to constitute ICC is liable for **₹50,000 fine** & license cancellation."},
+
+    {"q": "maternity benefit act leave salary pregnancy female employee",
+     "a": "⚖️ **Maternity Benefit Act, 1961 (Amended 2017)**\n\n**Entitlements for Female Employees:**\n• **26 Weeks Paid Maternity Leave** for up to 2 surviving children\n• **12 Weeks** for commissioning/adopting mothers\n• Mandatory **Crèche Facility** for establishments with 50+ employees\n• **Work from Home** option allowed post maternity leave by mutual agreement\n• Dismissal or termination during maternity leave is **ILLEGAL**."},
+
+    {"q": "rti right to information act application filing pio response",
+     "a": "⚖️ **Right to Information Act, 2005 (RTI)**\n\n**How to File RTI Application:**\n1. Write application to **Public Information Officer (PIO)** of the government department.\n2. Pay ₹10 application fee (free for BPL card holders).\n\n**Mandatory Timelines:**\n• Standard response: **30 days**\n• Life or liberty related info: **48 hours**\n\n**Appeals:** First Appeal to First Appellate Authority (FAA) within 30 days → Second Appeal to Information Commission (CIC/SIC)."},
+
+    {"q": "special marriage act interfaith inter caste court marriage",
+     "a": "⚖️ **Special Marriage Act, 1954**\n\nGoverns civil marriages in India regardless of religion or caste.\n\n**Key Requirements:**\n• No religious conversion required\n• **Notice of Intended Marriage** must be submitted to Marriage Officer\n• **30-Day Public Notice** period for objections\n• Requires 3 witnesses at the Marriage Registrar's office\n\nProvides full equal legal status and inheritance rights under civil law."},
 ]

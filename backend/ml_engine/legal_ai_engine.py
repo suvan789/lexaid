@@ -156,10 +156,34 @@ def _domain_intent_classifier(query_lower: str) -> str | None:
             if "section 498a" in item["q"]:
                 return item["a"]
 
-    # 14. IPC / BNS & Criminal Law
-    if any(w in query_lower for w in ["ipc", "bns", "false fir", "anticipatory bail", "police complaint"]):
+    # 15. Fundamental Rights & Article 21
+    if any(w in query_lower for w in ["fundamental rights", "article 21", "article 14", "article 19", "article 32", "constitution of india", "right to privacy", "right to life"]):
         for item in LEGAL_QA_CORPUS:
-            if "ipc bns sections" in item["q"] or "false police complaint" in item["q"]:
+            if "article 21" in item["q"] or "fundamental rights" in item["q"]:
+                return item["a"]
+
+    # 16. POSH Act 2013
+    if any(w in query_lower for w in ["posh", "posh act", "sexual harassment workplace", "internal committee"]):
+        for item in LEGAL_QA_CORPUS:
+            if "posh act" in item["q"]:
+                return item["a"]
+
+    # 17. Maternity Benefit Act
+    if any(w in query_lower for w in ["maternity", "maternity benefit", "pregnancy leave", "maternity leave"]):
+        for item in LEGAL_QA_CORPUS:
+            if "maternity benefit act" in item["q"]:
+                return item["a"]
+
+    # 18. RTI Act 2005
+    if any(w in query_lower for w in ["rti", "right to information", "pio", "rti application"]):
+        for item in LEGAL_QA_CORPUS:
+            if "rti right to information" in item["q"]:
+                return item["a"]
+
+    # 19. Special Marriage Act 1954
+    if any(w in query_lower for w in ["special marriage act", "court marriage", "interfaith marriage"]):
+        for item in LEGAL_QA_CORPUS:
+            if "special marriage act" in item["q"]:
                 return item["a"]
 
     return None
