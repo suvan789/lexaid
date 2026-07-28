@@ -31,8 +31,8 @@ async def upload_document(
     if len(file_bytes) == 0:
         raise HTTPException(status_code=400, detail="Uploaded file is empty.")
 
-    # Extract text from PDF
-    document_text = extract_text(file_bytes)
+    # Extract text from PDF (with scanned PDF OCR fallback)
+    document_text = extract_text(file_bytes, file.filename)
 
     # Analyze with Groq LLM
     analysis = await analyze_document(document_text)
