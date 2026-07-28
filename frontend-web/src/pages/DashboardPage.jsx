@@ -59,18 +59,18 @@ export default function DashboardPage() {
         API.get('/api/forum/posts?limit=5'),
         API.get('/api/appointments'),
       ]);
-      if (docsRes.status === 'fulfilled') {
+      if (docsRes.status === 'fulfilled' && Array.isArray(docsRes.value?.data)) {
         setRecentDocs(docsRes.value.data.slice(0, 5));
         setStats(s => ({ ...s, docs: docsRes.value.data.length }));
       }
-      if (genRes.status === 'fulfilled') {
+      if (genRes.status === 'fulfilled' && Array.isArray(genRes.value?.data)) {
         setStats(s => ({ ...s, generated: genRes.value.data.length }));
       }
-      if (postsRes.status === 'fulfilled') {
+      if (postsRes.status === 'fulfilled' && Array.isArray(postsRes.value?.data)) {
         setRecentPosts(postsRes.value.data.slice(0, 5));
         setStats(s => ({ ...s, posts: postsRes.value.data.length }));
       }
-      if (apptRes.status === 'fulfilled') {
+      if (apptRes.status === 'fulfilled' && Array.isArray(apptRes.value?.data)) {
         setAppointments(apptRes.value.data);
         setStats(s => ({ ...s, appointments: apptRes.value.data.length }));
       }
@@ -218,58 +218,60 @@ export default function DashboardPage() {
       </div>
 
       {/* 📅 Client Portal: Consultations Booking History & Real-Time Tracker */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 animate-fade-in">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xl">📅</span>
-              <h2 className="text-lg font-bold text-navy">Consultation History & Status Tracker</h2>
-              <span className="text-xs bg-navy/10 text-navy font-bold px-2.5 py-0.5 rounded-full">
-                {appointments.length} Total Bookings
-              </span>
+      {(() => {
+        const safeAppointments = Array.isArray(appointments) ? appointments : [];
+        const filteredAppointments = safeAppointments.filter(a => consultationFilter === 'all' || a.status === consultationFilter);
+        return (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 animate-fade-in">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">📅</span>
+                  <h2 className="text-lg font-bold text-navy">Consultation History & Status Tracker</h2>
+                  <span className="text-xs bg-navy/10 text-navy font-bold px-2.5 py-0.5 rounded-full">
+                    {safeAppointments.length} Total Bookings
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 mt-1">Track advocate confirmation, scheduled dates, and legal consultation progress</p>
+              </div>
+
+              <div className="flex items-center gap-1.5 bg-gray-50 p-1.5 rounded-xl border border-gray-200 text-xs">
+                {['all', 'pending', 'confirmed', 'completed', 'cancelled'].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setConsultationFilter(tab)}
+                    className={`px-3 py-1.5 rounded-lg font-semibold capitalize transition-all cursor-pointer ${
+                      consultationFilter === tab
+                        ? 'bg-navy text-white shadow-xs'
+                        : 'text-gray-600 hover:text-navy hover:bg-gray-100'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
             </div>
-            <p className="text-xs text-gray-500 mt-1">Track advocate confirmation, scheduled dates, and legal consultation progress</p>
-          </div>
 
-          <div className="flex items-center gap-1.5 bg-gray-50 p-1.5 rounded-xl border border-gray-200 text-xs">
-            {['all', 'pending', 'confirmed', 'completed', 'cancelled'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setConsultationFilter(tab)}
-                className={`px-3 py-1.5 rounded-lg font-semibold capitalize transition-all cursor-pointer ${
-                  consultationFilter === tab
-                    ? 'bg-navy text-white shadow-xs'
-                    : 'text-gray-600 hover:text-navy hover:bg-gray-100'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
+            {filteredAppointments.length === 0 ? (
+              <div className="text-center py-10 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
+                <p className="text-3xl mb-2">📋</p>
+                <h4 className="text-sm font-bold text-navy mb-1">No Consultations Found</h4>
+                <p className="text-xs text-gray-500 mb-4">Book an appointment with an advocate to track legal consultations here.</p>
+                <button
+                  onClick={() => navigate('/lawyers')}
+                  className="px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-navy-light transition-all shadow-sm cursor-pointer"
+                >
+                  👨‍⚖️ Book Consultation Now
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filteredAppointments.map((apt) => {
+                  const isCancelled = apt.status === 'cancelled';
+                  const currentStep = isCancelled ? -1 : apt.status === 'completed' ? 3 : apt.status === 'confirmed' ? 2 : 1;
 
-        {appointments.filter(a => consultationFilter === 'all' || a.status === consultationFilter).length === 0 ? (
-          <div className="text-center py-10 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
-            <p className="text-3xl mb-2">📋</p>
-            <h4 className="text-sm font-bold text-navy mb-1">No Consultations Found</h4>
-            <p className="text-xs text-gray-500 mb-4">Book an appointment with an advocate to track legal consultations here.</p>
-            <button
-              onClick={() => navigate('/lawyers')}
-              className="px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-navy-light transition-all shadow-sm cursor-pointer"
-            >
-              👨‍⚖️ Book Consultation Now
-            </button>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {appointments
-              .filter(a => consultationFilter === 'all' || a.status === consultationFilter)
-              .map((apt) => {
-                const isCancelled = apt.status === 'cancelled';
-                const currentStep = isCancelled ? -1 : apt.status === 'completed' ? 3 : apt.status === 'confirmed' ? 2 : 1;
-
-                return (
-                  <div key={apt.id} className="p-5 bg-gradient-to-br from-gray-50 via-white to-blue-50/20 border border-gray-200/80 rounded-2xl shadow-xs space-y-4 hover:border-accent/40 transition-all">
+                  return (
+                    <div key={apt.id} className="p-5 bg-gradient-to-br from-gray-50 via-white to-blue-50/20 border border-gray-200/80 rounded-2xl shadow-xs space-y-4 hover:border-accent/40 transition-all">
                     {/* Top Row: Booking ID, Advocate Name, Status Badge */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-gray-100">
                       <div className="flex items-center gap-3">
@@ -401,8 +403,8 @@ export default function DashboardPage() {
                 );
               })}
           </div>
-        )}
-      </div>
+        );
+      })()}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Documents */}
         <div className="bg-white rounded-xl shadow-sm p-5">
