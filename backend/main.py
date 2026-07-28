@@ -223,7 +223,7 @@ async def global_exception_handler(request, exc):
 @app.get("/api/health", tags=["Health"])
 async def health_check():
     """Health check endpoint."""
-    return {"status": "ok", "version": "2.0.0", "model": "llama-3.3-70b-versatile (Groq)"}
+    return {"status": "ok", "version": "3.0.0", "model": "Ollama Llama-3.2 + HuggingFace Zephyr-7B (Local AI)"}
 
 
 if __name__ == "__main__":
