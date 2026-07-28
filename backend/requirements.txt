@@ -19,3 +19,7 @@ psycopg2-binary==2.9.9
 pytest==8.2.2
 pytest-asyncio==0.23.7
 openpyxl==3.1.4
+scikit-learn==1.8.0
+numpy==1.26.4
+joblib==1.5.3
+nltk==3.10.0
