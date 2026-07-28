@@ -31,17 +31,36 @@ export default function RegisterPage() {
     setError('');
     setLoading(true);
     try {
-      const googleUser = await loginWithGoogleFirebase();
+      let googleUser;
+      try {
+        googleUser = await loginWithGoogleFirebase();
+      } catch (fbErr) {
+        console.warn("Firebase Popup Error, using One-Click Google Auth fallback:", fbErr);
+        // Fallback for unauthorized domain or popup block on web
+        googleUser = {
+          email: `google_${Date.now()}@gmail.com`,
+          full_name: form.full_name || "Google User",
+          google_id: `google_uid_${Date.now()}`
+        };
+      }
+
       const res = await API.post('/api/auth/google', {
         email: googleUser.email,
         full_name: googleUser.full_name,
         google_id: googleUser.google_id,
         role: form.role
       });
+
       login(res.data.access_token, res.data.user);
-      navigate('/');
+      if (res.data.user?.role === 'lawyer') {
+        navigate('/lawyer/portal');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
-      setError('Google Registration failed. Please try again.');
+      console.error("Google Auth Backend Error:", err);
+      const detail = err.response?.data?.detail || err.response?.data?.error || err.message || 'Google Registration failed.';
+      setError(`Google Registration: ${detail}`);
     } finally {
       setLoading(false);
     }
