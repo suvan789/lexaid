@@ -124,44 +124,11 @@ def _parse_json_response(text: str) -> dict:
 
 async def analyze_document(text: str) -> dict:
     """
-    Send document text to Groq for clause-by-clause legal analysis.
-    Chunks text to 30000 chars if too long. Retries once on JSON parse failure.
+    100% Local Machine Learning & Statutory Indian Act Document Analyzer.
+    Runs offline Scikit-Learn ML models & Act Mapper without calling third-party APIs.
     """
-    document_text = text[:30000] if len(text) > 30000 else text
-    full_prompt = ANALYSIS_PROMPT + document_text
-
-    try:
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": full_prompt,
-                }
-            ],
-            model=MODEL,
-            response_format={"type": "json_object"}
-        )
-        result = json.loads(chat_completion.choices[0].message.content)
-        return result
-    except Exception as e:
-        try:
-            # Retry without JSON format enforcement if it fails
-            chat_completion = client.chat.completions.create(
-                messages=[
-                    {
-                        "role": "user",
-                        "content": "Return ONLY valid JSON, no other text:\n\n" + full_prompt,
-                    }
-                ],
-                model=MODEL,
-            )
-            result = _parse_json_response(chat_completion.choices[0].message.content)
-            return result
-        except Exception as retry_e:
-            raise HTTPException(
-                status_code=500,
-                detail=f"AI analysis failed: {str(retry_e)}",
-            )
+    from ml_engine.local_analyzer import analyze_document_local_ml
+    return analyze_document_local_ml(text)
 
 
 async def generate_document(doc_type: str, form_data: dict) -> str:

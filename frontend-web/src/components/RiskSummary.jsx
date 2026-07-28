@@ -13,10 +13,10 @@ export default function RiskSummary({ analysis }) {
   const mlScore = analysis.ml_risk_score_percentage || (analysis.overall_risk === 'HIGH' ? 84.5 : analysis.overall_risk === 'MEDIUM' ? 52.0 : 18.5);
 
   return (
-    <div className={`${colors.bg} rounded-2xl p-6 ${colors.text} shadow-lg animate-fade-in mb-6`}>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+    <div className={`${colors.bg} rounded-2xl p-6 ${colors.text} shadow-lg animate-fade-in mb-6 space-y-4`}>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
             <span className="text-2xl">{analysis.overall_risk === 'HIGH' ? '🔴' : analysis.overall_risk === 'MEDIUM' ? '🟡' : '🟢'}</span>
             <h2 className="text-xl font-bold">{analysis.overall_risk} RISK</h2>
             <span className="text-xs bg-black/20 text-white px-2.5 py-1 rounded-full font-mono font-bold">
@@ -25,10 +25,23 @@ export default function RiskSummary({ analysis }) {
           </div>
           <p className="text-white/80 text-sm">{analysis.risk_summary}</p>
         </div>
-        <div className="text-sm font-medium bg-white/20 px-3 py-1.5 rounded-lg">
+        <div className="text-sm font-medium bg-white/20 px-3 py-1.5 rounded-lg shrink-0">
           {analysis.document_type}
         </div>
       </div>
+
+      {/* Statutory Indian Act Highlight Banner */}
+      {analysis.governing_statutory_act && (
+        <div className="bg-black/20 p-3.5 rounded-xl border border-white/20 text-xs text-white space-y-1">
+          <div className="flex items-center gap-2 font-bold text-amber-200">
+            <span>📜 Statutory Governing Indian Act:</span>
+            <span>{analysis.governing_statutory_act}</span>
+          </div>
+          {analysis.act_sections_applied && (
+            <p className="text-white/80 text-[11px]">Applied Sections: {analysis.act_sections_applied}</p>
+          )}
+        </div>
+      )}
 
       <div className="grid grid-cols-3 gap-3">
         {[
