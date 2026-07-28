@@ -27,7 +27,20 @@ async def get_lawyers(
     db: AsyncSession = Depends(get_db),
 ):
     """Search and filter lawyers. No auth required."""
-    query = select(LawyerProfile)
+    # Automatically purge static unlinked lawyer profiles (only true registered advocate users remain)
+    try:
+        from sqlalchemy import delete
+        user_lawyer_ids_res = await db.execute(select(User.lawyer_profile_id).where(User.lawyer_profile_id.is_not(None)))
+        valid_lawyer_ids = [row[0] for row in user_lawyer_ids_res.all() if row[0] is not None]
+        if valid_lawyer_ids:
+            await db.execute(delete(LawyerProfile).where(LawyerProfile.id.not_in(valid_lawyer_ids)))
+        else:
+            await db.execute(delete(LawyerProfile))
+        await db.commit()
+    except Exception:
+        pass
+
+    query = select(LawyerProfile).join(User, User.lawyer_profile_id == LawyerProfile.id)
 
     if city:
         query = query.where(LawyerProfile.city.ilike(f"%{city}%"))
