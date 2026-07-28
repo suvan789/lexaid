@@ -91,23 +91,48 @@ export default function AnalyzePage() {
           {/* Upload Zone */}
           <div
             id="upload-zone"
-            className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-300 cursor-pointer ${
-              dragActive ? 'border-accent bg-accent/5 scale-[1.02]' : file ? 'border-green-400 bg-green-50' : 'border-gray-300 bg-white hover:border-accent hover:bg-gray-50'
+            className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 ${
+              dragActive ? 'border-accent bg-accent/5 scale-[1.02]' : file ? 'border-green-400 bg-green-50/60' : 'border-gray-300 bg-white hover:border-accent hover:bg-gray-50 cursor-pointer'
             }`}
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            onClick={() => document.getElementById('file-input').click()}
+            onClick={() => !file && document.getElementById('file-input').click()}
           >
             <input id="file-input" type="file" accept=".pdf" onChange={handleFileSelect} className="hidden" />
             
             {file ? (
-              <>
-                <div className="text-5xl mb-4">✅</div>
-                <p className="text-lg font-semibold text-green-700 mb-1">{file.name}</p>
-                <p className="text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB • Ready to analyze</p>
-              </>
+              <div className="space-y-4">
+                <div className="text-5xl">📄</div>
+                <div>
+                  <p className="text-lg font-bold text-navy mb-1">{file.name}</p>
+                  <p className="text-sm text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB • Ready to analyze</p>
+                </div>
+                
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleUpload();
+                    }}
+                    className="px-8 py-3.5 bg-gradient-to-r from-navy via-indigo-900 to-navy text-white text-base font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <span>🔍</span> Analyze Document Now
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setFile(null);
+                      setError('');
+                    }}
+                    className="px-5 py-3.5 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold rounded-xl text-sm transition-all cursor-pointer"
+                  >
+                    Change File
+                  </button>
+                </div>
+              </div>
             ) : (
               <>
                 <div className="text-5xl mb-4">📄</div>
@@ -119,6 +144,12 @@ export default function AnalyzePage() {
               </>
             )}
           </div>
+
+          {error && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-medium flex items-center gap-2">
+              <span>⚠️</span> {error}
+            </div>
+          )}
 
           {/* Sample High-Clause Documents for Evaluators */}
           <div className="mt-8 bg-white p-5 rounded-2xl border border-gray-100 shadow-xs space-y-3">
