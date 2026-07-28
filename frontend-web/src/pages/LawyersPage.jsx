@@ -29,6 +29,7 @@ export default function LawyersPage() {
   const [showBooking, setShowBooking] = useState(false);
   const [bookingDate, setBookingDate] = useState('');
   const [issueDescription, setIssueDescription] = useState('');
+  const [bookingConfirmation, setBookingConfirmation] = useState(null);
 
   useEffect(() => {
     if (user?.role === 'lawyer') {
@@ -63,13 +64,21 @@ export default function LawyersPage() {
     e.preventDefault();
     if (!bookingDate) return;
     try {
-      await API.post('/api/appointments', {
+      const res = await API.post('/api/appointments', {
         lawyer_id: selectedLawyer.id,
         appointment_date: new Date(bookingDate).toISOString(),
         issue_description: issueDescription
       });
-      alert("Appointment booked successfully! View it in your Profile or Direct Messages.");
+      setBookingConfirmation({
+        appointment: res.data,
+        lawyer: selectedLawyer,
+        bookingDateFormatted: new Date(bookingDate).toLocaleString('en-IN', {
+          dateStyle: 'full',
+          timeStyle: 'short'
+        })
+      });
       setShowBooking(false);
+      setSelectedLawyer(null);
       setBookingDate('');
       setIssueDescription('');
     } catch (err) {
@@ -367,6 +376,91 @@ export default function LawyersPage() {
                   </button>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Booking Confirmation Modal / Page */}
+      {bookingConfirmation && (
+        <div className="fixed inset-0 bg-navy/60 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fade-in" onClick={() => setBookingConfirmation(null)}>
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-100" onClick={e => e.stopPropagation()}>
+            {/* Header Banner */}
+            <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-navy p-6 text-white text-center relative">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-xs text-3xl">
+                🎉
+              </div>
+              <h2 className="text-2xl font-extrabold mb-1">Booking Confirmed & Submitted!</h2>
+              <p className="text-emerald-100 text-xs font-medium">Your consultation request has been dispatched to the advocate.</p>
+            </div>
+
+            <div className="p-6 space-y-4">
+              {/* Booking Reference & Status */}
+              <div className="flex items-center justify-between p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl">
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-emerald-800 tracking-wider">Booking Reference ID</p>
+                  <p className="text-sm font-mono font-bold text-emerald-950">#BK-{bookingConfirmation.appointment.id.slice(0, 8).toUpperCase()}</p>
+                </div>
+                <div className="flex items-center gap-2 bg-emerald-100/80 px-3 py-1.5 rounded-full border border-emerald-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
+                  <span className="text-xs font-bold text-emerald-900 uppercase">Pending Confirmation</span>
+                </div>
+              </div>
+
+              {/* Advocate Info Card */}
+              <div className="p-4 bg-gray-50 border border-gray-200/80 rounded-2xl flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-navy text-white font-bold flex items-center justify-center text-lg shrink-0 shadow-md">
+                  {bookingConfirmation.lawyer.name.replace('Adv. ', '').charAt(0)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-navy text-sm truncate">{bookingConfirmation.lawyer.name}</h4>
+                  <p className="text-xs text-gray-500 font-medium">{bookingConfirmation.lawyer.specialization?.join(', ')} • {bookingConfirmation.lawyer.city}</p>
+                  <p className="text-xs text-emerald-700 font-semibold mt-0.5">Est. Fee: ₹{bookingConfirmation.lawyer.fee_min} - ₹{bookingConfirmation.lawyer.fee_max}</p>
+                </div>
+              </div>
+
+              {/* Appointment Date & Issue */}
+              <div className="space-y-2 text-xs">
+                <div className="p-3 bg-blue-50/70 border border-blue-100 rounded-xl">
+                  <p className="font-semibold text-blue-900 mb-0.5">📅 Scheduled Date & Time:</p>
+                  <p className="text-blue-950 font-bold">{bookingConfirmation.bookingDateFormatted}</p>
+                </div>
+                {bookingConfirmation.appointment.issue_description && (
+                  <div className="p-3 bg-gray-50 border border-gray-200/70 rounded-xl">
+                    <p className="font-semibold text-gray-700 mb-0.5">📝 Issue Description:</p>
+                    <p className="text-gray-600 italic line-clamp-2">"{bookingConfirmation.appointment.issue_description}"</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
+                <button
+                  onClick={() => {
+                    setBookingConfirmation(null);
+                    navigate('/');
+                  }}
+                  className="flex-1 py-3 bg-navy text-white font-bold rounded-xl text-xs hover:bg-navy-light transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <span>📋</span> Track in Client Portal
+                </button>
+                <button
+                  onClick={() => {
+                    setBookingConfirmation(null);
+                    navigate('/direct-chat');
+                  }}
+                  className="flex-1 py-3 bg-accent text-white font-bold rounded-xl text-xs hover:bg-accent-dark transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <span>💬</span> Open Direct Chat
+                </button>
+              </div>
+
+              <button
+                onClick={() => setBookingConfirmation(null)}
+                className="w-full py-2 bg-gray-100 text-gray-600 font-semibold rounded-xl text-xs hover:bg-gray-200 transition-colors cursor-pointer"
+              >
+                Close Window
+              </button>
             </div>
           </div>
         </div>

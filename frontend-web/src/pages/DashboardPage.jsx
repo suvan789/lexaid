@@ -15,9 +15,11 @@ const QUICK_ACTIONS = [
 export default function DashboardPage() {
   const { user, updateUser } = useAuth();
   const navigate = useNavigate();
-  const [stats, setStats] = useState({ docs: 0, generated: 0, posts: 0 });
+  const [stats, setStats] = useState({ docs: 0, generated: 0, posts: 0, appointments: 0 });
   const [recentDocs, setRecentDocs] = useState([]);
   const [recentPosts, setRecentPosts] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+  const [consultationFilter, setConsultationFilter] = useState('all');
   const [verifyStatus, setVerifyStatus] = useState('idle'); // idle, loading, sent, error
   const [mockLink, setMockLink] = useState(null);
 
@@ -51,10 +53,11 @@ export default function DashboardPage() {
 
   const loadDashboardData = async () => {
     try {
-      const [docsRes, genRes, postsRes] = await Promise.allSettled([
+      const [docsRes, genRes, postsRes, apptRes] = await Promise.allSettled([
         API.get('/api/documents/history'),
         API.get('/api/generator/history'),
         API.get('/api/forum/posts?limit=5'),
+        API.get('/api/appointments'),
       ]);
       if (docsRes.status === 'fulfilled') {
         setRecentDocs(docsRes.value.data.slice(0, 5));
@@ -66,6 +69,10 @@ export default function DashboardPage() {
       if (postsRes.status === 'fulfilled') {
         setRecentPosts(postsRes.value.data.slice(0, 5));
         setStats(s => ({ ...s, posts: postsRes.value.data.length }));
+      }
+      if (apptRes.status === 'fulfilled') {
+        setAppointments(apptRes.value.data);
+        setStats(s => ({ ...s, appointments: apptRes.value.data.length }));
       }
     } catch {}
   };
@@ -210,7 +217,192 @@ export default function DashboardPage() {
         <div id="predict-result-box"></div>
       </div>
 
-      {/* Recent Activity */}
+      {/* 📅 Client Portal: Consultations Booking History & Real-Time Tracker */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 animate-fade-in">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xl">📅</span>
+              <h2 className="text-lg font-bold text-navy">Consultation History & Status Tracker</h2>
+              <span className="text-xs bg-navy/10 text-navy font-bold px-2.5 py-0.5 rounded-full">
+                {appointments.length} Total Bookings
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 mt-1">Track advocate confirmation, scheduled dates, and legal consultation progress</p>
+          </div>
+
+          <div className="flex items-center gap-1.5 bg-gray-50 p-1.5 rounded-xl border border-gray-200 text-xs">
+            {['all', 'pending', 'confirmed', 'completed', 'cancelled'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setConsultationFilter(tab)}
+                className={`px-3 py-1.5 rounded-lg font-semibold capitalize transition-all cursor-pointer ${
+                  consultationFilter === tab
+                    ? 'bg-navy text-white shadow-xs'
+                    : 'text-gray-600 hover:text-navy hover:bg-gray-100'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {appointments.filter(a => consultationFilter === 'all' || a.status === consultationFilter).length === 0 ? (
+          <div className="text-center py-10 bg-gray-50/50 rounded-2xl border border-dashed border-gray-200">
+            <p className="text-3xl mb-2">📋</p>
+            <h4 className="text-sm font-bold text-navy mb-1">No Consultations Found</h4>
+            <p className="text-xs text-gray-500 mb-4">Book an appointment with an advocate to track legal consultations here.</p>
+            <button
+              onClick={() => navigate('/lawyers')}
+              className="px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-navy-light transition-all shadow-sm cursor-pointer"
+            >
+              👨‍⚖️ Book Consultation Now
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {appointments
+              .filter(a => consultationFilter === 'all' || a.status === consultationFilter)
+              .map((apt) => {
+                const isCancelled = apt.status === 'cancelled';
+                const currentStep = isCancelled ? -1 : apt.status === 'completed' ? 3 : apt.status === 'confirmed' ? 2 : 1;
+
+                return (
+                  <div key={apt.id} className="p-5 bg-gradient-to-br from-gray-50 via-white to-blue-50/20 border border-gray-200/80 rounded-2xl shadow-xs space-y-4 hover:border-accent/40 transition-all">
+                    {/* Top Row: Booking ID, Advocate Name, Status Badge */}
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-gray-100">
+                      <div className="flex items-center gap-3">
+                        <div className="w-11 h-11 rounded-xl bg-navy text-white font-bold flex items-center justify-center text-base shrink-0 shadow-sm">
+                          {apt.lawyer?.name ? apt.lawyer.name.replace('Adv. ', '').charAt(0) : '⚖️'}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="font-bold text-navy text-sm">{apt.lawyer?.name || 'Advocate Legal Counsel'}</h4>
+                            <span className="text-[10px] font-mono font-semibold bg-gray-200/70 text-gray-700 px-2 py-0.5 rounded">
+                              #BK-{apt.id.slice(0, 8).toUpperCase()}
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500">
+                            {apt.lawyer?.specialization?.join(', ')} • {apt.lawyer?.city || 'India'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 self-start md:self-auto">
+                        <span className={`text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 ${
+                          apt.status === 'confirmed' ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' :
+                          apt.status === 'completed' ? 'bg-blue-100 text-blue-800 border border-blue-300' :
+                          apt.status === 'cancelled' ? 'bg-red-100 text-red-700 border border-red-200' :
+                          'bg-amber-100 text-amber-800 border border-amber-300 animate-pulse'
+                        }`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${
+                            apt.status === 'confirmed' ? 'bg-emerald-600' :
+                            apt.status === 'completed' ? 'bg-blue-600' :
+                            apt.status === 'cancelled' ? 'bg-red-600' :
+                            'bg-amber-600'
+                          }`}></span>
+                          {apt.status === 'pending' ? 'Pending Confirmation' : apt.status}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Step Timeline Consultation Status Tracker */}
+                    {!isCancelled && (
+                      <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-xs">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Live Consultation Status Tracker</p>
+                        
+                        <div className="grid grid-cols-4 gap-2 text-center relative">
+                          <div className="absolute top-3 left-[12%] right-[12%] h-0.5 bg-gray-200 -z-0"></div>
+
+                          {/* Step 1: Request Submitted */}
+                          <div className="relative z-10 flex flex-col items-center">
+                            <div className="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center shadow-xs">✓</div>
+                            <p className="text-[11px] font-bold text-navy mt-1.5">Submitted</p>
+                            <p className="text-[9px] text-gray-400 hidden sm:block">Booking Sent</p>
+                          </div>
+
+                          {/* Step 2: Advocate Acceptance */}
+                          <div className="relative z-10 flex flex-col items-center">
+                            <div className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shadow-xs ${
+                              currentStep >= 2 ? 'bg-emerald-500 text-white' : currentStep === 1 ? 'bg-amber-500 text-white animate-pulse' : 'bg-gray-200 text-gray-500'
+                            }`}>
+                              {currentStep >= 2 ? '✓' : '2'}
+                            </div>
+                            <p className={`text-[11px] font-bold mt-1.5 ${currentStep >= 1 ? 'text-navy' : 'text-gray-400'}`}>Confirmation</p>
+                            <p className="text-[9px] text-gray-400 hidden sm:block">{currentStep >= 2 ? 'Accepted' : 'Awaiting Advocate'}</p>
+                          </div>
+
+                          {/* Step 3: Session Active */}
+                          <div className="relative z-10 flex flex-col items-center">
+                            <div className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shadow-xs ${
+                              currentStep >= 3 ? 'bg-emerald-500 text-white' : currentStep === 2 ? 'bg-blue-600 text-white animate-pulse' : 'bg-gray-200 text-gray-500'
+                            }`}>
+                              {currentStep >= 3 ? '✓' : '3'}
+                            </div>
+                            <p className={`text-[11px] font-bold mt-1.5 ${currentStep >= 2 ? 'text-navy' : 'text-gray-400'}`}>Session Ready</p>
+                            <p className="text-[9px] text-gray-400 hidden sm:block">{currentStep >= 2 ? 'Chat Active' : 'Pending'}</p>
+                          </div>
+
+                          {/* Step 4: Completed */}
+                          <div className="relative z-10 flex flex-col items-center">
+                            <div className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shadow-xs ${
+                              currentStep >= 3 ? 'bg-emerald-500 text-white' : 'bg-gray-200 text-gray-500'
+                            }`}>
+                              {currentStep >= 3 ? '✓' : '4'}
+                            </div>
+                            <p className={`text-[11px] font-bold mt-1.5 ${currentStep >= 3 ? 'text-navy' : 'text-gray-400'}`}>Completed</p>
+                            <p className="text-[9px] text-gray-400 hidden sm:block">{currentStep >= 3 ? 'Concluded' : 'Final Step'}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Date, Issue, Actions */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                      <div className="space-y-1">
+                        <p className="font-semibold text-gray-700">
+                          📅 Scheduled Date: <span className="font-bold text-navy">{new Date(apt.appointment_date).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                        </p>
+                        {apt.issue_description && (
+                          <p className="text-gray-500 italic line-clamp-1">
+                            📝 Problem: "{apt.issue_description}"
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          onClick={() => navigate('/direct-chat')}
+                          className="px-4 py-2 bg-navy hover:bg-navy-light text-white font-semibold rounded-xl transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+                        >
+                          <span>💬</span> Direct Message
+                        </button>
+
+                        {apt.status === 'pending' && (
+                          <button
+                            onClick={async () => {
+                              if (!window.confirm("Are you sure you want to cancel this consultation booking?")) return;
+                              try {
+                                await API.patch(`/api/appointments/${apt.id}/status`, { status: 'cancelled' });
+                                loadDashboardData();
+                              } catch {
+                                alert('Failed to cancel appointment.');
+                              }
+                            }}
+                            className="px-3 py-2 bg-white border border-red-200 text-red-600 hover:bg-red-50 font-semibold rounded-xl transition-colors cursor-pointer"
+                          >
+                            Cancel
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        )}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Documents */}
         <div className="bg-white rounded-xl shadow-sm p-5">
