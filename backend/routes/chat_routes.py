@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Header
+from fastapi import APIRouter, HTTPException
 from groq_service import general_legal_chat
 from chatbot import chat_with_document
 from schemas import ChatRequest, ChatLegalRequest, ChatResponse
@@ -28,7 +28,7 @@ async def chat_document_endpoint(
 async def chat_legal_endpoint(
     body: ChatLegalRequest
 ):
-    """General Indian law Q&A chat — accessible to all users."""
+    """General Indian law Q&A chat — accessible to all visitors and logged in users."""
     if not body.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
 

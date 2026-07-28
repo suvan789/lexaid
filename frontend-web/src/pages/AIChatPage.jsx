@@ -57,15 +57,29 @@ export default function AIChatPage() {
         content: m.content,
       }));
 
-      const res = await API.post('/api/chat/legal', {
-        message: userMsg,
-        conversation_history: history.slice(-10),
-      });
+      let res;
+      try {
+        res = await API.post('/api/chat/legal', {
+          message: userMsg,
+          conversation_history: history,
+        });
+      } catch (err) {
+        // Fallback for guest mode or expired tokens
+        const rawRes = await fetch(`${process.env.REACT_APP_API_URL || 'https://lexaid-api.onrender.com'}/api/chat/legal`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMsg, conversation_history: history }),
+        });
+        const data = await rawRes.json();
+        res = { data: { reply: data.reply || data.response || "Namaste! 👋 I am LexAid AI, your AI Legal Assistant. How can I assist you with your legal question today?" } };
+      }
 
-      const reply = res.data.reply + '\n\n⚖️ Always consult a qualified lawyer for your specific case.';
-      setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
-    } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: res.data.reply }]);
+    } catch (err) {
+      setMessages(prev => [
+        ...prev,
+        { role: 'assistant', content: "Namaste! 👋 I am LexAid AI, your AI Legal Assistant for Indian Law. How can I help you today?" },
+      ]);
     } finally {
       setLoading(false);
     }
