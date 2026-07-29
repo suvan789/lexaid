@@ -26,14 +26,16 @@ echo.
 echo   [1] Selenium E2E Tests  (470 test cases vs GitHub Pages)
 echo   [2] Baseline Load Test  (100 VUs x 60s vs Live API)
 echo   [3] Run BOTH Tests
-echo   [4] Exit
+echo   [4] Launch Mobile App in Expo Go (Scan QR on Mobile)
+echo   [5] Exit
 echo.
-set /p CHOICE=Enter choice (1/2/3/4): 
+set /p CHOICE=Enter choice (1/2/3/4/5): 
 
 if "%CHOICE%"=="1" goto SELENIUM
 if "%CHOICE%"=="2" goto LOADTEST
 if "%CHOICE%"=="3" goto BOTH
-if "%CHOICE%"=="4" goto EXIT
+if "%CHOICE%"=="4" goto EXPO
+if "%CHOICE%"=="5" goto EXIT
 
 :SELENIUM
 echo.
@@ -65,6 +67,16 @@ if exist "loadtest\reports\load-report.html" (
     echo [OK] Opening Load Test HTML Report...
     start "" "loadtest\reports\load-report.html"
 )
+goto END
+
+:EXPO
+echo.
+echo ============================================================
+echo   STARTING EXPO GO SERVER
+echo ============================================================
+echo.
+cd /d "d:\Lawaid\lexaid\mobile-app"
+npx expo start
 goto END
 
 :BOTH
