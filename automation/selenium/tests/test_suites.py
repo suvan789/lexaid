@@ -184,6 +184,7 @@ def run_all_tests(driver) -> list:
 
     for idx, tc in enumerate(catalogue, 1):
         logger.info(f"[{idx}/{total}] Running {tc['id']} — {tc['module']}")
+        sys.stdout.flush()
 
         # Retry logic
         result = None
