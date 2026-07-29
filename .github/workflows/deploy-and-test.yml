@@ -141,6 +141,13 @@ jobs:
         run: |
           google-chrome --version || chromium-browser --version || echo "Chrome ready"
 
+      # Clean pre-existing static reports to ensure dynamic generation
+      - name: "Clean Stale Reports"
+        run: |
+          rm -rf automation/selenium/reports/Summary/*
+          rm -rf automation/selenium/reports/Excel/*
+          rm -rf automation/selenium/reports/HTML/*
+
       # Stage 8: Run Selenium E2E Tests (400+ Test Cases)
       - name: "Stage 8 — Execute 400+ Selenium E2E Tests Against LIVE GitHub Pages"
         env:
@@ -151,6 +158,8 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name }}
           PASS_THRESHOLD: ${{ env.PASS_THRESHOLD }}
           GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
+          PYTHONPATH: "."
+          PYTHONUTF8: "1"
         run: |
           python automation/selenium/run_selenium_tests.py
         continue-on-error: true

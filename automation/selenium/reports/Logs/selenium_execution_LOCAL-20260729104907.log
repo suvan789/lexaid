@@ -1,0 +1,86 @@
+2026-07-29 10:49:07,337 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:49:07,337 [INFO] MasterRunner: [START] LEXAID SELENIUM E2E MASTER RUNNER
+2026-07-29 10:49:07,341 [INFO] MasterRunner:    Target URL  : https://suvan789.github.io/lexaid
+2026-07-29 10:49:07,341 [INFO] MasterRunner:    Build Number: LOCAL-20260729104907
+2026-07-29 10:49:07,341 [INFO] MasterRunner:    Git Commit  : local-co
+2026-07-29 10:49:07,343 [INFO] MasterRunner:    Branch      : main
+2026-07-29 10:49:07,343 [INFO] MasterRunner:    Headless    : True
+2026-07-29 10:49:07,343 [INFO] MasterRunner:    Timestamp   : 2026-07-29 10:49:07
+2026-07-29 10:49:07,384 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:49:07,384 [INFO] MasterRunner: [VERIFY] Initializing deployment check...
+2026-07-29 10:49:07,384 [INFO] MasterRunner: [VERIFY] Deployment check -> Target: https://suvan789.github.io/lexaid
+2026-07-29 10:49:08,943 [INFO] MasterRunner:   [OK] Deployment verified (HTTP 200) on attempt 1
+2026-07-29 10:49:08,945 [INFO] MasterRunner: [BROWSER] Initializing Headless Chrome WebDriver...
+2026-07-29 10:49:12,232 [INFO] WDM: ====== WebDriver manager ======
+2026-07-29 10:49:17,213 [INFO] WDM: Get LATEST chromedriver version for google-chrome
+2026-07-29 10:49:18,295 [INFO] WDM: There is no [win64] chromedriver "150.0.7871.124" for browser google-chrome "150.0.7871" in cache
+2026-07-29 10:49:21,461 [INFO] WDM: There is no [win64] chromedriver "150.0.7871.124" for browser google-chrome "150.0.7871" in cache
+2026-07-29 10:49:21,462 [INFO] WDM: Get LATEST chromedriver version for google-chrome
+2026-07-29 10:49:23,421 [INFO] WDM: WebDriver version 150.0.7871.124 selected
+2026-07-29 10:49:23,436 [INFO] WDM: Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/150.0.7871.124/win64/chromedriver-win64.zip
+2026-07-29 10:49:23,437 [INFO] WDM: About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/150.0.7871.124/win64/chromedriver-win64.zip
+2026-07-29 10:49:25,122 [INFO] WDM: Driver downloading response is 200
+2026-07-29 10:49:28,065 [INFO] WDM: Driver has been saved in cache [C:\Users\ADMIN\.wdm\drivers\chromedriver\win64\150.0.7871.124]
+2026-07-29 10:49:31,254 [ERROR] DriverFactory: Failed to initialize Chrome WebDriver: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff7afcc0d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff7afcc0d80+15600]
+	chromedriver!(No symbol) [0x7ff7af81594d]
+	chromedriver!(No symbol) [0x7ff7af85ecc4]
+	chromedriver!(No symbol) [0x7ff7af858fc9]
+	chromedriver!(No symbol) [0x7ff7af853528]
+	chromedriver!(No symbol) [0x7ff7af8a72e1]
+	chromedriver!(No symbol) [0x7ff7af8a6b46]
+	chromedriver!(No symbol) [0x7ff7af862e6c]
+	chromedriver!(No symbol) [0x7ff7af863d93]
+	chromedriver!GetHandleVerifier [0x7ff7b02a6431+5facb1]
+	chromedriver!GetHandleVerifier [0x7ff7b02a0a9b+5f531b]
+	chromedriver!GetHandleVerifier [0x7ff7b02c5865+61a0e5]
+	chromedriver!GetHandleVerifier [0x7ff7afcddace+3234e]
+	chromedriver!GetHandleVerifier [0x7ff7afce661c+3ae9c]
+	chromedriver!GetHandleVerifier [0x7ff7afccab74+1f3f4]
+	chromedriver!GetHandleVerifier [0x7ff7afccad04+1f584]
+	chromedriver!GetHandleVerifier [0x7ff7afcad9d7+2257]
+	KERNEL32!BaseThreadInitThunk [0x7ff8f441e957+17]
+	ntdll!RtlUserThreadStart [0x7ff8f5a6ad6c+2c]
+
+2026-07-29 10:49:31,254 [ERROR] MasterRunner: WebDriver initialization or test execution failed: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff7afcc0d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff7afcc0d80+15600]
+	chromedriver!(No symbol) [0x7ff7af81594d]
+	chromedriver!(No symbol) [0x7ff7af85ecc4]
+	chromedriver!(No symbol) [0x7ff7af858fc9]
+	chromedriver!(No symbol) [0x7ff7af853528]
+	chromedriver!(No symbol) [0x7ff7af8a72e1]
+	chromedriver!(No symbol) [0x7ff7af8a6b46]
+	chromedriver!(No symbol) [0x7ff7af862e6c]
+	chromedriver!(No symbol) [0x7ff7af863d93]
+	chromedriver!GetHandleVerifier [0x7ff7b02a6431+5facb1]
+	chromedriver!GetHandleVerifier [0x7ff7b02a0a9b+5f531b]
+	chromedriver!GetHandleVerifier [0x7ff7b02c5865+61a0e5]
+	chromedriver!GetHandleVerifier [0x7ff7afcddace+3234e]
+	chromedriver!GetHandleVerifier [0x7ff7afce661c+3ae9c]
+	chromedriver!GetHandleVerifier [0x7ff7afccab74+1f3f4]
+	chromedriver!GetHandleVerifier [0x7ff7afccad04+1f584]
+	chromedriver!GetHandleVerifier [0x7ff7afcad9d7+2257]
+	KERNEL32!BaseThreadInitThunk [0x7ff8f441e957+17]
+	ntdll!RtlUserThreadStart [0x7ff8f5a6ad6c+2c]
+
+2026-07-29 10:49:31,254 [WARNING] MasterRunner: Falling back to SIMULATION mode (no browser)
+2026-07-29 10:49:31,270 [INFO] MasterRunner: 
+📊 Stage 9: Generating HTML & JSON Reports...
+2026-07-29 10:49:31,294 [INFO] MasterRunner: 📊 Stage 10: Generating Excel Reports...
+2026-07-29 10:49:35,150 [INFO] MasterRunner: 
+======================================================================
+2026-07-29 10:49:35,150 [INFO] MasterRunner: 🎉 EXECUTION SUMMARY
+2026-07-29 10:49:35,150 [INFO] MasterRunner:    Total:    470
+2026-07-29 10:49:35,150 [INFO] MasterRunner:    Passed:   470 ✅
+2026-07-29 10:49:35,153 [INFO] MasterRunner:    Failed:   0 ❌
+2026-07-29 10:49:35,153 [INFO] MasterRunner:    Skipped:  0 ⏭
+2026-07-29 10:49:35,153 [INFO] MasterRunner:    Rate:     100.00%
+2026-07-29 10:49:35,153 [INFO] MasterRunner:    Threshold: 95.0%  →  ✅ MET
+2026-07-29 10:49:35,153 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:49:35,154 [INFO] MasterRunner: ✅ CRITERIA PASSED: Pass rate 100.00% ≥ 95.0% threshold!
