@@ -1,0 +1,14 @@
+2026-07-29 10:05:52,714 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:05:52,714 [INFO] MasterRunner: 🚀 LEXAID SELENIUM E2E MASTER RUNNER
+2026-07-29 10:05:52,773 [INFO] MasterRunner:    Target URL  : https://suvan789.github.io/lexaid
+2026-07-29 10:05:52,773 [INFO] MasterRunner:    Build Number: LOCAL-20260729100552
+2026-07-29 10:05:52,773 [INFO] MasterRunner:    Git Commit  : local-co
+2026-07-29 10:05:52,773 [INFO] MasterRunner:    Branch      : main
+2026-07-29 10:05:52,773 [INFO] MasterRunner:    Headless    : True
+2026-07-29 10:05:52,774 [INFO] MasterRunner:    Timestamp   : 2026-07-29 10:05:52
+2026-07-29 10:05:52,774 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:05:52,774 [INFO] MasterRunner: 🔍 DEPLOYMENT VERIFICATION — Target: https://suvan789.github.io/lexaid
+2026-07-29 10:05:54,096 [INFO] MasterRunner:   ✅ Deployment verified (HTTP 200) on attempt 1
+2026-07-29 10:05:54,100 [INFO] MasterRunner: 🌐 Initializing Headless Chrome WebDriver...
+2026-07-29 10:05:54,111 [ERROR] MasterRunner: WebDriver initialization or test execution failed: No module named 'selenium'
+2026-07-29 10:05:54,111 [WARNING] MasterRunner: Falling back to SIMULATION mode (no browser)
