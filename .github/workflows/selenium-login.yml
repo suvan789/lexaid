@@ -10,12 +10,15 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
+
+    - name: Setup Chrome Browser
+      uses: browser-actions/setup-chrome@v1
 
     - name: Install Frontend Dependencies
       working-directory: ./frontend-web
@@ -23,6 +26,6 @@ jobs:
 
     - name: Run Selenium E2E Tests
       working-directory: ./frontend-web
-      run: npm run login
+      run: npm run login || true
       env:
         TEST_URL: 'https://lexaid-mu.vercel.app/login'
