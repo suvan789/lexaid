@@ -84,6 +84,9 @@ export default function DashboardPage() {
     return 'Good evening';
   };
 
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+  const filteredAppointments = safeAppointments.filter(a => consultationFilter === 'all' || a.status === consultationFilter);
+
   return (
     <div className="page-container max-w-6xl mx-auto">
       {/* Verification Banner */}
@@ -218,11 +221,7 @@ export default function DashboardPage() {
       </div>
 
       {/* 📅 Client Portal: Consultations Booking History & Real-Time Tracker */}
-      {(() => {
-        const safeAppointments = Array.isArray(appointments) ? appointments : [];
-        const filteredAppointments = safeAppointments.filter(a => consultationFilter === 'all' || a.status === consultationFilter);
-        return (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 animate-fade-in">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 animate-fade-in">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
               <div>
                 <div className="flex items-center gap-2">
@@ -403,8 +402,8 @@ export default function DashboardPage() {
                 );
               })}
           </div>
-        );
-      })()}
+        )}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Documents */}
         <div className="bg-white rounded-xl shadow-sm p-5">
