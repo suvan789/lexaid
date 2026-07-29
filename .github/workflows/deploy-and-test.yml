@@ -16,7 +16,7 @@ permissions:
 
 concurrency:
   group: "deploy-and-test-${{ github.ref }}"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   BASE_URL: "https://suvan789.github.io/lexaid/"
@@ -70,7 +70,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend-web/build
           publish_branch: gh-pages
-          cname: ""
+          force_orphan: true
 
       - name: "Stage 5b — Verify gh-pages push succeeded"
         run: |
