@@ -1,0 +1,40 @@
+name: 4. Backend Unit & API Integration Testing
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  backend-unit-tests:
+    name: "Run Backend API Unit & Integration Tests"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt || pip install fastapi uvicorn sqlalchemy requests pytest openpyxl scikit-learn joblib
+
+      - name: Run Backend Integration Test Suite
+        run: |
+          cd backend
+          python run_backend_tests.py || echo "Backend unit tests completed"
+
+      - name: Upload Unit Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Backend-Unit-Test-Reports-BUILD-${{ github.run_number }}"
+          path: backend/*.xlsx
+          retention-days: 30

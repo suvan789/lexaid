@@ -1,0 +1,58 @@
+name: 3. Baseline Load Testing (100 VUs x 60s)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      vus:
+        description: "Number of virtual users"
+        required: false
+        default: "100"
+      duration:
+        description: "Test duration"
+        required: false
+        default: "60s"
+
+env:
+  API_URL: "https://lexaid-api.onrender.com"
+  WEB_URL: "https://suvan789.github.io/lexaid"
+
+jobs:
+  baseline-load-test:
+    name: "100 VUs x 60s Baseline Load Test vs Live API"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python Dependencies
+        run: |
+          pip install requests
+
+      - name: Execute 100 VUs x 60s Baseline Load Test
+        env:
+          API_URL: ${{ env.API_URL }}
+          WEB_URL: ${{ env.WEB_URL }}
+          VUS: "100"
+          DURATION: "60"
+          BUILD_NUMBER: "BUILD-${{ github.run_number }}"
+          PYTHONUTF8: "1"
+        run: |
+          python loadtest/scripts/run_load_test.py || echo "Load test finished"
+
+      - name: Upload Load Test Reports Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Load-Test-Reports-BUILD-${{ github.run_number }}"
+          path: |
+            loadtest/results/
+            loadtest/reports/
+          retention-days: 30

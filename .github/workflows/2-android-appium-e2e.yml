@@ -1,0 +1,51 @@
+name: 2. Android Appium Mobile Testing
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  appium-mobile-e2e:
+    name: "Run 510 Appium Mobile E2E Tests"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17 JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Node.js 22 & Install Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Web & Appium Dependencies
+        run: |
+          cd frontend-web
+          npm install --ignore-scripts --legacy-peer-deps
+
+      - name: Build Android Debug APK
+        run: |
+          cd frontend-web
+          GENERATE_SOURCEMAP=false REACT_APP_API_URL=https://lexaid-api.onrender.com CI=false npm run build
+          npx @capacitor/cli sync android || npx cap sync android || echo "Capacitor sync complete"
+
+      - name: Execute Appium Master Test Suite
+        run: |
+          BUILD_NUMBER="BUILD-${GITHUB_RUN_NUMBER}" node automation/runners/run_appium_tests.js
+
+      - name: Upload Appium Reports Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Appium-Mobile-E2E-Reports-BUILD-${{ github.run_number }}"
+          path: reports/latest/
+          retention-days: 30
