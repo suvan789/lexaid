@@ -188,8 +188,21 @@ async function generateExcelReports(testResults, targetDir) {
     });
   });
 
-  const mainExcelPath = path.join(targetDir, 'Automation_Test_Report.xlsx');
-  await wb.xlsx.writeFile(mainExcelPath);
+  const safeWrite = async (workbook, filePath) => {
+    try {
+      await workbook.xlsx.writeFile(filePath);
+    } catch (err) {
+      if (err.code === 'EBUSY') {
+        const altPath = filePath.replace('.xlsx', '_Updated.xlsx');
+        console.warn(`[WARN] File ${filePath} is open in Excel/WPS. Saving to ${altPath} instead.`);
+        await workbook.xlsx.writeFile(altPath);
+      } else {
+        throw err;
+      }
+    }
+  };
+
+  await safeWrite(wb, path.join(targetDir, 'Automation_Test_Report.xlsx'));
 
   // ──────────────── 2. Passed_Test_Cases.xlsx ────────────────
   const wbPassed = new ExcelJS.Workbook();
@@ -197,7 +210,7 @@ async function generateExcelReports(testResults, targetDir) {
   sp.columns = sExecuted.columns;
   styleHeaderRow(sp);
   passedTests.forEach(t => sp.addRow(t));
-  await wbPassed.xlsx.writeFile(path.join(targetDir, 'Passed_Test_Cases.xlsx'));
+  await safeWrite(wbPassed, path.join(targetDir, 'Passed_Test_Cases.xlsx'));
 
   // ──────────────── 3. Failed_Test_Cases.xlsx ────────────────
   const wbFailed = new ExcelJS.Workbook();
@@ -205,7 +218,7 @@ async function generateExcelReports(testResults, targetDir) {
   sf.columns = sFailed.columns;
   styleHeaderRow(sf);
   failedTests.forEach(t => sf.addRow(t));
-  await wbFailed.xlsx.writeFile(path.join(targetDir, 'Failed_Test_Cases.xlsx'));
+  await safeWrite(wbFailed, path.join(targetDir, 'Failed_Test_Cases.xlsx'));
 
   // ──────────────── 4. Execution_Summary.xlsx ────────────────
   const wbSummary = new ExcelJS.Workbook();
@@ -213,7 +226,7 @@ async function generateExcelReports(testResults, targetDir) {
   ss.columns = sMetrics.columns;
   styleHeaderRow(ss);
   metricsData.forEach(m => ss.addRow(m));
-  await wbSummary.xlsx.writeFile(path.join(targetDir, 'Execution_Summary.xlsx'));
+  await safeWrite(wbSummary, path.join(targetDir, 'Execution_Summary.xlsx'));
 
   console.log(`✅ Multi-Sheet Excel Reports generated successfully in: ${targetDir}`);
 }

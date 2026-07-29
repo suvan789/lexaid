@@ -1,0 +1,571 @@
+2026-07-29 10:23:56,560 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:23:56,560 [INFO] MasterRunner: [START] LEXAID SELENIUM E2E MASTER RUNNER
+2026-07-29 10:23:56,560 [INFO] MasterRunner:    Target URL  : https://suvan789.github.io/lexaid
+2026-07-29 10:23:56,560 [INFO] MasterRunner:    Build Number: LOCAL-20260729102356
+2026-07-29 10:23:56,561 [INFO] MasterRunner:    Git Commit  : local-co
+2026-07-29 10:23:56,561 [INFO] MasterRunner:    Branch      : main
+2026-07-29 10:23:56,561 [INFO] MasterRunner:    Headless    : True
+2026-07-29 10:23:56,561 [INFO] MasterRunner:    Timestamp   : 2026-07-29 10:23:56
+2026-07-29 10:23:56,563 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:23:56,563 [INFO] MasterRunner: [VERIFY] Initializing deployment check...
+2026-07-29 10:23:56,563 [INFO] MasterRunner: [VERIFY] Deployment check -> Target: https://suvan789.github.io/lexaid
+2026-07-29 10:23:57,594 [INFO] MasterRunner:   [OK] Deployment verified (HTTP 200) on attempt 1
+2026-07-29 10:23:57,597 [INFO] MasterRunner: [BROWSER] Initializing Headless Chrome WebDriver...
+2026-07-29 10:23:59,286 [INFO] DriverFactory: Chrome WebDriver initialized (headless=True)
+2026-07-29 10:23:59,287 [INFO] MasterRunner:   [OK] Chrome WebDriver ready
+2026-07-29 10:23:59,307 [INFO] SeleniumTestRunner: 🚀 Starting execution of 470 Selenium E2E test cases against https://suvan789.github.io/lexaid
+2026-07-29 10:23:59,308 [INFO] SeleniumTestRunner:    Build: LOCAL-20260729102356 | Commit: local-co | Branch: main
+2026-07-29 10:23:59,308 [INFO] SeleniumTestRunner: [1/470] Running TC_AUTH_001 — Authentication
+2026-07-29 10:24:02,554 [INFO] SeleniumTestRunner: [2/470] Running TC_AUTH_002 — Authentication
+2026-07-29 10:24:04,442 [INFO] SeleniumTestRunner: [3/470] Running TC_AUTH_003 — Authentication
+2026-07-29 10:24:06,238 [INFO] SeleniumTestRunner: [4/470] Running TC_AUTH_004 — Authentication
+2026-07-29 10:24:07,814 [INFO] SeleniumTestRunner: [5/470] Running TC_AUTH_005 — Authentication
+2026-07-29 10:24:09,389 [INFO] SeleniumTestRunner: [6/470] Running TC_AUTH_006 — Authentication
+2026-07-29 10:24:11,050 [INFO] SeleniumTestRunner: [7/470] Running TC_AUTH_007 — Authentication
+2026-07-29 10:24:12,698 [INFO] SeleniumTestRunner: [8/470] Running TC_AUTH_008 — Authentication
+2026-07-29 10:24:14,308 [INFO] SeleniumTestRunner: [9/470] Running TC_AUTH_009 — Authentication
+2026-07-29 10:24:15,949 [INFO] SeleniumTestRunner: [10/470] Running TC_AUTH_010 — Authentication
+2026-07-29 10:24:17,697 [INFO] SeleniumTestRunner: [11/470] Running TC_AUTH_011 — Authentication
+2026-07-29 10:24:19,342 [INFO] SeleniumTestRunner: [12/470] Running TC_AUTH_012 — Authentication
+2026-07-29 10:24:20,999 [INFO] SeleniumTestRunner: [13/470] Running TC_AUTH_013 — Authentication
+2026-07-29 10:24:22,978 [INFO] SeleniumTestRunner: [14/470] Running TC_AUTH_014 — Authentication
+2026-07-29 10:24:24,692 [INFO] SeleniumTestRunner: [15/470] Running TC_AUTH_015 — Authentication
+2026-07-29 10:24:26,395 [INFO] SeleniumTestRunner: [16/470] Running TC_AUTH_016 — Authentication
+2026-07-29 10:24:28,132 [INFO] SeleniumTestRunner: [17/470] Running TC_AUTH_017 — Authentication
+2026-07-29 10:24:29,933 [INFO] SeleniumTestRunner: [18/470] Running TC_AUTH_018 — Authentication
+2026-07-29 10:24:32,130 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_AUTH_018
+2026-07-29 10:24:35,172 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_AUTH_018
+2026-07-29 10:24:38,146 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_AUTH_018 — Simulated Selenium assertion failure in Authentication TC #18: Element not found within timeout.
+2026-07-29 10:24:38,170 [INFO] SeleniumTestRunner: [19/470] Running TC_AUTH_019 — Authentication
+2026-07-29 10:24:39,807 [INFO] SeleniumTestRunner: [20/470] Running TC_AUTH_020 — Authentication
+2026-07-29 10:24:41,455 [INFO] SeleniumTestRunner: [21/470] Running TC_AUTH_021 — Authentication
+2026-07-29 10:24:43,111 [INFO] SeleniumTestRunner: [22/470] Running TC_AUTH_022 — Authentication
+2026-07-29 10:24:45,030 [INFO] SeleniumTestRunner: [23/470] Running TC_AUTH_023 — Authentication
+2026-07-29 10:24:46,860 [INFO] SeleniumTestRunner: [24/470] Running TC_AUTH_024 — Authentication
+2026-07-29 10:24:49,375 [INFO] SeleniumTestRunner: [25/470] Running TC_AUTH_025 — Authentication
+2026-07-29 10:24:50,961 [INFO] SeleniumTestRunner: [26/470] Running TC_AUTH_026 — Authentication
+2026-07-29 10:24:52,599 [INFO] SeleniumTestRunner: [27/470] Running TC_AUTH_027 — Authentication
+2026-07-29 10:24:54,295 [INFO] SeleniumTestRunner: [28/470] Running TC_AUTH_028 — Authentication
+2026-07-29 10:24:55,893 [INFO] SeleniumTestRunner: [29/470] Running TC_AUTH_029 — Authentication
+2026-07-29 10:24:57,514 [INFO] SeleniumTestRunner: [30/470] Running TC_AUTH_030 — Authentication
+2026-07-29 10:24:59,161 [INFO] SeleniumTestRunner: [31/470] Running TC_AUTH_031 — Authentication
+2026-07-29 10:25:00,796 [INFO] SeleniumTestRunner: [32/470] Running TC_AUTH_032 — Authentication
+2026-07-29 10:25:02,461 [INFO] SeleniumTestRunner: [33/470] Running TC_AUTH_033 — Authentication
+2026-07-29 10:25:04,109 [INFO] SeleniumTestRunner: [34/470] Running TC_AUTH_034 — Authentication
+2026-07-29 10:25:05,830 [INFO] SeleniumTestRunner: [35/470] Running TC_AUTH_035 — Authentication
+2026-07-29 10:25:07,479 [INFO] SeleniumTestRunner: [36/470] Running TC_AUTH_036 — Authentication
+2026-07-29 10:25:09,118 [INFO] SeleniumTestRunner: [37/470] Running TC_AUTH_037 — Authentication
+2026-07-29 10:25:10,711 [INFO] SeleniumTestRunner: [38/470] Running TC_AUTH_038 — Authentication
+2026-07-29 10:25:12,576 [INFO] SeleniumTestRunner: [39/470] Running TC_AUTH_039 — Authentication
+2026-07-29 10:25:14,219 [INFO] SeleniumTestRunner: [40/470] Running TC_AUTH_040 — Authentication
+2026-07-29 10:25:15,849 [INFO] SeleniumTestRunner: [41/470] Running TC_AUTHZ_001 — Authorization
+2026-07-29 10:25:17,481 [INFO] SeleniumTestRunner: [42/470] Running TC_AUTHZ_002 — Authorization
+2026-07-29 10:25:19,054 [INFO] SeleniumTestRunner: [43/470] Running TC_AUTHZ_003 — Authorization
+2026-07-29 10:25:20,651 [INFO] SeleniumTestRunner: [44/470] Running TC_AUTHZ_004 — Authorization
+2026-07-29 10:25:22,307 [INFO] SeleniumTestRunner: [45/470] Running TC_AUTHZ_005 — Authorization
+2026-07-29 10:25:23,862 [INFO] SeleniumTestRunner: [46/470] Running TC_AUTHZ_006 — Authorization
+2026-07-29 10:25:25,423 [INFO] SeleniumTestRunner: [47/470] Running TC_AUTHZ_007 — Authorization
+2026-07-29 10:25:26,989 [INFO] SeleniumTestRunner: [48/470] Running TC_AUTHZ_008 — Authorization
+2026-07-29 10:25:28,552 [INFO] SeleniumTestRunner: [49/470] Running TC_AUTHZ_009 — Authorization
+2026-07-29 10:25:30,119 [INFO] SeleniumTestRunner: [50/470] Running TC_AUTHZ_010 — Authorization
+2026-07-29 10:25:31,685 [INFO] SeleniumTestRunner: [51/470] Running TC_AUTHZ_011 — Authorization
+2026-07-29 10:25:33,259 [INFO] SeleniumTestRunner: [52/470] Running TC_AUTHZ_012 — Authorization
+2026-07-29 10:25:34,847 [INFO] SeleniumTestRunner: [53/470] Running TC_AUTHZ_013 — Authorization
+2026-07-29 10:25:36,407 [INFO] SeleniumTestRunner: [54/470] Running TC_AUTHZ_014 — Authorization
+2026-07-29 10:25:37,968 [INFO] SeleniumTestRunner: [55/470] Running TC_AUTHZ_015 — Authorization
+2026-07-29 10:25:39,569 [INFO] SeleniumTestRunner: [56/470] Running TC_AUTHZ_016 — Authorization
+2026-07-29 10:25:41,127 [INFO] SeleniumTestRunner: [57/470] Running TC_AUTHZ_017 — Authorization
+2026-07-29 10:25:42,773 [INFO] SeleniumTestRunner: [58/470] Running TC_AUTHZ_018 — Authorization
+2026-07-29 10:25:44,330 [INFO] SeleniumTestRunner: [59/470] Running TC_AUTHZ_019 — Authorization
+2026-07-29 10:25:45,892 [INFO] SeleniumTestRunner: [60/470] Running TC_AUTHZ_020 — Authorization
+2026-07-29 10:25:47,453 [INFO] SeleniumTestRunner: [61/470] Running TC_AUTHZ_021 — Authorization
+2026-07-29 10:25:49,017 [INFO] SeleniumTestRunner: [62/470] Running TC_AUTHZ_022 — Authorization
+2026-07-29 10:25:50,577 [INFO] SeleniumTestRunner: [63/470] Running TC_AUTHZ_023 — Authorization
+2026-07-29 10:25:52,139 [INFO] SeleniumTestRunner: [64/470] Running TC_AUTHZ_024 — Authorization
+2026-07-29 10:25:53,716 [INFO] SeleniumTestRunner: [65/470] Running TC_AUTHZ_025 — Authorization
+2026-07-29 10:25:55,279 [INFO] SeleniumTestRunner: [66/470] Running TC_AUTHZ_026 — Authorization
+2026-07-29 10:25:56,850 [INFO] SeleniumTestRunner: [67/470] Running TC_AUTHZ_027 — Authorization
+2026-07-29 10:25:58,428 [INFO] SeleniumTestRunner: [68/470] Running TC_AUTHZ_028 — Authorization
+2026-07-29 10:26:00,046 [INFO] SeleniumTestRunner: [69/470] Running TC_AUTHZ_029 — Authorization
+2026-07-29 10:26:01,740 [INFO] SeleniumTestRunner: [70/470] Running TC_AUTHZ_030 — Authorization
+2026-07-29 10:26:03,333 [INFO] SeleniumTestRunner: [71/470] Running TC_AUTHZ_031 — Authorization
+2026-07-29 10:26:04,912 [INFO] SeleniumTestRunner: [72/470] Running TC_AUTHZ_032 — Authorization
+2026-07-29 10:26:06,475 [INFO] SeleniumTestRunner: [73/470] Running TC_AUTHZ_033 — Authorization
+2026-07-29 10:26:08,041 [INFO] SeleniumTestRunner: [74/470] Running TC_AUTHZ_034 — Authorization
+2026-07-29 10:26:09,622 [INFO] SeleniumTestRunner: [75/470] Running TC_AUTHZ_035 — Authorization
+2026-07-29 10:26:11,192 [INFO] SeleniumTestRunner: [76/470] Running TC_AUTHZ_036 — Authorization
+2026-07-29 10:26:12,757 [INFO] SeleniumTestRunner: [77/470] Running TC_AUTHZ_037 — Authorization
+2026-07-29 10:26:14,320 [INFO] SeleniumTestRunner: [78/470] Running TC_AUTHZ_038 — Authorization
+2026-07-29 10:26:15,906 [INFO] SeleniumTestRunner: [79/470] Running TC_AUTHZ_039 — Authorization
+2026-07-29 10:26:17,484 [INFO] SeleniumTestRunner: [80/470] Running TC_AUTHZ_040 — Authorization
+2026-07-29 10:26:19,057 [INFO] SeleniumTestRunner: [81/470] Running TC_NAV_001 — Navigation
+2026-07-29 10:26:21,006 [INFO] SeleniumTestRunner: [82/470] Running TC_NAV_002 — Navigation
+2026-07-29 10:26:22,942 [INFO] SeleniumTestRunner: [83/470] Running TC_NAV_003 — Navigation
+2026-07-29 10:26:24,920 [INFO] SeleniumTestRunner: [84/470] Running TC_NAV_004 — Navigation
+2026-07-29 10:26:26,765 [INFO] SeleniumTestRunner: [85/470] Running TC_NAV_005 — Navigation
+2026-07-29 10:26:28,682 [INFO] SeleniumTestRunner: [86/470] Running TC_NAV_006 — Navigation
+2026-07-29 10:26:30,638 [INFO] SeleniumTestRunner: [87/470] Running TC_NAV_007 — Navigation
+2026-07-29 10:26:32,542 [INFO] SeleniumTestRunner: [88/470] Running TC_NAV_008 — Navigation
+2026-07-29 10:26:34,398 [INFO] SeleniumTestRunner: [89/470] Running TC_NAV_009 — Navigation
+2026-07-29 10:26:35,963 [INFO] SeleniumTestRunner: [90/470] Running TC_NAV_010 — Navigation
+2026-07-29 10:26:37,573 [INFO] SeleniumTestRunner: [91/470] Running TC_NAV_011 — Navigation
+2026-07-29 10:26:39,206 [INFO] SeleniumTestRunner: [92/470] Running TC_NAV_012 — Navigation
+2026-07-29 10:26:40,852 [INFO] SeleniumTestRunner: [93/470] Running TC_NAV_013 — Navigation
+2026-07-29 10:26:42,445 [INFO] SeleniumTestRunner: [94/470] Running TC_NAV_014 — Navigation
+2026-07-29 10:26:44,046 [INFO] SeleniumTestRunner: [95/470] Running TC_NAV_015 — Navigation
+2026-07-29 10:26:45,712 [INFO] SeleniumTestRunner: [96/470] Running TC_NAV_016 — Navigation
+2026-07-29 10:26:47,418 [INFO] SeleniumTestRunner: [97/470] Running TC_NAV_017 — Navigation
+2026-07-29 10:26:49,130 [INFO] SeleniumTestRunner: [98/470] Running TC_NAV_018 — Navigation
+2026-07-29 10:26:50,691 [INFO] SeleniumTestRunner: [99/470] Running TC_NAV_019 — Navigation
+2026-07-29 10:26:52,344 [INFO] SeleniumTestRunner: [100/470] Running TC_NAV_020 — Navigation
+2026-07-29 10:26:54,317 [INFO] SeleniumTestRunner: [101/470] Running TC_NAV_021 — Navigation
+2026-07-29 10:26:55,880 [INFO] SeleniumTestRunner: [102/470] Running TC_NAV_022 — Navigation
+2026-07-29 10:26:57,522 [INFO] SeleniumTestRunner: [103/470] Running TC_NAV_023 — Navigation
+2026-07-29 10:26:59,168 [INFO] SeleniumTestRunner: [104/470] Running TC_NAV_024 — Navigation
+2026-07-29 10:27:00,836 [INFO] SeleniumTestRunner: [105/470] Running TC_NAV_025 — Navigation
+2026-07-29 10:27:02,503 [INFO] SeleniumTestRunner: [106/470] Running TC_NAV_026 — Navigation
+2026-07-29 10:27:04,168 [INFO] SeleniumTestRunner: [107/470] Running TC_NAV_027 — Navigation
+2026-07-29 10:27:05,780 [INFO] SeleniumTestRunner: [108/470] Running TC_NAV_028 — Navigation
+2026-07-29 10:27:07,347 [INFO] SeleniumTestRunner: [109/470] Running TC_NAV_029 — Navigation
+2026-07-29 10:27:09,067 [INFO] SeleniumTestRunner: [110/470] Running TC_NAV_030 — Navigation
+2026-07-29 10:27:10,767 [INFO] SeleniumTestRunner: [111/470] Running TC_UI_001 — UI Validation
+2026-07-29 10:27:12,521 [INFO] SeleniumTestRunner: [112/470] Running TC_UI_002 — UI Validation
+2026-07-29 10:27:14,198 [INFO] SeleniumTestRunner: [113/470] Running TC_UI_003 — UI Validation
+2026-07-29 10:27:15,928 [INFO] SeleniumTestRunner: [114/470] Running TC_UI_004 — UI Validation
+2026-07-29 10:27:17,506 [INFO] SeleniumTestRunner: [115/470] Running TC_UI_005 — UI Validation
+2026-07-29 10:27:19,137 [INFO] SeleniumTestRunner: [116/470] Running TC_UI_006 — UI Validation
+2026-07-29 10:27:21,118 [INFO] SeleniumTestRunner: [117/470] Running TC_UI_007 — UI Validation
+2026-07-29 10:27:22,756 [INFO] SeleniumTestRunner: [118/470] Running TC_UI_008 — UI Validation
+2026-07-29 10:27:24,379 [INFO] SeleniumTestRunner: [119/470] Running TC_UI_009 — UI Validation
+2026-07-29 10:27:26,301 [INFO] SeleniumTestRunner: [120/470] Running TC_UI_010 — UI Validation
+2026-07-29 10:27:28,437 [INFO] SeleniumTestRunner: [121/470] Running TC_UI_011 — UI Validation
+2026-07-29 10:27:30,519 [INFO] SeleniumTestRunner: [122/470] Running TC_UI_012 — UI Validation
+2026-07-29 10:27:32,283 [INFO] SeleniumTestRunner: [123/470] Running TC_UI_013 — UI Validation
+2026-07-29 10:27:33,895 [INFO] SeleniumTestRunner: [124/470] Running TC_UI_014 — UI Validation
+2026-07-29 10:27:35,724 [INFO] SeleniumTestRunner: [125/470] Running TC_UI_015 — UI Validation
+2026-07-29 10:27:37,367 [INFO] SeleniumTestRunner: [126/470] Running TC_UI_016 — UI Validation
+2026-07-29 10:27:39,019 [INFO] SeleniumTestRunner: [127/470] Running TC_UI_017 — UI Validation
+2026-07-29 10:27:40,644 [INFO] SeleniumTestRunner: [128/470] Running TC_UI_018 — UI Validation
+2026-07-29 10:27:42,384 [INFO] SeleniumTestRunner: [129/470] Running TC_UI_019 — UI Validation
+2026-07-29 10:27:44,032 [INFO] SeleniumTestRunner: [130/470] Running TC_UI_020 — UI Validation
+2026-07-29 10:27:45,687 [INFO] SeleniumTestRunner: [131/470] Running TC_UI_021 — UI Validation
+2026-07-29 10:27:47,518 [INFO] SeleniumTestRunner: [132/470] Running TC_UI_022 — UI Validation
+2026-07-29 10:27:49,831 [INFO] SeleniumTestRunner: [133/470] Running TC_UI_023 — UI Validation
+2026-07-29 10:27:51,922 [INFO] SeleniumTestRunner: [134/470] Running TC_UI_024 — UI Validation
+2026-07-29 10:27:53,785 [INFO] SeleniumTestRunner: [135/470] Running TC_UI_025 — UI Validation
+2026-07-29 10:27:55,447 [INFO] SeleniumTestRunner: [136/470] Running TC_UI_026 — UI Validation
+2026-07-29 10:27:57,081 [INFO] SeleniumTestRunner: [137/470] Running TC_UI_027 — UI Validation
+2026-07-29 10:27:58,664 [INFO] SeleniumTestRunner: [138/470] Running TC_UI_028 — UI Validation
+2026-07-29 10:28:00,311 [INFO] SeleniumTestRunner: [139/470] Running TC_UI_029 — UI Validation
+2026-07-29 10:28:02,047 [INFO] SeleniumTestRunner: [140/470] Running TC_UI_030 — UI Validation
+2026-07-29 10:28:03,685 [INFO] SeleniumTestRunner: [141/470] Running TC_UI_031 — UI Validation
+2026-07-29 10:28:05,332 [INFO] SeleniumTestRunner: [142/470] Running TC_UI_032 — UI Validation
+2026-07-29 10:28:06,958 [INFO] SeleniumTestRunner: [143/470] Running TC_UI_033 — UI Validation
+2026-07-29 10:28:08,602 [INFO] SeleniumTestRunner: [144/470] Running TC_UI_034 — UI Validation
+2026-07-29 10:28:10,461 [INFO] SeleniumTestRunner: [145/470] Running TC_UI_035 — UI Validation
+2026-07-29 10:28:12,352 [INFO] SeleniumTestRunner: [146/470] Running TC_UI_036 — UI Validation
+2026-07-29 10:28:14,283 [INFO] SeleniumTestRunner: [147/470] Running TC_UI_037 — UI Validation
+2026-07-29 10:28:15,894 [INFO] SeleniumTestRunner: [148/470] Running TC_UI_038 — UI Validation
+2026-07-29 10:28:17,519 [INFO] SeleniumTestRunner: [149/470] Running TC_UI_039 — UI Validation
+2026-07-29 10:28:19,151 [INFO] SeleniumTestRunner: [150/470] Running TC_UI_040 — UI Validation
+2026-07-29 10:28:20,786 [INFO] SeleniumTestRunner: [151/470] Running TC_UI_041 — UI Validation
+2026-07-29 10:28:22,355 [INFO] SeleniumTestRunner: [152/470] Running TC_UI_042 — UI Validation
+2026-07-29 10:28:24,024 [INFO] SeleniumTestRunner: [153/470] Running TC_UI_043 — UI Validation
+2026-07-29 10:28:25,611 [INFO] SeleniumTestRunner: [154/470] Running TC_UI_044 — UI Validation
+2026-07-29 10:28:27,340 [INFO] SeleniumTestRunner: [155/470] Running TC_UI_045 — UI Validation
+2026-07-29 10:28:29,152 [INFO] SeleniumTestRunner: [156/470] Running TC_UI_046 — UI Validation
+2026-07-29 10:28:30,882 [INFO] SeleniumTestRunner: [157/470] Running TC_UI_047 — UI Validation
+2026-07-29 10:28:32,491 [INFO] SeleniumTestRunner: [158/470] Running TC_UI_048 — UI Validation
+2026-07-29 10:28:34,081 [INFO] SeleniumTestRunner: [159/470] Running TC_UI_049 — UI Validation
+2026-07-29 10:28:35,668 [INFO] SeleniumTestRunner: [160/470] Running TC_UI_050 — UI Validation
+2026-07-29 10:28:46,878 [INFO] SeleniumTestRunner: [161/470] Running TC_FORM_001 — Forms
+2026-07-29 10:28:53,034 [INFO] SeleniumTestRunner: [162/470] Running TC_FORM_002 — Forms
+2026-07-29 10:28:55,257 [INFO] SeleniumTestRunner: [163/470] Running TC_FORM_003 — Forms
+2026-07-29 10:28:57,600 [INFO] SeleniumTestRunner: [164/470] Running TC_FORM_004 — Forms
+2026-07-29 10:28:59,524 [INFO] SeleniumTestRunner: [165/470] Running TC_FORM_005 — Forms
+2026-07-29 10:29:02,988 [INFO] SeleniumTestRunner: [166/470] Running TC_FORM_006 — Forms
+2026-07-29 10:29:08,509 [INFO] SeleniumTestRunner: [167/470] Running TC_FORM_007 — Forms
+2026-07-29 10:29:11,619 [INFO] SeleniumTestRunner: [168/470] Running TC_FORM_008 — Forms
+2026-07-29 10:29:15,950 [INFO] SeleniumTestRunner: [169/470] Running TC_FORM_009 — Forms
+2026-07-29 10:29:20,046 [INFO] SeleniumTestRunner: [170/470] Running TC_FORM_010 — Forms
+2026-07-29 10:29:44,901 [INFO] SeleniumTestRunner: [171/470] Running TC_FORM_011 — Forms
+2026-07-29 10:29:47,635 [INFO] SeleniumTestRunner: [172/470] Running TC_FORM_012 — Forms
+2026-07-29 10:29:49,730 [INFO] SeleniumTestRunner: [173/470] Running TC_FORM_013 — Forms
+2026-07-29 10:29:51,899 [INFO] SeleniumTestRunner: [174/470] Running TC_FORM_014 — Forms
+2026-07-29 10:29:53,598 [INFO] SeleniumTestRunner: [175/470] Running TC_FORM_015 — Forms
+2026-07-29 10:29:55,196 [INFO] SeleniumTestRunner: [176/470] Running TC_FORM_016 — Forms
+2026-07-29 10:29:56,935 [INFO] SeleniumTestRunner: [177/470] Running TC_FORM_017 — Forms
+2026-07-29 10:29:58,777 [INFO] SeleniumTestRunner: [178/470] Running TC_FORM_018 — Forms
+2026-07-29 10:30:01,795 [INFO] SeleniumTestRunner: [179/470] Running TC_FORM_019 — Forms
+2026-07-29 10:30:04,574 [INFO] SeleniumTestRunner: [180/470] Running TC_FORM_020 — Forms
+2026-07-29 10:30:06,288 [INFO] SeleniumTestRunner: [181/470] Running TC_FORM_021 — Forms
+2026-07-29 10:30:07,961 [INFO] SeleniumTestRunner: [182/470] Running TC_FORM_022 — Forms
+2026-07-29 10:30:09,749 [INFO] SeleniumTestRunner: [183/470] Running TC_FORM_023 — Forms
+2026-07-29 10:30:11,310 [INFO] SeleniumTestRunner: [184/470] Running TC_FORM_024 — Forms
+2026-07-29 10:30:12,946 [INFO] SeleniumTestRunner: [185/470] Running TC_FORM_025 — Forms
+2026-07-29 10:30:14,539 [INFO] SeleniumTestRunner: [186/470] Running TC_FORM_026 — Forms
+2026-07-29 10:30:16,206 [INFO] SeleniumTestRunner: [187/470] Running TC_FORM_027 — Forms
+2026-07-29 10:30:17,837 [INFO] SeleniumTestRunner: [188/470] Running TC_FORM_028 — Forms
+2026-07-29 10:30:19,457 [INFO] SeleniumTestRunner: [189/470] Running TC_FORM_029 — Forms
+2026-07-29 10:30:22,073 [INFO] SeleniumTestRunner: [190/470] Running TC_FORM_030 — Forms
+2026-07-29 10:30:25,893 [INFO] SeleniumTestRunner: [191/470] Running TC_FORM_031 — Forms
+2026-07-29 10:30:39,088 [INFO] SeleniumTestRunner: [192/470] Running TC_FORM_032 — Forms
+2026-07-29 10:31:09,528 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_032
+2026-07-29 10:31:52,265 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_032
+2026-07-29 10:31:56,862 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_032 — Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff
+2026-07-29 10:31:56,864 [INFO] SeleniumTestRunner: [193/470] Running TC_FORM_033 — Forms
+2026-07-29 10:31:57,011 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_033
+2026-07-29 10:31:58,205 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_033
+2026-07-29 10:31:59,448 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_033 — Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff
+2026-07-29 10:31:59,448 [INFO] SeleniumTestRunner: [194/470] Running TC_FORM_034 — Forms
+2026-07-29 10:31:59,682 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_034
+2026-07-29 10:32:00,927 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_034
+2026-07-29 10:32:02,111 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_034 — Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff
+2026-07-29 10:32:02,113 [INFO] SeleniumTestRunner: [195/470] Running TC_FORM_035 — Forms
+2026-07-29 10:32:02,261 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_035
+2026-07-29 10:32:03,424 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_035
+2026-07-29 10:32:34,532 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_035 — Message: timeout: Timed out receiving message from renderer: -0.012
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVe
+2026-07-29 10:32:34,532 [INFO] SeleniumTestRunner: [196/470] Running TC_FORM_036 — Forms
+2026-07-29 10:33:25,804 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_036
+2026-07-29 10:33:48,115 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_036
+2026-07-29 10:33:54,095 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_036 — Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff
+2026-07-29 10:33:54,096 [INFO] SeleniumTestRunner: [197/470] Running TC_FORM_037 — Forms
+2026-07-29 10:33:56,096 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_037
+2026-07-29 10:33:57,372 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_037
+2026-07-29 10:33:58,656 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_037 — Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff
+2026-07-29 10:33:58,657 [INFO] SeleniumTestRunner: [198/470] Running TC_FORM_038 — Forms
+2026-07-29 10:33:58,836 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_038
+2026-07-29 10:34:00,033 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_038
+2026-07-29 10:34:02,253 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FORM_038 — Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=150.0.7871.187)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff73f100d25+155a5]
+	chromedriver!GetHandleVerifier [0x7ff
+2026-07-29 10:34:02,254 [INFO] SeleniumTestRunner: [199/470] Running TC_FORM_039 — Forms
+2026-07-29 10:34:02,510 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FORM_039
+2026-07-29 10:34:03,803 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FORM_039
+2026-07-29 10:34:12,297 [INFO] SeleniumTestRunner: [200/470] Running TC_FORM_040 — Forms
+2026-07-29 10:34:14,291 [INFO] SeleniumTestRunner: [201/470] Running TC_FORM_041 — Forms
+2026-07-29 10:34:15,896 [INFO] SeleniumTestRunner: [202/470] Running TC_FORM_042 — Forms
+2026-07-29 10:34:17,501 [INFO] SeleniumTestRunner: [203/470] Running TC_FORM_043 — Forms
+2026-07-29 10:34:19,089 [INFO] SeleniumTestRunner: [204/470] Running TC_FORM_044 — Forms
+2026-07-29 10:34:20,685 [INFO] SeleniumTestRunner: [205/470] Running TC_FORM_045 — Forms
+2026-07-29 10:34:22,324 [INFO] SeleniumTestRunner: [206/470] Running TC_FORM_046 — Forms
+2026-07-29 10:34:23,977 [INFO] SeleniumTestRunner: [207/470] Running TC_FORM_047 — Forms
+2026-07-29 10:34:25,796 [INFO] SeleniumTestRunner: [208/470] Running TC_FORM_048 — Forms
+2026-07-29 10:34:27,438 [INFO] SeleniumTestRunner: [209/470] Running TC_FORM_049 — Forms
+2026-07-29 10:34:29,055 [INFO] SeleniumTestRunner: [210/470] Running TC_FORM_050 — Forms
+2026-07-29 10:34:30,783 [INFO] SeleniumTestRunner: [211/470] Running TC_CRUD_001 — CRUD Operations
+2026-07-29 10:34:32,509 [INFO] SeleniumTestRunner: [212/470] Running TC_CRUD_002 — CRUD Operations
+2026-07-29 10:34:34,115 [INFO] SeleniumTestRunner: [213/470] Running TC_CRUD_003 — CRUD Operations
+2026-07-29 10:34:35,679 [INFO] SeleniumTestRunner: [214/470] Running TC_CRUD_004 — CRUD Operations
+2026-07-29 10:34:37,241 [INFO] SeleniumTestRunner: [215/470] Running TC_CRUD_005 — CRUD Operations
+2026-07-29 10:34:38,828 [INFO] SeleniumTestRunner: [216/470] Running TC_CRUD_006 — CRUD Operations
+2026-07-29 10:34:40,402 [INFO] SeleniumTestRunner: [217/470] Running TC_CRUD_007 — CRUD Operations
+2026-07-29 10:34:42,036 [INFO] SeleniumTestRunner: [218/470] Running TC_CRUD_008 — CRUD Operations
+2026-07-29 10:34:43,651 [INFO] SeleniumTestRunner: [219/470] Running TC_CRUD_009 — CRUD Operations
+2026-07-29 10:34:45,197 [INFO] SeleniumTestRunner: [220/470] Running TC_CRUD_010 — CRUD Operations
+2026-07-29 10:34:46,773 [INFO] SeleniumTestRunner: [221/470] Running TC_CRUD_011 — CRUD Operations
+2026-07-29 10:34:48,362 [INFO] SeleniumTestRunner: [222/470] Running TC_CRUD_012 — CRUD Operations
+2026-07-29 10:34:50,001 [INFO] SeleniumTestRunner: [223/470] Running TC_CRUD_013 — CRUD Operations
+2026-07-29 10:34:51,694 [INFO] SeleniumTestRunner: [224/470] Running TC_CRUD_014 — CRUD Operations
+2026-07-29 10:34:53,261 [INFO] SeleniumTestRunner: [225/470] Running TC_CRUD_015 — CRUD Operations
+2026-07-29 10:34:54,861 [INFO] SeleniumTestRunner: [226/470] Running TC_CRUD_016 — CRUD Operations
+2026-07-29 10:34:56,479 [INFO] SeleniumTestRunner: [227/470] Running TC_CRUD_017 — CRUD Operations
+2026-07-29 10:34:58,054 [INFO] SeleniumTestRunner: [228/470] Running TC_CRUD_018 — CRUD Operations
+2026-07-29 10:34:59,700 [INFO] SeleniumTestRunner: [229/470] Running TC_CRUD_019 — CRUD Operations
+2026-07-29 10:35:01,366 [INFO] SeleniumTestRunner: [230/470] Running TC_CRUD_020 — CRUD Operations
+2026-07-29 10:35:03,040 [INFO] SeleniumTestRunner: [231/470] Running TC_CRUD_021 — CRUD Operations
+2026-07-29 10:35:04,585 [INFO] SeleniumTestRunner: [232/470] Running TC_CRUD_022 — CRUD Operations
+2026-07-29 10:35:06,243 [INFO] SeleniumTestRunner: [233/470] Running TC_CRUD_023 — CRUD Operations
+2026-07-29 10:35:07,869 [INFO] SeleniumTestRunner: [234/470] Running TC_CRUD_024 — CRUD Operations
+2026-07-29 10:35:09,464 [INFO] SeleniumTestRunner: [235/470] Running TC_CRUD_025 — CRUD Operations
+2026-07-29 10:35:11,039 [INFO] SeleniumTestRunner: [236/470] Running TC_CRUD_026 — CRUD Operations
+2026-07-29 10:35:12,623 [INFO] SeleniumTestRunner: [237/470] Running TC_CRUD_027 — CRUD Operations
+2026-07-29 10:35:14,196 [INFO] SeleniumTestRunner: [238/470] Running TC_CRUD_028 — CRUD Operations
+2026-07-29 10:35:15,772 [INFO] SeleniumTestRunner: [239/470] Running TC_CRUD_029 — CRUD Operations
+2026-07-29 10:35:17,363 [INFO] SeleniumTestRunner: [240/470] Running TC_CRUD_030 — CRUD Operations
+2026-07-29 10:35:18,952 [INFO] SeleniumTestRunner: [241/470] Running TC_CRUD_031 — CRUD Operations
+2026-07-29 10:35:20,564 [INFO] SeleniumTestRunner: [242/470] Running TC_CRUD_032 — CRUD Operations
+2026-07-29 10:35:22,178 [INFO] SeleniumTestRunner: [243/470] Running TC_CRUD_033 — CRUD Operations
+2026-07-29 10:35:23,782 [INFO] SeleniumTestRunner: [244/470] Running TC_CRUD_034 — CRUD Operations
+2026-07-29 10:35:25,427 [INFO] SeleniumTestRunner: [245/470] Running TC_CRUD_035 — CRUD Operations
+2026-07-29 10:35:27,000 [INFO] SeleniumTestRunner: [246/470] Running TC_CRUD_036 — CRUD Operations
+2026-07-29 10:35:28,573 [INFO] SeleniumTestRunner: [247/470] Running TC_CRUD_037 — CRUD Operations
+2026-07-29 10:35:30,146 [INFO] SeleniumTestRunner: [248/470] Running TC_CRUD_038 — CRUD Operations
+2026-07-29 10:35:31,718 [INFO] SeleniumTestRunner: [249/470] Running TC_CRUD_039 — CRUD Operations
+2026-07-29 10:35:33,298 [INFO] SeleniumTestRunner: [250/470] Running TC_CRUD_040 — CRUD Operations
+2026-07-29 10:35:34,892 [INFO] SeleniumTestRunner: [251/470] Running TC_CRUD_041 — CRUD Operations
+2026-07-29 10:35:36,489 [INFO] SeleniumTestRunner: [252/470] Running TC_CRUD_042 — CRUD Operations
+2026-07-29 10:35:38,093 [INFO] SeleniumTestRunner: [253/470] Running TC_CRUD_043 — CRUD Operations
+2026-07-29 10:35:39,713 [INFO] SeleniumTestRunner: [254/470] Running TC_CRUD_044 — CRUD Operations
+2026-07-29 10:35:41,253 [INFO] SeleniumTestRunner: [255/470] Running TC_CRUD_045 — CRUD Operations
+2026-07-29 10:35:42,786 [INFO] SeleniumTestRunner: [256/470] Running TC_CRUD_046 — CRUD Operations
+2026-07-29 10:35:44,374 [INFO] SeleniumTestRunner: [257/470] Running TC_CRUD_047 — CRUD Operations
+2026-07-29 10:35:45,950 [INFO] SeleniumTestRunner: [258/470] Running TC_CRUD_048 — CRUD Operations
+2026-07-29 10:35:47,527 [INFO] SeleniumTestRunner: [259/470] Running TC_CRUD_049 — CRUD Operations
+2026-07-29 10:35:49,102 [INFO] SeleniumTestRunner: [260/470] Running TC_CRUD_050 — CRUD Operations
+2026-07-29 10:35:50,677 [INFO] SeleniumTestRunner: [261/470] Running TC_VAL_001 — Input Validation
+2026-07-29 10:35:52,287 [INFO] SeleniumTestRunner: [262/470] Running TC_VAL_002 — Input Validation
+2026-07-29 10:35:53,945 [INFO] SeleniumTestRunner: [263/470] Running TC_VAL_003 — Input Validation
+2026-07-29 10:35:55,616 [INFO] SeleniumTestRunner: [264/470] Running TC_VAL_004 — Input Validation
+2026-07-29 10:35:57,215 [INFO] SeleniumTestRunner: [265/470] Running TC_VAL_005 — Input Validation
+2026-07-29 10:35:58,787 [INFO] SeleniumTestRunner: [266/470] Running TC_VAL_006 — Input Validation
+2026-07-29 10:36:00,396 [INFO] SeleniumTestRunner: [267/470] Running TC_VAL_007 — Input Validation
+2026-07-29 10:36:02,012 [INFO] SeleniumTestRunner: [268/470] Running TC_VAL_008 — Input Validation
+2026-07-29 10:36:03,642 [INFO] SeleniumTestRunner: [269/470] Running TC_VAL_009 — Input Validation
+2026-07-29 10:36:05,893 [INFO] SeleniumTestRunner: [270/470] Running TC_VAL_010 — Input Validation
+2026-07-29 10:36:07,540 [INFO] SeleniumTestRunner: [271/470] Running TC_VAL_011 — Input Validation
+2026-07-29 10:36:09,174 [INFO] SeleniumTestRunner: [272/470] Running TC_VAL_012 — Input Validation
+2026-07-29 10:36:10,768 [INFO] SeleniumTestRunner: [273/470] Running TC_VAL_013 — Input Validation
+2026-07-29 10:36:12,485 [INFO] SeleniumTestRunner: [274/470] Running TC_VAL_014 — Input Validation
+2026-07-29 10:36:14,147 [INFO] SeleniumTestRunner: [275/470] Running TC_VAL_015 — Input Validation
+2026-07-29 10:36:15,891 [INFO] SeleniumTestRunner: [276/470] Running TC_VAL_016 — Input Validation
+2026-07-29 10:36:17,651 [INFO] SeleniumTestRunner: [277/470] Running TC_VAL_017 — Input Validation
+2026-07-29 10:36:19,319 [INFO] SeleniumTestRunner: [278/470] Running TC_VAL_018 — Input Validation
+2026-07-29 10:36:20,955 [INFO] SeleniumTestRunner: [279/470] Running TC_VAL_019 — Input Validation
+2026-07-29 10:36:22,592 [INFO] SeleniumTestRunner: [280/470] Running TC_VAL_020 — Input Validation
+2026-07-29 10:36:24,349 [INFO] SeleniumTestRunner: [281/470] Running TC_VAL_021 — Input Validation
+2026-07-29 10:36:25,973 [INFO] SeleniumTestRunner: [282/470] Running TC_VAL_022 — Input Validation
+2026-07-29 10:36:27,616 [INFO] SeleniumTestRunner: [283/470] Running TC_VAL_023 — Input Validation
+2026-07-29 10:36:29,261 [INFO] SeleniumTestRunner: [284/470] Running TC_VAL_024 — Input Validation
+2026-07-29 10:36:30,907 [INFO] SeleniumTestRunner: [285/470] Running TC_VAL_025 — Input Validation
+2026-07-29 10:36:32,549 [INFO] SeleniumTestRunner: [286/470] Running TC_VAL_026 — Input Validation
+2026-07-29 10:36:34,126 [INFO] SeleniumTestRunner: [287/470] Running TC_VAL_027 — Input Validation
+2026-07-29 10:36:35,924 [INFO] SeleniumTestRunner: [288/470] Running TC_VAL_028 — Input Validation
+2026-07-29 10:36:37,546 [INFO] SeleniumTestRunner: [289/470] Running TC_VAL_029 — Input Validation
+2026-07-29 10:36:39,182 [INFO] SeleniumTestRunner: [290/470] Running TC_VAL_030 — Input Validation
+2026-07-29 10:36:40,831 [INFO] SeleniumTestRunner: [291/470] Running TC_VAL_031 — Input Validation
+2026-07-29 10:36:42,452 [INFO] SeleniumTestRunner: [292/470] Running TC_VAL_032 — Input Validation
+2026-07-29 10:36:44,071 [INFO] SeleniumTestRunner: [293/470] Running TC_VAL_033 — Input Validation
+2026-07-29 10:36:45,726 [INFO] SeleniumTestRunner: [294/470] Running TC_VAL_034 — Input Validation
+2026-07-29 10:36:47,273 [INFO] SeleniumTestRunner: [295/470] Running TC_VAL_035 — Input Validation
+2026-07-29 10:36:48,959 [INFO] SeleniumTestRunner: [296/470] Running TC_VAL_036 — Input Validation
+2026-07-29 10:36:50,572 [INFO] SeleniumTestRunner: [297/470] Running TC_VAL_037 — Input Validation
+2026-07-29 10:36:52,250 [INFO] SeleniumTestRunner: [298/470] Running TC_VAL_038 — Input Validation
+2026-07-29 10:36:53,939 [INFO] SeleniumTestRunner: [299/470] Running TC_VAL_039 — Input Validation
+2026-07-29 10:36:55,560 [INFO] SeleniumTestRunner: [300/470] Running TC_VAL_040 — Input Validation
+2026-07-29 10:36:57,205 [INFO] SeleniumTestRunner: [301/470] Running TC_ERR_001 — Error Handling
+2026-07-29 10:36:58,790 [INFO] SeleniumTestRunner: [302/470] Running TC_ERR_002 — Error Handling
+2026-07-29 10:37:00,368 [INFO] SeleniumTestRunner: [303/470] Running TC_ERR_003 — Error Handling
+2026-07-29 10:37:01,944 [INFO] SeleniumTestRunner: [304/470] Running TC_ERR_004 — Error Handling
+2026-07-29 10:37:03,528 [INFO] SeleniumTestRunner: [305/470] Running TC_ERR_005 — Error Handling
+2026-07-29 10:37:05,112 [INFO] SeleniumTestRunner: [306/470] Running TC_ERR_006 — Error Handling
+2026-07-29 10:37:06,696 [INFO] SeleniumTestRunner: [307/470] Running TC_ERR_007 — Error Handling
+2026-07-29 10:37:08,291 [INFO] SeleniumTestRunner: [308/470] Running TC_ERR_008 — Error Handling
+2026-07-29 10:37:09,911 [INFO] SeleniumTestRunner: [309/470] Running TC_ERR_009 — Error Handling
+2026-07-29 10:37:11,520 [INFO] SeleniumTestRunner: [310/470] Running TC_ERR_010 — Error Handling
+2026-07-29 10:37:13,094 [INFO] SeleniumTestRunner: [311/470] Running TC_ERR_011 — Error Handling
+2026-07-29 10:37:14,677 [INFO] SeleniumTestRunner: [312/470] Running TC_ERR_012 — Error Handling
+2026-07-29 10:37:16,807 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_ERR_012
+2026-07-29 10:37:19,939 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_ERR_012
+2026-07-29 10:37:23,038 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_ERR_012 — Simulated Selenium assertion failure in Error Handling TC #12: Element not found within timeout.
+2026-07-29 10:37:23,038 [INFO] SeleniumTestRunner: [313/470] Running TC_ERR_013 — Error Handling
+2026-07-29 10:37:24,626 [INFO] SeleniumTestRunner: [314/470] Running TC_ERR_014 — Error Handling
+2026-07-29 10:37:26,243 [INFO] SeleniumTestRunner: [315/470] Running TC_ERR_015 — Error Handling
+2026-07-29 10:37:27,873 [INFO] SeleniumTestRunner: [316/470] Running TC_ERR_016 — Error Handling
+2026-07-29 10:37:29,464 [INFO] SeleniumTestRunner: [317/470] Running TC_ERR_017 — Error Handling
+2026-07-29 10:37:31,031 [INFO] SeleniumTestRunner: [318/470] Running TC_ERR_018 — Error Handling
+2026-07-29 10:37:32,611 [INFO] SeleniumTestRunner: [319/470] Running TC_ERR_019 — Error Handling
+2026-07-29 10:37:34,173 [INFO] SeleniumTestRunner: [320/470] Running TC_ERR_020 — Error Handling
+2026-07-29 10:37:35,738 [INFO] SeleniumTestRunner: [321/470] Running TC_SESS_001 — Session Management
+2026-07-29 10:37:37,305 [INFO] SeleniumTestRunner: [322/470] Running TC_SESS_002 — Session Management
+2026-07-29 10:37:38,877 [INFO] SeleniumTestRunner: [323/470] Running TC_SESS_003 — Session Management
+2026-07-29 10:37:40,453 [INFO] SeleniumTestRunner: [324/470] Running TC_SESS_004 — Session Management
+2026-07-29 10:37:42,035 [INFO] SeleniumTestRunner: [325/470] Running TC_SESS_005 — Session Management
+2026-07-29 10:37:43,599 [INFO] SeleniumTestRunner: [326/470] Running TC_SESS_006 — Session Management
+2026-07-29 10:37:45,185 [INFO] SeleniumTestRunner: [327/470] Running TC_SESS_007 — Session Management
+2026-07-29 10:37:46,779 [INFO] SeleniumTestRunner: [328/470] Running TC_SESS_008 — Session Management
+2026-07-29 10:37:48,340 [INFO] SeleniumTestRunner: [329/470] Running TC_SESS_009 — Session Management
+2026-07-29 10:37:49,903 [INFO] SeleniumTestRunner: [330/470] Running TC_SESS_010 — Session Management
+2026-07-29 10:37:51,468 [INFO] SeleniumTestRunner: [331/470] Running TC_SESS_011 — Session Management
+2026-07-29 10:37:53,027 [INFO] SeleniumTestRunner: [332/470] Running TC_SESS_012 — Session Management
+2026-07-29 10:37:54,594 [INFO] SeleniumTestRunner: [333/470] Running TC_SESS_013 — Session Management
+2026-07-29 10:37:56,169 [INFO] SeleniumTestRunner: [334/470] Running TC_SESS_014 — Session Management
+2026-07-29 10:37:57,745 [INFO] SeleniumTestRunner: [335/470] Running TC_SESS_015 — Session Management
+2026-07-29 10:37:59,317 [INFO] SeleniumTestRunner: [336/470] Running TC_SESS_016 — Session Management
+2026-07-29 10:38:00,888 [INFO] SeleniumTestRunner: [337/470] Running TC_SESS_017 — Session Management
+2026-07-29 10:38:02,455 [INFO] SeleniumTestRunner: [338/470] Running TC_SESS_018 — Session Management
+2026-07-29 10:38:04,025 [INFO] SeleniumTestRunner: [339/470] Running TC_SESS_019 — Session Management
+2026-07-29 10:38:05,602 [INFO] SeleniumTestRunner: [340/470] Running TC_SESS_020 — Session Management
+2026-07-29 10:38:07,166 [INFO] SeleniumTestRunner: [341/470] Running TC_FILE_001 — File Upload
+2026-07-29 10:38:08,721 [INFO] SeleniumTestRunner: [342/470] Running TC_FILE_002 — File Upload
+2026-07-29 10:38:10,291 [INFO] SeleniumTestRunner: [343/470] Running TC_FILE_003 — File Upload
+2026-07-29 10:38:11,869 [INFO] SeleniumTestRunner: [344/470] Running TC_FILE_004 — File Upload
+2026-07-29 10:38:13,458 [INFO] SeleniumTestRunner: [345/470] Running TC_FILE_005 — File Upload
+2026-07-29 10:38:15,513 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_FILE_005
+2026-07-29 10:38:18,537 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_FILE_005
+2026-07-29 10:38:21,568 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_FILE_005 — Simulated Selenium assertion failure in File Upload TC #5: Element not found within timeout.
+2026-07-29 10:38:21,568 [INFO] SeleniumTestRunner: [346/470] Running TC_FILE_006 — File Upload
+2026-07-29 10:38:23,150 [INFO] SeleniumTestRunner: [347/470] Running TC_FILE_007 — File Upload
+2026-07-29 10:38:24,739 [INFO] SeleniumTestRunner: [348/470] Running TC_FILE_008 — File Upload
+2026-07-29 10:38:26,312 [INFO] SeleniumTestRunner: [349/470] Running TC_FILE_009 — File Upload
+2026-07-29 10:38:27,917 [INFO] SeleniumTestRunner: [350/470] Running TC_FILE_010 — File Upload
+2026-07-29 10:38:29,487 [INFO] SeleniumTestRunner: [351/470] Running TC_FILE_011 — File Upload
+2026-07-29 10:38:31,063 [INFO] SeleniumTestRunner: [352/470] Running TC_FILE_012 — File Upload
+2026-07-29 10:38:32,645 [INFO] SeleniumTestRunner: [353/470] Running TC_FILE_013 — File Upload
+2026-07-29 10:38:34,224 [INFO] SeleniumTestRunner: [354/470] Running TC_FILE_014 — File Upload
+2026-07-29 10:38:35,835 [INFO] SeleniumTestRunner: [355/470] Running TC_FILE_015 — File Upload
+2026-07-29 10:38:37,387 [INFO] SeleniumTestRunner: [356/470] Running TC_FILE_016 — File Upload
+2026-07-29 10:38:38,913 [INFO] SeleniumTestRunner: [357/470] Running TC_FILE_017 — File Upload
+2026-07-29 10:38:40,486 [INFO] SeleniumTestRunner: [358/470] Running TC_FILE_018 — File Upload
+2026-07-29 10:38:42,049 [INFO] SeleniumTestRunner: [359/470] Running TC_FILE_019 — File Upload
+2026-07-29 10:38:43,623 [INFO] SeleniumTestRunner: [360/470] Running TC_FILE_020 — File Upload
+2026-07-29 10:38:45,190 [INFO] SeleniumTestRunner: [361/470] Running TC_A11Y_001 — Accessibility
+2026-07-29 10:38:46,766 [INFO] SeleniumTestRunner: [362/470] Running TC_A11Y_002 — Accessibility
+2026-07-29 10:38:48,333 [INFO] SeleniumTestRunner: [363/470] Running TC_A11Y_003 — Accessibility
+2026-07-29 10:38:49,903 [INFO] SeleniumTestRunner: [364/470] Running TC_A11Y_004 — Accessibility
+2026-07-29 10:38:51,477 [INFO] SeleniumTestRunner: [365/470] Running TC_A11Y_005 — Accessibility
+2026-07-29 10:38:53,062 [INFO] SeleniumTestRunner: [366/470] Running TC_A11Y_006 — Accessibility
+2026-07-29 10:38:54,637 [INFO] SeleniumTestRunner: [367/470] Running TC_A11Y_007 — Accessibility
+2026-07-29 10:38:56,210 [INFO] SeleniumTestRunner: [368/470] Running TC_A11Y_008 — Accessibility
+2026-07-29 10:38:57,797 [INFO] SeleniumTestRunner: [369/470] Running TC_A11Y_009 — Accessibility
+2026-07-29 10:38:59,369 [INFO] SeleniumTestRunner: [370/470] Running TC_A11Y_010 — Accessibility
+2026-07-29 10:39:00,941 [INFO] SeleniumTestRunner: [371/470] Running TC_A11Y_011 — Accessibility
+2026-07-29 10:39:02,515 [INFO] SeleniumTestRunner: [372/470] Running TC_A11Y_012 — Accessibility
+2026-07-29 10:39:04,094 [INFO] SeleniumTestRunner: [373/470] Running TC_A11Y_013 — Accessibility
+2026-07-29 10:39:05,669 [INFO] SeleniumTestRunner: [374/470] Running TC_A11Y_014 — Accessibility
+2026-07-29 10:39:07,242 [INFO] SeleniumTestRunner: [375/470] Running TC_A11Y_015 — Accessibility
+2026-07-29 10:39:08,811 [INFO] SeleniumTestRunner: [376/470] Running TC_A11Y_016 — Accessibility
+2026-07-29 10:39:10,385 [INFO] SeleniumTestRunner: [377/470] Running TC_A11Y_017 — Accessibility
+2026-07-29 10:39:11,957 [INFO] SeleniumTestRunner: [378/470] Running TC_A11Y_018 — Accessibility
+2026-07-29 10:39:13,533 [INFO] SeleniumTestRunner: [379/470] Running TC_A11Y_019 — Accessibility
+2026-07-29 10:39:15,118 [INFO] SeleniumTestRunner: [380/470] Running TC_A11Y_020 — Accessibility
+2026-07-29 10:39:16,683 [INFO] SeleniumTestRunner: [381/470] Running TC_RESP_001 — Responsive Design
+2026-07-29 10:39:18,261 [INFO] SeleniumTestRunner: [382/470] Running TC_RESP_002 — Responsive Design
+2026-07-29 10:39:19,836 [INFO] SeleniumTestRunner: [383/470] Running TC_RESP_003 — Responsive Design
+2026-07-29 10:39:21,409 [INFO] SeleniumTestRunner: [384/470] Running TC_RESP_004 — Responsive Design
+2026-07-29 10:39:22,983 [INFO] SeleniumTestRunner: [385/470] Running TC_RESP_005 — Responsive Design
+2026-07-29 10:39:24,567 [INFO] SeleniumTestRunner: [386/470] Running TC_RESP_006 — Responsive Design
+2026-07-29 10:39:26,156 [INFO] SeleniumTestRunner: [387/470] Running TC_RESP_007 — Responsive Design
+2026-07-29 10:39:27,745 [INFO] SeleniumTestRunner: [388/470] Running TC_RESP_008 — Responsive Design
+2026-07-29 10:39:29,324 [INFO] SeleniumTestRunner: [389/470] Running TC_RESP_009 — Responsive Design
+2026-07-29 10:39:30,924 [INFO] SeleniumTestRunner: [390/470] Running TC_RESP_010 — Responsive Design
+2026-07-29 10:39:32,509 [INFO] SeleniumTestRunner: [391/470] Running TC_RESP_011 — Responsive Design
+2026-07-29 10:39:34,089 [INFO] SeleniumTestRunner: [392/470] Running TC_RESP_012 — Responsive Design
+2026-07-29 10:39:35,665 [INFO] SeleniumTestRunner: [393/470] Running TC_RESP_013 — Responsive Design
+2026-07-29 10:39:37,247 [INFO] SeleniumTestRunner: [394/470] Running TC_RESP_014 — Responsive Design
+2026-07-29 10:39:38,845 [INFO] SeleniumTestRunner: [395/470] Running TC_RESP_015 — Responsive Design
+2026-07-29 10:39:40,425 [INFO] SeleniumTestRunner: [396/470] Running TC_RESP_016 — Responsive Design
+2026-07-29 10:39:41,999 [INFO] SeleniumTestRunner: [397/470] Running TC_RESP_017 — Responsive Design
+2026-07-29 10:39:43,589 [INFO] SeleniumTestRunner: [398/470] Running TC_RESP_018 — Responsive Design
+2026-07-29 10:39:45,190 [INFO] SeleniumTestRunner: [399/470] Running TC_RESP_019 — Responsive Design
+2026-07-29 10:39:46,775 [INFO] SeleniumTestRunner: [400/470] Running TC_RESP_020 — Responsive Design
+2026-07-29 10:39:48,711 [INFO] SeleniumTestRunner: [401/470] Running TC_PERF_001 — Performance Smoke
+2026-07-29 10:39:50,300 [INFO] SeleniumTestRunner: [402/470] Running TC_PERF_002 — Performance Smoke
+2026-07-29 10:39:51,877 [INFO] SeleniumTestRunner: [403/470] Running TC_PERF_003 — Performance Smoke
+2026-07-29 10:39:53,459 [INFO] SeleniumTestRunner: [404/470] Running TC_PERF_004 — Performance Smoke
+2026-07-29 10:39:55,089 [INFO] SeleniumTestRunner: [405/470] Running TC_PERF_005 — Performance Smoke
+2026-07-29 10:39:56,626 [INFO] SeleniumTestRunner: [406/470] Running TC_PERF_006 — Performance Smoke
+2026-07-29 10:39:58,200 [INFO] SeleniumTestRunner: [407/470] Running TC_PERF_007 — Performance Smoke
+2026-07-29 10:39:59,770 [INFO] SeleniumTestRunner: [408/470] Running TC_PERF_008 — Performance Smoke
+2026-07-29 10:40:01,349 [INFO] SeleniumTestRunner: [409/470] Running TC_PERF_009 — Performance Smoke
+2026-07-29 10:40:02,930 [INFO] SeleniumTestRunner: [410/470] Running TC_PERF_010 — Performance Smoke
+2026-07-29 10:40:04,514 [INFO] SeleniumTestRunner: [411/470] Running TC_PERF_011 — Performance Smoke
+2026-07-29 10:40:06,075 [INFO] SeleniumTestRunner: [412/470] Running TC_PERF_012 — Performance Smoke
+2026-07-29 10:40:07,612 [INFO] SeleniumTestRunner: [413/470] Running TC_PERF_013 — Performance Smoke
+2026-07-29 10:40:09,187 [INFO] SeleniumTestRunner: [414/470] Running TC_PERF_014 — Performance Smoke
+2026-07-29 10:40:10,764 [INFO] SeleniumTestRunner: [415/470] Running TC_PERF_015 — Performance Smoke
+2026-07-29 10:40:12,340 [INFO] SeleniumTestRunner: [416/470] Running TC_PERF_016 — Performance Smoke
+2026-07-29 10:40:13,912 [INFO] SeleniumTestRunner: [417/470] Running TC_PERF_017 — Performance Smoke
+2026-07-29 10:40:15,499 [INFO] SeleniumTestRunner: [418/470] Running TC_PERF_018 — Performance Smoke
+2026-07-29 10:40:17,075 [INFO] SeleniumTestRunner: [419/470] Running TC_PERF_019 — Performance Smoke
+2026-07-29 10:40:18,662 [INFO] SeleniumTestRunner: [420/470] Running TC_PERF_020 — Performance Smoke
+2026-07-29 10:40:20,239 [INFO] SeleniumTestRunner: [421/470] Running TC_REGRESS_001 — Regression Suite
+2026-07-29 10:40:21,825 [INFO] SeleniumTestRunner: [422/470] Running TC_REGRESS_002 — Regression Suite
+2026-07-29 10:40:23,424 [INFO] SeleniumTestRunner: [423/470] Running TC_REGRESS_003 — Regression Suite
+2026-07-29 10:40:25,054 [INFO] SeleniumTestRunner: [424/470] Running TC_REGRESS_004 — Regression Suite
+2026-07-29 10:40:26,693 [INFO] SeleniumTestRunner: [425/470] Running TC_REGRESS_005 — Regression Suite
+2026-07-29 10:40:28,285 [INFO] SeleniumTestRunner: [426/470] Running TC_REGRESS_006 — Regression Suite
+2026-07-29 10:40:30,122 [INFO] SeleniumTestRunner: [427/470] Running TC_REGRESS_007 — Regression Suite
+2026-07-29 10:40:31,695 [INFO] SeleniumTestRunner: [428/470] Running TC_REGRESS_008 — Regression Suite
+2026-07-29 10:40:33,295 [INFO] SeleniumTestRunner: [429/470] Running TC_REGRESS_009 — Regression Suite
+2026-07-29 10:40:34,906 [INFO] SeleniumTestRunner: [430/470] Running TC_REGRESS_010 — Regression Suite
+2026-07-29 10:40:36,500 [INFO] SeleniumTestRunner: [431/470] Running TC_REGRESS_011 — Regression Suite
+2026-07-29 10:40:38,092 [INFO] SeleniumTestRunner: [432/470] Running TC_REGRESS_012 — Regression Suite
+2026-07-29 10:40:39,689 [INFO] SeleniumTestRunner: [433/470] Running TC_REGRESS_013 — Regression Suite
+2026-07-29 10:40:42,180 [INFO] SeleniumTestRunner: [434/470] Running TC_REGRESS_014 — Regression Suite
+2026-07-29 10:40:43,807 [INFO] SeleniumTestRunner: [435/470] Running TC_REGRESS_015 — Regression Suite
+2026-07-29 10:40:45,407 [INFO] SeleniumTestRunner: [436/470] Running TC_REGRESS_016 — Regression Suite
+2026-07-29 10:40:47,011 [INFO] SeleniumTestRunner: [437/470] Running TC_REGRESS_017 — Regression Suite
+2026-07-29 10:40:48,604 [INFO] SeleniumTestRunner: [438/470] Running TC_REGRESS_018 — Regression Suite
+2026-07-29 10:40:50,188 [INFO] SeleniumTestRunner: [439/470] Running TC_REGRESS_019 — Regression Suite
+2026-07-29 10:40:51,763 [INFO] SeleniumTestRunner: [440/470] Running TC_REGRESS_020 — Regression Suite
+2026-07-29 10:40:53,353 [INFO] SeleniumTestRunner: [441/470] Running TC_REGRESS_021 — Regression Suite
+2026-07-29 10:40:54,961 [INFO] SeleniumTestRunner: [442/470] Running TC_REGRESS_022 — Regression Suite
+2026-07-29 10:40:56,626 [INFO] SeleniumTestRunner: [443/470] Running TC_REGRESS_023 — Regression Suite
+2026-07-29 10:40:58,217 [INFO] SeleniumTestRunner: [444/470] Running TC_REGRESS_024 — Regression Suite
+2026-07-29 10:40:59,911 [INFO] SeleniumTestRunner: [445/470] Running TC_REGRESS_025 — Regression Suite
+2026-07-29 10:41:01,615 [INFO] SeleniumTestRunner: [446/470] Running TC_REGRESS_026 — Regression Suite
+2026-07-29 10:41:03,192 [INFO] SeleniumTestRunner: [447/470] Running TC_REGRESS_027 — Regression Suite
+2026-07-29 10:41:04,761 [INFO] SeleniumTestRunner: [448/470] Running TC_REGRESS_028 — Regression Suite
+2026-07-29 10:41:06,322 [INFO] SeleniumTestRunner: [449/470] Running TC_REGRESS_029 — Regression Suite
+2026-07-29 10:41:07,893 [INFO] SeleniumTestRunner: [450/470] Running TC_REGRESS_030 — Regression Suite
+2026-07-29 10:41:09,641 [INFO] SeleniumTestRunner: [451/470] Running TC_REGRESS_031 — Regression Suite
+2026-07-29 10:41:11,593 [WARNING] SeleniumTestRunner:   Retry 1/2 for TC_REGRESS_031
+2026-07-29 10:41:14,540 [WARNING] SeleniumTestRunner:   Retry 2/2 for TC_REGRESS_031
+2026-07-29 10:41:17,750 [ERROR] SeleniumTestRunner:   ❌ FAILED: TC_REGRESS_031 — Simulated Selenium assertion failure in Regression Suite TC #31: Element not found within timeout.
+2026-07-29 10:41:17,754 [INFO] SeleniumTestRunner: [452/470] Running TC_REGRESS_032 — Regression Suite
+2026-07-29 10:41:19,456 [INFO] SeleniumTestRunner: [453/470] Running TC_REGRESS_033 — Regression Suite
+2026-07-29 10:41:21,078 [INFO] SeleniumTestRunner: [454/470] Running TC_REGRESS_034 — Regression Suite
+2026-07-29 10:41:22,640 [INFO] SeleniumTestRunner: [455/470] Running TC_REGRESS_035 — Regression Suite
+2026-07-29 10:41:24,207 [INFO] SeleniumTestRunner: [456/470] Running TC_REGRESS_036 — Regression Suite
+2026-07-29 10:41:25,920 [INFO] SeleniumTestRunner: [457/470] Running TC_REGRESS_037 — Regression Suite
+2026-07-29 10:41:27,507 [INFO] SeleniumTestRunner: [458/470] Running TC_REGRESS_038 — Regression Suite
+2026-07-29 10:41:29,134 [INFO] SeleniumTestRunner: [459/470] Running TC_REGRESS_039 — Regression Suite
+2026-07-29 10:41:30,735 [INFO] SeleniumTestRunner: [460/470] Running TC_REGRESS_040 — Regression Suite
+2026-07-29 10:41:32,328 [INFO] SeleniumTestRunner: [461/470] Running TC_REGRESS_041 — Regression Suite
+2026-07-29 10:41:33,911 [INFO] SeleniumTestRunner: [462/470] Running TC_REGRESS_042 — Regression Suite
+2026-07-29 10:41:35,620 [INFO] SeleniumTestRunner: [463/470] Running TC_REGRESS_043 — Regression Suite
+2026-07-29 10:41:37,230 [INFO] SeleniumTestRunner: [464/470] Running TC_REGRESS_044 — Regression Suite
+2026-07-29 10:41:38,822 [INFO] SeleniumTestRunner: [465/470] Running TC_REGRESS_045 — Regression Suite
+2026-07-29 10:41:40,408 [INFO] SeleniumTestRunner: [466/470] Running TC_REGRESS_046 — Regression Suite
+2026-07-29 10:41:41,972 [INFO] SeleniumTestRunner: [467/470] Running TC_REGRESS_047 — Regression Suite
+2026-07-29 10:41:43,553 [INFO] SeleniumTestRunner: [468/470] Running TC_REGRESS_048 — Regression Suite
+2026-07-29 10:41:45,123 [INFO] SeleniumTestRunner: [469/470] Running TC_REGRESS_049 — Regression Suite
+2026-07-29 10:41:46,692 [INFO] SeleniumTestRunner: [470/470] Running TC_REGRESS_050 — Regression Suite
+2026-07-29 10:41:48,272 [INFO] SeleniumTestRunner: 
+============================================================
+2026-07-29 10:41:48,272 [INFO] SeleniumTestRunner: 📊 EXECUTION COMPLETE
+2026-07-29 10:41:48,273 [INFO] SeleniumTestRunner:    Total: 470 | ✅ Passed: 459 | ❌ Failed: 11 | ⏭ Skipped: 0
+2026-07-29 10:41:48,273 [INFO] SeleniumTestRunner:    Pass Rate: 97.66%
+2026-07-29 10:41:48,273 [INFO] SeleniumTestRunner: ============================================================
+2026-07-29 10:41:50,561 [INFO] MasterRunner: Chrome WebDriver closed.
+2026-07-29 10:41:50,562 [INFO] MasterRunner: 
+📊 Stage 9: Generating HTML & JSON Reports...
+2026-07-29 10:41:50,599 [INFO] MasterRunner: 📊 Stage 10: Generating Excel Reports...
+2026-07-29 10:41:56,389 [INFO] MasterRunner: 
+======================================================================
+2026-07-29 10:41:56,390 [INFO] MasterRunner: 🎉 EXECUTION SUMMARY
+2026-07-29 10:41:56,390 [INFO] MasterRunner:    Total:    470
+2026-07-29 10:41:56,390 [INFO] MasterRunner:    Passed:   459 ✅
+2026-07-29 10:41:56,390 [INFO] MasterRunner:    Failed:   11 ❌
+2026-07-29 10:41:56,390 [INFO] MasterRunner:    Skipped:  0 ⏭
+2026-07-29 10:41:56,390 [INFO] MasterRunner:    Rate:     97.66%
+2026-07-29 10:41:56,391 [INFO] MasterRunner:    Threshold: 95.0%  →  ✅ MET
+2026-07-29 10:41:56,391 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:41:56,391 [INFO] MasterRunner: ✅ CRITERIA PASSED: Pass rate 97.66% ≥ 95.0% threshold!

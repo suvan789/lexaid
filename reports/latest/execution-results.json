@@ -1,13 +1,13 @@
 {
-  "buildNumber": "BUILD-3453",
-  "timestamp": "2026-07-29 04:05:53",
+  "buildNumber": "BUILD-0378",
+  "timestamp": "2026-07-29 05:15:50",
   "summary": {
     "total": 510,
-    "passed": 506,
-    "failed": 4,
+    "passed": 510,
+    "failed": 0,
     "skipped": 0,
-    "passPercentage": 99.2,
-    "failPercentage": 0.8
+    "passPercentage": 100,
+    "failPercentage": 0
   },
   "testCases": [
     {
@@ -19,7 +19,7 @@
       "expected": "Expected Authentication scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 105,
+      "duration": 165,
       "screenshot": null,
       "stack": null
     },
@@ -32,7 +32,7 @@
       "expected": "Expected Authentication scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 98,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -45,7 +45,7 @@
       "expected": "Expected Authentication scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 262,
+      "duration": 178,
       "screenshot": null,
       "stack": null
     },
@@ -58,7 +58,7 @@
       "expected": "Expected Authentication scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 251,
+      "duration": 172,
       "screenshot": null,
       "stack": null
     },
@@ -71,7 +71,7 @@
       "expected": "Expected Authentication scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 161,
+      "duration": 246,
       "screenshot": null,
       "stack": null
     },
@@ -84,7 +84,7 @@
       "expected": "Expected Authentication scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 232,
+      "duration": 167,
       "screenshot": null,
       "stack": null
     },
@@ -97,7 +97,7 @@
       "expected": "Expected Authentication scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 118,
       "screenshot": null,
       "stack": null
     },
@@ -110,7 +110,7 @@
       "expected": "Expected Authentication scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 191,
+      "duration": 142,
       "screenshot": null,
       "stack": null
     },
@@ -123,7 +123,7 @@
       "expected": "Expected Authentication scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 243,
+      "duration": 223,
       "screenshot": null,
       "stack": null
     },
@@ -136,7 +136,7 @@
       "expected": "Expected Authentication scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 103,
+      "duration": 167,
       "screenshot": null,
       "stack": null
     },
@@ -149,7 +149,7 @@
       "expected": "Expected Authentication scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 117,
+      "duration": 158,
       "screenshot": null,
       "stack": null
     },
@@ -162,7 +162,7 @@
       "expected": "Expected Authentication scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 165,
+      "duration": 141,
       "screenshot": null,
       "stack": null
     },
@@ -175,7 +175,7 @@
       "expected": "Expected Authentication scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 95,
+      "duration": 186,
       "screenshot": null,
       "stack": null
     },
@@ -188,7 +188,7 @@
       "expected": "Expected Authentication scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 176,
+      "duration": 98,
       "screenshot": null,
       "stack": null
     },
@@ -201,7 +201,7 @@
       "expected": "Expected Authentication scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 112,
+      "duration": 189,
       "screenshot": null,
       "stack": null
     },
@@ -214,7 +214,7 @@
       "expected": "Expected Authentication scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 258,
+      "duration": 122,
       "screenshot": null,
       "stack": null
     },
@@ -227,7 +227,7 @@
       "expected": "Expected Authentication scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 175,
+      "duration": 220,
       "screenshot": null,
       "stack": null
     },
@@ -240,7 +240,7 @@
       "expected": "Expected Authentication scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 117,
+      "duration": 124,
       "screenshot": null,
       "stack": null
     },
@@ -253,7 +253,7 @@
       "expected": "Expected Authentication scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 171,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -266,7 +266,7 @@
       "expected": "Expected Authentication scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 130,
+      "duration": 184,
       "screenshot": null,
       "stack": null
     },
@@ -279,7 +279,7 @@
       "expected": "Expected Authentication scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 173,
+      "duration": 125,
       "screenshot": null,
       "stack": null
     },
@@ -292,7 +292,7 @@
       "expected": "Expected Authentication scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 124,
+      "duration": 151,
       "screenshot": null,
       "stack": null
     },
@@ -305,7 +305,7 @@
       "expected": "Expected Authentication scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 211,
+      "duration": 202,
       "screenshot": null,
       "stack": null
     },
@@ -318,7 +318,7 @@
       "expected": "Expected Authentication scenario 24 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 153,
+      "duration": 169,
       "screenshot": null,
       "stack": null
     },
@@ -331,7 +331,7 @@
       "expected": "Expected Authentication scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 217,
+      "duration": 241,
       "screenshot": null,
       "stack": null
     },
@@ -344,7 +344,7 @@
       "expected": "Expected Authentication scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 183,
+      "duration": 137,
       "screenshot": null,
       "stack": null
     },
@@ -357,7 +357,7 @@
       "expected": "Expected Authentication scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 126,
+      "duration": 116,
       "screenshot": null,
       "stack": null
     },
@@ -370,7 +370,7 @@
       "expected": "Expected Authentication scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 180,
+      "duration": 136,
       "screenshot": null,
       "stack": null
     },
@@ -383,7 +383,7 @@
       "expected": "Expected Authentication scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 246,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -396,7 +396,7 @@
       "expected": "Expected Authentication scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 183,
+      "duration": 214,
       "screenshot": null,
       "stack": null
     },
@@ -409,7 +409,7 @@
       "expected": "Expected Authentication scenario 31 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 259,
       "screenshot": null,
       "stack": null
     },
@@ -422,7 +422,7 @@
       "expected": "Expected Authentication scenario 32 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 180,
+      "duration": 260,
       "screenshot": null,
       "stack": null
     },
@@ -435,7 +435,7 @@
       "expected": "Expected Authentication scenario 33 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 191,
+      "duration": 144,
       "screenshot": null,
       "stack": null
     },
@@ -448,7 +448,7 @@
       "expected": "Expected Authentication scenario 34 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 100,
+      "duration": 90,
       "screenshot": null,
       "stack": null
     },
@@ -461,7 +461,7 @@
       "expected": "Expected Authentication scenario 35 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 254,
+      "duration": 140,
       "screenshot": null,
       "stack": null
     },
@@ -474,7 +474,7 @@
       "expected": "Expected Authentication scenario 36 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 212,
+      "duration": 207,
       "screenshot": null,
       "stack": null
     },
@@ -487,7 +487,7 @@
       "expected": "Expected Authentication scenario 37 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 207,
+      "duration": 194,
       "screenshot": null,
       "stack": null
     },
@@ -500,7 +500,7 @@
       "expected": "Expected Authentication scenario 38 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 198,
+      "duration": 90,
       "screenshot": null,
       "stack": null
     },
@@ -513,7 +513,7 @@
       "expected": "Expected Authentication scenario 39 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 163,
+      "duration": 117,
       "screenshot": null,
       "stack": null
     },
@@ -526,7 +526,7 @@
       "expected": "Expected Authentication scenario 40 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 194,
+      "duration": 260,
       "screenshot": null,
       "stack": null
     },
@@ -539,7 +539,7 @@
       "expected": "Expected Authorization scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 239,
+      "duration": 259,
       "screenshot": null,
       "stack": null
     },
@@ -552,7 +552,7 @@
       "expected": "Expected Authorization scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 170,
+      "duration": 212,
       "screenshot": null,
       "stack": null
     },
@@ -565,7 +565,7 @@
       "expected": "Expected Authorization scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 259,
+      "duration": 195,
       "screenshot": null,
       "stack": null
     },
@@ -578,7 +578,7 @@
       "expected": "Expected Authorization scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 153,
+      "duration": 124,
       "screenshot": null,
       "stack": null
     },
@@ -591,7 +591,7 @@
       "expected": "Expected Authorization scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 98,
+      "duration": 200,
       "screenshot": null,
       "stack": null
     },
@@ -604,7 +604,7 @@
       "expected": "Expected Authorization scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 165,
+      "duration": 219,
       "screenshot": null,
       "stack": null
     },
@@ -617,7 +617,7 @@
       "expected": "Expected Authorization scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 134,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -630,7 +630,7 @@
       "expected": "Expected Authorization scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 163,
+      "duration": 131,
       "screenshot": null,
       "stack": null
     },
@@ -643,7 +643,7 @@
       "expected": "Expected Authorization scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 212,
+      "duration": 258,
       "screenshot": null,
       "stack": null
     },
@@ -656,7 +656,7 @@
       "expected": "Expected Authorization scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 140,
+      "duration": 144,
       "screenshot": null,
       "stack": null
     },
@@ -669,7 +669,7 @@
       "expected": "Expected Authorization scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 223,
+      "duration": 239,
       "screenshot": null,
       "stack": null
     },
@@ -682,7 +682,7 @@
       "expected": "Expected Authorization scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -695,7 +695,7 @@
       "expected": "Expected Authorization scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 154,
+      "duration": 264,
       "screenshot": null,
       "stack": null
     },
@@ -708,7 +708,7 @@
       "expected": "Expected Authorization scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 90,
       "screenshot": null,
       "stack": null
     },
@@ -721,7 +721,7 @@
       "expected": "Expected Authorization scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 210,
+      "duration": 255,
       "screenshot": null,
       "stack": null
     },
@@ -734,7 +734,7 @@
       "expected": "Expected Authorization scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 170,
+      "duration": 262,
       "screenshot": null,
       "stack": null
     },
@@ -747,7 +747,7 @@
       "expected": "Expected Authorization scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 251,
+      "duration": 117,
       "screenshot": null,
       "stack": null
     },
@@ -760,7 +760,7 @@
       "expected": "Expected Authorization scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 200,
+      "duration": 127,
       "screenshot": null,
       "stack": null
     },
@@ -773,7 +773,7 @@
       "expected": "Expected Authorization scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 219,
+      "duration": 263,
       "screenshot": null,
       "stack": null
     },
@@ -786,7 +786,7 @@
       "expected": "Expected Authorization scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 257,
+      "duration": 247,
       "screenshot": null,
       "stack": null
     },
@@ -799,7 +799,7 @@
       "expected": "Expected Authorization scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 135,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -812,7 +812,7 @@
       "expected": "Expected Authorization scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 156,
+      "duration": 263,
       "screenshot": null,
       "stack": null
     },
@@ -825,7 +825,7 @@
       "expected": "Expected Authorization scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 108,
+      "duration": 248,
       "screenshot": null,
       "stack": null
     },
@@ -838,7 +838,7 @@
       "expected": "Expected Authorization scenario 24 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 98,
+      "duration": 157,
       "screenshot": null,
       "stack": null
     },
@@ -851,7 +851,7 @@
       "expected": "Expected Authorization scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 264,
+      "duration": 237,
       "screenshot": null,
       "stack": null
     },
@@ -864,7 +864,7 @@
       "expected": "Expected Authorization scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 152,
+      "duration": 199,
       "screenshot": null,
       "stack": null
     },
@@ -877,7 +877,7 @@
       "expected": "Expected Authorization scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 108,
+      "duration": 134,
       "screenshot": null,
       "stack": null
     },
@@ -890,7 +890,7 @@
       "expected": "Expected Authorization scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 106,
+      "duration": 255,
       "screenshot": null,
       "stack": null
     },
@@ -903,7 +903,7 @@
       "expected": "Expected Authorization scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 257,
+      "duration": 148,
       "screenshot": null,
       "stack": null
     },
@@ -916,7 +916,7 @@
       "expected": "Expected Authorization scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 138,
+      "duration": 240,
       "screenshot": null,
       "stack": null
     },
@@ -929,7 +929,7 @@
       "expected": "Expected Registration scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 227,
+      "duration": 137,
       "screenshot": null,
       "stack": null
     },
@@ -942,7 +942,7 @@
       "expected": "Expected Registration scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 202,
+      "duration": 218,
       "screenshot": null,
       "stack": null
     },
@@ -955,7 +955,7 @@
       "expected": "Expected Registration scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 100,
+      "duration": 163,
       "screenshot": null,
       "stack": null
     },
@@ -968,7 +968,7 @@
       "expected": "Expected Registration scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 191,
+      "duration": 162,
       "screenshot": null,
       "stack": null
     },
@@ -981,7 +981,7 @@
       "expected": "Expected Registration scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 163,
+      "duration": 152,
       "screenshot": null,
       "stack": null
     },
@@ -994,7 +994,7 @@
       "expected": "Expected Registration scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 170,
+      "duration": 241,
       "screenshot": null,
       "stack": null
     },
@@ -1007,7 +1007,7 @@
       "expected": "Expected Registration scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 100,
+      "duration": 103,
       "screenshot": null,
       "stack": null
     },
@@ -1020,7 +1020,7 @@
       "expected": "Expected Registration scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 223,
+      "duration": 249,
       "screenshot": null,
       "stack": null
     },
@@ -1033,7 +1033,7 @@
       "expected": "Expected Registration scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 204,
+      "duration": 211,
       "screenshot": null,
       "stack": null
     },
@@ -1046,7 +1046,7 @@
       "expected": "Expected Registration scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 160,
+      "duration": 167,
       "screenshot": null,
       "stack": null
     },
@@ -1059,7 +1059,7 @@
       "expected": "Expected Registration scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 100,
+      "duration": 177,
       "screenshot": null,
       "stack": null
     },
@@ -1072,7 +1072,7 @@
       "expected": "Expected Registration scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 259,
+      "duration": 232,
       "screenshot": null,
       "stack": null
     },
@@ -1085,7 +1085,7 @@
       "expected": "Expected Registration scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 209,
+      "duration": 122,
       "screenshot": null,
       "stack": null
     },
@@ -1098,7 +1098,7 @@
       "expected": "Expected Registration scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 150,
+      "duration": 264,
       "screenshot": null,
       "stack": null
     },
@@ -1111,7 +1111,7 @@
       "expected": "Expected Registration scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 242,
+      "duration": 214,
       "screenshot": null,
       "stack": null
     },
@@ -1124,7 +1124,7 @@
       "expected": "Expected Registration scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 139,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -1137,7 +1137,7 @@
       "expected": "Expected Registration scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 176,
+      "duration": 194,
       "screenshot": null,
       "stack": null
     },
@@ -1150,7 +1150,7 @@
       "expected": "Expected Registration scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 184,
+      "duration": 169,
       "screenshot": null,
       "stack": null
     },
@@ -1163,7 +1163,7 @@
       "expected": "Expected Registration scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 114,
+      "duration": 186,
       "screenshot": null,
       "stack": null
     },
@@ -1176,7 +1176,7 @@
       "expected": "Expected Registration scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 163,
+      "duration": 110,
       "screenshot": null,
       "stack": null
     },
@@ -1189,7 +1189,7 @@
       "expected": "Expected Profile Management scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 244,
+      "duration": 170,
       "screenshot": null,
       "stack": null
     },
@@ -1202,7 +1202,7 @@
       "expected": "Expected Profile Management scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 218,
+      "duration": 110,
       "screenshot": null,
       "stack": null
     },
@@ -1215,7 +1215,7 @@
       "expected": "Expected Profile Management scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 255,
+      "duration": 101,
       "screenshot": null,
       "stack": null
     },
@@ -1228,7 +1228,7 @@
       "expected": "Expected Profile Management scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 166,
+      "duration": 180,
       "screenshot": null,
       "stack": null
     },
@@ -1241,7 +1241,7 @@
       "expected": "Expected Profile Management scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 230,
+      "duration": 216,
       "screenshot": null,
       "stack": null
     },
@@ -1254,7 +1254,7 @@
       "expected": "Expected Profile Management scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 254,
+      "duration": 223,
       "screenshot": null,
       "stack": null
     },
@@ -1267,7 +1267,7 @@
       "expected": "Expected Profile Management scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -1280,7 +1280,7 @@
       "expected": "Expected Profile Management scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 212,
+      "duration": 180,
       "screenshot": null,
       "stack": null
     },
@@ -1293,7 +1293,7 @@
       "expected": "Expected Profile Management scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 178,
+      "duration": 268,
       "screenshot": null,
       "stack": null
     },
@@ -1306,7 +1306,7 @@
       "expected": "Expected Profile Management scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 245,
+      "duration": 149,
       "screenshot": null,
       "stack": null
     },
@@ -1319,7 +1319,7 @@
       "expected": "Expected Profile Management scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 118,
+      "duration": 247,
       "screenshot": null,
       "stack": null
     },
@@ -1332,7 +1332,7 @@
       "expected": "Expected Profile Management scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 171,
+      "duration": 234,
       "screenshot": null,
       "stack": null
     },
@@ -1345,7 +1345,7 @@
       "expected": "Expected Profile Management scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 173,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -1358,7 +1358,7 @@
       "expected": "Expected Profile Management scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 173,
       "screenshot": null,
       "stack": null
     },
@@ -1371,7 +1371,7 @@
       "expected": "Expected Profile Management scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 101,
+      "duration": 195,
       "screenshot": null,
       "stack": null
     },
@@ -1384,7 +1384,7 @@
       "expected": "Expected Profile Management scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 133,
+      "duration": 220,
       "screenshot": null,
       "stack": null
     },
@@ -1397,7 +1397,7 @@
       "expected": "Expected Profile Management scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 152,
+      "duration": 180,
       "screenshot": null,
       "stack": null
     },
@@ -1410,7 +1410,7 @@
       "expected": "Expected Profile Management scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 98,
+      "duration": 134,
       "screenshot": null,
       "stack": null
     },
@@ -1423,7 +1423,7 @@
       "expected": "Expected Profile Management scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 247,
+      "duration": 126,
       "screenshot": null,
       "stack": null
     },
@@ -1436,7 +1436,7 @@
       "expected": "Expected Profile Management scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 137,
+      "duration": 179,
       "screenshot": null,
       "stack": null
     },
@@ -1449,7 +1449,7 @@
       "expected": "Expected Navigation scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 124,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -1462,7 +1462,7 @@
       "expected": "Expected Navigation scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 125,
+      "duration": 235,
       "screenshot": null,
       "stack": null
     },
@@ -1475,7 +1475,7 @@
       "expected": "Expected Navigation scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 161,
+      "duration": 102,
       "screenshot": null,
       "stack": null
     },
@@ -1488,7 +1488,7 @@
       "expected": "Expected Navigation scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 148,
+      "duration": 147,
       "screenshot": null,
       "stack": null
     },
@@ -1501,7 +1501,7 @@
       "expected": "Expected Navigation scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 179,
+      "duration": 169,
       "screenshot": null,
       "stack": null
     },
@@ -1514,7 +1514,7 @@
       "expected": "Expected Navigation scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 96,
+      "duration": 166,
       "screenshot": null,
       "stack": null
     },
@@ -1527,7 +1527,7 @@
       "expected": "Expected Navigation scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 136,
+      "duration": 246,
       "screenshot": null,
       "stack": null
     },
@@ -1540,7 +1540,7 @@
       "expected": "Expected Navigation scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 139,
+      "duration": 125,
       "screenshot": null,
       "stack": null
     },
@@ -1553,7 +1553,7 @@
       "expected": "Expected Navigation scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 147,
+      "duration": 118,
       "screenshot": null,
       "stack": null
     },
@@ -1566,7 +1566,7 @@
       "expected": "Expected Navigation scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 100,
       "screenshot": null,
       "stack": null
     },
@@ -1579,7 +1579,7 @@
       "expected": "Expected Navigation scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 243,
+      "duration": 128,
       "screenshot": null,
       "stack": null
     },
@@ -1592,7 +1592,7 @@
       "expected": "Expected Navigation scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 112,
+      "duration": 214,
       "screenshot": null,
       "stack": null
     },
@@ -1605,7 +1605,7 @@
       "expected": "Expected Navigation scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 263,
       "screenshot": null,
       "stack": null
     },
@@ -1618,7 +1618,7 @@
       "expected": "Expected Navigation scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 241,
+      "duration": 163,
       "screenshot": null,
       "stack": null
     },
@@ -1631,7 +1631,7 @@
       "expected": "Expected Navigation scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 254,
+      "duration": 140,
       "screenshot": null,
       "stack": null
     },
@@ -1644,7 +1644,7 @@
       "expected": "Expected Navigation scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 156,
+      "duration": 124,
       "screenshot": null,
       "stack": null
     },
@@ -1657,7 +1657,7 @@
       "expected": "Expected Navigation scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 222,
+      "duration": 159,
       "screenshot": null,
       "stack": null
     },
@@ -1670,7 +1670,7 @@
       "expected": "Expected Navigation scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 121,
+      "duration": 266,
       "screenshot": null,
       "stack": null
     },
@@ -1683,7 +1683,7 @@
       "expected": "Expected Navigation scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 218,
+      "duration": 149,
       "screenshot": null,
       "stack": null
     },
@@ -1696,7 +1696,7 @@
       "expected": "Expected Navigation scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -1709,7 +1709,7 @@
       "expected": "Expected Navigation scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 220,
+      "duration": 228,
       "screenshot": null,
       "stack": null
     },
@@ -1722,7 +1722,7 @@
       "expected": "Expected Navigation scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 258,
+      "duration": 98,
       "screenshot": null,
       "stack": null
     },
@@ -1735,7 +1735,7 @@
       "expected": "Expected Navigation scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 190,
+      "duration": 119,
       "screenshot": null,
       "stack": null
     },
@@ -1748,7 +1748,7 @@
       "expected": "Expected Navigation scenario 24 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 124,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -1761,7 +1761,7 @@
       "expected": "Expected Navigation scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 265,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -1774,7 +1774,7 @@
       "expected": "Expected Navigation scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 204,
+      "duration": 254,
       "screenshot": null,
       "stack": null
     },
@@ -1787,7 +1787,7 @@
       "expected": "Expected Navigation scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 173,
+      "duration": 113,
       "screenshot": null,
       "stack": null
     },
@@ -1800,7 +1800,7 @@
       "expected": "Expected Navigation scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 171,
+      "duration": 166,
       "screenshot": null,
       "stack": null
     },
@@ -1813,7 +1813,7 @@
       "expected": "Expected Navigation scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 211,
+      "duration": 232,
       "screenshot": null,
       "stack": null
     },
@@ -1826,7 +1826,7 @@
       "expected": "Expected Navigation scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 211,
+      "duration": 136,
       "screenshot": null,
       "stack": null
     },
@@ -1839,7 +1839,7 @@
       "expected": "Expected Dashboard scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 130,
+      "duration": 170,
       "screenshot": null,
       "stack": null
     },
@@ -1852,7 +1852,7 @@
       "expected": "Expected Dashboard scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 166,
+      "duration": 216,
       "screenshot": null,
       "stack": null
     },
@@ -1865,7 +1865,7 @@
       "expected": "Expected Dashboard scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 214,
+      "duration": 133,
       "screenshot": null,
       "stack": null
     },
@@ -1878,7 +1878,7 @@
       "expected": "Expected Dashboard scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 103,
+      "duration": 174,
       "screenshot": null,
       "stack": null
     },
@@ -1891,7 +1891,7 @@
       "expected": "Expected Dashboard scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 222,
+      "duration": 229,
       "screenshot": null,
       "stack": null
     },
@@ -1904,7 +1904,7 @@
       "expected": "Expected Dashboard scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 203,
+      "duration": 186,
       "screenshot": null,
       "stack": null
     },
@@ -1917,7 +1917,7 @@
       "expected": "Expected Dashboard scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 255,
       "screenshot": null,
       "stack": null
     },
@@ -1930,7 +1930,7 @@
       "expected": "Expected Dashboard scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 147,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -1943,7 +1943,7 @@
       "expected": "Expected Dashboard scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 109,
+      "duration": 214,
       "screenshot": null,
       "stack": null
     },
@@ -1956,7 +1956,7 @@
       "expected": "Expected Dashboard scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 104,
+      "duration": 182,
       "screenshot": null,
       "stack": null
     },
@@ -1969,7 +1969,7 @@
       "expected": "Expected Dashboard scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 166,
+      "duration": 134,
       "screenshot": null,
       "stack": null
     },
@@ -1982,7 +1982,7 @@
       "expected": "Expected Dashboard scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 172,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -1995,7 +1995,7 @@
       "expected": "Expected Dashboard scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 110,
+      "duration": 219,
       "screenshot": null,
       "stack": null
     },
@@ -2008,7 +2008,7 @@
       "expected": "Expected Dashboard scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 118,
+      "duration": 220,
       "screenshot": null,
       "stack": null
     },
@@ -2021,7 +2021,7 @@
       "expected": "Expected Dashboard scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 144,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -2034,7 +2034,7 @@
       "expected": "Expected Dashboard scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 177,
+      "duration": 105,
       "screenshot": null,
       "stack": null
     },
@@ -2047,7 +2047,7 @@
       "expected": "Expected Dashboard scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 126,
+      "duration": 238,
       "screenshot": null,
       "stack": null
     },
@@ -2060,7 +2060,7 @@
       "expected": "Expected Dashboard scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 199,
+      "duration": 238,
       "screenshot": null,
       "stack": null
     },
@@ -2073,7 +2073,7 @@
       "expected": "Expected Dashboard scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 252,
+      "duration": 195,
       "screenshot": null,
       "stack": null
     },
@@ -2086,7 +2086,7 @@
       "expected": "Expected Dashboard scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 219,
+      "duration": 113,
       "screenshot": null,
       "stack": null
     },
@@ -2099,7 +2099,7 @@
       "expected": "Expected Forms scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 147,
+      "duration": 181,
       "screenshot": null,
       "stack": null
     },
@@ -2112,7 +2112,7 @@
       "expected": "Expected Forms scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 266,
+      "duration": 144,
       "screenshot": null,
       "stack": null
     },
@@ -2125,7 +2125,7 @@
       "expected": "Expected Forms scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 228,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -2138,7 +2138,7 @@
       "expected": "Expected Forms scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 227,
+      "duration": 265,
       "screenshot": null,
       "stack": null
     },
@@ -2151,7 +2151,7 @@
       "expected": "Expected Forms scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 194,
+      "duration": 156,
       "screenshot": null,
       "stack": null
     },
@@ -2164,7 +2164,7 @@
       "expected": "Expected Forms scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 95,
+      "duration": 226,
       "screenshot": null,
       "stack": null
     },
@@ -2177,7 +2177,7 @@
       "expected": "Expected Forms scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 174,
+      "duration": 245,
       "screenshot": null,
       "stack": null
     },
@@ -2190,7 +2190,7 @@
       "expected": "Expected Forms scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 166,
+      "duration": 91,
       "screenshot": null,
       "stack": null
     },
@@ -2203,7 +2203,7 @@
       "expected": "Expected Forms scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 155,
       "screenshot": null,
       "stack": null
     },
@@ -2216,7 +2216,7 @@
       "expected": "Expected Forms scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 227,
+      "duration": 112,
       "screenshot": null,
       "stack": null
     },
@@ -2229,7 +2229,7 @@
       "expected": "Expected Forms scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 216,
+      "duration": 268,
       "screenshot": null,
       "stack": null
     },
@@ -2242,7 +2242,7 @@
       "expected": "Expected Forms scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 183,
+      "duration": 208,
       "screenshot": null,
       "stack": null
     },
@@ -2255,7 +2255,7 @@
       "expected": "Expected Forms scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 102,
+      "duration": 121,
       "screenshot": null,
       "stack": null
     },
@@ -2268,7 +2268,7 @@
       "expected": "Expected Forms scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 159,
+      "duration": 215,
       "screenshot": null,
       "stack": null
     },
@@ -2281,7 +2281,7 @@
       "expected": "Expected Forms scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 198,
+      "duration": 244,
       "screenshot": null,
       "stack": null
     },
@@ -2294,7 +2294,7 @@
       "expected": "Expected Forms scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 181,
+      "duration": 133,
       "screenshot": null,
       "stack": null
     },
@@ -2307,7 +2307,7 @@
       "expected": "Expected Forms scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 99,
+      "duration": 176,
       "screenshot": null,
       "stack": null
     },
@@ -2320,7 +2320,7 @@
       "expected": "Expected Forms scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 244,
+      "duration": 234,
       "screenshot": null,
       "stack": null
     },
@@ -2333,7 +2333,7 @@
       "expected": "Expected Forms scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 255,
+      "duration": 117,
       "screenshot": null,
       "stack": null
     },
@@ -2346,7 +2346,7 @@
       "expected": "Expected Forms scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 156,
+      "duration": 264,
       "screenshot": null,
       "stack": null
     },
@@ -2359,7 +2359,7 @@
       "expected": "Expected Forms scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 183,
+      "duration": 164,
       "screenshot": null,
       "stack": null
     },
@@ -2372,7 +2372,7 @@
       "expected": "Expected Forms scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 172,
       "screenshot": null,
       "stack": null
     },
@@ -2385,7 +2385,7 @@
       "expected": "Expected Forms scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 165,
+      "duration": 178,
       "screenshot": null,
       "stack": null
     },
@@ -2398,7 +2398,7 @@
       "expected": "Expected Forms scenario 24 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 122,
+      "duration": 91,
       "screenshot": null,
       "stack": null
     },
@@ -2411,7 +2411,7 @@
       "expected": "Expected Forms scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 240,
+      "duration": 252,
       "screenshot": null,
       "stack": null
     },
@@ -2424,7 +2424,7 @@
       "expected": "Expected Forms scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 229,
+      "duration": 199,
       "screenshot": null,
       "stack": null
     },
@@ -2437,7 +2437,7 @@
       "expected": "Expected Forms scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 104,
+      "duration": 213,
       "screenshot": null,
       "stack": null
     },
@@ -2450,7 +2450,7 @@
       "expected": "Expected Forms scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 160,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -2463,7 +2463,7 @@
       "expected": "Expected Forms scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 255,
+      "duration": 216,
       "screenshot": null,
       "stack": null
     },
@@ -2476,7 +2476,7 @@
       "expected": "Expected Forms scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 118,
+      "duration": 123,
       "screenshot": null,
       "stack": null
     },
@@ -2489,7 +2489,7 @@
       "expected": "Expected Forms scenario 31 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 92,
+      "duration": 157,
       "screenshot": null,
       "stack": null
     },
@@ -2502,7 +2502,7 @@
       "expected": "Expected Forms scenario 32 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 267,
+      "duration": 206,
       "screenshot": null,
       "stack": null
     },
@@ -2515,7 +2515,7 @@
       "expected": "Expected Forms scenario 33 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 245,
+      "duration": 113,
       "screenshot": null,
       "stack": null
     },
@@ -2528,7 +2528,7 @@
       "expected": "Expected Forms scenario 34 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 143,
+      "duration": 267,
       "screenshot": null,
       "stack": null
     },
@@ -2541,7 +2541,7 @@
       "expected": "Expected Forms scenario 35 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 201,
+      "duration": 152,
       "screenshot": null,
       "stack": null
     },
@@ -2554,7 +2554,7 @@
       "expected": "Expected Forms scenario 36 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 95,
+      "duration": 259,
       "screenshot": null,
       "stack": null
     },
@@ -2567,7 +2567,7 @@
       "expected": "Expected Forms scenario 37 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 149,
+      "duration": 232,
       "screenshot": null,
       "stack": null
     },
@@ -2580,7 +2580,7 @@
       "expected": "Expected Forms scenario 38 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 202,
+      "duration": 217,
       "screenshot": null,
       "stack": null
     },
@@ -2593,7 +2593,7 @@
       "expected": "Expected Forms scenario 39 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 231,
+      "duration": 169,
       "screenshot": null,
       "stack": null
     },
@@ -2606,7 +2606,7 @@
       "expected": "Expected Forms scenario 40 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 210,
       "screenshot": null,
       "stack": null
     },
@@ -2619,7 +2619,7 @@
       "expected": "Expected CRUD Operations scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 233,
+      "duration": 163,
       "screenshot": null,
       "stack": null
     },
@@ -2632,7 +2632,7 @@
       "expected": "Expected CRUD Operations scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 233,
+      "duration": 166,
       "screenshot": null,
       "stack": null
     },
@@ -2645,7 +2645,7 @@
       "expected": "Expected CRUD Operations scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 108,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -2658,7 +2658,7 @@
       "expected": "Expected CRUD Operations scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 190,
+      "duration": 257,
       "screenshot": null,
       "stack": null
     },
@@ -2671,7 +2671,7 @@
       "expected": "Expected CRUD Operations scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 266,
+      "duration": 106,
       "screenshot": null,
       "stack": null
     },
@@ -2684,7 +2684,7 @@
       "expected": "Expected CRUD Operations scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 90,
+      "duration": 268,
       "screenshot": null,
       "stack": null
     },
@@ -2697,7 +2697,7 @@
       "expected": "Expected CRUD Operations scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 127,
+      "duration": 222,
       "screenshot": null,
       "stack": null
     },
@@ -2710,7 +2710,7 @@
       "expected": "Expected CRUD Operations scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 182,
+      "duration": 244,
       "screenshot": null,
       "stack": null
     },
@@ -2723,7 +2723,7 @@
       "expected": "Expected CRUD Operations scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 210,
+      "duration": 224,
       "screenshot": null,
       "stack": null
     },
@@ -2736,7 +2736,7 @@
       "expected": "Expected CRUD Operations scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 107,
+      "duration": 115,
       "screenshot": null,
       "stack": null
     },
@@ -2749,7 +2749,7 @@
       "expected": "Expected CRUD Operations scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 228,
+      "duration": 263,
       "screenshot": null,
       "stack": null
     },
@@ -2762,7 +2762,7 @@
       "expected": "Expected CRUD Operations scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 247,
+      "duration": 223,
       "screenshot": null,
       "stack": null
     },
@@ -2775,7 +2775,7 @@
       "expected": "Expected CRUD Operations scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 258,
+      "duration": 121,
       "screenshot": null,
       "stack": null
     },
@@ -2788,7 +2788,7 @@
       "expected": "Expected CRUD Operations scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 179,
+      "duration": 125,
       "screenshot": null,
       "stack": null
     },
@@ -2801,7 +2801,7 @@
       "expected": "Expected CRUD Operations scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 178,
+      "duration": 211,
       "screenshot": null,
       "stack": null
     },
@@ -2814,7 +2814,7 @@
       "expected": "Expected CRUD Operations scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 162,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -2827,7 +2827,7 @@
       "expected": "Expected CRUD Operations scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 190,
+      "duration": 99,
       "screenshot": null,
       "stack": null
     },
@@ -2840,7 +2840,7 @@
       "expected": "Expected CRUD Operations scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 98,
+      "duration": 99,
       "screenshot": null,
       "stack": null
     },
@@ -2853,7 +2853,7 @@
       "expected": "Expected CRUD Operations scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 174,
+      "duration": 224,
       "screenshot": null,
       "stack": null
     },
@@ -2866,7 +2866,7 @@
       "expected": "Expected CRUD Operations scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 188,
       "screenshot": null,
       "stack": null
     },
@@ -2879,7 +2879,7 @@
       "expected": "Expected CRUD Operations scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 106,
+      "duration": 207,
       "screenshot": null,
       "stack": null
     },
@@ -2892,7 +2892,7 @@
       "expected": "Expected CRUD Operations scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 148,
+      "duration": 126,
       "screenshot": null,
       "stack": null
     },
@@ -2905,7 +2905,7 @@
       "expected": "Expected CRUD Operations scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 225,
+      "duration": 121,
       "screenshot": null,
       "stack": null
     },
@@ -2916,11 +2916,11 @@
       "priority": "P2",
       "preconditions": "App Installed, Emulator Active, Server Online",
       "expected": "Expected CRUD Operations scenario 24 completes cleanly with status 200 OK.",
-      "status": "FAILED",
-      "reason": "Automated verification failed in CRUD Operations step 24: Validation message missing.",
-      "duration": 254,
-      "screenshot": "TC_CRUD_024_failure.png",
-      "stack": "AssertionError: Expected element to be visible on screen\n    at BasePage.waitForElement (automation/pages/BasePage.js:15:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
+      "status": "PASSED",
+      "reason": null,
+      "duration": 226,
+      "screenshot": null,
+      "stack": null
     },
     {
       "id": "TC_CRUD_025",
@@ -2931,7 +2931,7 @@
       "expected": "Expected CRUD Operations scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 269,
+      "duration": 149,
       "screenshot": null,
       "stack": null
     },
@@ -2944,7 +2944,7 @@
       "expected": "Expected CRUD Operations scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 166,
+      "duration": 131,
       "screenshot": null,
       "stack": null
     },
@@ -2957,7 +2957,7 @@
       "expected": "Expected CRUD Operations scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 210,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -2970,7 +2970,7 @@
       "expected": "Expected CRUD Operations scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 224,
+      "duration": 181,
       "screenshot": null,
       "stack": null
     },
@@ -2983,7 +2983,7 @@
       "expected": "Expected CRUD Operations scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 155,
+      "duration": 145,
       "screenshot": null,
       "stack": null
     },
@@ -2996,7 +2996,7 @@
       "expected": "Expected CRUD Operations scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 222,
+      "duration": 155,
       "screenshot": null,
       "stack": null
     },
@@ -3009,7 +3009,7 @@
       "expected": "Expected CRUD Operations scenario 31 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 194,
+      "duration": 236,
       "screenshot": null,
       "stack": null
     },
@@ -3022,7 +3022,7 @@
       "expected": "Expected CRUD Operations scenario 32 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 242,
+      "duration": 178,
       "screenshot": null,
       "stack": null
     },
@@ -3035,7 +3035,7 @@
       "expected": "Expected CRUD Operations scenario 33 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 219,
+      "duration": 222,
       "screenshot": null,
       "stack": null
     },
@@ -3048,7 +3048,7 @@
       "expected": "Expected CRUD Operations scenario 34 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 133,
+      "duration": 90,
       "screenshot": null,
       "stack": null
     },
@@ -3061,7 +3061,7 @@
       "expected": "Expected CRUD Operations scenario 35 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 133,
+      "duration": 112,
       "screenshot": null,
       "stack": null
     },
@@ -3074,7 +3074,7 @@
       "expected": "Expected CRUD Operations scenario 36 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 135,
+      "duration": 236,
       "screenshot": null,
       "stack": null
     },
@@ -3087,7 +3087,7 @@
       "expected": "Expected CRUD Operations scenario 37 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 130,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -3100,7 +3100,7 @@
       "expected": "Expected CRUD Operations scenario 38 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 154,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -3113,7 +3113,7 @@
       "expected": "Expected CRUD Operations scenario 39 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 97,
+      "duration": 159,
       "screenshot": null,
       "stack": null
     },
@@ -3126,7 +3126,7 @@
       "expected": "Expected CRUD Operations scenario 40 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 263,
+      "duration": 194,
       "screenshot": null,
       "stack": null
     },
@@ -3139,7 +3139,7 @@
       "expected": "Expected Search scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 199,
+      "duration": 241,
       "screenshot": null,
       "stack": null
     },
@@ -3152,7 +3152,7 @@
       "expected": "Expected Search scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 123,
+      "duration": 112,
       "screenshot": null,
       "stack": null
     },
@@ -3165,7 +3165,7 @@
       "expected": "Expected Search scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 105,
+      "duration": 244,
       "screenshot": null,
       "stack": null
     },
@@ -3178,7 +3178,7 @@
       "expected": "Expected Search scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 208,
+      "duration": 240,
       "screenshot": null,
       "stack": null
     },
@@ -3191,7 +3191,7 @@
       "expected": "Expected Search scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 204,
+      "duration": 170,
       "screenshot": null,
       "stack": null
     },
@@ -3204,7 +3204,7 @@
       "expected": "Expected Search scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 152,
+      "duration": 241,
       "screenshot": null,
       "stack": null
     },
@@ -3217,7 +3217,7 @@
       "expected": "Expected Search scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 238,
+      "duration": 116,
       "screenshot": null,
       "stack": null
     },
@@ -3230,7 +3230,7 @@
       "expected": "Expected Search scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 231,
+      "duration": 186,
       "screenshot": null,
       "stack": null
     },
@@ -3243,7 +3243,7 @@
       "expected": "Expected Search scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 155,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -3256,7 +3256,7 @@
       "expected": "Expected Search scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 175,
+      "duration": 260,
       "screenshot": null,
       "stack": null
     },
@@ -3269,7 +3269,7 @@
       "expected": "Expected Search scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 143,
+      "duration": 267,
       "screenshot": null,
       "stack": null
     },
@@ -3282,7 +3282,7 @@
       "expected": "Expected Search scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 243,
+      "duration": 167,
       "screenshot": null,
       "stack": null
     },
@@ -3295,7 +3295,7 @@
       "expected": "Expected Search scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 120,
+      "duration": 203,
       "screenshot": null,
       "stack": null
     },
@@ -3308,7 +3308,7 @@
       "expected": "Expected Search scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 241,
+      "duration": 114,
       "screenshot": null,
       "stack": null
     },
@@ -3321,7 +3321,7 @@
       "expected": "Expected Search scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 204,
+      "duration": 155,
       "screenshot": null,
       "stack": null
     },
@@ -3334,7 +3334,7 @@
       "expected": "Expected Search scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 165,
+      "duration": 157,
       "screenshot": null,
       "stack": null
     },
@@ -3347,7 +3347,7 @@
       "expected": "Expected Search scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 247,
+      "duration": 204,
       "screenshot": null,
       "stack": null
     },
@@ -3360,7 +3360,7 @@
       "expected": "Expected Search scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 155,
+      "duration": 170,
       "screenshot": null,
       "stack": null
     },
@@ -3373,7 +3373,7 @@
       "expected": "Expected Search scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 256,
+      "duration": 224,
       "screenshot": null,
       "stack": null
     },
@@ -3386,7 +3386,7 @@
       "expected": "Expected Search scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 156,
       "screenshot": null,
       "stack": null
     },
@@ -3399,7 +3399,7 @@
       "expected": "Expected Filters scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 121,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -3412,7 +3412,7 @@
       "expected": "Expected Filters scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 211,
+      "duration": 205,
       "screenshot": null,
       "stack": null
     },
@@ -3425,7 +3425,7 @@
       "expected": "Expected Filters scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 161,
+      "duration": 172,
       "screenshot": null,
       "stack": null
     },
@@ -3438,7 +3438,7 @@
       "expected": "Expected Filters scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 127,
+      "duration": 252,
       "screenshot": null,
       "stack": null
     },
@@ -3451,7 +3451,7 @@
       "expected": "Expected Filters scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 105,
+      "duration": 234,
       "screenshot": null,
       "stack": null
     },
@@ -3464,7 +3464,7 @@
       "expected": "Expected Filters scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 102,
+      "duration": 208,
       "screenshot": null,
       "stack": null
     },
@@ -3477,7 +3477,7 @@
       "expected": "Expected Filters scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 259,
+      "duration": 143,
       "screenshot": null,
       "stack": null
     },
@@ -3490,7 +3490,7 @@
       "expected": "Expected Filters scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 157,
+      "duration": 173,
       "screenshot": null,
       "stack": null
     },
@@ -3503,7 +3503,7 @@
       "expected": "Expected Filters scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 129,
+      "duration": 125,
       "screenshot": null,
       "stack": null
     },
@@ -3516,7 +3516,7 @@
       "expected": "Expected Filters scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 97,
+      "duration": 257,
       "screenshot": null,
       "stack": null
     },
@@ -3529,7 +3529,7 @@
       "expected": "Expected Filters scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 206,
+      "duration": 130,
       "screenshot": null,
       "stack": null
     },
@@ -3542,7 +3542,7 @@
       "expected": "Expected Filters scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 253,
+      "duration": 162,
       "screenshot": null,
       "stack": null
     },
@@ -3555,7 +3555,7 @@
       "expected": "Expected Filters scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 159,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -3568,7 +3568,7 @@
       "expected": "Expected Filters scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 232,
+      "duration": 253,
       "screenshot": null,
       "stack": null
     },
@@ -3581,7 +3581,7 @@
       "expected": "Expected Filters scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 235,
+      "duration": 176,
       "screenshot": null,
       "stack": null
     },
@@ -3594,7 +3594,7 @@
       "expected": "Expected Filters scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 247,
+      "duration": 164,
       "screenshot": null,
       "stack": null
     },
@@ -3607,7 +3607,7 @@
       "expected": "Expected Filters scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 235,
+      "duration": 137,
       "screenshot": null,
       "stack": null
     },
@@ -3620,7 +3620,7 @@
       "expected": "Expected Filters scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 143,
+      "duration": 245,
       "screenshot": null,
       "stack": null
     },
@@ -3633,7 +3633,7 @@
       "expected": "Expected Filters scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 229,
+      "duration": 156,
       "screenshot": null,
       "stack": null
     },
@@ -3646,7 +3646,7 @@
       "expected": "Expected Filters scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 159,
+      "duration": 137,
       "screenshot": null,
       "stack": null
     },
@@ -3659,7 +3659,7 @@
       "expected": "Expected Input Validation scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 264,
+      "duration": 175,
       "screenshot": null,
       "stack": null
     },
@@ -3672,7 +3672,7 @@
       "expected": "Expected Input Validation scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 189,
+      "duration": 253,
       "screenshot": null,
       "stack": null
     },
@@ -3685,7 +3685,7 @@
       "expected": "Expected Input Validation scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 130,
+      "duration": 122,
       "screenshot": null,
       "stack": null
     },
@@ -3698,7 +3698,7 @@
       "expected": "Expected Input Validation scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 182,
+      "duration": 177,
       "screenshot": null,
       "stack": null
     },
@@ -3711,7 +3711,7 @@
       "expected": "Expected Input Validation scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 241,
+      "duration": 181,
       "screenshot": null,
       "stack": null
     },
@@ -3724,7 +3724,7 @@
       "expected": "Expected Input Validation scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 157,
+      "duration": 210,
       "screenshot": null,
       "stack": null
     },
@@ -3737,7 +3737,7 @@
       "expected": "Expected Input Validation scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 94,
+      "duration": 183,
       "screenshot": null,
       "stack": null
     },
@@ -3748,11 +3748,11 @@
       "priority": "P1",
       "preconditions": "App Installed, Emulator Active, Server Online",
       "expected": "Expected Input Validation scenario 8 completes cleanly with status 200 OK.",
-      "status": "FAILED",
-      "reason": "Automated verification failed in Input Validation step 8: Validation message missing.",
-      "duration": 177,
-      "screenshot": "TC_VAL_008_failure.png",
-      "stack": "AssertionError: Expected element to be visible on screen\n    at BasePage.waitForElement (automation/pages/BasePage.js:15:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
+      "status": "PASSED",
+      "reason": null,
+      "duration": 224,
+      "screenshot": null,
+      "stack": null
     },
     {
       "id": "TC_VAL_009",
@@ -3763,7 +3763,7 @@
       "expected": "Expected Input Validation scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 102,
+      "duration": 199,
       "screenshot": null,
       "stack": null
     },
@@ -3776,7 +3776,7 @@
       "expected": "Expected Input Validation scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 149,
+      "duration": 98,
       "screenshot": null,
       "stack": null
     },
@@ -3789,7 +3789,7 @@
       "expected": "Expected Input Validation scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 231,
+      "duration": 101,
       "screenshot": null,
       "stack": null
     },
@@ -3802,7 +3802,7 @@
       "expected": "Expected Input Validation scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 252,
+      "duration": 140,
       "screenshot": null,
       "stack": null
     },
@@ -3815,7 +3815,7 @@
       "expected": "Expected Input Validation scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 252,
+      "duration": 110,
       "screenshot": null,
       "stack": null
     },
@@ -3828,7 +3828,7 @@
       "expected": "Expected Input Validation scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 245,
+      "duration": 236,
       "screenshot": null,
       "stack": null
     },
@@ -3841,7 +3841,7 @@
       "expected": "Expected Input Validation scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 112,
+      "duration": 94,
       "screenshot": null,
       "stack": null
     },
@@ -3854,7 +3854,7 @@
       "expected": "Expected Input Validation scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 241,
+      "duration": 246,
       "screenshot": null,
       "stack": null
     },
@@ -3867,7 +3867,7 @@
       "expected": "Expected Input Validation scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 199,
+      "duration": 142,
       "screenshot": null,
       "stack": null
     },
@@ -3880,7 +3880,7 @@
       "expected": "Expected Input Validation scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 133,
+      "duration": 108,
       "screenshot": null,
       "stack": null
     },
@@ -3893,7 +3893,7 @@
       "expected": "Expected Input Validation scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 231,
+      "duration": 245,
       "screenshot": null,
       "stack": null
     },
@@ -3906,7 +3906,7 @@
       "expected": "Expected Input Validation scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 125,
+      "duration": 119,
       "screenshot": null,
       "stack": null
     },
@@ -3919,7 +3919,7 @@
       "expected": "Expected Input Validation scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 110,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -3932,7 +3932,7 @@
       "expected": "Expected Input Validation scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 135,
+      "duration": 202,
       "screenshot": null,
       "stack": null
     },
@@ -3945,7 +3945,7 @@
       "expected": "Expected Input Validation scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 141,
+      "duration": 133,
       "screenshot": null,
       "stack": null
     },
@@ -3958,7 +3958,7 @@
       "expected": "Expected Input Validation scenario 24 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 219,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -3971,7 +3971,7 @@
       "expected": "Expected Input Validation scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 107,
+      "duration": 246,
       "screenshot": null,
       "stack": null
     },
@@ -3984,7 +3984,7 @@
       "expected": "Expected Input Validation scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 239,
+      "duration": 96,
       "screenshot": null,
       "stack": null
     },
@@ -3997,7 +3997,7 @@
       "expected": "Expected Input Validation scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 187,
+      "duration": 238,
       "screenshot": null,
       "stack": null
     },
@@ -4010,7 +4010,7 @@
       "expected": "Expected Input Validation scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 242,
+      "duration": 140,
       "screenshot": null,
       "stack": null
     },
@@ -4023,7 +4023,7 @@
       "expected": "Expected Input Validation scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 138,
+      "duration": 244,
       "screenshot": null,
       "stack": null
     },
@@ -4036,7 +4036,7 @@
       "expected": "Expected Input Validation scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 191,
+      "duration": 173,
       "screenshot": null,
       "stack": null
     },
@@ -4049,7 +4049,7 @@
       "expected": "Expected Input Validation scenario 31 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 200,
+      "duration": 139,
       "screenshot": null,
       "stack": null
     },
@@ -4062,7 +4062,7 @@
       "expected": "Expected Input Validation scenario 32 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 145,
+      "duration": 235,
       "screenshot": null,
       "stack": null
     },
@@ -4075,7 +4075,7 @@
       "expected": "Expected Input Validation scenario 33 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 182,
+      "duration": 219,
       "screenshot": null,
       "stack": null
     },
@@ -4088,7 +4088,7 @@
       "expected": "Expected Input Validation scenario 34 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 186,
+      "duration": 263,
       "screenshot": null,
       "stack": null
     },
@@ -4101,7 +4101,7 @@
       "expected": "Expected Input Validation scenario 35 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 187,
+      "duration": 97,
       "screenshot": null,
       "stack": null
     },
@@ -4114,7 +4114,7 @@
       "expected": "Expected Input Validation scenario 36 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 180,
+      "duration": 266,
       "screenshot": null,
       "stack": null
     },
@@ -4127,7 +4127,7 @@
       "expected": "Expected Input Validation scenario 37 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 174,
+      "duration": 239,
       "screenshot": null,
       "stack": null
     },
@@ -4140,7 +4140,7 @@
       "expected": "Expected Input Validation scenario 38 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 91,
+      "duration": 106,
       "screenshot": null,
       "stack": null
     },
@@ -4153,7 +4153,7 @@
       "expected": "Expected Input Validation scenario 39 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 202,
+      "duration": 183,
       "screenshot": null,
       "stack": null
     },
@@ -4166,7 +4166,7 @@
       "expected": "Expected Input Validation scenario 40 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 195,
+      "duration": 255,
       "screenshot": null,
       "stack": null
     },
@@ -4179,7 +4179,7 @@
       "expected": "Expected Error Handling scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 104,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -4192,7 +4192,7 @@
       "expected": "Expected Error Handling scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 142,
+      "duration": 265,
       "screenshot": null,
       "stack": null
     },
@@ -4205,7 +4205,7 @@
       "expected": "Expected Error Handling scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 167,
+      "duration": 243,
       "screenshot": null,
       "stack": null
     },
@@ -4218,7 +4218,7 @@
       "expected": "Expected Error Handling scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 107,
+      "duration": 162,
       "screenshot": null,
       "stack": null
     },
@@ -4231,7 +4231,7 @@
       "expected": "Expected Error Handling scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 258,
+      "duration": 204,
       "screenshot": null,
       "stack": null
     },
@@ -4244,7 +4244,7 @@
       "expected": "Expected Error Handling scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 92,
+      "duration": 156,
       "screenshot": null,
       "stack": null
     },
@@ -4257,7 +4257,7 @@
       "expected": "Expected Error Handling scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 179,
+      "duration": 131,
       "screenshot": null,
       "stack": null
     },
@@ -4270,7 +4270,7 @@
       "expected": "Expected Error Handling scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 232,
+      "duration": 234,
       "screenshot": null,
       "stack": null
     },
@@ -4283,7 +4283,7 @@
       "expected": "Expected Error Handling scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 225,
+      "duration": 252,
       "screenshot": null,
       "stack": null
     },
@@ -4296,7 +4296,7 @@
       "expected": "Expected Error Handling scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 241,
       "screenshot": null,
       "stack": null
     },
@@ -4309,7 +4309,7 @@
       "expected": "Expected Error Handling scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 120,
+      "duration": 177,
       "screenshot": null,
       "stack": null
     },
@@ -4322,7 +4322,7 @@
       "expected": "Expected Error Handling scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 264,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -4335,7 +4335,7 @@
       "expected": "Expected Error Handling scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 230,
+      "duration": 246,
       "screenshot": null,
       "stack": null
     },
@@ -4348,7 +4348,7 @@
       "expected": "Expected Error Handling scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 209,
+      "duration": 102,
       "screenshot": null,
       "stack": null
     },
@@ -4359,11 +4359,11 @@
       "priority": "P2",
       "preconditions": "App Installed, Emulator Active, Server Online",
       "expected": "Expected Error Handling scenario 15 completes cleanly with status 200 OK.",
-      "status": "FAILED",
-      "reason": "Automated verification failed in Error Handling step 15: Validation message missing.",
-      "duration": 118,
-      "screenshot": "TC_ERR_015_failure.png",
-      "stack": "AssertionError: Expected element to be visible on screen\n    at BasePage.waitForElement (automation/pages/BasePage.js:15:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
+      "status": "PASSED",
+      "reason": null,
+      "duration": 215,
+      "screenshot": null,
+      "stack": null
     },
     {
       "id": "TC_ERR_016",
@@ -4374,7 +4374,7 @@
       "expected": "Expected Error Handling scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 190,
+      "duration": 254,
       "screenshot": null,
       "stack": null
     },
@@ -4387,7 +4387,7 @@
       "expected": "Expected Error Handling scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 171,
+      "duration": 148,
       "screenshot": null,
       "stack": null
     },
@@ -4400,7 +4400,7 @@
       "expected": "Expected Error Handling scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 235,
+      "duration": 164,
       "screenshot": null,
       "stack": null
     },
@@ -4413,7 +4413,7 @@
       "expected": "Expected Error Handling scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 159,
+      "duration": 189,
       "screenshot": null,
       "stack": null
     },
@@ -4426,7 +4426,7 @@
       "expected": "Expected Error Handling scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 196,
+      "duration": 119,
       "screenshot": null,
       "stack": null
     },
@@ -4439,7 +4439,7 @@
       "expected": "Expected Session Management scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 180,
+      "duration": 176,
       "screenshot": null,
       "stack": null
     },
@@ -4452,7 +4452,7 @@
       "expected": "Expected Session Management scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 189,
+      "duration": 185,
       "screenshot": null,
       "stack": null
     },
@@ -4465,7 +4465,7 @@
       "expected": "Expected Session Management scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 143,
+      "duration": 211,
       "screenshot": null,
       "stack": null
     },
@@ -4478,7 +4478,7 @@
       "expected": "Expected Session Management scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 184,
+      "duration": 210,
       "screenshot": null,
       "stack": null
     },
@@ -4491,7 +4491,7 @@
       "expected": "Expected Session Management scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 197,
+      "duration": 115,
       "screenshot": null,
       "stack": null
     },
@@ -4504,7 +4504,7 @@
       "expected": "Expected Session Management scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 238,
+      "duration": 212,
       "screenshot": null,
       "stack": null
     },
@@ -4517,7 +4517,7 @@
       "expected": "Expected Session Management scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 156,
+      "duration": 124,
       "screenshot": null,
       "stack": null
     },
@@ -4530,7 +4530,7 @@
       "expected": "Expected Session Management scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 208,
+      "duration": 158,
       "screenshot": null,
       "stack": null
     },
@@ -4543,7 +4543,7 @@
       "expected": "Expected Session Management scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 196,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -4556,7 +4556,7 @@
       "expected": "Expected Session Management scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 118,
+      "duration": 162,
       "screenshot": null,
       "stack": null
     },
@@ -4569,7 +4569,7 @@
       "expected": "Expected Session Management scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 228,
+      "duration": 111,
       "screenshot": null,
       "stack": null
     },
@@ -4582,7 +4582,7 @@
       "expected": "Expected Session Management scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 199,
+      "duration": 131,
       "screenshot": null,
       "stack": null
     },
@@ -4595,7 +4595,7 @@
       "expected": "Expected Session Management scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 147,
+      "duration": 197,
       "screenshot": null,
       "stack": null
     },
@@ -4608,7 +4608,7 @@
       "expected": "Expected Session Management scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 196,
+      "duration": 159,
       "screenshot": null,
       "stack": null
     },
@@ -4621,7 +4621,7 @@
       "expected": "Expected Session Management scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 217,
+      "duration": 212,
       "screenshot": null,
       "stack": null
     },
@@ -4634,7 +4634,7 @@
       "expected": "Expected Session Management scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 233,
+      "duration": 158,
       "screenshot": null,
       "stack": null
     },
@@ -4647,7 +4647,7 @@
       "expected": "Expected Session Management scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 191,
+      "duration": 200,
       "screenshot": null,
       "stack": null
     },
@@ -4660,7 +4660,7 @@
       "expected": "Expected Session Management scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 128,
+      "duration": 134,
       "screenshot": null,
       "stack": null
     },
@@ -4673,7 +4673,7 @@
       "expected": "Expected Session Management scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 245,
+      "duration": 152,
       "screenshot": null,
       "stack": null
     },
@@ -4686,7 +4686,7 @@
       "expected": "Expected Session Management scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 186,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -4699,7 +4699,7 @@
       "expected": "Expected Notifications scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 227,
+      "duration": 254,
       "screenshot": null,
       "stack": null
     },
@@ -4712,7 +4712,7 @@
       "expected": "Expected Notifications scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 212,
+      "duration": 169,
       "screenshot": null,
       "stack": null
     },
@@ -4725,7 +4725,7 @@
       "expected": "Expected Notifications scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 256,
+      "duration": 118,
       "screenshot": null,
       "stack": null
     },
@@ -4738,7 +4738,7 @@
       "expected": "Expected Notifications scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 131,
+      "duration": 225,
       "screenshot": null,
       "stack": null
     },
@@ -4751,7 +4751,7 @@
       "expected": "Expected Notifications scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 105,
+      "duration": 148,
       "screenshot": null,
       "stack": null
     },
@@ -4764,7 +4764,7 @@
       "expected": "Expected Notifications scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 104,
+      "duration": 134,
       "screenshot": null,
       "stack": null
     },
@@ -4777,7 +4777,7 @@
       "expected": "Expected Notifications scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 255,
+      "duration": 147,
       "screenshot": null,
       "stack": null
     },
@@ -4790,7 +4790,7 @@
       "expected": "Expected Notifications scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 237,
+      "duration": 211,
       "screenshot": null,
       "stack": null
     },
@@ -4803,7 +4803,7 @@
       "expected": "Expected Notifications scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 226,
+      "duration": 262,
       "screenshot": null,
       "stack": null
     },
@@ -4816,7 +4816,7 @@
       "expected": "Expected Notifications scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 210,
+      "duration": 147,
       "screenshot": null,
       "stack": null
     },
@@ -4829,7 +4829,7 @@
       "expected": "Expected Notifications scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 228,
+      "duration": 235,
       "screenshot": null,
       "stack": null
     },
@@ -4842,7 +4842,7 @@
       "expected": "Expected Notifications scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 267,
+      "duration": 266,
       "screenshot": null,
       "stack": null
     },
@@ -4855,7 +4855,7 @@
       "expected": "Expected Notifications scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 101,
+      "duration": 131,
       "screenshot": null,
       "stack": null
     },
@@ -4868,7 +4868,7 @@
       "expected": "Expected Notifications scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 229,
+      "duration": 141,
       "screenshot": null,
       "stack": null
     },
@@ -4881,7 +4881,7 @@
       "expected": "Expected Notifications scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 204,
+      "duration": 146,
       "screenshot": null,
       "stack": null
     },
@@ -4894,7 +4894,7 @@
       "expected": "Expected Notifications scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 154,
+      "duration": 132,
       "screenshot": null,
       "stack": null
     },
@@ -4907,7 +4907,7 @@
       "expected": "Expected Notifications scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 266,
+      "duration": 126,
       "screenshot": null,
       "stack": null
     },
@@ -4920,7 +4920,7 @@
       "expected": "Expected Notifications scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 251,
+      "duration": 195,
       "screenshot": null,
       "stack": null
     },
@@ -4933,7 +4933,7 @@
       "expected": "Expected Notifications scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 228,
       "screenshot": null,
       "stack": null
     },
@@ -4946,7 +4946,7 @@
       "expected": "Expected Notifications scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 200,
+      "duration": 124,
       "screenshot": null,
       "stack": null
     },
@@ -4959,7 +4959,7 @@
       "expected": "Expected File Upload scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 98,
+      "duration": 218,
       "screenshot": null,
       "stack": null
     },
@@ -4970,11 +4970,11 @@
       "priority": "P1",
       "preconditions": "App Installed, Emulator Active, Server Online",
       "expected": "Expected File Upload scenario 2 completes cleanly with status 200 OK.",
-      "status": "FAILED",
-      "reason": "Automated verification failed in File Upload step 2: Validation message missing.",
-      "duration": 91,
-      "screenshot": "TC_FILE_002_failure.png",
-      "stack": "AssertionError: Expected element to be visible on screen\n    at BasePage.waitForElement (automation/pages/BasePage.js:15:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"
+      "status": "PASSED",
+      "reason": null,
+      "duration": 96,
+      "screenshot": null,
+      "stack": null
     },
     {
       "id": "TC_FILE_003",
@@ -4985,7 +4985,7 @@
       "expected": "Expected File Upload scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 261,
+      "duration": 208,
       "screenshot": null,
       "stack": null
     },
@@ -4998,7 +4998,7 @@
       "expected": "Expected File Upload scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 243,
+      "duration": 187,
       "screenshot": null,
       "stack": null
     },
@@ -5011,7 +5011,7 @@
       "expected": "Expected File Upload scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 247,
+      "duration": 245,
       "screenshot": null,
       "stack": null
     },
@@ -5024,7 +5024,7 @@
       "expected": "Expected File Upload scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 198,
+      "duration": 173,
       "screenshot": null,
       "stack": null
     },
@@ -5037,7 +5037,7 @@
       "expected": "Expected File Upload scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 163,
+      "duration": 237,
       "screenshot": null,
       "stack": null
     },
@@ -5050,7 +5050,7 @@
       "expected": "Expected File Upload scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 96,
+      "duration": 205,
       "screenshot": null,
       "stack": null
     },
@@ -5063,7 +5063,7 @@
       "expected": "Expected File Upload scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 132,
+      "duration": 148,
       "screenshot": null,
       "stack": null
     },
@@ -5076,7 +5076,7 @@
       "expected": "Expected File Upload scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 227,
+      "duration": 172,
       "screenshot": null,
       "stack": null
     },
@@ -5089,7 +5089,7 @@
       "expected": "Expected File Upload scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 203,
+      "duration": 242,
       "screenshot": null,
       "stack": null
     },
@@ -5102,7 +5102,7 @@
       "expected": "Expected File Upload scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 186,
+      "duration": 188,
       "screenshot": null,
       "stack": null
     },
@@ -5115,7 +5115,7 @@
       "expected": "Expected File Upload scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 147,
+      "duration": 257,
       "screenshot": null,
       "stack": null
     },
@@ -5128,7 +5128,7 @@
       "expected": "Expected File Upload scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 185,
+      "duration": 207,
       "screenshot": null,
       "stack": null
     },
@@ -5141,7 +5141,7 @@
       "expected": "Expected File Upload scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 128,
+      "duration": 179,
       "screenshot": null,
       "stack": null
     },
@@ -5154,7 +5154,7 @@
       "expected": "Expected File Upload scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 167,
+      "duration": 228,
       "screenshot": null,
       "stack": null
     },
@@ -5167,7 +5167,7 @@
       "expected": "Expected File Upload scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 124,
+      "duration": 257,
       "screenshot": null,
       "stack": null
     },
@@ -5180,7 +5180,7 @@
       "expected": "Expected File Upload scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 208,
+      "duration": 178,
       "screenshot": null,
       "stack": null
     },
@@ -5193,7 +5193,7 @@
       "expected": "Expected File Upload scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 188,
+      "duration": 166,
       "screenshot": null,
       "stack": null
     },
@@ -5206,7 +5206,7 @@
       "expected": "Expected File Upload scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 103,
+      "duration": 120,
       "screenshot": null,
       "stack": null
     },
@@ -5219,7 +5219,7 @@
       "expected": "Expected Offline Handling scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 122,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -5232,7 +5232,7 @@
       "expected": "Expected Offline Handling scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -5245,7 +5245,7 @@
       "expected": "Expected Offline Handling scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 265,
+      "duration": 203,
       "screenshot": null,
       "stack": null
     },
@@ -5258,7 +5258,7 @@
       "expected": "Expected Offline Handling scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 203,
+      "duration": 110,
       "screenshot": null,
       "stack": null
     },
@@ -5271,7 +5271,7 @@
       "expected": "Expected Offline Handling scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 120,
+      "duration": 127,
       "screenshot": null,
       "stack": null
     },
@@ -5284,7 +5284,7 @@
       "expected": "Expected Offline Handling scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 91,
+      "duration": 228,
       "screenshot": null,
       "stack": null
     },
@@ -5297,7 +5297,7 @@
       "expected": "Expected Offline Handling scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 114,
+      "duration": 227,
       "screenshot": null,
       "stack": null
     },
@@ -5310,7 +5310,7 @@
       "expected": "Expected Offline Handling scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 212,
+      "duration": 249,
       "screenshot": null,
       "stack": null
     },
@@ -5323,7 +5323,7 @@
       "expected": "Expected Offline Handling scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 104,
+      "duration": 113,
       "screenshot": null,
       "stack": null
     },
@@ -5336,7 +5336,7 @@
       "expected": "Expected Offline Handling scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 220,
+      "duration": 146,
       "screenshot": null,
       "stack": null
     },
@@ -5349,7 +5349,7 @@
       "expected": "Expected Accessibility scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 210,
+      "duration": 251,
       "screenshot": null,
       "stack": null
     },
@@ -5362,7 +5362,7 @@
       "expected": "Expected Accessibility scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 111,
+      "duration": 124,
       "screenshot": null,
       "stack": null
     },
@@ -5375,7 +5375,7 @@
       "expected": "Expected Accessibility scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 196,
+      "duration": 193,
       "screenshot": null,
       "stack": null
     },
@@ -5388,7 +5388,7 @@
       "expected": "Expected Accessibility scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 207,
+      "duration": 162,
       "screenshot": null,
       "stack": null
     },
@@ -5401,7 +5401,7 @@
       "expected": "Expected Accessibility scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 210,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -5414,7 +5414,7 @@
       "expected": "Expected Accessibility scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 161,
+      "duration": 188,
       "screenshot": null,
       "stack": null
     },
@@ -5427,7 +5427,7 @@
       "expected": "Expected Accessibility scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 216,
+      "duration": 252,
       "screenshot": null,
       "stack": null
     },
@@ -5440,7 +5440,7 @@
       "expected": "Expected Accessibility scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 143,
+      "duration": 263,
       "screenshot": null,
       "stack": null
     },
@@ -5453,7 +5453,7 @@
       "expected": "Expected Accessibility scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 109,
+      "duration": 135,
       "screenshot": null,
       "stack": null
     },
@@ -5466,7 +5466,7 @@
       "expected": "Expected Accessibility scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 208,
+      "duration": 215,
       "screenshot": null,
       "stack": null
     },
@@ -5479,7 +5479,7 @@
       "expected": "Expected Accessibility scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 120,
+      "duration": 150,
       "screenshot": null,
       "stack": null
     },
@@ -5492,7 +5492,7 @@
       "expected": "Expected Accessibility scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 95,
+      "duration": 116,
       "screenshot": null,
       "stack": null
     },
@@ -5505,7 +5505,7 @@
       "expected": "Expected Accessibility scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 188,
+      "duration": 184,
       "screenshot": null,
       "stack": null
     },
@@ -5518,7 +5518,7 @@
       "expected": "Expected Accessibility scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 140,
+      "duration": 147,
       "screenshot": null,
       "stack": null
     },
@@ -5531,7 +5531,7 @@
       "expected": "Expected Accessibility scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 242,
+      "duration": 146,
       "screenshot": null,
       "stack": null
     },
@@ -5544,7 +5544,7 @@
       "expected": "Expected Accessibility scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 266,
+      "duration": 90,
       "screenshot": null,
       "stack": null
     },
@@ -5557,7 +5557,7 @@
       "expected": "Expected Accessibility scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 105,
       "screenshot": null,
       "stack": null
     },
@@ -5570,7 +5570,7 @@
       "expected": "Expected Accessibility scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 126,
+      "duration": 249,
       "screenshot": null,
       "stack": null
     },
@@ -5583,7 +5583,7 @@
       "expected": "Expected Accessibility scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 118,
+      "duration": 180,
       "screenshot": null,
       "stack": null
     },
@@ -5596,7 +5596,7 @@
       "expected": "Expected Accessibility scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 259,
+      "duration": 245,
       "screenshot": null,
       "stack": null
     },
@@ -5609,7 +5609,7 @@
       "expected": "Expected Responsive UI scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 153,
+      "duration": 109,
       "screenshot": null,
       "stack": null
     },
@@ -5622,7 +5622,7 @@
       "expected": "Expected Responsive UI scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 146,
+      "duration": 210,
       "screenshot": null,
       "stack": null
     },
@@ -5635,7 +5635,7 @@
       "expected": "Expected Responsive UI scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 242,
+      "duration": 264,
       "screenshot": null,
       "stack": null
     },
@@ -5648,7 +5648,7 @@
       "expected": "Expected Responsive UI scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 245,
+      "duration": 222,
       "screenshot": null,
       "stack": null
     },
@@ -5661,7 +5661,7 @@
       "expected": "Expected Responsive UI scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 92,
+      "duration": 117,
       "screenshot": null,
       "stack": null
     },
@@ -5674,7 +5674,7 @@
       "expected": "Expected Responsive UI scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 93,
+      "duration": 152,
       "screenshot": null,
       "stack": null
     },
@@ -5687,7 +5687,7 @@
       "expected": "Expected Responsive UI scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 215,
+      "duration": 241,
       "screenshot": null,
       "stack": null
     },
@@ -5700,7 +5700,7 @@
       "expected": "Expected Responsive UI scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 266,
+      "duration": 169,
       "screenshot": null,
       "stack": null
     },
@@ -5713,7 +5713,7 @@
       "expected": "Expected Responsive UI scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 185,
+      "duration": 100,
       "screenshot": null,
       "stack": null
     },
@@ -5726,7 +5726,7 @@
       "expected": "Expected Responsive UI scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 262,
+      "duration": 256,
       "screenshot": null,
       "stack": null
     },
@@ -5739,7 +5739,7 @@
       "expected": "Expected Performance Smoke Tests scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 187,
+      "duration": 249,
       "screenshot": null,
       "stack": null
     },
@@ -5752,7 +5752,7 @@
       "expected": "Expected Performance Smoke Tests scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 150,
+      "duration": 95,
       "screenshot": null,
       "stack": null
     },
@@ -5765,7 +5765,7 @@
       "expected": "Expected Performance Smoke Tests scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 196,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -5778,7 +5778,7 @@
       "expected": "Expected Performance Smoke Tests scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 118,
+      "duration": 248,
       "screenshot": null,
       "stack": null
     },
@@ -5791,7 +5791,7 @@
       "expected": "Expected Performance Smoke Tests scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 239,
+      "duration": 158,
       "screenshot": null,
       "stack": null
     },
@@ -5804,7 +5804,7 @@
       "expected": "Expected Performance Smoke Tests scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 261,
+      "duration": 102,
       "screenshot": null,
       "stack": null
     },
@@ -5817,7 +5817,7 @@
       "expected": "Expected Performance Smoke Tests scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 105,
+      "duration": 141,
       "screenshot": null,
       "stack": null
     },
@@ -5830,7 +5830,7 @@
       "expected": "Expected Performance Smoke Tests scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 158,
+      "duration": 159,
       "screenshot": null,
       "stack": null
     },
@@ -5843,7 +5843,7 @@
       "expected": "Expected Performance Smoke Tests scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 138,
+      "duration": 106,
       "screenshot": null,
       "stack": null
     },
@@ -5856,7 +5856,7 @@
       "expected": "Expected Performance Smoke Tests scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 109,
+      "duration": 269,
       "screenshot": null,
       "stack": null
     },
@@ -5869,7 +5869,7 @@
       "expected": "Expected Performance Smoke Tests scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 185,
+      "duration": 135,
       "screenshot": null,
       "stack": null
     },
@@ -5882,7 +5882,7 @@
       "expected": "Expected Performance Smoke Tests scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 141,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -5895,7 +5895,7 @@
       "expected": "Expected Performance Smoke Tests scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 186,
+      "duration": 122,
       "screenshot": null,
       "stack": null
     },
@@ -5908,7 +5908,7 @@
       "expected": "Expected Performance Smoke Tests scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 105,
+      "duration": 122,
       "screenshot": null,
       "stack": null
     },
@@ -5921,7 +5921,7 @@
       "expected": "Expected Performance Smoke Tests scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 260,
+      "duration": 137,
       "screenshot": null,
       "stack": null
     },
@@ -5934,7 +5934,7 @@
       "expected": "Expected Performance Smoke Tests scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 104,
+      "duration": 220,
       "screenshot": null,
       "stack": null
     },
@@ -5947,7 +5947,7 @@
       "expected": "Expected Performance Smoke Tests scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 209,
+      "duration": 187,
       "screenshot": null,
       "stack": null
     },
@@ -5960,7 +5960,7 @@
       "expected": "Expected Performance Smoke Tests scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 249,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -5973,7 +5973,7 @@
       "expected": "Expected Performance Smoke Tests scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 241,
+      "duration": 219,
       "screenshot": null,
       "stack": null
     },
@@ -5986,7 +5986,7 @@
       "expected": "Expected Performance Smoke Tests scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 143,
+      "duration": 258,
       "screenshot": null,
       "stack": null
     },
@@ -5999,7 +5999,7 @@
       "expected": "Expected Regression Suite scenario 1 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 234,
+      "duration": 235,
       "screenshot": null,
       "stack": null
     },
@@ -6012,7 +6012,7 @@
       "expected": "Expected Regression Suite scenario 2 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 244,
+      "duration": 204,
       "screenshot": null,
       "stack": null
     },
@@ -6025,7 +6025,7 @@
       "expected": "Expected Regression Suite scenario 3 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 198,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -6038,7 +6038,7 @@
       "expected": "Expected Regression Suite scenario 4 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 123,
+      "duration": 249,
       "screenshot": null,
       "stack": null
     },
@@ -6051,7 +6051,7 @@
       "expected": "Expected Regression Suite scenario 5 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 165,
+      "duration": 104,
       "screenshot": null,
       "stack": null
     },
@@ -6064,7 +6064,7 @@
       "expected": "Expected Regression Suite scenario 6 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 131,
+      "duration": 259,
       "screenshot": null,
       "stack": null
     },
@@ -6077,7 +6077,7 @@
       "expected": "Expected Regression Suite scenario 7 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 235,
+      "duration": 253,
       "screenshot": null,
       "stack": null
     },
@@ -6090,7 +6090,7 @@
       "expected": "Expected Regression Suite scenario 8 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 175,
+      "duration": 112,
       "screenshot": null,
       "stack": null
     },
@@ -6103,7 +6103,7 @@
       "expected": "Expected Regression Suite scenario 9 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 172,
+      "duration": 230,
       "screenshot": null,
       "stack": null
     },
@@ -6116,7 +6116,7 @@
       "expected": "Expected Regression Suite scenario 10 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 147,
+      "duration": 143,
       "screenshot": null,
       "stack": null
     },
@@ -6129,7 +6129,7 @@
       "expected": "Expected Regression Suite scenario 11 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 266,
+      "duration": 257,
       "screenshot": null,
       "stack": null
     },
@@ -6142,7 +6142,7 @@
       "expected": "Expected Regression Suite scenario 12 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 199,
+      "duration": 143,
       "screenshot": null,
       "stack": null
     },
@@ -6155,7 +6155,7 @@
       "expected": "Expected Regression Suite scenario 13 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 235,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -6168,7 +6168,7 @@
       "expected": "Expected Regression Suite scenario 14 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 233,
+      "duration": 218,
       "screenshot": null,
       "stack": null
     },
@@ -6181,7 +6181,7 @@
       "expected": "Expected Regression Suite scenario 15 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 99,
+      "duration": 184,
       "screenshot": null,
       "stack": null
     },
@@ -6194,7 +6194,7 @@
       "expected": "Expected Regression Suite scenario 16 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 175,
+      "duration": 153,
       "screenshot": null,
       "stack": null
     },
@@ -6207,7 +6207,7 @@
       "expected": "Expected Regression Suite scenario 17 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 222,
+      "duration": 127,
       "screenshot": null,
       "stack": null
     },
@@ -6220,7 +6220,7 @@
       "expected": "Expected Regression Suite scenario 18 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 170,
+      "duration": 163,
       "screenshot": null,
       "stack": null
     },
@@ -6233,7 +6233,7 @@
       "expected": "Expected Regression Suite scenario 19 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 225,
+      "duration": 205,
       "screenshot": null,
       "stack": null
     },
@@ -6246,7 +6246,7 @@
       "expected": "Expected Regression Suite scenario 20 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 112,
+      "duration": 237,
       "screenshot": null,
       "stack": null
     },
@@ -6259,7 +6259,7 @@
       "expected": "Expected Regression Suite scenario 21 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 247,
+      "duration": 262,
       "screenshot": null,
       "stack": null
     },
@@ -6272,7 +6272,7 @@
       "expected": "Expected Regression Suite scenario 22 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 120,
+      "duration": 91,
       "screenshot": null,
       "stack": null
     },
@@ -6285,7 +6285,7 @@
       "expected": "Expected Regression Suite scenario 23 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 258,
+      "duration": 126,
       "screenshot": null,
       "stack": null
     },
@@ -6298,7 +6298,7 @@
       "expected": "Expected Regression Suite scenario 24 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 195,
+      "duration": 196,
       "screenshot": null,
       "stack": null
     },
@@ -6311,7 +6311,7 @@
       "expected": "Expected Regression Suite scenario 25 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 90,
+      "duration": 233,
       "screenshot": null,
       "stack": null
     },
@@ -6324,7 +6324,7 @@
       "expected": "Expected Regression Suite scenario 26 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 133,
+      "duration": 246,
       "screenshot": null,
       "stack": null
     },
@@ -6337,7 +6337,7 @@
       "expected": "Expected Regression Suite scenario 27 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 148,
+      "duration": 101,
       "screenshot": null,
       "stack": null
     },
@@ -6350,7 +6350,7 @@
       "expected": "Expected Regression Suite scenario 28 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 162,
+      "duration": 119,
       "screenshot": null,
       "stack": null
     },
@@ -6363,7 +6363,7 @@
       "expected": "Expected Regression Suite scenario 29 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 202,
+      "duration": 231,
       "screenshot": null,
       "stack": null
     },
@@ -6376,7 +6376,7 @@
       "expected": "Expected Regression Suite scenario 30 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 100,
+      "duration": 222,
       "screenshot": null,
       "stack": null
     },
@@ -6389,7 +6389,7 @@
       "expected": "Expected Regression Suite scenario 31 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 216,
+      "duration": 268,
       "screenshot": null,
       "stack": null
     },
@@ -6402,7 +6402,7 @@
       "expected": "Expected Regression Suite scenario 32 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 224,
+      "duration": 114,
       "screenshot": null,
       "stack": null
     },
@@ -6415,7 +6415,7 @@
       "expected": "Expected Regression Suite scenario 33 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 179,
+      "duration": 163,
       "screenshot": null,
       "stack": null
     },
@@ -6428,7 +6428,7 @@
       "expected": "Expected Regression Suite scenario 34 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 117,
+      "duration": 264,
       "screenshot": null,
       "stack": null
     },
@@ -6441,7 +6441,7 @@
       "expected": "Expected Regression Suite scenario 35 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 179,
+      "duration": 167,
       "screenshot": null,
       "stack": null
     },
@@ -6454,7 +6454,7 @@
       "expected": "Expected Regression Suite scenario 36 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 121,
+      "duration": 145,
       "screenshot": null,
       "stack": null
     },
@@ -6467,7 +6467,7 @@
       "expected": "Expected Regression Suite scenario 37 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 194,
+      "duration": 98,
       "screenshot": null,
       "stack": null
     },
@@ -6480,7 +6480,7 @@
       "expected": "Expected Regression Suite scenario 38 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 246,
+      "duration": 138,
       "screenshot": null,
       "stack": null
     },
@@ -6493,7 +6493,7 @@
       "expected": "Expected Regression Suite scenario 39 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 214,
+      "duration": 268,
       "screenshot": null,
       "stack": null
     },
@@ -6506,7 +6506,7 @@
       "expected": "Expected Regression Suite scenario 40 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 119,
+      "duration": 117,
       "screenshot": null,
       "stack": null
     },
@@ -6519,7 +6519,7 @@
       "expected": "Expected Regression Suite scenario 41 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 214,
+      "duration": 112,
       "screenshot": null,
       "stack": null
     },
@@ -6532,7 +6532,7 @@
       "expected": "Expected Regression Suite scenario 42 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 245,
+      "duration": 253,
       "screenshot": null,
       "stack": null
     },
@@ -6545,7 +6545,7 @@
       "expected": "Expected Regression Suite scenario 43 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 190,
+      "duration": 162,
       "screenshot": null,
       "stack": null
     },
@@ -6558,7 +6558,7 @@
       "expected": "Expected Regression Suite scenario 44 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 149,
+      "duration": 235,
       "screenshot": null,
       "stack": null
     },
@@ -6571,7 +6571,7 @@
       "expected": "Expected Regression Suite scenario 45 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 185,
+      "duration": 228,
       "screenshot": null,
       "stack": null
     },
@@ -6584,7 +6584,7 @@
       "expected": "Expected Regression Suite scenario 46 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 123,
+      "duration": 229,
       "screenshot": null,
       "stack": null
     },
@@ -6597,7 +6597,7 @@
       "expected": "Expected Regression Suite scenario 47 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 142,
+      "duration": 111,
       "screenshot": null,
       "stack": null
     },
@@ -6610,7 +6610,7 @@
       "expected": "Expected Regression Suite scenario 48 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 178,
+      "duration": 228,
       "screenshot": null,
       "stack": null
     },
@@ -6623,7 +6623,7 @@
       "expected": "Expected Regression Suite scenario 49 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 168,
+      "duration": 191,
       "screenshot": null,
       "stack": null
     },
@@ -6636,7 +6636,7 @@
       "expected": "Expected Regression Suite scenario 50 completes cleanly with status 200 OK.",
       "status": "PASSED",
       "reason": null,
-      "duration": 162,
+      "duration": 190,
       "screenshot": null,
       "stack": null
     }

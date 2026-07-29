@@ -1,0 +1,81 @@
+2026-07-29 10:44:20,566 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:44:20,566 [INFO] MasterRunner: [START] LEXAID SELENIUM E2E MASTER RUNNER
+2026-07-29 10:44:20,566 [INFO] MasterRunner:    Target URL  : https://suvan789.github.io/lexaid
+2026-07-29 10:44:20,566 [INFO] MasterRunner:    Build Number: LOCAL-20260729104420
+2026-07-29 10:44:20,566 [INFO] MasterRunner:    Git Commit  : local-co
+2026-07-29 10:44:20,567 [INFO] MasterRunner:    Branch      : main
+2026-07-29 10:44:20,567 [INFO] MasterRunner:    Headless    : True
+2026-07-29 10:44:20,567 [INFO] MasterRunner:    Timestamp   : 2026-07-29 10:44:20
+2026-07-29 10:44:20,568 [INFO] MasterRunner: ======================================================================
+2026-07-29 10:44:20,568 [INFO] MasterRunner: [VERIFY] Initializing deployment check...
+2026-07-29 10:44:20,568 [INFO] MasterRunner: [VERIFY] Deployment check -> Target: https://suvan789.github.io/lexaid
+2026-07-29 10:44:21,451 [INFO] MasterRunner:   [OK] Deployment verified (HTTP 200) on attempt 1
+2026-07-29 10:44:21,453 [INFO] MasterRunner: [BROWSER] Initializing Headless Chrome WebDriver...
+2026-07-29 10:44:22,940 [INFO] DriverFactory: Chrome WebDriver initialized (headless=True)
+2026-07-29 10:44:22,940 [INFO] MasterRunner:   [OK] Chrome WebDriver ready
+2026-07-29 10:44:22,962 [INFO] SeleniumTestRunner: 🚀 Starting execution of 470 Selenium E2E test cases against https://suvan789.github.io/lexaid
+2026-07-29 10:44:22,962 [INFO] SeleniumTestRunner:    Build: LOCAL-20260729104420 | Commit: local-co | Branch: main
+2026-07-29 10:44:22,963 [INFO] SeleniumTestRunner: [1/470] Running TC_AUTH_001 — Authentication
+2026-07-29 10:44:25,273 [INFO] SeleniumTestRunner: [2/470] Running TC_AUTH_002 — Authentication
+2026-07-29 10:44:26,874 [INFO] SeleniumTestRunner: [3/470] Running TC_AUTH_003 — Authentication
+2026-07-29 10:44:28,442 [INFO] SeleniumTestRunner: [4/470] Running TC_AUTH_004 — Authentication
+2026-07-29 10:44:30,012 [INFO] SeleniumTestRunner: [5/470] Running TC_AUTH_005 — Authentication
+2026-07-29 10:44:31,587 [INFO] SeleniumTestRunner: [6/470] Running TC_AUTH_006 — Authentication
+2026-07-29 10:44:33,175 [INFO] SeleniumTestRunner: [7/470] Running TC_AUTH_007 — Authentication
+2026-07-29 10:44:34,740 [INFO] SeleniumTestRunner: [8/470] Running TC_AUTH_008 — Authentication
+2026-07-29 10:44:36,317 [INFO] SeleniumTestRunner: [9/470] Running TC_AUTH_009 — Authentication
+2026-07-29 10:44:37,893 [INFO] SeleniumTestRunner: [10/470] Running TC_AUTH_010 — Authentication
+2026-07-29 10:44:39,455 [INFO] SeleniumTestRunner: [11/470] Running TC_AUTH_011 — Authentication
+2026-07-29 10:44:41,025 [INFO] SeleniumTestRunner: [12/470] Running TC_AUTH_012 — Authentication
+2026-07-29 10:44:42,599 [INFO] SeleniumTestRunner: [13/470] Running TC_AUTH_013 — Authentication
+2026-07-29 10:44:44,207 [INFO] SeleniumTestRunner: [14/470] Running TC_AUTH_014 — Authentication
+2026-07-29 10:44:45,771 [INFO] SeleniumTestRunner: [15/470] Running TC_AUTH_015 — Authentication
+2026-07-29 10:44:47,405 [INFO] SeleniumTestRunner: [16/470] Running TC_AUTH_016 — Authentication
+2026-07-29 10:44:48,982 [INFO] SeleniumTestRunner: [17/470] Running TC_AUTH_017 — Authentication
+2026-07-29 10:44:50,568 [INFO] SeleniumTestRunner: [18/470] Running TC_AUTH_018 — Authentication
+2026-07-29 10:44:52,147 [INFO] SeleniumTestRunner: [19/470] Running TC_AUTH_019 — Authentication
+2026-07-29 10:44:53,967 [INFO] SeleniumTestRunner: [20/470] Running TC_AUTH_020 — Authentication
+2026-07-29 10:44:56,228 [INFO] SeleniumTestRunner: [21/470] Running TC_AUTH_021 — Authentication
+2026-07-29 10:44:57,843 [INFO] SeleniumTestRunner: [22/470] Running TC_AUTH_022 — Authentication
+2026-07-29 10:44:59,467 [INFO] SeleniumTestRunner: [23/470] Running TC_AUTH_023 — Authentication
+2026-07-29 10:45:01,062 [INFO] SeleniumTestRunner: [24/470] Running TC_AUTH_024 — Authentication
+2026-07-29 10:45:02,648 [INFO] SeleniumTestRunner: [25/470] Running TC_AUTH_025 — Authentication
+2026-07-29 10:45:04,249 [INFO] SeleniumTestRunner: [26/470] Running TC_AUTH_026 — Authentication
+2026-07-29 10:45:05,806 [INFO] SeleniumTestRunner: [27/470] Running TC_AUTH_027 — Authentication
+2026-07-29 10:45:07,465 [INFO] SeleniumTestRunner: [28/470] Running TC_AUTH_028 — Authentication
+2026-07-29 10:45:09,036 [INFO] SeleniumTestRunner: [29/470] Running TC_AUTH_029 — Authentication
+2026-07-29 10:45:10,617 [INFO] SeleniumTestRunner: [30/470] Running TC_AUTH_030 — Authentication
+2026-07-29 10:45:12,337 [INFO] SeleniumTestRunner: [31/470] Running TC_AUTH_031 — Authentication
+2026-07-29 10:45:13,944 [INFO] SeleniumTestRunner: [32/470] Running TC_AUTH_032 — Authentication
+2026-07-29 10:45:15,473 [INFO] SeleniumTestRunner: [33/470] Running TC_AUTH_033 — Authentication
+2026-07-29 10:45:17,294 [INFO] SeleniumTestRunner: [34/470] Running TC_AUTH_034 — Authentication
+2026-07-29 10:45:18,981 [INFO] SeleniumTestRunner: [35/470] Running TC_AUTH_035 — Authentication
+2026-07-29 10:45:20,806 [INFO] SeleniumTestRunner: [36/470] Running TC_AUTH_036 — Authentication
+2026-07-29 10:45:22,666 [INFO] SeleniumTestRunner: [37/470] Running TC_AUTH_037 — Authentication
+2026-07-29 10:45:24,428 [INFO] SeleniumTestRunner: [38/470] Running TC_AUTH_038 — Authentication
+2026-07-29 10:45:26,033 [INFO] SeleniumTestRunner: [39/470] Running TC_AUTH_039 — Authentication
+2026-07-29 10:45:27,629 [INFO] SeleniumTestRunner: [40/470] Running TC_AUTH_040 — Authentication
+2026-07-29 10:45:29,179 [INFO] SeleniumTestRunner: [41/470] Running TC_AUTHZ_001 — Authorization
+2026-07-29 10:45:30,882 [INFO] SeleniumTestRunner: [42/470] Running TC_AUTHZ_002 — Authorization
+2026-07-29 10:45:32,467 [INFO] SeleniumTestRunner: [43/470] Running TC_AUTHZ_003 — Authorization
+2026-07-29 10:45:34,026 [INFO] SeleniumTestRunner: [44/470] Running TC_AUTHZ_004 — Authorization
+2026-07-29 10:45:35,581 [INFO] SeleniumTestRunner: [45/470] Running TC_AUTHZ_005 — Authorization
+2026-07-29 10:45:37,149 [INFO] SeleniumTestRunner: [46/470] Running TC_AUTHZ_006 — Authorization
+2026-07-29 10:45:38,667 [INFO] SeleniumTestRunner: [47/470] Running TC_AUTHZ_007 — Authorization
+2026-07-29 10:45:40,191 [INFO] SeleniumTestRunner: [48/470] Running TC_AUTHZ_008 — Authorization
+2026-07-29 10:45:41,818 [INFO] SeleniumTestRunner: [49/470] Running TC_AUTHZ_009 — Authorization
+2026-07-29 10:45:43,408 [INFO] SeleniumTestRunner: [50/470] Running TC_AUTHZ_010 — Authorization
+2026-07-29 10:45:44,935 [INFO] SeleniumTestRunner: [51/470] Running TC_AUTHZ_011 — Authorization
+2026-07-29 10:45:46,530 [INFO] SeleniumTestRunner: [52/470] Running TC_AUTHZ_012 — Authorization
+2026-07-29 10:45:48,132 [INFO] SeleniumTestRunner: [53/470] Running TC_AUTHZ_013 — Authorization
+2026-07-29 10:45:49,716 [INFO] SeleniumTestRunner: [54/470] Running TC_AUTHZ_014 — Authorization
+2026-07-29 10:45:51,236 [INFO] SeleniumTestRunner: [55/470] Running TC_AUTHZ_015 — Authorization
+2026-07-29 10:45:52,796 [INFO] SeleniumTestRunner: [56/470] Running TC_AUTHZ_016 — Authorization
+2026-07-29 10:45:54,359 [INFO] SeleniumTestRunner: [57/470] Running TC_AUTHZ_017 — Authorization
+2026-07-29 10:45:55,924 [INFO] SeleniumTestRunner: [58/470] Running TC_AUTHZ_018 — Authorization
+2026-07-29 10:45:57,487 [INFO] SeleniumTestRunner: [59/470] Running TC_AUTHZ_019 — Authorization
+2026-07-29 10:45:59,089 [INFO] SeleniumTestRunner: [60/470] Running TC_AUTHZ_020 — Authorization
+2026-07-29 10:46:00,655 [INFO] SeleniumTestRunner: [61/470] Running TC_AUTHZ_021 — Authorization
+2026-07-29 10:46:02,267 [INFO] SeleniumTestRunner: [62/470] Running TC_AUTHZ_022 — Authorization
+2026-07-29 10:46:03,899 [INFO] SeleniumTestRunner: [63/470] Running TC_AUTHZ_023 — Authorization
+2026-07-29 10:46:05,496 [INFO] SeleniumTestRunner: [64/470] Running TC_AUTHZ_024 — Authorization

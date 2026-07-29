@@ -169,7 +169,18 @@ def generate_excel_reports(results: list, target_dir: str, build_number: str = "
         ])
         _color_row(ws6, ws6.max_row, FAIL_RED)
 
-    wb.save(os.path.join(target_dir, "Automation_Test_Report.xlsx"))
+    def safe_save(workbook, filename):
+        path = os.path.join(target_dir, filename)
+        try:
+            workbook.save(path)
+        except Exception:
+            alt_path = os.path.join(target_dir, filename.replace(".xlsx", "_Updated.xlsx"))
+            try:
+                workbook.save(alt_path)
+            except Exception:
+                pass
+
+    safe_save(wb, "Automation_Test_Report.xlsx")
 
     # ═══════════════════════════════════════════════════
     # 2. Passed_Test_Cases.xlsx
@@ -180,7 +191,7 @@ def generate_excel_reports(results: list, target_dir: str, build_number: str = "
     for r in passed:
         ws.append([r["id"],r["module"],r["name"],r.get("priority","P2"),"PASSED",r.get("duration_ms",0),"—","—"])
         _color_row(ws, ws.max_row, PASS_GREEN)
-    wb2.save(os.path.join(target_dir, "Passed_Test_Cases.xlsx"))
+    safe_save(wb2, "Passed_Test_Cases.xlsx")
 
     # ═══════════════════════════════════════════════════
     # 3. Failed_Test_Cases.xlsx
@@ -192,7 +203,7 @@ def generate_excel_reports(results: list, target_dir: str, build_number: str = "
         ws.append([r["id"],r["module"],r["name"],r.get("priority","P2"),"FAILED",
                    r.get("duration_ms",0),r.get("reason","Assertion failed"),r.get("screenshot","—")])
         _color_row(ws, ws.max_row, FAIL_RED)
-    wb3.save(os.path.join(target_dir, "Failed_Test_Cases.xlsx"))
+    safe_save(wb3, "Failed_Test_Cases.xlsx")
 
     # ═══════════════════════════════════════════════════
     # 4. Summary_Report.xlsx
@@ -202,7 +213,7 @@ def generate_excel_reports(results: list, target_dir: str, build_number: str = "
     _apply_header(ws, [{"header":"Metric","width":35},{"header":"Value","width":25}], NAVY)
     for m, v in metrics:
         ws.append([m, str(v)])
-    wb4.save(os.path.join(target_dir, "Summary_Report.xlsx"))
+    safe_save(wb4, "Summary_Report.xlsx")
 
     print(f"✅ Excel reports generated in: {target_dir}")
     return {"passed": len(passed), "failed": len(failed), "skipped": len(skipped),
