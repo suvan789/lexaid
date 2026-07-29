@@ -69,30 +69,32 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      let googleUser;
-      try {
-        googleUser = await loginWithGoogleFirebase();
-      } catch (fbErr) {
-        console.warn("Firebase Popup Error, using One-Click Google Auth fallback:", fbErr);
-        googleUser = {
-          email: `google_${Date.now()}@gmail.com`,
-          full_name: "Google User",
-          google_id: `google_uid_${Date.now()}`
-        };
-      }
+      // Attempt real Firebase Google Popup Sign-In
+      const googleUser = await loginWithGoogleFirebase();
 
+      // Send real Google user data to backend
       const res = await API.post('/api/auth/google', {
         email: googleUser.email,
-        full_name: googleUser.full_name,
+        full_name: googleUser.full_name || googleUser.email.split('@')[0],
         google_id: googleUser.google_id,
+        photo_url: googleUser.photo_url || null,
         role: 'client'
       });
       login(res.data.access_token, res.data.user);
       navigate('/');
     } catch (err) {
-      console.error("Firebase Sign-In Error:", err);
-      const detail = err.response?.data?.detail || err.response?.data?.error || err.message || 'Google Sign-In failed.';
-      setError(`Google Sign-In: ${detail}`);
+      console.error("Google Sign-In Error:", err);
+      // Show actionable error — no silent fallback
+      if (err.code === 'auth/unauthorized-domain') {
+        setError('Google Sign-In is blocked on this domain. Please use Email & Password login, or visit lexaid-mu.vercel.app for Google login.');
+      } else if (err.code === 'auth/popup-blocked') {
+        setError('Popup was blocked by your browser. Please allow popups for this site and try again.');
+      } else if (err.code === 'auth/popup-closed-by-user') {
+        setError('Google Sign-In was cancelled. Please try again.');
+      } else {
+        const detail = err.response?.data?.detail || err.response?.data?.error || err.message || 'Google Sign-In failed.';
+        setError(`Google Sign-In failed: ${detail}`);
+      }
     } finally {
       setLoading(false);
     }
@@ -100,11 +102,11 @@ export default function LoginPage() {
 
   const quickLogin = (type) => {
     if (type === 'advocate') {
-      setEmail('suvansenthils@gmail.com');
-      setPassword('Password123!');
+      setEmail('flowfored@gmail.com');
+      setPassword('password123');
     } else {
-      setEmail('citizen@lexaid.com');
-      setPassword('Password123!');
+      setEmail('suvansenthils@gmail.com');
+      setPassword('password123');
     }
   };
 

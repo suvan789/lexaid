@@ -15,7 +15,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-googleProvider.setCustomParameters({ prompt: 'select_account' });
+// Force account picker every time (never auto-select)
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
 
 export const loginWithGoogleFirebase = async () => {
   try {
