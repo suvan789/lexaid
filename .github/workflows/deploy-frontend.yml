@@ -23,7 +23,7 @@ jobs:
         run: |
           cd frontend-web
           npm install --ignore-scripts --legacy-peer-deps
-          CI=false npm run build
+          REACT_APP_API_URL=https://lexaid-api.onrender.com CI=false npm run build
           cp build/index.html build/404.html
 
       - name: Deploy to gh-pages Branch
