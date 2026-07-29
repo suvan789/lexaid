@@ -3,29 +3,49 @@ name: Selenium E2E Tests
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  test:
+  selenium-tests:
+    name: "Execute 400+ Selenium E2E Tests"
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Setup Chrome Browser
-      uses: browser-actions/setup-chrome@v1
+      - name: Install Python Dependencies
+        run: |
+          pip install -r automation/selenium/requirements.txt
 
-    - name: Install Frontend Dependencies
-      working-directory: ./frontend-web
-      run: npm install
+      - name: Setup Headless Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
 
-    - name: Run Selenium E2E Tests
-      working-directory: ./frontend-web
-      run: npm run login || true
-      env:
-        TEST_URL: 'https://lexaid-mu.vercel.app/login'
+      - name: Run Master Selenium E2E Suite
+        env:
+          BASE_URL: "https://suvan789.github.io/lexaid/"
+          HEADLESS: "true"
+          BUILD_NUMBER: "BUILD-${{ github.run_number }}"
+          PYTHONPATH: "."
+          PYTHONUTF8: "1"
+          PYTHONUNBUFFERED: "1"
+          PASS_THRESHOLD: "95.0"
+        run: |
+          python automation/selenium/run_selenium_tests.py
+
+      - name: Upload Test Reports Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Selenium-E2E-Reports-${{ github.run_number }}"
+          path: automation/selenium/reports/
+          retention-days: 30
