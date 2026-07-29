@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies & Build
         run: |
           cd frontend-web
-          npm install
+          npm install --legacy-peer-deps --no-audit
           CI=false npm run build
           cp build/index.html build/404.html
 
