@@ -1,6 +1,7 @@
 {
   "name": "lexaid-web",
   "version": "2.0.0",
+  "homepage": "https://suvan789.github.io/lexaid",
   "private": true,
   "dependencies": {
     "@capacitor/android": "^8.4.2",

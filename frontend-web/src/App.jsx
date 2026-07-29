@@ -128,7 +128,7 @@ export default function App() {
     <ErrorBoundary>
       <AuthProvider>
         <AppProvider>
-          <Router>
+          <Router basename={process.env.PUBLIC_URL || ''}>
             <AppRoutes />
           </Router>
         </AppProvider>
