@@ -14,8 +14,7 @@ on:
   schedule:
     - cron: "0 2 * * *"   # Nightly 2AM UTC
   push:
-    paths:
-      - "loadtest/**"
+    branches: ["main"]
 
 permissions:
   contents: write
