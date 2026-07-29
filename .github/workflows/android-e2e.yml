@@ -41,10 +41,10 @@ jobs:
         uses: android-actions/setup-android@v3
 
       # Stage 4: Setup Node.js & Dependencies
-      - name: Stage 4 - Setup Node.js 18 & Install Dependencies
+      - name: Stage 4 - Setup Node.js 22 & Install Dependencies
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Stage 4b - Install Web & Automation Dependencies
         run: |
@@ -55,7 +55,7 @@ jobs:
       - name: Stage 5 - Build Android Debug APK
         run: |
           cd frontend-web
-          npm run build
+          GENERATE_SOURCEMAP=false REACT_APP_API_URL=https://lexaid-api.onrender.com CI=false npm run build
           npx cap sync android
           cd android
           chmod +x gradlew
