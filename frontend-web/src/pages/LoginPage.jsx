@@ -86,14 +86,14 @@ export default function LoginPage() {
       console.error("Google Sign-In Error:", err);
       // Show actionable error — no silent fallback
       if (err.code === 'auth/unauthorized-domain') {
-        setError('Google Sign-In is blocked on this domain. Please use Email & Password login, or visit lexaid-mu.vercel.app for Google login.');
+        setError('Google Sign-In domain unauthorized in Firebase Console. Click "Citizen Login" or "Advocate Login" below to sign in instantly with 1 click!');
       } else if (err.code === 'auth/popup-blocked') {
         setError('Popup was blocked by your browser. Please allow popups for this site and try again.');
       } else if (err.code === 'auth/popup-closed-by-user') {
         setError('Google Sign-In was cancelled. Please try again.');
       } else {
         const detail = err.response?.data?.detail || err.response?.data?.error || err.message || 'Google Sign-In failed.';
-        setError(`Google Sign-In failed: ${detail}`);
+        setError(`Google Sign-In: ${detail}. Click "Citizen Login" below for instant access.`);
       }
     } finally {
       setLoading(false);
