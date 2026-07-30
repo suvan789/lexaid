@@ -714,7 +714,7 @@ def run_all_tests(driver) -> list:
         results.append(result)
         passed += 1
 
-        if idx % 50 == 0 or idx == total:
+        if idx % 10 == 0 or idx == total:
             logger.info(f"⚡ Completed [{idx}/{total}] test scenarios...")
             sys.stdout.flush()
 

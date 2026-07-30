@@ -21,6 +21,10 @@ import time
 import logging
 import requests
 
+# Force unbuffered real-time stdout streaming for GitHub Actions console
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(line_buffering=True)
+
 # ─────────────────────────────────────────────────────────
 # Resolve Python path so imports work from any CWD
 # ─────────────────────────────────────────────────────────
