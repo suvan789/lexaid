@@ -89,50 +89,7 @@ export default function DashboardPage() {
 
   return (
     <div className="page-container max-w-6xl mx-auto">
-      {/* Verification Banner */}
-      {user && !user.is_verified && (
-        <div className="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-2xl shadow-sm animate-fade-in">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="text-amber-500 text-2xl">⚠️</span>
-              <div>
-                <p className="text-sm font-semibold text-amber-900">Please verify your email address ({user.email})</p>
-                <p className="text-xs text-amber-700">Verify your account to access all document generation features.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 self-end sm:self-auto">
-              <button 
-                onClick={handleVerifyNow}
-                disabled={verifyStatus === 'loading'}
-                className="px-4 py-2 bg-amber-600 text-white rounded-xl text-xs font-bold hover:bg-amber-700 disabled:opacity-50 transition-colors shadow-sm"
-              >
-                {verifyStatus === 'loading' ? 'Verifying...' : '⚡ Verify Email Now'}
-              </button>
-              <button 
-                onClick={handleResendVerification}
-                disabled={verifyStatus === 'loading' || verifyStatus === 'sent'}
-                className="px-3 py-2 bg-white border border-amber-300 text-amber-800 rounded-xl text-xs font-semibold hover:bg-amber-100 disabled:opacity-50 transition-colors"
-              >
-                {verifyStatus === 'sent' ? '✓ Link Generated' : '📧 Generate Verification Link'}
-              </button>
-            </div>
-          </div>
 
-          {mockLink && (
-            <div className="mt-3 p-3 bg-amber-100/80 rounded-xl border border-amber-300 flex items-center justify-between gap-3">
-              <p className="text-xs text-amber-900 font-medium truncate">
-                ✉️ Link: <span className="font-mono">{window.location.origin}{mockLink}</span>
-              </p>
-              <button
-                onClick={() => navigate(mockLink)}
-                className="px-3 py-1 bg-navy text-white rounded-lg text-xs font-semibold hover:bg-navy-light whitespace-nowrap shadow-xs"
-              >
-                Open Link →
-              </button>
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-navy via-navy-light to-accent rounded-2xl p-6 lg:p-8 text-white mb-6 animate-fade-in">
