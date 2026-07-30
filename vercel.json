@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd frontend-web && npm run build",
+  "outputDirectory": "frontend-web/build",
+  "installCommand": "cd frontend-web && npm install --ignore-scripts --legacy-peer-deps",
+  "framework": "create-react-app",
+  "git": {
+    "deploymentEnabled": {
+      "gh-pages": false
+    }
+  }
+}
