@@ -10,7 +10,7 @@ from schemas import (
     SendOTPRequest, VerifyOTPRequest, GoogleAuthRequest
 )
 from auth import hash_password, verify_password, create_access_token, get_current_user, decode_token
-from email_service import send_verification_email
+from email_service import send_verification_email, send_password_reset_email
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 
@@ -291,18 +291,15 @@ async def forgot_password(req: ForgotPasswordRequest, db: AsyncSession = Depends
     user = result.scalar_one_or_none()
     
     if not user:
-        return {"message": "If an account exists, a reset link has been sent."}
+        return {"message": f"Password reset instructions dispatched to {req.email}."}
 
     from datetime import timedelta
     token = create_access_token(data={"sub": str(user.id), "type": "reset"}, expires_delta=timedelta(hours=1))
     
-    print(f"\n========== EMAIL MOCK ==========")
-    print(f"To: {user.email}")
-    print(f"Subject: Reset your password")
-    print(f"Link: https://lexaid-mu.vercel.app/reset-password?token={token}")
-    print(f"================================\n")
+    # Dispatch real HTML password reset email to user inbox
+    await send_password_reset_email(user.email, token)
     
-    return {"message": "If an account exists, a reset link has been sent.", "mock_link": f"/reset-password?token={token}"}
+    return {"message": f"Password reset instructions dispatched to {user.email}.", "mock_link": f"/reset-password?token={token}"}
 
 
 @router.post("/reset-password")
