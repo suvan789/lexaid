@@ -109,7 +109,7 @@ async def send_verification_email(to_email: str, token: str):
 
             with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
                 server.starttls()
-                server.login(SMTP_USER, SMTP_PASSWORD)
+                server.login(SMTP_USER, SMTP_PASSWORD.replace(" ", "").strip())
                 server.sendmail(SMTP_USER, to_email, msg.as_string())
             print(f"✓ Real email sent via SMTP to {to_email}")
             return True
@@ -220,7 +220,7 @@ async def send_password_reset_email(to_email: str, token: str):
 
             with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
                 server.starttls()
-                server.login(SMTP_USER, SMTP_PASSWORD)
+                server.login(SMTP_USER, SMTP_PASSWORD.replace(" ", "").strip())
                 server.sendmail(SMTP_USER, to_email, msg.as_string())
             print(f"✓ Password reset email sent via SMTP to {to_email}")
             return True
