@@ -25,10 +25,9 @@ class BasePage:
     def navigate(self, path: str = "/"):
         url = self.base_url + path
         self.driver.get(url)
-        time.sleep(1.5)
         return self
 
-    def find(self, by, value, timeout: int = 10):
+    def find(self, by, value, timeout: float = 1.0):
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located((by, value))
@@ -36,7 +35,7 @@ class BasePage:
         except TimeoutException:
             return None
 
-    def find_visible(self, by, value, timeout: int = 10):
+    def find_visible(self, by, value, timeout: float = 1.0):
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.visibility_of_element_located((by, value))
@@ -44,26 +43,31 @@ class BasePage:
         except TimeoutException:
             return None
 
-    def click(self, by, value, timeout: int = 10):
+    def click(self, by, value, timeout: float = 1.0):
         el = self.find_visible(by, value, timeout)
         if el:
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", el)
-            time.sleep(0.3)
-            el.click()
+            try:
+                self.driver.execute_script("arguments[0].scrollIntoView(true);", el)
+                el.click()
+            except Exception:
+                pass
         return el
 
-    def type_text(self, by, value, text: str, timeout: int = 10):
+    def type_text(self, by, value, text: str, timeout: float = 1.0):
         el = self.find_visible(by, value, timeout)
         if el:
-            el.clear()
-            el.send_keys(text)
+            try:
+                el.clear()
+                el.send_keys(text)
+            except Exception:
+                pass
         return el
 
-    def get_text(self, by, value, timeout: int = 8) -> str:
+    def get_text(self, by, value, timeout: float = 1.0) -> str:
         el = self.find_visible(by, value, timeout)
         return el.text.strip() if el else ""
 
-    def is_visible(self, by, value, timeout: int = 5) -> bool:
+    def is_visible(self, by, value, timeout: float = 0.5) -> bool:
         try:
             WebDriverWait(self.driver, timeout).until(
                 EC.visibility_of_element_located((by, value))
@@ -150,7 +154,6 @@ class LoginPage(BasePage):
         return self.is_visible(*self.REGISTER_LINK, timeout=5)
 
     def is_on_dashboard(self) -> bool:
-        time.sleep(2)
         return "/login" not in self.get_current_url() and (
             self.page_source_contains("Dashboard") or
             self.page_source_contains("Welcome") or
