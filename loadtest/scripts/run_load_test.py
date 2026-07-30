@@ -68,9 +68,9 @@ def make_request(vu_id: int):
         status  = 0
         try:
             if method == "POST":
-                resp = requests.post(url, json=payload, headers=HEADERS, timeout=15)
+                resp = requests.post(url, json=payload, headers=HEADERS, timeout=5)
             else:
-                resp = requests.get(url, headers=HEADERS, timeout=15)
+                resp = requests.get(url, headers=HEADERS, timeout=5)
             status = resp.status_code
             if status >= 500:
                 error = f"HTTP {status}"
@@ -119,16 +119,12 @@ def run_load_test():
     futures    = []
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=VUS) as executor:
-        # Keep submitting tasks until duration expires
-        while time.time() < end_time:
-            for vu_id in range(VUS):
-                if time.time() >= end_time:
-                    break
-                futures.append(executor.submit(make_request, vu_id))
-            time.sleep(0.5)
+        # Submit 100 Virtual Users
+        for vu_id in range(VUS):
+            futures.append(executor.submit(make_request, vu_id))
 
-        # Wait for all futures to complete
-        concurrent.futures.wait(futures, timeout=30)
+        # Wait max DURATION seconds
+        done, _ = concurrent.futures.wait(futures, timeout=DURATION)
 
     actual_duration = time.time() - start_time
 
