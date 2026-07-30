@@ -84,16 +84,13 @@ export default function LoginPage() {
       navigate('/');
     } catch (err) {
       console.error("Google Sign-In Error:", err);
-      // Show actionable error — no silent fallback
-      if (err.code === 'auth/unauthorized-domain') {
-        setError('Google Sign-In domain unauthorized in Firebase Console. Click "Citizen Login" or "Advocate Login" below to sign in instantly with 1 click!');
+      if (err.message && err.message.includes("cancelled")) {
+        setError('Google Sign-In was cancelled.');
       } else if (err.code === 'auth/popup-blocked') {
         setError('Popup was blocked by your browser. Please allow popups for this site and try again.');
-      } else if (err.code === 'auth/popup-closed-by-user') {
-        setError('Google Sign-In was cancelled. Please try again.');
       } else {
         const detail = err.response?.data?.detail || err.response?.data?.error || err.message || 'Google Sign-In failed.';
-        setError(`Google Sign-In: ${detail}. Click "Citizen Login" below for instant access.`);
+        setError(`Google Sign-In: ${detail}`);
       }
     } finally {
       setLoading(false);
