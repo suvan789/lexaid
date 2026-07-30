@@ -15,12 +15,17 @@ class ExcelReporter:
             duration = round(report.duration, 2)
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             
-            # Extract category and test name
-            node_parts = report.nodeid.split("::")[-1].split("_")
-            category = "Unknown"
-            if len(node_parts) > 4:
-                category = node_parts[3].capitalize()
-            test_name = report.nodeid.split("::")[-1]
+            # Extract category and human-readable test name
+            raw_name = report.nodeid.split("::")[-1]
+            node_parts = raw_name.split("_")
+            category = "API Integration"
+            if len(node_parts) > 2:
+                category = node_parts[2].capitalize()
+            
+            # Format raw function name into clean realistic title
+            clean_words = [w.capitalize() for w in raw_name.replace("test_", "").replace("tc_", "").split("_") if not w.isdigit()]
+            formatted_title = "Verify " + " ".join(clean_words)
+            test_name = getattr(report, "keywords", {}).get("description", formatted_title)
 
             if report.passed:
                 self.passedTests.append({
