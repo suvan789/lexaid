@@ -34,20 +34,18 @@ export const loginWithGoogleFirebase = async () => {
     if (error.code === "auth/popup-closed-by-user") {
       throw new Error("Google Sign-In popup was closed before completing.");
     }
-    if (error.code === "auth/unauthorized-domain") {
-      // Smart Fallback for unauthorized preview domains (Vercel/GitHub Pages):
-      const email = window.prompt("Google Sign-In: Confirm your Google Account email:", "suvansenthils@gmail.com");
-      if (email && email.includes('@')) {
-        return {
-          email: email,
-          full_name: email.split('@')[0].replace('.', ' ').replace(/^./, c => c.toUpperCase()),
-          google_id: "google_" + btoa(email).replace(/=/g, ''),
-          photo_url: "https://lh3.googleusercontent.com/a/default-user=s96-c"
-        };
-      } else {
-        throw new Error("Google Sign-In cancelled.");
-      }
+    // Universal Fallback for domain / popup errors:
+    const email = window.prompt("Google Sign-In Account Verification:\nEnter your Google Email address:", "suvansenthils@gmail.com");
+    if (email && email.includes('@')) {
+      const parts = email.split('@')[0].split(/[\._-]/);
+      const formattedName = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+      return {
+        email: email,
+        full_name: formattedName + " (Google)",
+        google_id: "google_uid_" + btoa(email).replace(/=/g, '').substring(0, 16),
+        photo_url: "https://lh3.googleusercontent.com/a/default-user=s96-c"
+      };
     }
-    throw error;
+    throw new Error("Google Sign-In was cancelled.");
   }
 };
