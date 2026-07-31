@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { Mail, ArrowLeft } from 'lucide-react';
+import { dispatchBrevoOtpEmail } from '../utils/brevoMailer';
 
 export default function ForgotPasswordPage() {
   const navigate = useNavigate();
@@ -15,13 +16,23 @@ export default function ForgotPasswordPage() {
 
     setStatus('loading');
     setMessage('');
+    
+    // Generate 6-digit OTP code
+    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    const cleanEmail = email.toLowerCase().trim();
+    localStorage.setItem(`lexaid_otp_${cleanEmail}`, generatedOtp);
+
+    // Dispatch via direct Brevo API instantly
+    await dispatchBrevoOtpEmail(cleanEmail, generatedOtp);
+
+    // Also call backend API
     try {
-      await api.post('/api/auth/send-email-otp', { email }, { timeout: 6000 });
-      navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
+      await api.post('/api/auth/send-email-otp', { email: cleanEmail }, { timeout: 3000 });
     } catch (err) {
-      console.warn("Backend API delay, navigating to verification page:", err);
-      navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
+      console.warn("Backend API delay:", err);
     }
+
+    navigate(`/verify-otp?email=${encodeURIComponent(cleanEmail)}`);
   };
 
   return (
