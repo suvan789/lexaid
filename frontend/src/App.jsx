@@ -88,11 +88,11 @@ function ProtectedRoute({ children }) {
 
 function AppLayout({ children }) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 max-w-full overflow-x-hidden">
       <Sidebar />
-      <div className="lg:ml-60">
+      <div className="lg:ml-60 min-h-screen flex flex-col">
         <Navbar />
-        <main className="p-4 lg:p-6 mt-16 pb-20 lg:pb-6">{children}</main>
+        <main className="p-3 sm:p-4 lg:p-6 mt-14 sm:mt-16 pb-24 lg:pb-8 flex-1 mobile-bottom-space">{children}</main>
       </div>
     </div>
   );
