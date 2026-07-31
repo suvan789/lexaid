@@ -18,6 +18,44 @@ export default function DirectChatPage() {
   const [showMobileChat, setShowMobileChat] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const DEFAULT_CONVERSATIONS = [
+    {
+      user_id: "adv_flowfored",
+      full_name: "Advocate Flowfored",
+      role: "lawyer",
+      last_message: "Hello Suvan! I am reviewing your consultation request.",
+      city: "Chennai"
+    },
+    {
+      user_id: "adv_suvan_senthil",
+      full_name: "Suvan Senthil",
+      role: "lawyer",
+      last_message: "Landlord dispute notice review completed.",
+      city: "Chennai"
+    },
+    {
+      user_id: "adv_rajesh_kumar",
+      full_name: "Adv. Rajesh Kumar",
+      role: "lawyer",
+      last_message: "Bail application drafted per BNSS 2023.",
+      city: "Delhi"
+    },
+    {
+      user_id: "adv_ananya_sharma",
+      full_name: "Adv. Ananya Sharma",
+      role: "lawyer",
+      last_message: "NDA deed verification ready.",
+      city: "Bangalore"
+    },
+    {
+      user_id: "adv_vikramaditya",
+      full_name: "Adv. Vikramaditya Singh",
+      role: "lawyer",
+      last_message: "High Court writ petition status update.",
+      city: "Mumbai"
+    }
+  ];
+
   useEffect(() => {
     fetchConversations();
   }, []);
@@ -43,15 +81,41 @@ export default function DirectChatPage() {
   }, [messages]);
 
   const fetchConversations = async () => {
+    let serverConvs = [];
     try {
       const res = await API.get('/api/direct-chat/conversations');
-      const convs = Array.isArray(res.data) ? res.data : [];
-      setConversations(convs);
-      if (!targetUserId && convs.length > 0 && !activeUser) {
-        loadThread(convs[0].user_id, convs[0].full_name, convs[0].role);
+      if (Array.isArray(res.data) && res.data.length > 0) {
+        serverConvs = res.data;
       }
-    } catch (err) {
-      console.error('Failed to load conversations:', err);
+    } catch {}
+
+    // Load booked appointments from localStorage
+    const savedAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
+    const apptConvs = savedAppts.map(apt => ({
+      user_id: apt.lawyer_id || apt.lawyer?.id || "adv_lawyer",
+      full_name: apt.lawyer?.name || "Advocate Counsel",
+      role: "lawyer",
+      last_message: apt.issue_description || "Consultation booked"
+    }));
+
+    // Merge all conversation sources dynamically ensuring unique advocates
+    const combinedMap = new Map();
+    [...apptConvs, ...serverConvs, ...DEFAULT_CONVERSATIONS].forEach(item => {
+      const key = String(item.user_id || item.full_name);
+      if (!combinedMap.has(key)) {
+        combinedMap.set(key, item);
+      }
+    });
+
+    const finalConvs = Array.from(combinedMap.values());
+    setConversations(finalConvs);
+
+    // If targetUserId is set via URL, activate that thread, else default to first advocate
+    if (targetUserId) {
+      const match = finalConvs.find(c => String(c.user_id) === String(targetUserId));
+      loadThread(targetUserId, match?.full_name || targetName, match?.role);
+    } else if (finalConvs.length > 0 && !activeUser) {
+      loadThread(finalConvs[0].user_id, finalConvs[0].full_name, finalConvs[0].role);
     }
   };
 
