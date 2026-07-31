@@ -174,7 +174,6 @@ export default function AnalyzePage() {
       navigate('/results');
     }, 1500);
   };
-  };
 
   return (
     <div className="page-container max-w-3xl mx-auto">
