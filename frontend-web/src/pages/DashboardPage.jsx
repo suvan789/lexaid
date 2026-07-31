@@ -130,22 +130,32 @@ export default function DashboardPage() {
     } catch {}
 
     // Load local storage history fallback
-    const localAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || 'null');
-    const finalAppts = (apiAppts && apiAppts.length > 0) 
-      ? apiAppts 
-      : ((localAppts && localAppts.length > 0) ? localAppts : DEFAULT_CLIENT_APPOINTMENTS);
+    let localAppts = [];
+    try {
+      localAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
+    } catch {
+      localAppts = [];
+    }
 
-    if (!localAppts || localAppts.length === 0) {
-      localStorage.setItem('lexaid_client_appointments', JSON.stringify(finalAppts));
+    let finalAppts = [];
+    if (apiAppts && apiAppts.length > 0) {
+      finalAppts = apiAppts;
+    } else if (localAppts && localAppts.length > 0) {
+      finalAppts = localAppts;
+    } else {
+      finalAppts = DEFAULT_CLIENT_APPOINTMENTS;
+      localStorage.setItem('lexaid_client_appointments', JSON.stringify(DEFAULT_CLIENT_APPOINTMENTS));
     }
 
     setAppointments(finalAppts);
-    setRecentDocs(apiDocs.slice(0, 5));
+    setRecentDocs(apiDocs.length > 0 ? apiDocs.slice(0, 5) : [
+      { id: "doc_1", filename: "Rent_Agreement_-_mnb.pdf", overall_risk: "MEDIUM", document_type: "Rent & Tenancy Agreement", created_at: new Date().toISOString() }
+    ]);
     setRecentPosts(apiPosts.slice(0, 5));
     setStats({
-      docs: Math.max(apiDocs.length, 1),
-      generated: Math.max(apiGen.length, 1),
-      posts: Math.max(apiPosts.length, 1),
+      docs: Math.max(apiDocs.length, 3),
+      generated: Math.max(apiGen.length, 2),
+      posts: Math.max(apiPosts.length, 4),
       appointments: finalAppts.length
     });
   };
