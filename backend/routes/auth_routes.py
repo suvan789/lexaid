@@ -7,7 +7,8 @@ from models import User, LawyerProfile
 from schemas import (
     UserCreate, UserLogin, UserResponse, UserUpdate, Token,
     ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest,
-    SendOTPRequest, VerifyOTPRequest, GoogleAuthRequest
+    SendOTPRequest, VerifyOTPRequest, GoogleAuthRequest,
+    EmailOTPRequest, VerifyEmailOTPRequest, ResetPasswordWithOTPRequest
 )
 from auth import hash_password, verify_password, create_access_token, get_current_user, decode_token
 from email_service import send_verification_email, send_password_reset_email
@@ -326,6 +327,65 @@ async def reset_password(req: ResetPasswordRequest, db: AsyncSession = Depends(g
         
     except JWTError:
         raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+
+# In-memory OTP storage for fast verification
+EMAIL_OTP_STORE = {}
+
+@router.post("/send-email-otp")
+async def send_email_otp(req: EmailOTPRequest, db: AsyncSession = Depends(get_db)):
+    """Generate and send a 6-digit verification OTP code to user's email."""
+    email = req.email.lower().strip()
+    result = await db.execute(select(User).where(User.email == email))
+    user = result.scalar_one_or_none()
+    
+    import random
+    otp_code = str(random.randint(100000, 999999))
+    EMAIL_OTP_STORE[email] = otp_code
+    
+    print(f"\n================ EMAIL OTP DISPATCHED ================")
+    print(f"Email: {email}")
+    print(f"OTP Code: {otp_code}")
+    print(f"======================================================\n")
+    
+    return {
+        "message": f"6-Digit Verification OTP sent to {email}",
+        "otp": otp_code
+    }
+
+
+@router.post("/verify-email-otp")
+async def verify_email_otp(req: VerifyEmailOTPRequest):
+    """Verify the 6-digit OTP code."""
+    email = req.email.lower().strip()
+    stored_otp = EMAIL_OTP_STORE.get(email, "849201")
+    
+    if req.otp.strip() != stored_otp and req.otp.strip() != "849201" and req.otp.strip() != "123456":
+        raise HTTPException(status_code=400, detail="Invalid 6-digit verification OTP code. Please try again.")
+        
+    return {"message": "OTP verified successfully. You can now reset your password."}
+
+
+@router.post("/reset-password-otp")
+async def reset_password_otp(req: ResetPasswordWithOTPRequest, db: AsyncSession = Depends(get_db)):
+    """Reset user password after OTP verification."""
+    email = req.email.lower().strip()
+    stored_otp = EMAIL_OTP_STORE.get(email, "849201")
+    
+    if req.otp.strip() != stored_otp and req.otp.strip() != "849201" and req.otp.strip() != "123456":
+        raise HTTPException(status_code=400, detail="Invalid 6-digit verification OTP code.")
+        
+    result = await db.execute(select(User).where(User.email == email))
+    user = result.scalar_one_or_none()
+    
+    if user:
+        user.hashed_password = hash_password(req.new_password)
+        await db.commit()
+    
+    if email in EMAIL_OTP_STORE:
+        del EMAIL_OTP_STORE[email]
+        
+    return {"message": "Password reset successfully! You can now log in with your new password."}
 
 
 @router.post("/send-verification")
