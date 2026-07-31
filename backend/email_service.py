@@ -123,9 +123,13 @@ async def send_verification_email(to_email: str, token: str):
     return True
 
 
-async def send_password_reset_email(to_email: str, token: str):
-    """Send real password reset email to user via SMTP / Resend / Brevo."""
-    reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
+async def send_password_reset_email(to_email: str, token_or_otp: str):
+    """Send real password reset OTP email to user via Brevo / Resend / SMTP."""
+    is_otp = len(token_or_otp.strip()) == 6 and token_or_otp.strip().isdigit()
+    otp_code = token_or_otp.strip()
+    reset_url = f"{FRONTEND_URL}/verify-otp?email={to_email}"
+    
+    email_subject = f"Your 6-Digit LexAid Password Reset OTP: {otp_code} 🔐" if is_otp else "Reset Your LexAid Password 🔐"
     
     html_content = f"""
     <!DOCTYPE html>
@@ -143,20 +147,21 @@ async def send_password_reset_email(to_email: str, token: str):
             
             <h2 style="color: #1a1f3a; font-size: 18px; margin-bottom: 12px;">Reset Your LexAid Password</h2>
             <p style="color: #4b5563; font-size: 14px; line-height: 1.6;">
-                We received a password reset request for your LexAid account (<strong>{to_email}</strong>). Tap the button below to set a new password:
+                We received a password reset request for your LexAid account (<strong>{to_email}</strong>).
             </p>
             
-            <div style="text-align: center; margin: 32px 0;">
-                <a href="{reset_url}" style="background-color: #2563eb; color: #ffffff; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 4px 12px rgba(37,99,235,0.3);">
-                    🔐 Reset My Password
-                </a>
+            <div style="background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 20px; text-align: center; margin: 24px 0;">
+                <p style="color: #1e40af; font-size: 12px; font-weight: bold; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Your 6-Digit Verification OTP Code</p>
+                <div style="font-size: 32px; font-weight: 800; font-family: monospace; letter-spacing: 6px; color: #1d4ed8;">
+                    {otp_code}
+                </div>
+                <p style="color: #3b82f6; font-size: 11px; margin: 8px 0 0 0;">Valid for 10 minutes. Do not share this code with anyone.</p>
             </div>
             
-            <div style="background-color: #f9fafb; border-radius: 8px; padding: 12px; margin-top: 24px; border: 1px solid #e5e7eb;">
-                <p style="color: #9ca3af; font-size: 11px; margin: 0; word-break: break-all; text-align: center;">
-                    Or copy and paste this link into your browser:<br>
-                    <a href="{reset_url}" style="color: #2563eb;">{reset_url}</a>
-                </p>
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="{reset_url}" style="background-color: #2563eb; color: #ffffff; padding: 12px 28px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">
+                    Open Verification Page
+                </a>
             </div>
         </div>
     </body>
@@ -171,7 +176,7 @@ async def send_password_reset_email(to_email: str, token: str):
                 data=json.dumps({
                     "from": "LexAid Security <onboarding@resend.dev>",
                     "to": [to_email],
-                    "subject": "Reset Your LexAid Password 🔐",
+                    "subject": email_subject,
                     "html": html_content
                 }).encode("utf-8"),
                 headers={
@@ -194,7 +199,7 @@ async def send_password_reset_email(to_email: str, token: str):
                 data=json.dumps({
                     "sender": {"name": "LexAid Security", "email": "suvansenthils@gmail.com"},
                     "to": [{"email": to_email}],
-                    "subject": "Reset Your LexAid Password 🔐",
+                    "subject": email_subject,
                     "htmlContent": html_content
                 }).encode("utf-8"),
                 headers={

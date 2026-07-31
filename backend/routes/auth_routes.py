@@ -343,14 +343,16 @@ async def send_email_otp(req: EmailOTPRequest, db: AsyncSession = Depends(get_db
     otp_code = str(random.randint(100000, 999999))
     EMAIL_OTP_STORE[email] = otp_code
     
+    # Dispatch real email via Brevo API / SMTP
+    await send_password_reset_email(email, otp_code)
+    
     print(f"\n================ EMAIL OTP DISPATCHED ================")
     print(f"Email: {email}")
     print(f"OTP Code: {otp_code}")
     print(f"======================================================\n")
     
     return {
-        "message": f"6-Digit Verification OTP sent to {email}",
-        "otp": otp_code
+        "message": f"6-Digit Verification OTP sent to {email}"
     }
 
 
