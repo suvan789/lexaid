@@ -4,6 +4,219 @@ Covers all major Indian Acts, Sections, and legal scenarios.
 Used by the TF-IDF Semantic Retrieval engine in legal_ai_engine.py.
 """
 
+SECTION_KNOWLEDGE_DICT = {
+    "307": {
+        "title": "IPC Section 307 / BNS Section 109 — Attempt to Murder",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "307",
+        "section_bns": "109",
+        "description": "Attempt to commit murder. Whoever does any act with such intention or knowledge, and under such circumstances that, if he by that act caused death, he would be guilty of murder.",
+        "punishment": "Imprisonment up to 10 years + Fine; if hurt is caused to any person, punishment can extend to Life Imprisonment.",
+        "nature": "Cognizable, Non-Bailable, Non-Compoundable, Triable by Court of Session.",
+        "key_steps": [
+            "File FIR immediately under Section 307 IPC / 109 BNS at local police station",
+            "Medical Examination & MLC (Medico-Legal Case) report is crucial evidence",
+            "Accused must apply for Regular Bail in Sessions Court or High Court",
+            "Anticipatory Bail under CrPC Section 438 / BNSS 482 can be sought prior to arrest"
+        ]
+    },
+    "302": {
+        "title": "IPC Section 302 / BNS Section 103 — Punishment for Murder",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "302",
+        "section_bns": "103",
+        "description": "Punishment for committing murder with intentional cause of death or knowledge.",
+        "punishment": "Death Penalty OR Life Imprisonment + Mandatory Fine.",
+        "nature": "Cognizable, Non-Bailable, Non-Compoundable, Triable by Court of Session.",
+        "key_steps": [
+            "Immediate registration of FIR under Section 302 IPC / 103 BNS",
+            "Post-mortem report, forensic evidence, and eye-witness statements are primary evidence",
+            "Bail can only be granted by High Court or Supreme Court under rare circumstances"
+        ]
+    },
+    "420": {
+        "title": "IPC Section 420 / BNS Section 318 — Cheating & Dishonestly Inducing Delivery of Property",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "420",
+        "section_bns": "318",
+        "description": "Cheating and dishonestly inducing delivery of property or altering/destroying valuable security.",
+        "punishment": "Imprisonment up to 7 years + Fine.",
+        "nature": "Cognizable, Non-Bailable (in most states), Compoundable with permission of Court.",
+        "key_steps": [
+            "File FIR at local police station or Economic Offences Wing (EOW)",
+            "If police refuses FIR, file complaint before Magistrate under Section 156(3) CrPC / 175(3) BNSS",
+            "Gather bank statements, agreements, WhatsApp chats, and financial receipts"
+        ]
+    },
+    "498a": {
+        "title": "IPC Section 498A / BNS Section 85 — Matrimonial Cruelty & Dowry Harassment",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "498A",
+        "section_bns": "85",
+        "description": "Husband or relative of husband of a woman subjecting her to cruelty or dowry harassment.",
+        "punishment": "Imprisonment up to 3 years + Fine.",
+        "nature": "Cognizable, Non-Bailable, Non-Compoundable.",
+        "key_steps": [
+            "Police must issue Section 41A CrPC Notice before any arrest (Arnesh Kumar Guidelines)",
+            "Accused can apply for Anticipatory Bail in Sessions Court",
+            "Filing of written complaint with Women Police Cell / Protection Officer"
+        ]
+    },
+    "376": {
+        "title": "IPC Section 376 / BNS Section 63 — Punishment for Rape",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "376",
+        "section_bns": "63",
+        "description": "Committing sexual assault without consent or against will of a person.",
+        "punishment": "Rigorously Imprisoned for not less than 10 years which may extend to Life Imprisonment + Fine.",
+        "nature": "Cognizable, Non-Bailable, Non-Compoundable, Triable by Court of Session.",
+        "key_steps": [
+            "Immediate FIR registration & Mandatory Medical Examination under Section 164A CrPC",
+            "Statement recorded before Judicial Magistrate under Section 164 CrPC / 183 BNSS",
+            "Free legal aid & victim compensation scheme applicable"
+        ]
+    },
+    "379": {
+        "title": "IPC Section 379 / BNS Section 303 — Punishment for Theft",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "379",
+        "section_bns": "303",
+        "description": "Taking dishonestly any movable property out of the possession of any person without consent.",
+        "punishment": "Imprisonment up to 3 years OR Fine OR Both.",
+        "nature": "Cognizable, Non-Bailable, Triable by Any Magistrate.",
+        "key_steps": [
+            "File FIR for theft at local police station",
+            "Provide proof of ownership (invoices, IMEI numbers, vehicle RC)",
+            "Apply for return of property (Panchnama) in Magistrate Court"
+        ]
+    },
+    "384": {
+        "title": "IPC Section 384 / BNS Section 308 — Punishment for Extortion",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "384",
+        "section_bns": "308",
+        "description": "Intentionally putting any person in fear of injury to induce delivery of property or valuable security.",
+        "punishment": "Imprisonment up to 3 years OR Fine OR Both.",
+        "nature": "Cognizable, Non-Bailable, Triable by Any Magistrate.",
+        "key_steps": [
+            "File FIR for Extortion / Blackmail at Police Station / Cyber Crime Cell",
+            "Preserve call recordings, messages, and transaction records",
+            "Apply for Protection / Injunction if threat persists"
+        ]
+    },
+    "506": {
+        "title": "IPC Section 506 / BNS Section 351 — Punishment for Criminal Intimidation",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "506",
+        "section_bns": "351",
+        "description": "Threatening any person with injury to person, reputation, or property to cause alarm.",
+        "punishment": "Imprisonment up to 2 years OR Fine; if threat is to cause death or grievous hurt, up to 7 years.",
+        "nature": "Non-Cognizable (Bailable) / Cognizable if threat to cause death.",
+        "key_steps": [
+            "Lodge Police Complaint / NCR (Non-Cognizable Report) at police station",
+            "File complaint before Judicial Magistrate under Section 200 CrPC",
+            "Seek restraining order / bond for keeping peace under Section 107 CrPC"
+        ]
+    },
+    "354": {
+        "title": "IPC Section 354 / BNS Section 74 — Assault on Woman with Intent to Outrage Modesty",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "354",
+        "section_bns": "74",
+        "description": "Assaulting or using criminal force to any woman intending to outrage her modesty.",
+        "punishment": "Imprisonment not less than 1 year, which may extend to 5 years + Fine.",
+        "nature": "Cognizable, Non-Bailable, Triable by Any Magistrate.",
+        "key_steps": [
+            "Immediate FIR registration at police station or Women Helpline (1091)",
+            "Recording statement under Section 164 CrPC before Magistrate",
+            "Police must complete investigation within statutory timeline"
+        ]
+    },
+    "323": {
+        "title": "IPC Section 323 / BNS Section 115 — Voluntarily Causing Hurt",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "323",
+        "section_bns": "115",
+        "description": "Voluntarily causing bodily pain, disease, or infirmity to any person.",
+        "punishment": "Imprisonment up to 1 year OR Fine up to ₹1,000 OR Both.",
+        "nature": "Non-Cognizable, Bailable, Compoundable.",
+        "key_steps": [
+            "Get MLC (Medico-Legal Certificate) from government hospital",
+            "Lodge NCR at local police station or file private complaint in Magistrate Court",
+            "Matter can be settled / compounded amicably between parties"
+        ]
+    },
+    "324": {
+        "title": "IPC Section 324 / BNS Section 117 — Voluntarily Causing Hurt by Dangerous Weapons",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "324",
+        "section_bns": "117",
+        "description": "Voluntarily causing hurt by means of any instrument for shooting, stabbing, or cutting.",
+        "punishment": "Imprisonment up to 3 years OR Fine OR Both.",
+        "nature": "Cognizable, Non-Bailable, Triable by Any Magistrate.",
+        "key_steps": [
+            "File FIR immediately at police station",
+            "Hospital MLC report & seizure of weapon by police is essential",
+            "Accused can apply for Regular Bail in Magistrate Court"
+        ]
+    },
+    "120b": {
+        "title": "IPC Section 120B / BNS Section 61 — Criminal Conspiracy",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "120B",
+        "section_bns": "61",
+        "description": "Agreement between two or more persons to do or cause to be done an illegal act.",
+        "punishment": "Same punishment as principal offender of the offence conspired.",
+        "nature": "Same nature as the main offence conspired.",
+        "key_steps": [
+            "Invoiced along with main substantive IPC charges (e.g. 420 + 120B)",
+            "Call detail records (CDR), joint meetings, and common intention are key evidence"
+        ]
+    },
+    "406": {
+        "title": "IPC Section 406 / BNS Section 316 — Criminal Breach of Trust",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "406",
+        "section_bns": "316",
+        "description": "Dishonest misappropriation or conversion of property entrusted to a person.",
+        "punishment": "Imprisonment up to 3 years OR Fine OR Both.",
+        "nature": "Cognizable, Non-Bailable, Compoundable with permission of Court.",
+        "key_steps": [
+            "File FIR for Criminal Breach of Trust at police station",
+            "Gather entrustment proof (receipts, power of attorney, agreements)",
+            "File civil suit for recovery alongside criminal proceeding"
+        ]
+    },
+    "509": {
+        "title": "IPC Section 509 / BNS Section 79 — Insulting Modesty of a Woman",
+        "act": "Indian Penal Code, 1860 / Bharatiya Nyaya Sanhita, 2023",
+        "section_ipc": "509",
+        "section_bns": "79",
+        "description": "Uttering any word, making any gesture or sound intending to insult modesty of a woman.",
+        "punishment": "Imprisonment up to 3 years + Fine.",
+        "nature": "Cognizable, Bailable, Compoundable.",
+        "key_steps": [
+            "Lodge complaint / FIR at local police station or Cyber Cell if online",
+            "Preserve audio/video/text proof of gesture or insult",
+            "Accused can seek bail from Magistrate Court"
+        ]
+    },
+    "138": {
+        "title": "NI Act Section 138 — Dishonour of Cheque (Cheque Bounce)",
+        "act": "Negotiable Instruments Act, 1881",
+        "section_ipc": "N/A",
+        "section_bns": "N/A",
+        "description": "Dishonour of cheque for insufficiency of funds or exceeding arrangement amount.",
+        "punishment": "Imprisonment up to 2 years OR Fine up to 2x cheque amount OR Both.",
+        "nature": "Non-Cognizable, Bailable, Compoundable.",
+        "key_steps": [
+            "Obtain Bank Return Memo from bank",
+            "Send Statutory Demand Notice within 30 days of bank memo",
+            "If unpaid in 15 days, file complaint in Magistrate Court within 30 days"
+        ]
+    }
+}
+
 LEGAL_QA_CORPUS = [
 
     # ─── GREETINGS & GENERAL ────────────────────────────────────────────────

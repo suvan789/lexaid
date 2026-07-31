@@ -14,7 +14,21 @@ import joblib
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from ml_engine.legal_knowledge_base import LEGAL_QA_CORPUS
+from ml_engine.legal_knowledge_base import LEGAL_QA_CORPUS, SECTION_KNOWLEDGE_DICT
+
+def format_section_response(sec_data: dict) -> str:
+    """Format clean, structured legal response for an IPC / BNS section."""
+    steps_html = "\n".join([f"{idx+1}. {step}" for idx, step in enumerate(sec_data["key_steps"])])
+    return (
+        f"⚖️ **{sec_data['title']}**\n\n"
+        f"**Act:** {sec_data['act']}\n"
+        f"**IPC Section:** {sec_data['section_ipc']} | **BNS 2023 Section:** {sec_data['section_bns']}\n\n"
+        f"**Definition:**\n{sec_data['description']}\n\n"
+        f"**Punishment:**\n{sec_data['punishment']}\n\n"
+        f"**Nature of Offence:**\n{sec_data['nature']}\n\n"
+        f"**Recommended Legal Steps:**\n{steps_html}\n\n"
+        f"*(For case-specific legal advice, always consult a registered advocate.)*"
+    )
 
 MODEL_DIR = os.path.dirname(os.path.abspath(__file__))
 VECTORIZER_PATH = os.path.join(MODEL_DIR, "legal_tfidf_vectorizer.pkl")
@@ -78,7 +92,12 @@ def _preprocess(text: str) -> str:
 
 def _domain_intent_classifier(query_lower: str) -> str | None:
     """Fast-path legal domain intent & Act-Year entity router for 100% precision on Indian Acts."""
-    # 1. Motor Vehicles Act 1988 & Road Accidents
+    # 0. Check exact IPC / BNS Section numbers (307, 302, 420, 498a, 376, 379, 384, 506, 354, 323, 324, 120b, 406, 509, 138)
+    sec_match = re.search(r'\b(?:ipc|section|sec|bns|bns\s*section)?\s*(307|302|420|498a|376|379|384|506|354|323|324|120b|406|509|138)\b', query_lower)
+    if sec_match:
+        sec_num = sec_match.group(1).lower()
+        if sec_num in SECTION_KNOWLEDGE_DICT:
+            return format_section_response(SECTION_KNOWLEDGE_DICT[sec_num])
     if any(w in query_lower for w in ["1988", "motor vehicle", "motor vehicles", "mv act", "bus", "bike", "crashed", "crash", "collision", "hit", "accident", "mact", "vehicle accident", "knocked down", "run over"]):
         for item in LEGAL_QA_CORPUS:
             if "bike crashed by government bus" in item["q"] or "accident hit and run" in item["q"]:
