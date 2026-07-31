@@ -7,6 +7,7 @@ const CATEGORIES = [
   'Labour', 'Property', 'Criminal', 'General'
 ];
 
+export default function NewsPage() {
   const [articles, setArticles] = useState([
     {
       id: "news_sc_2026_01",
