@@ -23,13 +23,11 @@ export default function ForgotPasswordPage() {
     setStatus('loading');
     setMessage('');
     try {
-      const res = await api.post('/api/auth/send-email-otp', { email }, { timeout: 5000 });
-      const generatedOtp = res.data?.otp || "849201";
-      navigate(`/verify-otp?email=${encodeURIComponent(email)}&otp=${generatedOtp}`);
+      await api.post('/api/auth/send-email-otp', { email }, { timeout: 6000 });
+      navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
     } catch (err) {
-      console.warn("Backend API timeout, generating instant verification OTP:", err);
-      const mockOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      navigate(`/verify-otp?email=${encodeURIComponent(email)}&otp=${mockOtp}`);
+      console.warn("Backend API delay, navigating to verification page:", err);
+      navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
     }
   };
 

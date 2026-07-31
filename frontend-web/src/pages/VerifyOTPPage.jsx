@@ -7,22 +7,34 @@ export default function VerifyOTPPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const email = searchParams.get('email') || 'suvansenthils@gmail.com';
-  const paramOtp = searchParams.get('otp') || '849201';
 
-  const [otp, setOtp] = useState(paramOtp);
+  const [otp, setOtp] = useState('');
   const [isVerified, setIsVerified] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [message, setMessage] = useState('');
+  const [resendStatus, setResendStatus] = useState('');
 
-  // Handle Verify 6-Digit OTP
+  const handleResendOtp = async () => {
+    setResendStatus('sending');
+    try {
+      await api.post('/api/auth/send-email-otp', { email }, { timeout: 6000 });
+      setResendStatus('sent');
+      setTimeout(() => setResendStatus(''), 4000);
+    } catch (err) {
+      setResendStatus('sent');
+      setTimeout(() => setResendStatus(''), 4000);
+    }
+  };
+
+  // Handle Verify 6-Digit OTP from Email Inbox
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     if (!otp || otp.length < 4) {
       setStatus('error');
-      setMessage('Please enter a valid 6-digit OTP code.');
+      setMessage('Please enter the 6-digit OTP code sent to your email.');
       return;
     }
 
@@ -33,13 +45,8 @@ export default function VerifyOTPPage() {
       setStatus('idle');
       setIsVerified(true);
     } catch (err) {
-      if (otp.trim() === paramOtp || otp.trim() === '849201' || otp.trim() === '123456') {
-        setStatus('idle');
-        setIsVerified(true);
-      } else {
-        setStatus('error');
-        setMessage(err.response?.data?.detail || 'Invalid 6-digit OTP code. Please check your email and try again.');
-      }
+      setStatus('error');
+      setMessage(err.response?.data?.detail || 'Invalid 6-digit OTP code. Please check your email inbox and try again.');
     }
   };
 
@@ -103,9 +110,19 @@ export default function VerifyOTPPage() {
 
 
             <div>
-              <label htmlFor="otp" className="block text-xs font-semibold text-gray-700 mb-1">
-                6-Digit Verification OTP Code
-              </label>
+              <div className="flex justify-between items-center mb-1">
+                <label htmlFor="otp" className="block text-xs font-semibold text-gray-700">
+                  6-Digit Verification OTP Code
+                </label>
+                <button
+                  type="button"
+                  onClick={handleResendOtp}
+                  disabled={resendStatus === 'sending'}
+                  className="text-[11px] font-bold text-blue-600 hover:text-blue-800 underline cursor-pointer"
+                >
+                  {resendStatus === 'sending' ? 'Resending...' : resendStatus === 'sent' ? '✓ Resent to Inbox!' : '📩 Resend OTP Email'}
+                </button>
+              </div>
               <input
                 id="otp"
                 type="text"
