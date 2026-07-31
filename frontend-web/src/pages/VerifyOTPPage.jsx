@@ -100,24 +100,7 @@ export default function VerifyOTPPage() {
         {/* STEP 1: VERIFY 6-DIGIT OTP */}
         {!isVerified && (
           <form className="mt-6 space-y-5" onSubmit={handleVerifyOtp}>
-            <div className="p-4 bg-blue-50/80 rounded-xl border border-blue-200 relative overflow-hidden animate-fade-in">
-              <div className="flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <p className="text-xs font-bold text-blue-900">Email Verification Dispatched</p>
-                  <p className="text-[11px] text-blue-700 mt-0.5">
-                    Your 6-Digit Code: <span className="font-mono font-extrabold text-blue-900 bg-white px-2 py-0.5 rounded border border-blue-200 text-xs">{paramOtp}</span>
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setOtp(paramOtp)}
-                    className="mt-2 text-[11px] font-bold text-blue-700 underline hover:text-blue-900 cursor-pointer"
-                  >
-                    ⚡ Auto-Fill Code ({paramOtp})
-                  </button>
-                </div>
-              </div>
-            </div>
+
 
             <div>
               <label htmlFor="otp" className="block text-xs font-semibold text-gray-700 mb-1">
