@@ -191,28 +191,29 @@ async def send_password_reset_email(to_email: str, token_or_otp: str):
         except Exception as e:
             print(f"x Resend API error: {e}")
 
-    # Method 2: Brevo API
+    # Method 2: Brevo / Sendinblue API
     if BREVO_API_KEY:
-        try:
-            req = urllib.request.Request(
-                "https://api.brevo.com/v3/smtp/email",
-                data=json.dumps({
-                    "sender": {"name": "LexAid Security", "email": "suvansenthils@gmail.com"},
-                    "to": [{"email": to_email}],
-                    "subject": email_subject,
-                    "htmlContent": html_content
-                }).encode("utf-8"),
-                headers={
-                    "api-key": BREVO_API_KEY,
-                    "Content-Type": "application/json"
-                },
-                method="POST"
-            )
-            with urllib.request.urlopen(req) as resp:
-                print(f"✓ Password reset email sent via Brevo to {to_email}")
-                return True
-        except Exception as e:
-            print(f"x Brevo API error: {e}")
+        for endpoint in ["https://api.brevo.com/v3/smtp/email", "https://api.sendinblue.com/v3/smtp/email"]:
+            try:
+                req = urllib.request.Request(
+                    endpoint,
+                    data=json.dumps({
+                        "sender": {"name": "LexAid Security", "email": "suvansenthils@gmail.com"},
+                        "to": [{"email": to_email}],
+                        "subject": email_subject,
+                        "htmlContent": html_content
+                    }).encode("utf-8"),
+                    headers={
+                        "api-key": BREVO_API_KEY,
+                        "Content-Type": "application/json"
+                    },
+                    method="POST"
+                )
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    print(f"✓ Password reset email sent via Brevo to {to_email}")
+                    return True
+            except Exception as e:
+                print(f"x Brevo API error ({endpoint}): {e}")
 
     # Method 3: Standard SMTP
     if SMTP_USER and SMTP_PASSWORD:
