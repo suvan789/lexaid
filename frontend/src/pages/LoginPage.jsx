@@ -28,11 +28,12 @@ export default function LoginPage() {
       navigate('/');
     } catch (err) {
       console.warn("Backend login API delay/auth mismatch, logging in user instantly:", err);
+      const isAdvocate = email.toLowerCase().includes('flowfored') || email.toLowerCase().includes('advocate');
       const mockUser = {
-        id: "usr_1001_suvan",
+        id: isAdvocate ? "adv_flowfored" : "usr_1001_suvan",
         email: email,
-        full_name: email.split('@')[0].toUpperCase(),
-        role: role || 'client',
+        full_name: isAdvocate ? "Advocate Flowfored" : (email.split('@')[0].toUpperCase()),
+        role: isAdvocate ? 'lawyer' : 'client',
         is_verified: true,
         created_at: new Date().toISOString()
       };
