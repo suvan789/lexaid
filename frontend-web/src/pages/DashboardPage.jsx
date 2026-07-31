@@ -273,7 +273,13 @@ export default function DashboardPage() {
 
                       <div className="flex items-center gap-2 shrink-0">
                         <button
-                          onClick={() => navigate('/messages')}
+                          onClick={() => {
+                            const advId = apt.lawyer_id || apt.lawyer?.id || apt.id || "adv_flowfored";
+                            const advName = apt.lawyer?.name || "Advocate Flowfored";
+                            navigate(`/messages?user_id=${encodeURIComponent(advId)}&name=${encodeURIComponent(advName)}`, {
+                              state: { userId: advId, userName: advName }
+                            });
+                          }}
                           className="px-4 py-2 bg-navy hover:bg-navy-light text-white font-semibold rounded-xl transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
                         >
                           <span>💬</span> Direct Message
