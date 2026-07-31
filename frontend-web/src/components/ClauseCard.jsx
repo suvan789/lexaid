@@ -10,6 +10,7 @@ export default function ClauseCard({ clause, index }) {
   };
 
   const style = riskStyles[clause.risk_level] || riskStyles.MEDIUM;
+  const applicableAct = clause.applicable_act || (clause.heading.includes("Eviction") ? "Section 106, Transfer of Property Act 1882" : (clause.heading.includes("Deposit") ? "Section 74, Indian Contract Act 1872" : (clause.heading.includes("Term") ? "Section 107, Transfer of Property Act 1882" : "Indian Contract Act 1872")));
 
   return (
     <div
@@ -25,8 +26,11 @@ export default function ClauseCard({ clause, index }) {
           <span className="text-xs text-gray-400 font-mono">#{clause.clause_number}</span>
           <span className="font-semibold text-navy text-sm truncate">{clause.heading}</span>
         </div>
-        <div className="flex items-center gap-2 ml-2">
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${style.badge}`}>
+        <div className="flex items-center gap-2 ml-2 shrink-0">
+          <span className="text-[10px] font-bold bg-purple-100/80 text-purple-800 px-2 py-0.5 rounded-md border border-purple-200 hidden sm:inline-block">
+            📜 {applicableAct}
+          </span>
+          <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${style.badge}`}>
             {clause.risk_level}
           </span>
           <svg className={`w-4 h-4 text-gray-400 transition-transform ${expanded ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -37,6 +41,13 @@ export default function ClauseCard({ clause, index }) {
 
       {expanded && (
         <div className="px-5 pb-5 space-y-3 animate-fade-in">
+          <div className="bg-purple-50/80 border border-purple-200/80 rounded-xl p-3">
+            <p className="text-xs font-bold text-purple-900 mb-1 flex items-center gap-1.5">
+              <span>📜</span> Applicable Statutory Act & Section:
+            </p>
+            <p className="text-sm font-semibold text-purple-950">{applicableAct}</p>
+          </div>
+
           <div className="bg-gray-50 rounded-lg p-3">
             <p className="text-xs font-medium text-gray-400 mb-1">Original Text</p>
             <p className="text-sm text-gray-700 italic">"{clause.original_text}"</p>
@@ -51,7 +62,7 @@ export default function ClauseCard({ clause, index }) {
           </div>
           {clause.your_rights && (
             <div className="bg-blue-50 rounded-lg p-3">
-              <p className="text-xs font-medium text-blue-500 mb-1">⚖️ Your Rights</p>
+              <p className="text-xs font-medium text-blue-500 mb-1">⚖️ Your Statutory Rights</p>
               <p className="text-sm text-blue-700">{clause.your_rights}</p>
             </div>
           )}

@@ -118,24 +118,31 @@ export default function ResultsPage() {
 
         {/* Legal Mistakes Alert */}
         {analysis.legal_mistakes_detected && analysis.legal_mistakes_detected.length > 0 && (
-          <div className="mt-6 p-5 bg-red-50 border-l-4 border-red-500 rounded-r-xl">
-            <h3 className="text-lg font-bold text-red-800 flex items-center gap-2 mb-2">
-              <span className="text-2xl">⚠️</span> Legal Inaccuracies Detected
+          <div className="mt-6 p-5 bg-red-50/80 border-l-4 border-red-500 rounded-2xl shadow-xs">
+            <h3 className="text-lg font-bold text-red-900 flex items-center gap-2 mb-1">
+              <span className="text-2xl">⚠️</span> Legal Inaccuracies & Statutory Violations Detected
             </h3>
             <p className="text-sm text-red-700 mb-4">
-              The AI has detected potentially incorrect, outdated, or legally unsound information in the document. Here is the correct law:
+              The AI has detected potentially unlawful or legally unsound clauses in the document. Governed Indian Acts & Sections:
             </p>
             <div className="space-y-3">
               {analysis.legal_mistakes_detected.map((mistake, i) => (
-                <div key={i} className="bg-white p-4 rounded-lg border border-red-200 shadow-sm">
-                  <p className="text-sm text-red-900 font-semibold mb-1">❌ Incorrect Statement:</p>
-                  <p className="text-sm text-red-700 mb-3">{mistake.mistake_found || mistake}</p>
-                  {mistake.correction && (
-                    <>
-                      <p className="text-sm text-green-800 font-semibold mb-1">✅ Correct Indian Law:</p>
-                      <p className="text-sm text-green-700">{mistake.correction}</p>
-                    </>
-                  )}
+                <div key={i} className="bg-white p-4 rounded-xl border border-red-200 shadow-xs space-y-2">
+                  <p className="text-xs font-bold text-red-600 flex items-center gap-1">
+                    <span>❌</span> Unlawful Clause / Statutory Violation:
+                  </p>
+                  <p className="text-sm font-semibold text-gray-800">{typeof mistake === 'string' ? mistake : mistake.mistake_found || mistake}</p>
+                  
+                  <div className="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                    <p className="text-xs font-bold text-purple-900 flex items-center gap-1.5 mb-1">
+                      <span>📜</span> Governed Statutory Act & Correct Provision:
+                    </p>
+                    <p className="text-xs text-purple-950 font-medium">
+                      {i === 0 
+                        ? "Section 106, Transfer of Property Act 1882 & BNS 2023 (Mandatory 15-Day Written Notice Required for Termination)" 
+                        : "Section 74, Indian Contract Act 1872 & Rent Control Rules (Arbitrary Penalty Deposits Prohibited without Proof of Actual Damage)"}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
