@@ -6,6 +6,7 @@ import { AppProvider } from './context/AppContext';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import VerifyOTPPage from './pages/VerifyOTPPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
 import DashboardPage from './pages/DashboardPage';
@@ -102,6 +103,7 @@ function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/verify-otp" element={<VerifyOTPPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />
       <Route path="/" element={<ProtectedRoute><AppLayout><MainDashboard /></AppLayout></ProtectedRoute>} />
