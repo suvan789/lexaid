@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AppProvider } from './context/AppContext';
 
@@ -130,7 +130,7 @@ export default function App() {
     <ErrorBoundary>
       <AuthProvider>
         <AppProvider>
-          <Router basename={process.env.PUBLIC_URL && process.env.PUBLIC_URL.startsWith('http') ? new URL(process.env.PUBLIC_URL).pathname : (process.env.PUBLIC_URL && process.env.PUBLIC_URL !== '.' ? process.env.PUBLIC_URL : '')}>
+          <Router>
             <AppRoutes />
           </Router>
         </AppProvider>
