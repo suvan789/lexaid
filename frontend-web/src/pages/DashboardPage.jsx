@@ -99,11 +99,15 @@ export default function DashboardPage() {
   ];
 
   useEffect(() => {
-    // 1. Instantly populate UI state in 0 seconds from local storage
-    const initialLocalAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
-    const initialAppts = initialLocalAppts.length > 0 ? initialLocalAppts : DEFAULT_CLIENT_APPOINTMENTS;
-    if (initialLocalAppts.length === 0) {
-      localStorage.setItem('lexaid_client_appointments', JSON.stringify(DEFAULT_CLIENT_APPOINTMENTS));
+    // 1. Instantly populate UI state in 0 seconds from user-scoped local storage
+    const userKey = user?.email || user?.id || 'guest';
+    const storageKey = `lexaid_client_appointments_${userKey}`;
+
+    const initialLocalAppts = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    const initialAppts = initialLocalAppts.length > 0 ? initialLocalAppts : (userKey.includes('suvan') ? DEFAULT_CLIENT_APPOINTMENTS : []);
+    
+    if (initialLocalAppts.length === 0 && userKey.includes('suvan')) {
+      localStorage.setItem(storageKey, JSON.stringify(DEFAULT_CLIENT_APPOINTMENTS));
     }
     setAppointments(initialAppts);
     setStats({
@@ -118,9 +122,12 @@ export default function DashboardPage() {
 
     // 2. Fetch network API data silently in background
     loadDashboardData();
-  }, []);
+  }, [user]);
 
   const loadDashboardData = async () => {
+    const userKey = user?.email || user?.id || 'guest';
+    const storageKey = `lexaid_client_appointments_${userKey}`;
+
     let apiAppts = [];
     let apiDocs = [];
     let apiGen = [];
@@ -149,7 +156,7 @@ export default function DashboardPage() {
 
     if (apiAppts && apiAppts.length > 0) {
       setAppointments(apiAppts);
-      localStorage.setItem('lexaid_client_appointments', JSON.stringify(apiAppts));
+      localStorage.setItem(storageKey, JSON.stringify(apiAppts));
     }
     if (apiDocs && apiDocs.length > 0) {
       setRecentDocs(apiDocs.slice(0, 5));

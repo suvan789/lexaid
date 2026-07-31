@@ -92,10 +92,12 @@ export default function LawyersPage() {
       };
     }
 
-    // Save to persistent localStorage history
-    const existing = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
+    // Save to persistent user-scoped localStorage history
+    const userKey = user?.email || user?.id || 'guest';
+    const storageKey = `lexaid_client_appointments_${userKey}`;
+    const existing = JSON.parse(localStorage.getItem(storageKey) || '[]');
     const updated = [createdAppt, ...existing.filter(a => a.id !== createdAppt.id)];
-    localStorage.setItem('lexaid_client_appointments', JSON.stringify(updated));
+    localStorage.setItem(storageKey, JSON.stringify(updated));
 
     setBookingConfirmation({
       appointment: createdAppt,
