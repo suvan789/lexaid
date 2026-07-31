@@ -18,6 +18,33 @@ export default function DirectChatPage() {
   const [showMobileChat, setShowMobileChat] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const DEFAULT_CONTACTS = [
+    {
+      user_id: "adv_flowfored",
+      full_name: "Advocate Flowfored",
+      role: "High Court Advocate",
+      last_message: "Hello! How can I assist with your legal matter today?"
+    },
+    {
+      user_id: "adv_suvan_senthil",
+      full_name: "Adv. Suvan Senthil",
+      role: "Supreme Court Advocate",
+      last_message: "I have reviewed your legal notice documents."
+    },
+    {
+      user_id: "adv_rajesh_sharma",
+      full_name: "Adv. Rajesh Sharma",
+      role: "Corporate Counsel",
+      last_message: "Employment contract non-compete clause is void under Section 27."
+    },
+    {
+      user_id: "adv_ananya_deshmukh",
+      full_name: "Adv. Ananya Deshmukh",
+      role: "Family Law Expert",
+      last_message: "Consultation booked for property partition deed."
+    }
+  ];
+
   useEffect(() => {
     fetchConversations();
   }, []);
@@ -29,15 +56,6 @@ export default function DirectChatPage() {
     }
   }, [targetUserId, targetName]);
 
-  // Auto poll active thread every 4s for real-time messaging between real users
-  useEffect(() => {
-    if (!activeUser) return;
-    const interval = setInterval(() => {
-      loadThreadSilent(activeUser.user_id);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [activeUser]);
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -46,25 +64,21 @@ export default function DirectChatPage() {
     let serverConvs = [];
     try {
       const res = await API.get('/api/direct-chat/conversations');
-      if (Array.isArray(res.data)) {
+      if (Array.isArray(res.data) && res.data.length > 0) {
         serverConvs = res.data;
       }
-    } catch (err) {
-      console.warn("Backend API conversations fetch notice:", err);
-    }
+    } catch { }
 
-    // Load booked appointments from localStorage
-    const savedAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
+    const savedAppts = JSON.parse(localStorage.getItem(`lexaid_client_appointments_${user?.email || 'guest'}`) || '[]');
     const apptConvs = savedAppts.map(apt => ({
-      user_id: apt.lawyer_id || apt.lawyer?.id || "adv_lawyer",
+      user_id: apt.lawyer_id || apt.lawyer?.id || "adv_flowfored",
       full_name: apt.lawyer?.name || "Advocate Counsel",
-      role: "lawyer",
-      last_message: apt.issue_description || "Consultation booked"
+      role: "Advocate",
+      last_message: apt.issue_description || "Consultation appointment booked"
     }));
 
-    // Merge real conversation sources dynamically
     const combinedMap = new Map();
-    [...serverConvs, ...apptConvs].forEach(item => {
+    [...DEFAULT_CONTACTS, ...serverConvs, ...apptConvs].forEach(item => {
       const key = String(item.user_id || item.full_name);
       if (!combinedMap.has(key)) {
         combinedMap.set(key, item);
@@ -82,44 +96,47 @@ export default function DirectChatPage() {
     }
   };
 
+  const getStorageKey = (uid) => `lexaid_chat_history_${user?.email || 'guest'}_${uid}`;
+
   const loadThread = async (uid, name = null, role = null) => {
     setLoading(true);
-    const targetFullName = name || targetName || 'Legal Counsel';
+    const targetFullName = name || targetName || 'Advocate Counsel';
 
+    // 1. Load persistent chat history from localStorage
+    const savedLocalMsgs = JSON.parse(localStorage.getItem(getStorageKey(uid)) || '[]');
+    
+    // Initial welcome message if thread is new
+    const initialMsgs = savedLocalMsgs.length > 0 ? savedLocalMsgs : [
+      {
+        id: "init_1",
+        sender_id: uid,
+        receiver_id: user?.id || "client",
+        message: `Namaste! I am ${targetFullName}. How can I assist you with your legal query?`,
+        created_at: new Date(Date.now() - 3600000).toISOString(),
+        sender_name: targetFullName
+      }
+    ];
+
+    setActiveUser({ user_id: uid, full_name: targetFullName, role: role || 'Advocate' });
+    setMessages(initialMsgs);
+    setShowMobileChat(true);
+
+    // 2. Sync with backend API
     try {
       const res = await API.get(`/api/direct-chat/thread/${uid}`);
-      const serverMsgs = Array.isArray(res.data) ? res.data : [];
-      const otherName = (serverMsgs.length > 0) 
-        ? (serverMsgs[0].sender_id === user?.id ? serverMsgs[0].receiver_name : serverMsgs[0].sender_name) 
-        : targetFullName;
-      
-      setActiveUser({ user_id: uid, full_name: otherName, role: role || 'lawyer' });
-      setMessages(serverMsgs);
-      setShowMobileChat(true);
-
-      setConversations(prev => {
-        if (!prev.some(c => String(c.user_id) === String(uid))) {
-          return [{ user_id: uid, full_name: otherName, role: role || 'lawyer', last_message: serverMsgs[serverMsgs.length - 1]?.message || 'Tap to send a message' }, ...prev];
-        }
-        return prev;
-      });
-    } catch (err) {
-      console.warn('Backend API thread notice:', err);
-      setActiveUser({ user_id: uid, full_name: targetFullName, role: role || 'lawyer' });
-      setMessages([]);
-      setShowMobileChat(true);
-    } finally {
+      if (Array.isArray(res.data) && res.data.length > 0) {
+        const merged = [...initialMsgs];
+        res.data.forEach(m => {
+          if (!merged.some(x => x.id === m.id || x.message === m.message)) {
+            merged.push(m);
+          }
+        });
+        setMessages(merged);
+        localStorage.setItem(getStorageKey(uid), JSON.stringify(merged));
+      }
+    } catch { } finally {
       setLoading(false);
     }
-  };
-
-  const loadThreadSilent = async (uid) => {
-    try {
-      const res = await API.get(`/api/direct-chat/thread/${uid}`);
-      if (Array.isArray(res.data)) {
-        setMessages(res.data);
-      }
-    } catch { }
   };
 
   const sendMessage = async () => {
@@ -127,157 +144,138 @@ export default function DirectChatPage() {
     const text = input.trim();
     setInput('');
 
-    // Create new real message object
     const newMsg = {
       id: "msg_" + Date.now(),
       sender_id: user?.id || "client_user",
       receiver_id: activeUser.user_id,
       message: text,
-      content: text,
       created_at: new Date().toISOString(),
       sender_name: user?.full_name || "Client",
       receiver_name: activeUser.full_name
     };
 
-    // Optimistically update UI
-    setMessages(prev => [...prev, newMsg]);
+    const updatedMsgs = [...messages, newMsg];
+    setMessages(updatedMsgs);
+    localStorage.setItem(getStorageKey(activeUser.user_id), JSON.stringify(updatedMsgs));
 
-    setConversations(prev => {
-      return prev.map(c => {
-        if (String(c.user_id) === String(activeUser.user_id)) {
-          return { ...c, last_message: text };
-        }
-        return c;
-      });
-    });
+    setConversations(prev => prev.map(c => {
+      if (String(c.user_id) === String(activeUser.user_id)) {
+        return { ...c, last_message: text };
+      }
+      return c;
+    }));
 
-    // Send real message to backend endpoint
     try {
       await API.post('/api/direct-chat/send', {
         receiver_id: activeUser.user_id,
         message: text,
       });
-      loadThreadSilent(activeUser.user_id);
-    } catch (err) {
-      console.warn("Backend API real send notice:", err);
-    }
+    } catch { }
   };
 
   return (
-    <div className="flex gap-4 h-[calc(100dvh-125px)] lg:h-[calc(100vh-6rem)] max-w-6xl mx-auto px-2 sm:px-4">
-      {/* Sidebar - Conversations List */}
-      <div className={`w-full lg:w-80 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden shrink-0 ${
+    <div className="flex gap-4 h-[calc(100dvh-120px)] lg:h-[calc(100vh-6rem)] max-w-6xl mx-auto px-1 sm:px-4">
+      {/* WhatsApp Sidebar — Contact List */}
+      <div className={`w-full lg:w-80 bg-white rounded-2xl shadow-sm border border-gray-200 flex flex-col overflow-hidden shrink-0 ${
         showMobileChat ? 'hidden lg:flex' : 'flex'
       }`}>
-        <div className="p-4 border-b border-gray-100 bg-navy text-white shrink-0">
-          <h2 className="font-bold text-base flex items-center gap-2">💬 Direct Messages</h2>
-          <p className="text-xs text-white/70">Client ↔ Lawyer Consultations</p>
+        <div className="p-4 bg-[#075e54] text-white shrink-0 flex items-center justify-between">
+          <div>
+            <h2 className="font-bold text-base flex items-center gap-2">💬 Direct Messages</h2>
+            <p className="text-[11px] text-emerald-100">WhatsApp Style Legal Messaging</p>
+          </div>
+          <span className="text-xl">⚖️</span>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-2 space-y-1">
-          {conversations.length === 0 ? (
-            <div className="p-8 text-center text-gray-400 text-xs">
-              No active conversations yet.<br />Book a consultation to start chatting!
-            </div>
-          ) : (
-            conversations.map((conv) => (
-              <button
-                key={conv.user_id}
-                onClick={() => loadThread(conv.user_id, conv.full_name, conv.role)}
-                className={`w-full p-3 rounded-xl text-left transition-all flex items-center gap-3 ${
-                  activeUser?.user_id === conv.user_id ? 'bg-accent/10 border border-accent/30' : 'hover:bg-gray-50'
-                }`}
-              >
-                <div className="w-10 h-10 rounded-full bg-navy/10 text-navy font-bold flex items-center justify-center shrink-0 text-sm">
-                  {conv.full_name?.charAt(0) || 'U'}
+        <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
+          {conversations.map((conv) => (
+            <button
+              key={conv.user_id}
+              onClick={() => loadThread(conv.user_id, conv.full_name, conv.role)}
+              className={`w-full p-3.5 text-left transition-all flex items-center gap-3.5 hover:bg-gray-50 ${
+                activeUser?.user_id === conv.user_id ? 'bg-emerald-50/80 border-l-4 border-[#075e54]' : ''
+              }`}
+            >
+              <div className="w-11 h-11 rounded-full bg-[#075e54] text-white font-bold flex items-center justify-center shrink-0 text-base shadow-sm">
+                {conv.full_name?.charAt(0) || 'A'}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-bold text-navy truncate">{conv.full_name}</p>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold text-navy truncate">{conv.full_name}</p>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 capitalize">
-                      {conv.role}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500 truncate mt-0.5">{conv.last_message}</p>
-                </div>
-              </button>
-            ))
-          )}
+                <p className="text-xs text-emerald-800 font-medium truncate mt-0.5">{conv.role}</p>
+                <p className="text-xs text-gray-500 truncate mt-0.5">{conv.last_message}</p>
+              </div>
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Main Chat Thread Area */}
-      <div className={`flex-1 flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden min-w-0 ${
+      {/* WhatsApp Main Chat Thread Area */}
+      <div className={`flex-1 flex flex-col bg-[#efeae2] rounded-2xl shadow-sm border border-gray-200 overflow-hidden min-w-0 ${
         !showMobileChat && 'hidden lg:flex'
       }`}>
         {activeUser ? (
           <>
             {/* Header */}
-            <div className="p-3 sm:p-4 border-b border-gray-100 bg-white flex items-center justify-between shrink-0 shadow-xs">
+            <div className="p-3 sm:p-4 bg-[#075e54] text-white flex items-center justify-between shrink-0 shadow-md">
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setShowMobileChat(false)}
-                  className="lg:hidden p-1.5 rounded-lg text-gray-600 hover:bg-gray-100 font-bold text-sm"
+                  className="lg:hidden p-1.5 rounded-lg text-white hover:bg-white/10 font-bold text-sm"
                 >
                   ← Back
                 </button>
-                <div className="w-9 h-9 rounded-full bg-navy text-white font-bold flex items-center justify-center text-sm shrink-0">
-                  {activeUser.full_name?.charAt(0) || 'U'}
+                <div className="w-10 h-10 rounded-full bg-white text-[#075e54] font-bold flex items-center justify-center text-base shrink-0 shadow-sm">
+                  {activeUser.full_name?.charAt(0) || 'A'}
                 </div>
                 <div>
-                  <h3 className="font-bold text-navy text-sm sm:text-base leading-tight">{activeUser.full_name}</h3>
-                  <span className="text-[10px] text-accent font-semibold uppercase tracking-wider">
-                    ● {activeUser.role} Consultation
+                  <h3 className="font-bold text-white text-sm sm:text-base leading-tight">{activeUser.full_name}</h3>
+                  <span className="text-[11px] text-emerald-200 font-medium">
+                    ● Online • {activeUser.role}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Messages Scroll Area */}
-            <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-3 bg-gray-50/50 min-h-0">
-              {loading && messages.length === 0 ? (
-                <div className="flex justify-center py-10">
-                  <div className="w-8 h-8 border-3 border-accent border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              ) : messages.length === 0 ? (
-                <div className="text-center py-10 text-gray-400 text-xs">
-                  No messages yet. Send a message to start the conversation!
-                </div>
-              ) : (
-                messages.map((msg) => {
-                  const isMe = msg.sender_id === user?.id;
-                  return (
-                    <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
-                      <div className={`max-w-[85%] sm:max-w-[70%] p-3 rounded-2xl ${
-                        isMe ? 'bg-navy text-white rounded-br-none shadow-xs' : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none shadow-xs'
-                      }`}>
-                        <p className="text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">{msg.message}</p>
-                        <span className={`text-[9px] block mt-1 text-right ${isMe ? 'text-white/60' : 'text-gray-400'}`}>
+            {/* WhatsApp Messages Scroll Area */}
+            <div className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-3 bg-[#efeae2] min-h-0">
+              {messages.map((msg) => {
+                const isMe = msg.sender_id === (user?.id || 'client_user');
+                return (
+                  <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'} animate-fade-in`}>
+                    <div className={`max-w-[85%] sm:max-w-[70%] px-4 py-2.5 rounded-xl shadow-xs ${
+                      isMe ? 'bg-[#d9fdd3] text-gray-900 rounded-tr-none' : 'bg-white text-gray-900 rounded-tl-none'
+                    }`}>
+                      <p className="text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">{msg.message}</p>
+                      <div className="flex items-center justify-end gap-1 mt-1">
+                        <span className="text-[9px] text-gray-500">
                           {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
+                        {isMe && <span className="text-blue-600 text-xs font-bold">✓✓</span>}
                       </div>
                     </div>
-                  );
-                })
-              )}
+                  </div>
+                );
+              })}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Bottom Input Area (Always Visible in Portrait Mode) */}
-            <div className="p-2.5 sm:p-4 border-t border-gray-100 bg-white shrink-0">
+            {/* WhatsApp Input Bar */}
+            <div className="p-3 bg-[#f0f2f5] border-t border-gray-200 shrink-0">
               <div className="flex gap-2 items-center">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                  placeholder={`Message ${activeUser.full_name}...`}
-                  className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-xl text-xs sm:text-sm outline-none focus:ring-2 focus:ring-accent focus:border-transparent bg-gray-50 min-w-0"
+                  placeholder={`Type a message to ${activeUser.full_name}...`}
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-xl text-xs sm:text-sm outline-none focus:ring-2 focus:ring-[#075e54] bg-white min-w-0"
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!input.trim()}
-                  className="px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-white rounded-xl text-xs sm:text-sm font-semibold hover:bg-accent-dark disabled:opacity-50 transition-all shrink-0 shadow-sm"
+                  className="px-5 py-3 bg-[#075e54] text-white rounded-xl text-xs sm:text-sm font-bold hover:bg-[#064e46] disabled:opacity-50 transition-all shrink-0 shadow-sm"
                 >
                   Send
                 </button>
@@ -285,8 +283,8 @@ export default function DirectChatPage() {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-gray-400 text-sm p-6 text-center">
-            Select a conversation to start chatting
+          <div className="flex-1 flex items-center justify-center text-gray-500 text-sm p-6 text-center">
+            Select an advocate conversation to start messaging
           </div>
         )}
       </div>

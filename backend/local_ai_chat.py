@@ -33,9 +33,17 @@ THANKS_PATTERN = re.compile(
 def generate_local_legal_chat_response(message: str, conversation_history: list = None) -> str:
     """LexAid AI Chat — clean professional legal assistant."""
     msg = message.strip()
+    msg_lower = msg.lower()
 
-    # ── 1. Greeting ─────────────────────────────────────────────────────────
-    if GREETINGS_PATTERN.match(msg):
+    # ── 1. Statutory Act / Legal Section Handler (Priority Over Greetings) ──
+    is_legal_query = any(keyword in msg_lower for keyword in [
+        "act", "section", "ipc", "bns", "bnss", "crpc", "property", "contract",
+        "notice", "landlord", "tenant", "rent", "court", "lawyer", "rights", "divorce",
+        "consumer", "labour", "employment", "cheque", "106", "107", "74", "27"
+    ])
+
+    # ── 2. Greeting (Only if NOT a legal query) ─────────────────────────────
+    if not is_legal_query and GREETINGS_PATTERN.match(msg):
         return (
             "Namaste! 🙏 I am **LexAid AI**, your Indian Legal Assistant.\n\n"
             "Ask me any question about Indian law and I will guide you with the relevant Acts and Sections."
