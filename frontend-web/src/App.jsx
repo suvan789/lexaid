@@ -1,3 +1,4 @@
+// LexAid App Version 2.4.0 - Build 20260731_1048
 import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
