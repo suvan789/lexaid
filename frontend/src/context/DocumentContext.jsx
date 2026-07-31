@@ -5,10 +5,21 @@ const DocumentContext = createContext(null);
 export function DocumentProvider({ children }) {
   const [analysis, setAnalysis] = useState(null);
   const [documentText, setDocumentText] = useState("");
+  const [documentId, setDocumentId] = useState(null);
+  const [currentLanguage, setCurrentLanguage] = useState("english");
 
   return (
     <DocumentContext.Provider
-      value={{ analysis, documentText, setAnalysis, setDocumentText }}
+      value={{
+        analysis,
+        documentText,
+        documentId,
+        currentLanguage,
+        setAnalysis,
+        setDocumentText,
+        setDocumentId,
+        setCurrentLanguage,
+      }}
     >
       {children}
     </DocumentContext.Provider>

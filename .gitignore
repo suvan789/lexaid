@@ -10,3 +10,7 @@ dist/
 *.zip
 desktop-app/out/  
  
+*.apk
+*.exe
+frontend/desktop/out/
+
