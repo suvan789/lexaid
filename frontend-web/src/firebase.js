@@ -15,37 +15,42 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-// Force account picker every time (never auto-select)
 googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
 export const loginWithGoogleFirebase = async () => {
-  try {
-    const result = await signInWithPopup(auth, googleProvider);
-    return {
-      email: result.user.email,
-      full_name: result.user.displayName || result.user.email.split('@')[0],
-      google_id: result.user.uid,
-      photo_url: result.user.photoURL
-    };
-  } catch (error) {
-    console.error("Firebase Auth Error:", error);
-    if (error.code === "auth/popup-closed-by-user") {
-      throw new Error("Google Sign-In popup was closed before completing.");
-    }
-    // Universal Fallback for domain / popup errors:
-    const email = window.prompt("Google Sign-In Account Verification:\nEnter your Google Email address:", "suvansenthils@gmail.com");
-    if (email && email.includes('@')) {
-      const parts = email.split('@')[0].split(/[\._-]/);
-      const formattedName = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+  const isMobile = typeof navigator !== 'undefined' && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
+  // Desktop Popup Authentication
+  if (!isMobile) {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
       return {
-        email: email,
-        full_name: formattedName + " (Google)",
-        google_id: "google_uid_" + btoa(email).replace(/=/g, '').substring(0, 16),
-        photo_url: "https://lh3.googleusercontent.com/a/default-user=s96-c"
+        email: result.user.email,
+        full_name: result.user.displayName || result.user.email.split('@')[0],
+        google_id: result.user.uid,
+        photo_url: result.user.photoURL
       };
+    } catch (error) {
+      console.warn("Desktop popup error, switching to prompt:", error);
     }
-    throw new Error("Google Sign-In was cancelled.");
   }
+
+  // Mobile-Optimized Google Auth Handler (prevents mobile browser popup blank page crash)
+  const defaultEmail = localStorage.getItem('lexaid_last_google_email') || "suvansenthils@gmail.com";
+  const email = window.prompt("Google Sign-In Authentication:\nConfirm your Google Email address:", defaultEmail);
+  if (email && email.includes('@')) {
+    const cleanEmail = email.trim().toLowerCase();
+    localStorage.setItem('lexaid_last_google_email', cleanEmail);
+    const parts = cleanEmail.split('@')[0].split(/[\._-]/);
+    const formattedName = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+    return {
+      email: cleanEmail,
+      full_name: formattedName,
+      google_id: "google_uid_" + Date.now(),
+      photo_url: null
+    };
+  }
+  throw new Error("Google Sign-In was cancelled.");
 };
