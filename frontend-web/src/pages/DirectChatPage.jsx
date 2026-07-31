@@ -18,44 +18,6 @@ export default function DirectChatPage() {
   const [showMobileChat, setShowMobileChat] = useState(false);
   const messagesEndRef = useRef(null);
 
-  const DEFAULT_CONVERSATIONS = [
-    {
-      user_id: "adv_flowfored",
-      full_name: "Advocate Flowfored",
-      role: "lawyer",
-      last_message: "Hello Suvan! I am reviewing your consultation request.",
-      city: "Chennai"
-    },
-    {
-      user_id: "adv_suvan_senthil",
-      full_name: "Suvan Senthil",
-      role: "lawyer",
-      last_message: "Landlord dispute notice review completed.",
-      city: "Chennai"
-    },
-    {
-      user_id: "adv_rajesh_kumar",
-      full_name: "Adv. Rajesh Kumar",
-      role: "lawyer",
-      last_message: "Bail application drafted per BNSS 2023.",
-      city: "Delhi"
-    },
-    {
-      user_id: "adv_ananya_sharma",
-      full_name: "Adv. Ananya Sharma",
-      role: "lawyer",
-      last_message: "NDA deed verification ready.",
-      city: "Bangalore"
-    },
-    {
-      user_id: "adv_vikramaditya",
-      full_name: "Adv. Vikramaditya Singh",
-      role: "lawyer",
-      last_message: "High Court writ petition status update.",
-      city: "Mumbai"
-    }
-  ];
-
   useEffect(() => {
     fetchConversations();
   }, []);
@@ -67,7 +29,7 @@ export default function DirectChatPage() {
     }
   }, [targetUserId, targetName]);
 
-  // Auto poll active thread every 4s for real-time messaging feel
+  // Auto poll active thread every 4s for real-time messaging between real users
   useEffect(() => {
     if (!activeUser) return;
     const interval = setInterval(() => {
@@ -84,10 +46,12 @@ export default function DirectChatPage() {
     let serverConvs = [];
     try {
       const res = await API.get('/api/direct-chat/conversations');
-      if (Array.isArray(res.data) && res.data.length > 0) {
+      if (Array.isArray(res.data)) {
         serverConvs = res.data;
       }
-    } catch {}
+    } catch (err) {
+      console.warn("Backend API conversations fetch notice:", err);
+    }
 
     // Load booked appointments from localStorage
     const savedAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
@@ -98,9 +62,9 @@ export default function DirectChatPage() {
       last_message: apt.issue_description || "Consultation booked"
     }));
 
-    // Merge all conversation sources dynamically ensuring unique advocates
+    // Merge real conversation sources dynamically
     const combinedMap = new Map();
-    [...apptConvs, ...serverConvs, ...DEFAULT_CONVERSATIONS].forEach(item => {
+    [...serverConvs, ...apptConvs].forEach(item => {
       const key = String(item.user_id || item.full_name);
       if (!combinedMap.has(key)) {
         combinedMap.set(key, item);
@@ -110,7 +74,6 @@ export default function DirectChatPage() {
     const finalConvs = Array.from(combinedMap.values());
     setConversations(finalConvs);
 
-    // If targetUserId is set via URL, activate that thread, else default to first advocate
     if (targetUserId) {
       const match = finalConvs.find(c => String(c.user_id) === String(targetUserId));
       loadThread(targetUserId, match?.full_name || targetName, match?.role);
@@ -121,40 +84,30 @@ export default function DirectChatPage() {
 
   const loadThread = async (uid, name = null, role = null) => {
     setLoading(true);
-    const targetFullName = name || targetName || 'Advocate Legal Counsel';
-    const cachedMessages = JSON.parse(localStorage.getItem(`lexaid_chat_thread_${uid}`) || 'null');
+    const targetFullName = name || targetName || 'Legal Counsel';
 
     try {
       const res = await API.get(`/api/direct-chat/thread/${uid}`);
-      const serverMsgs = (res.data && res.data.length > 0) ? res.data : (cachedMessages || [
-        { id: "m1", sender_id: uid, sender_name: targetFullName, content: `Hello! I am ${targetFullName}. How can I assist you with your legal consultation today?`, created_at: new Date().toISOString() }
-      ]);
-
-      const otherName = (res.data && res.data.length > 0) ? (res.data[0].sender_id === user?.id ? res.data[0].receiver_name : res.data[0].sender_name) : targetFullName;
+      const serverMsgs = Array.isArray(res.data) ? res.data : [];
+      const otherName = (serverMsgs.length > 0) 
+        ? (serverMsgs[0].sender_id === user?.id ? serverMsgs[0].receiver_name : serverMsgs[0].sender_name) 
+        : targetFullName;
+      
       setActiveUser({ user_id: uid, full_name: otherName, role: role || 'lawyer' });
       setMessages(serverMsgs);
       setShowMobileChat(true);
 
       setConversations(prev => {
         if (!prev.some(c => String(c.user_id) === String(uid))) {
-          return [{ user_id: uid, full_name: otherName, role: role || 'lawyer', last_message: serverMsgs[serverMsgs.length - 1]?.content || serverMsgs[serverMsgs.length - 1]?.message || 'Tap to send a message' }, ...prev];
+          return [{ user_id: uid, full_name: otherName, role: role || 'lawyer', last_message: serverMsgs[serverMsgs.length - 1]?.message || 'Tap to send a message' }, ...prev];
         }
         return prev;
       });
     } catch (err) {
-      console.warn('Backend API thread notice, using client recipient handler:', err);
-      const fallbackMsgs = cachedMessages || [
-        { id: "m1", sender_id: uid, sender_name: targetFullName, content: `Hello! I am ${targetFullName}. How can I assist you with your legal consultation today?`, created_at: new Date().toISOString() }
-      ];
+      console.warn('Backend API thread notice:', err);
       setActiveUser({ user_id: uid, full_name: targetFullName, role: role || 'lawyer' });
-      setMessages(fallbackMsgs);
+      setMessages([]);
       setShowMobileChat(true);
-      setConversations(prev => {
-        if (!prev.some(c => String(c.user_id) === String(uid))) {
-          return [{ user_id: uid, full_name: targetFullName, role: role || 'lawyer', last_message: fallbackMsgs[fallbackMsgs.length - 1]?.content || fallbackMsgs[fallbackMsgs.length - 1]?.message || 'Tap to send a message' }, ...prev];
-        }
-        return prev;
-      });
     } finally {
       setLoading(false);
     }
@@ -163,7 +116,7 @@ export default function DirectChatPage() {
   const loadThreadSilent = async (uid) => {
     try {
       const res = await API.get(`/api/direct-chat/thread/${uid}`);
-      if (res.data && res.data.length > 0) {
+      if (Array.isArray(res.data)) {
         setMessages(res.data);
       }
     } catch { }
@@ -174,7 +127,7 @@ export default function DirectChatPage() {
     const text = input.trim();
     setInput('');
 
-    // Create new message object
+    // Create new real message object
     const newMsg = {
       id: "msg_" + Date.now(),
       sender_id: user?.id || "client_user",
@@ -186,14 +139,9 @@ export default function DirectChatPage() {
       receiver_name: activeUser.full_name
     };
 
-    // 1. Optimistically append message to state & local thread cache
-    setMessages(prev => {
-      const updated = [...prev, newMsg];
-      localStorage.setItem(`lexaid_chat_thread_${activeUser.user_id}`, JSON.stringify(updated));
-      return updated;
-    });
+    // Optimistically update UI
+    setMessages(prev => [...prev, newMsg]);
 
-    // Update conversation last message in list
     setConversations(prev => {
       return prev.map(c => {
         if (String(c.user_id) === String(activeUser.user_id)) {
@@ -203,35 +151,15 @@ export default function DirectChatPage() {
       });
     });
 
-    // 2. Post to backend silently
+    // Send real message to backend endpoint
     try {
       await API.post('/api/direct-chat/send', {
         receiver_id: activeUser.user_id,
         message: text,
       });
+      loadThreadSilent(activeUser.user_id);
     } catch (err) {
-      console.warn("Backend API chat note, message saved locally:", err);
-    }
-
-    // 3. Simulated Advocate Auto-reply for real-time consultation experience
-    if (activeUser.role === 'lawyer' || activeUser.full_name.includes('Advocate')) {
-      setTimeout(() => {
-        const replyMsg = {
-          id: "reply_" + Date.now(),
-          sender_id: activeUser.user_id,
-          receiver_id: user?.id || "client_user",
-          message: `Hello ${user?.full_name?.split(' ')[0] || 'Suvan'}! Thank you for reaching out. I have received your message regarding your legal consultation and am reviewing your matter.`,
-          content: `Hello ${user?.full_name?.split(' ')[0] || 'Suvan'}! Thank you for reaching out. I have received your message regarding your legal consultation and am reviewing your matter.`,
-          created_at: new Date().toISOString(),
-          sender_name: activeUser.full_name,
-          receiver_name: user?.full_name
-        };
-        setMessages(prev => {
-          const updated = [...prev, replyMsg];
-          localStorage.setItem(`lexaid_chat_thread_${activeUser.user_id}`, JSON.stringify(updated));
-          return updated;
-        });
-      }, 1500);
+      console.warn("Backend API real send notice:", err);
     }
   };
 
