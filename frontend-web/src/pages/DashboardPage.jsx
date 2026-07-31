@@ -99,6 +99,24 @@ export default function DashboardPage() {
   ];
 
   useEffect(() => {
+    // 1. Instantly populate UI state in 0 seconds from local storage
+    const initialLocalAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
+    const initialAppts = initialLocalAppts.length > 0 ? initialLocalAppts : DEFAULT_CLIENT_APPOINTMENTS;
+    if (initialLocalAppts.length === 0) {
+      localStorage.setItem('lexaid_client_appointments', JSON.stringify(DEFAULT_CLIENT_APPOINTMENTS));
+    }
+    setAppointments(initialAppts);
+    setStats({
+      docs: 3,
+      generated: 2,
+      posts: 4,
+      appointments: initialAppts.length
+    });
+    setRecentDocs([
+      { id: "doc_1", filename: "Rent_Agreement_-_mnb.pdf", overall_risk: "MEDIUM", document_type: "Rent & Tenancy Agreement", created_at: new Date().toISOString() }
+    ]);
+
+    // 2. Fetch network API data silently in background
     loadDashboardData();
   }, []);
 
@@ -129,35 +147,22 @@ export default function DashboardPage() {
       }
     } catch {}
 
-    // Load local storage history fallback
-    let localAppts = [];
-    try {
-      localAppts = JSON.parse(localStorage.getItem('lexaid_client_appointments') || '[]');
-    } catch {
-      localAppts = [];
-    }
-
-    let finalAppts = [];
     if (apiAppts && apiAppts.length > 0) {
-      finalAppts = apiAppts;
-    } else if (localAppts && localAppts.length > 0) {
-      finalAppts = localAppts;
-    } else {
-      finalAppts = DEFAULT_CLIENT_APPOINTMENTS;
-      localStorage.setItem('lexaid_client_appointments', JSON.stringify(DEFAULT_CLIENT_APPOINTMENTS));
+      setAppointments(apiAppts);
+      localStorage.setItem('lexaid_client_appointments', JSON.stringify(apiAppts));
     }
-
-    setAppointments(finalAppts);
-    setRecentDocs(apiDocs.length > 0 ? apiDocs.slice(0, 5) : [
-      { id: "doc_1", filename: "Rent_Agreement_-_mnb.pdf", overall_risk: "MEDIUM", document_type: "Rent & Tenancy Agreement", created_at: new Date().toISOString() }
-    ]);
-    setRecentPosts(apiPosts.slice(0, 5));
-    setStats({
-      docs: Math.max(apiDocs.length, 3),
-      generated: Math.max(apiGen.length, 2),
-      posts: Math.max(apiPosts.length, 4),
-      appointments: finalAppts.length
-    });
+    if (apiDocs && apiDocs.length > 0) {
+      setRecentDocs(apiDocs.slice(0, 5));
+    }
+    if (apiPosts && apiPosts.length > 0) {
+      setRecentPosts(apiPosts.slice(0, 5));
+    }
+    setStats(prev => ({
+      docs: Math.max(apiDocs.length, prev.docs || 3),
+      generated: Math.max(apiGen.length, prev.generated || 2),
+      posts: Math.max(apiPosts.length, prev.posts || 4),
+      appointments: apiAppts.length > 0 ? apiAppts.length : prev.appointments
+    }));
   };
 
   const getGreeting = () => {
