@@ -192,7 +192,7 @@ async def send_password_reset_email(to_email: str, token: str):
             req = urllib.request.Request(
                 "https://api.brevo.com/v3/smtp/email",
                 data=json.dumps({
-                    "sender": {"name": "LexAid Security", "email": "lexaid.app.india@gmail.com"},
+                    "sender": {"name": "LexAid Security", "email": "suvansenthils@gmail.com"},
                     "to": [{"email": to_email}],
                     "subject": "Reset Your LexAid Password 🔐",
                     "htmlContent": html_content
