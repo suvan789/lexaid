@@ -447,7 +447,7 @@ export default function LawyersPage() {
                 <button
                   onClick={() => {
                     setBookingConfirmation(null);
-                    navigate('/direct-chat');
+                    navigate('/messages');
                   }}
                   className="flex-1 py-3 bg-accent text-white font-bold rounded-xl text-xs hover:bg-accent-dark transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
                 >

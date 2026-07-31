@@ -119,6 +119,7 @@ function AppRoutes() {
       <Route path="/profile" element={<ProtectedRoute><AppLayout><ProfilePage /></AppLayout></ProtectedRoute>} />
       <Route path="/lawyer/portal" element={<ProtectedRoute><AppLayout><LawyerPortalPage /></AppLayout></ProtectedRoute>} />
       <Route path="/messages" element={<ProtectedRoute><AppLayout><DirectChatPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/direct-chat" element={<ProtectedRoute><AppLayout><DirectChatPage /></AppLayout></ProtectedRoute>} />
       <Route path="/ml-engine" element={<ProtectedRoute><AppLayout><MLEnginePage /></AppLayout></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
