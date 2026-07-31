@@ -32,6 +32,12 @@ export default function Sidebar() {
         { path: '/profile', label: 'My Profile', icon: '👤' },
       ];
 
+  React.useEffect(() => {
+    const handleToggle = () => setMobileOpen(prev => !prev);
+    window.addEventListener('toggle-mobile-sidebar', handleToggle);
+    return () => window.removeEventListener('toggle-mobile-sidebar', handleToggle);
+  }, []);
+
   return (
     <>
       {/* Desktop Sidebar */}
@@ -83,7 +89,7 @@ export default function Sidebar() {
         )}
       </aside>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Slide-Out Drawer Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 lg:hidden animate-fade-in" onClick={() => setMobileOpen(false)}>
           <aside className="w-72 bg-navy text-white h-full flex flex-col shadow-2xl animate-slide-in" onClick={e => e.stopPropagation()}>
@@ -141,37 +147,6 @@ export default function Sidebar() {
           </aside>
         </div>
       )}
-
-      {/* Mobile Bottom Nav */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-navy z-40 border-t border-white/10 safe-area-inset-bottom">
-        <div className="flex justify-around py-1">
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="flex flex-col items-center py-2 px-2 text-xs text-gray-400 hover:text-white"
-          >
-            <span className="text-lg mb-0.5">☰</span>
-            <span style={{ fontSize: '10px' }}>Menu</span>
-          </button>
-          {navItems.slice(0, 5).map((item) => {
-            const isActive = location.pathname === item.path ||
-              (item.path !== '/' && location.pathname.startsWith(item.path));
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={`flex flex-col items-center py-2 px-2 text-xs ${
-                  isActive ? 'text-accent font-bold' : 'text-gray-400'
-                }`}
-              >
-                <span className="text-lg mb-0.5">{item.icon}</span>
-                <span className="truncate" style={{ fontSize: '10px' }}>
-                  {item.label.split(' ')[0]}
-                </span>
-              </NavLink>
-            );
-          })}
-        </div>
-      </nav>
     </>
   );
 }

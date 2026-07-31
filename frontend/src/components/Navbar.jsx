@@ -48,10 +48,17 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 right-0 left-0 lg:left-60 h-16 bg-white border-b border-gray-200 z-30 flex items-center justify-between px-4 lg:px-6">
-      {/* Left: Title */}
+      {/* Left: Mobile Hamburger & App Title */}
       <div className="flex items-center gap-3">
-        <span className="lg:hidden text-xl">⚖️</span>
-        <h2 className="text-lg font-semibold text-navy hidden sm:block">LexAid</h2>
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('toggle-mobile-sidebar'))}
+          className="lg:hidden p-2 text-navy hover:bg-gray-100 rounded-lg text-2xl font-bold transition-colors"
+          title="Open Menu"
+        >
+          ☰
+        </button>
+        <span className="hidden sm:inline text-xl">⚖️</span>
+        <h2 className="text-lg font-bold text-navy">LexAid</h2>
       </div>
 
       {/* Right: User Actions */}
