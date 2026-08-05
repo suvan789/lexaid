@@ -328,9 +328,9 @@ export default function LawyersPage() {
 
       {/* Detail Modal */}
       {selectedLawyer && (
-        <div className="fixed inset-0 bg-navy/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in" onClick={() => setSelectedLawyer(null)}>
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden" onClick={e => e.stopPropagation()}>
-            <div className="p-6">
+        <div className="fixed inset-0 bg-navy/50 backdrop-blur-sm flex items-center justify-center p-3 z-50 animate-fade-in" onClick={() => setSelectedLawyer(null)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90dvh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <div className="p-4 sm:p-6">
               <div className="flex justify-between items-start mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-navy text-white text-xl font-bold flex items-center justify-center">
@@ -476,8 +476,8 @@ export default function LawyersPage() {
 
       {/* Booking Confirmation Modal / Page */}
       {bookingConfirmation && (
-        <div className="fixed inset-0 bg-navy/60 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fade-in" onClick={() => setBookingConfirmation(null)}>
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-100" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-navy/60 backdrop-blur-md flex items-center justify-center p-3 z-50 animate-fade-in" onClick={() => setBookingConfirmation(null)}>
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90dvh] overflow-y-auto border border-gray-100" onClick={e => e.stopPropagation()}>
             {/* Header Banner */}
             <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-navy p-6 text-white text-center relative">
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3 backdrop-blur-xs text-3xl">
