@@ -3,7 +3,35 @@ import API from '../api/axios';
 
 // ─── Comprehensive Offline Legal AI Engine ───────────────────────────────────
 function getOfflineLegalReply(q) {
-  const lq = q.toLowerCase();
+  const lq = q.toLowerCase().trim();
+
+  // ── Greetings & Casual Conversation ──
+  if (/^(hi|hello|hey|hii|hiii|helo|helo|howdy|yo|sup|what'?s up|namaste|namaskar|vanakkam|salaam|greetings?)[\s!?.]*$/.test(lq)) {
+    return `Hello! 👋 I'm **LexAid AI**, your Indian Legal Assistant.\n\nHow can I help you today? You can ask me about:\n• 🏠 Rent disputes & tenant rights\n• ⚖️ Criminal law (FIR, bail, cheque bounce)\n• 👨‍👩‍👧 Family law (divorce, maintenance, custody)\n• 💼 Labour & employment issues\n• 🛒 Consumer complaints\n• 🏘️ Property & RERA disputes\n• 💻 Cyber crime & online fraud\n• 📋 RTI, tax, insurance and more\n\nJust describe your legal problem and I'll guide you!`;
+  }
+
+  if (/^(how are you|how r u|how are u|how do you do|what are you|who are you|are you a bot|are you ai|what can you do|what is lexaid|tell me about yourself)[\s!?.]*$/.test(lq)) {
+    return `I'm **LexAid AI** — an AI-powered legal assistant specialized in **Indian law**. 🤖⚖️\n\nI can help you understand:\n• Laws, Acts & Sections relevant to your situation\n• Your legal rights and remedies\n• Step-by-step guidance on filing complaints\n• What to do in legal emergencies\n\nI'm available 24/7, completely free. Just type your legal question and I'll guide you with the relevant Indian laws and Acts.\n\nWhat legal issue can I help you with today?`;
+  }
+
+  if (/^(thank you|thanks|thank u|thnx|thx|ty|great|ok|okay|good|nice|perfect|got it|understood|noted|sure|alright|fine)[\s!?.]*$/.test(lq)) {
+    return `You're welcome! 😊\n\nIf you have any other legal questions — whether about property, criminal law, family disputes, employment, or consumer rights — feel free to ask anytime.\n\n*Remember: For filing cases or official legal proceedings, always consult a registered advocate.*`;
+  }
+
+  if (/^(bye|goodbye|good bye|see you|see ya|take care|talk later|ttyl|cya)[\s!?.]*$/.test(lq)) {
+    return `Goodbye! 👋 Stay safe and informed about your legal rights.\n\nIf you ever face a legal issue, LexAid AI is here 24/7 to guide you. Take care! ⚖️`;
+  }
+
+  if (lq.includes('help') && lq.split(' ').length <= 3) {
+    return `Sure, I'm here to help! 🙏\n\nPlease describe your legal problem in detail. For example:\n• *"My landlord is not returning my security deposit"*\n• *"My employer fired me without notice"*\n• *"Cheque given to me has bounced"*\n• *"I want to file a consumer complaint"*\n• *"My neighbour encroached on my land"*\n\nThe more details you give, the better I can guide you with the specific law and steps!`;
+  }
+
+  if (lq.includes('good morning') || lq.includes('good afternoon') || lq.includes('good evening') || lq.includes('good night')) {
+    const greet = lq.includes('morning') ? 'Good morning' : lq.includes('afternoon') ? 'Good afternoon' : lq.includes('evening') ? 'Good evening' : 'Good night';
+    return `${greet}! ☀️ I'm **LexAid AI**, ready to assist with any Indian legal question.\n\nWhat legal matter can I help you with today?`;
+  }
+
+
 
   // ── Section 106 / Rent / Tenancy ──
   if (lq.includes('106') || (lq.includes('rent') && lq.includes('notice')) || lq.includes('eviction') || lq.includes('tenancy') || lq.includes('landlord') || lq.includes('tenant')) {
