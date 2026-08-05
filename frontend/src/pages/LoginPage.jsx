@@ -81,10 +81,10 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      // 1. Get Google user details from Firebase or Account prompt
+      // 1. Get Google user details from Firebase
       const googleUser = await loginWithGoogleFirebase();
 
-      // 2. Post to backend with 4s timeout & instant fallback
+      // 2. Post to backend with fallback
       try {
         const res = await API.post('/api/auth/google', {
           email: googleUser.email,
@@ -92,7 +92,7 @@ export default function LoginPage() {
           google_id: googleUser.google_id,
           photo_url: googleUser.photo_url || null,
           role: 'client'
-        }, { timeout: 4000 });
+        }, { timeout: 8000 });
         login(res.data.access_token, res.data.user);
       } catch (backendErr) {
         console.warn("Backend API timeout, logging in with Google account directly:", backendErr);
@@ -109,16 +109,23 @@ export default function LoginPage() {
 
       navigate('/');
     } catch (err) {
+      // REDIRECT_INITIATED = Android is redirecting to Google — NOT an error
+      if (err.message === 'REDIRECT_INITIATED') {
+        // Keep loading spinner — app will restart after Google redirect
+        setLoading(true);
+        return;
+      }
       console.error("Google Sign-In Error:", err);
-      if (err.message && err.message.includes("cancelled")) {
+      if (err.message?.includes('cancelled')) {
         setError('Google Sign-In was cancelled.');
       } else if (err.code === 'auth/popup-blocked') {
-        setError('Popup was blocked by your browser. Please allow popups for this site and try again.');
+        setError('Popup blocked. Please allow popups for this site and try again.');
+      } else if (err.message?.includes('Please try email')) {
+        setError('Google Sign-In failed. Please use email/password login instead.');
       } else {
-        const detail = err.response?.data?.detail || err.response?.data?.error || err.message || 'Google Sign-In failed.';
+        const detail = err.response?.data?.detail || err.message || 'Google Sign-In failed.';
         setError(`Google Sign-In: ${detail}`);
       }
-    } finally {
       setLoading(false);
     }
   };

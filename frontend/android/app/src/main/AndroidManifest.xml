@@ -22,6 +22,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- Deep link for Firebase Google Auth redirect callback -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="com.lexaid.app" android:host="firebase-auth" />
+            </intent-filter>
+
+            <!-- Handle lexaid-d29fe.firebaseapp.com redirect back to app -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                      android:host="lexaid-d29fe.firebaseapp.com"
+                      android:pathPrefix="/__/auth/callback" />
+            </intent-filter>
+
         </activity>
 
         <provider
