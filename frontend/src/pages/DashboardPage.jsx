@@ -215,28 +215,31 @@ export default function DashboardPage() {
 
 
       {/* 📅 Client Portal: Consultations Booking History & Real-Time Tracker */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8 animate-fade-in">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">📅</span>
-                  <h2 className="text-lg font-bold text-navy">Consultation History & Status Tracker</h2>
-                  <span className="text-xs bg-navy/10 text-navy font-bold px-2.5 py-0.5 rounded-full">
-                    {safeAppointments.length} Total Bookings
-                  </span>
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 mb-8 animate-fade-in">
+            <div className="flex flex-col gap-3 mb-5 pb-4 border-b border-gray-100">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xl">📅</span>
+                    <h2 className="text-base sm:text-lg font-bold text-navy">Consultation History & Tracker</h2>
+                    <span className="text-xs bg-navy/10 text-navy font-bold px-2 py-0.5 rounded-full">
+                      {safeAppointments.length} Bookings
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Track advocate confirmation and consultation progress</p>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">Track advocate confirmation, scheduled dates, and legal consultation progress</p>
               </div>
 
-              <div className="flex items-center gap-1.5 bg-gray-50 p-1.5 rounded-xl border border-gray-200 text-xs">
+              {/* Scrollable filter tabs */}
+              <div className="flex overflow-x-auto gap-1.5 pb-1 no-scrollbar">
                 {['all', 'pending', 'confirmed', 'completed', 'cancelled'].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setConsultationFilter(tab)}
-                    className={`px-3 py-1.5 rounded-lg font-semibold capitalize transition-all cursor-pointer ${
+                    className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer ${
                       consultationFilter === tab
                         ? 'bg-navy text-white shadow-xs'
-                        : 'text-gray-600 hover:text-navy hover:bg-gray-100'
+                        : 'text-gray-600 hover:text-navy hover:bg-gray-100 bg-gray-50 border border-gray-200'
                     }`}
                   >
                     {tab}
@@ -354,19 +357,19 @@ export default function DashboardPage() {
                     )}
 
                     {/* Date, Issue, Actions */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                    <div className="flex flex-col gap-3 text-xs">
                       <div className="space-y-1">
                         <p className="font-semibold text-gray-700">
-                          📅 Scheduled Date: <span className="font-bold text-navy">{new Date(apt.appointment_date).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                          📅 Scheduled: <span className="font-bold text-navy">{new Date(apt.appointment_date).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</span>
                         </p>
                         {apt.issue_description && (
-                          <p className="text-gray-500 italic line-clamp-1">
-                            📝 Problem: "{apt.issue_description}"
+                          <p className="text-gray-500 italic line-clamp-2">
+                            📝 "{apt.issue_description}"
                           </p>
                         )}
                       </div>
 
-                      <div className="flex items-center gap-2 shrink-0">
+                      <div className="flex flex-wrap gap-2">
                         <button
                           onClick={() => {
                             const advId = apt.lawyer_id || apt.lawyer?.id || apt.id || "adv_flowfored";
@@ -375,7 +378,7 @@ export default function DashboardPage() {
                               state: { userId: advId, userName: advName }
                             });
                           }}
-                          className="px-4 py-2 bg-navy hover:bg-navy-light text-white font-semibold rounded-xl transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+                          className="px-3 py-2 bg-navy hover:bg-navy-light text-white font-semibold rounded-xl transition-all shadow-xs flex items-center gap-1.5 cursor-pointer text-xs"
                         >
                           <span>💬</span> Direct Message
                         </button>
@@ -391,7 +394,7 @@ export default function DashboardPage() {
                                 alert('Failed to cancel appointment.');
                               }
                             }}
-                            className="px-3 py-2 bg-white border border-red-200 text-red-600 hover:bg-red-50 font-semibold rounded-xl transition-colors cursor-pointer"
+                            className="px-3 py-2 bg-white border border-red-200 text-red-600 hover:bg-red-50 font-semibold rounded-xl transition-colors cursor-pointer text-xs"
                           >
                             Cancel
                           </button>
